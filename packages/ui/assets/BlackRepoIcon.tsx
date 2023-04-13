@@ -1,7 +1,9 @@
 import React from "react";
-
-export const BlackRepoIcon = () => (
-  <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+interface PropsType {
+  size?: number;
+}
+export const BlackRepoIcon = ({ size = 28 }: PropsType) => (
+  <svg width={size} height={size} viewBox="0 0 28 28" fill="none">
     <path
       d="M-5.53131e-05 27.0733V0C11.3731 0 13.862 0.606385 16.6131 4.92242C17.5687 6.42163 19.1509 8.43281 23.3326 11.0813C27.2952 16.1211 27.0709 22.7823 27.0709 27.0733H-5.53131e-05Z"
       fill="#818181"

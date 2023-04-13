@@ -1,7 +1,9 @@
 import React from "react";
-
-export const whiteRepoIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+interface PropsType {
+  size?: number;
+}
+export const whiteRepoIcon = ({ size = 24 }: PropsType) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
     <g clip-path="url(#clip0_3244_1371)">
       <path
         d="M-0.285891 24.3787V0.0126953C9.94996 0.0126953 12.1899 0.558442 14.666 4.44287C15.526 5.79216 16.95 7.60223 20.7135 9.98586C24.2798 14.5217 24.078 20.5167 24.078 24.3787H-0.285891Z"
