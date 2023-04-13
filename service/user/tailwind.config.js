@@ -49,7 +49,7 @@ module.exports = {
       body1: [
         "22px",
         {
-          fontWeight: "400",
+          fontWeight: "500",
         },
       ],
       body2: [
@@ -77,9 +77,21 @@ module.exports = {
         },
       ],
       body6: [
-        "20px",
+        "17px",
         {
           fontWeight: "400",
+        },
+      ],
+      body7: [
+        "14px",
+        {
+          fontWeight: "400",
+        },
+      ],
+      body8: [
+        "14px",
+        {
+          fontWeight: "600",
         },
       ],
     },
