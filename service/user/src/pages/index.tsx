@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   return (
     <main>
-      <Input label="asgsa" errorMsg="Asfagas" />
+      <Input label="asgsa" placeholder="asf" />
       <Footer />
     </main>
   );

@@ -13,6 +13,8 @@ module.exports = {
       gray200: "#C5C5C5",
       gray100: "#F6F6F6",
       gray50: "#FFFFFF",
+      blue: "#006EFF",
+      green: "#04DF00",
       check: "#04DF00",
       error: "#E84045",
       focus: "#006EFF",

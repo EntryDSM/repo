@@ -1,21 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 import { Preview } from "../assets/Preview";
+import { NonPreview } from "../assets";
 
 interface PropsType {
+  kind?: "text" | "password" | "button";
+  times?: string;
   label: string;
   placeholder: string;
+  successMsg?: string;
   errorMsg?: string;
 }
 
-const Input = ({ label, errorMsg }: PropsType) => {
+const Input = ({
+  kind = "text",
+  times,
+  label,
+  errorMsg,
+  successMsg,
+}: PropsType) => {
+  const [open, setOpen] = useState<boolean>(false);
+  const EyeIcon = open ? Preview : NonPreview;
+  const PasswordTypeChange = () => setOpen(!open);
+
+  const borderError = errorMsg ? "error" : "gray900";
+  const borderFocus = kind === "button" ? "" : "focus-within:border-blue";
+  const isPassword = kind === "password" && !open;
   return (
     <div className="relative">
       <div className="text-body8 mb-2.5 ml-[7px]">{label}</div>
-      <input className="w-full h-11.5 rounded border-2 focus:border-blue focus:border-2 focus:outline-none py-3 px-4 text-body7" />
-      <div className="absolute top-[44px] right-[20px]">
-        <Preview size={24} />
+      <div className="absolute top-[1px] right-[7px] text-body7">{times}</div>
+      <div
+        className={`flex items-center bg-gray50 rounded border-2 h-[46px] border-${borderError} pl-5 ${borderFocus}`}
+      >
+        <input
+          type={isPassword ? "password" : "text"}
+          className={"w-full h-full focus:outline-none py-3 text-body7"}
+        />
+        {!borderFocus && (
+          <div
+            className={`flex items-center bg-${borderError} h-full px-[18px] text-gray50 text-body8`}
+          >
+            {kind}
+          </div>
+        )}
+        {isPassword && (
+          <div onClick={PasswordTypeChange} className="">
+            <EyeIcon size={24} />
+          </div>
+        )}
       </div>
-      {errorMsg && <div className="text-body7">{errorMsg}</div>}
+      {successMsg && <div className="text-body7 text-green">{successMsg}</div>}
+      {errorMsg && <div className="text-body7 text-error">{errorMsg}</div>}
     </div>
   );
 };
