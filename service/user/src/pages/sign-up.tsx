@@ -1,6 +1,5 @@
 import { Plus } from "@packages/ui/assets";
-import { Logo } from "@packages/ui";
-import Input from "../../../../packages/ui/components/Input";
+import { Logo, Input, Button } from "@packages/ui";
 
 const SignUp = () => {
   return (
@@ -21,6 +20,9 @@ const SignUp = () => {
         <Input label="학년" placeholder="학년을 선택해주세요" />
         <Input label="반" placeholder="반을 선택해주세요" />
         <Input label="번호" placeholder="번호를 입력해주세요" />
+        <Button radius="normal" kind="contained">
+          회원가입
+        </Button>
       </div>
     </div>
   );

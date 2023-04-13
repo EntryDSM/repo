@@ -1,14 +1,14 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import { Footer } from "@/components/footer";
-import Input from "@packages/ui/components/Input";
+import { Header } from "@/components/header";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
     <main>
-      <Input label="asgsa" placeholder="asf" />
+      <Header />
       <Footer />
     </main>
   );
