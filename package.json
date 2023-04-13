@@ -1,0 +1,12 @@
+{
+  "name": "repo",
+  "version": "0.0.0",
+  "packageManager": "yarn@3.5.0",
+  "workspaces": [
+    "./service/*",
+    "./packages/*"
+  ],
+  "devDependencies": {
+    "typescript": "^5.0.4"
+  }
+}
