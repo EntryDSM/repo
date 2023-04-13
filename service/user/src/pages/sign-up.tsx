@@ -1,5 +1,6 @@
-import { Plus } from "../../../../packages/ui/assets";
-import { Logo } from "../../../../packages/ui";
+import { Plus } from "@packages/ui/assets";
+import { Logo } from "@packages/ui";
+import Input from "../../../../packages/ui/components/Input";
 
 const SignUp = () => {
   return (
@@ -16,6 +17,10 @@ const SignUp = () => {
       </div>
       <div className="w-[770px]">
         <div className="text-title1">회원가입</div>
+        <Input label="이름" placeholder="이름을 입력해주세요" />
+        <Input label="학년" placeholder="학년을 선택해주세요" />
+        <Input label="반" placeholder="반을 선택해주세요" />
+        <Input label="번호" placeholder="번호를 입력해주세요" />
       </div>
     </div>
   );

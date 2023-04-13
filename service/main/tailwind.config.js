@@ -4,6 +4,7 @@ module.exports = {
     "./src/pages/**/*.{js,ts,jsx,tsx}",
     "./src/components/**/*.{js,ts,jsx,tsx}",
     "./src/app/**/*.{js,ts,jsx,tsx}",
+    "../../packages/ui/components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -17,10 +18,84 @@ module.exports = {
       gray200: "#C5C5C5",
       gray100: "#F6F6F6",
       gray50: "#FFFFFF",
+      check: "#04DF00",
+      error: "#E84045",
+      focus: "#006EFF",
     },
-    check: "#04DF00",
-    error: "#E84045",
-    focus: "#006EFF",
+    fontSize: {
+      title1: [
+        "30px",
+        {
+          fontWeight: "600",
+        },
+      ],
+      title2: [
+        "27px",
+        {
+          fontWeight: "500",
+        },
+      ],
+      title3: [
+        "24px",
+        {
+          fontWeight: "300",
+        },
+      ],
+      title4: [
+        "24px",
+        {
+          fontWeight: "100",
+        },
+      ],
+      body1: [
+        "22px",
+        {
+          fontWeight: "500",
+        },
+      ],
+      body2: [
+        "22px",
+        {
+          fontWeight: "400",
+        },
+      ],
+      body3: [
+        "20px",
+        {
+          fontWeight: "500",
+        },
+      ],
+      body4: [
+        "20px",
+        {
+          fontWeight: "400",
+        },
+      ],
+      body5: [
+        "17px",
+        {
+          fontWeight: "500",
+        },
+      ],
+      body6: [
+        "17px",
+        {
+          fontWeight: "400",
+        },
+      ],
+      body7: [
+        "14px",
+        {
+          fontWeight: "400",
+        },
+      ],
+      body8: [
+        "14px",
+        {
+          fontWeight: "600",
+        },
+      ],
+    },
   },
   plugins: [],
 };
