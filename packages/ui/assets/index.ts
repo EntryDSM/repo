@@ -17,3 +17,4 @@ export * from "./Setting";
 export * from "./Stack";
 export * from "./Warning";
 export * from "./BlackRepoIcon";
+export * from "./Teacher";
