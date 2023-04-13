@@ -1,4 +1,3 @@
-export * from "./Multiply";
 export * from "./Delete";
 export * from "./Facebook";
 export * from "./Close";
