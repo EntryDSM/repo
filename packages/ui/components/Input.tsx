@@ -4,7 +4,7 @@ import { Preview } from "../assets/Preview";
 interface PropsType {
   label: string;
   placeholder: string;
-  errorMsg: string;
+  errorMsg?: string;
 }
 
 const Input = ({ label, errorMsg }: PropsType) => {
@@ -15,7 +15,7 @@ const Input = ({ label, errorMsg }: PropsType) => {
       <div className="absolute top-[44px] right-[20px]">
         <Preview size={24} />
       </div>
-      <div className="text-body7">{errorMsg}</div>
+      {errorMsg && <div className="text-body7">{errorMsg}</div>}
     </div>
   );
 };
