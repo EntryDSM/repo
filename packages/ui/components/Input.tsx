@@ -11,7 +11,7 @@ interface PropsType {
   errorMsg?: string;
 }
 
-const Input = ({
+export const Input = ({
   kind = "text",
   times,
   label,
@@ -54,5 +54,3 @@ const Input = ({
     </div>
   );
 };
-
-export default Input;

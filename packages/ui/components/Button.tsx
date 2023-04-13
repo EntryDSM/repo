@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactNode } from "react";
 
 interface PropsType {
   radius: "normal" | "circle";
@@ -11,6 +11,7 @@ interface PropsType {
     | "point"
     | "critical";
   disabled?: boolean;
+  children: ReactNode;
   onClick?: () => void;
 }
 
@@ -51,10 +52,11 @@ const buttonColor = {
   },
 };
 
-const Button = ({
+export const Button = ({
   radius = "normal",
   kind = "text",
   onClick,
+  children,
   disabled = false,
 }: PropsType) => {
   const { enable, disable } = buttonColor[kind];
@@ -67,9 +69,7 @@ const Button = ({
       onClick={() => !disabled && onClick}
       disabled={disabled}
     >
-      hi
+      {children}
     </button>
   );
 };
-
-export default Button;
