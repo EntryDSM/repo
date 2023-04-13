@@ -6,6 +6,11 @@
     "./service/*",
     "./packages/*"
   ],
+  "scripts": {
+    "build:admin": "yarn workspace @service/admin build",
+    "build:main": "yarn workspace @service/main build",
+    "build:user": "yarn workspace @service/user build"
+  },
   "devDependencies": {
     "typescript": "^5.0.4"
   }

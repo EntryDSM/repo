@@ -24,6 +24,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "reference": "workspace:service/admin"\
       },\
       {\
+        "name": "main",\
+        "reference": "workspace:service/main"\
+      },\
+      {\
         "name": "@service/user",\
         "reference": "workspace:service/user"\
       }\
@@ -34,6 +38,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ["@packages/ui", ["workspace:packages/ui"]],\
       ["@service/admin", ["workspace:service/admin"]],\
       ["@service/user", ["workspace:service/user"]],\
+      ["main", ["workspace:service/main"]],\
       ["repo", ["workspace:."]]\
     ],\
     "fallbackPool": [\
@@ -3031,6 +3036,27 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["lru-cache", "npm:7.18.3"]\
           ],\
           "linkType": "HARD"\
+        }]\
+      ]],\
+      ["main", [\
+        ["workspace:service/main", {\
+          "packageLocation": "./service/main/",\
+          "packageDependencies": [\
+            ["main", "workspace:service/main"],\
+            ["@types/node", "npm:18.15.11"],\
+            ["@types/react", "npm:18.0.35"],\
+            ["@types/react-dom", "npm:18.0.11"],\
+            ["autoprefixer", "virtual:41fe72e4f1f69320fab2b9b0a8de9a11b807f96dc0bdf2bac3f8aed1e8d970b37a8bc0f83fb0a695fb539d2a942d537caa95efbfb96ee4ef46b0f998b5e06f0f#npm:10.4.14"],\
+            ["eslint", "npm:8.38.0"],\
+            ["eslint-config-next", "virtual:41fe72e4f1f69320fab2b9b0a8de9a11b807f96dc0bdf2bac3f8aed1e8d970b37a8bc0f83fb0a695fb539d2a942d537caa95efbfb96ee4ef46b0f998b5e06f0f#npm:13.3.0"],\
+            ["next", "virtual:41fe72e4f1f69320fab2b9b0a8de9a11b807f96dc0bdf2bac3f8aed1e8d970b37a8bc0f83fb0a695fb539d2a942d537caa95efbfb96ee4ef46b0f998b5e06f0f#npm:13.3.0"],\
+            ["postcss", "npm:8.4.21"],\
+            ["react", "npm:18.2.0"],\
+            ["react-dom", "virtual:576cc4d2cc244f3af3c540317c2f84ae4d9a046d2b1519763846c613a93498d7e30080f38895c54cb2ed8b1a477d494fed6d10759b4dbb9b81d50d6a277d3c78#npm:18.2.0"],\
+            ["tailwindcss", "virtual:41fe72e4f1f69320fab2b9b0a8de9a11b807f96dc0bdf2bac3f8aed1e8d970b37a8bc0f83fb0a695fb539d2a942d537caa95efbfb96ee4ef46b0f998b5e06f0f#npm:3.3.1"],\
+            ["typescript", "patch:typescript@npm%3A5.0.4#~builtin<compat/typescript>::version=5.0.4&hash=85af82"]\
+          ],\
+          "linkType": "SOFT"\
         }]\
       ]],\
       ["make-fetch-happen", [\
