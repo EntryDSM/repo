@@ -53,9 +53,9 @@ const buttonColor = {
 
 const Button = ({
   radius = "normal",
-  kind = "underline",
+  kind = "text",
   onClick,
-  disabled = true,
+  disabled = false,
 }: PropsType) => {
   const { enable, disable } = buttonColor[kind];
   const borderRadius = radius === "circle" ? "100px" : "2px";
