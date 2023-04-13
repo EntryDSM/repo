@@ -316,10 +316,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@service/user@workspace:service/user":
+"@service/main@workspace:service/main":
   version: 0.0.0-use.local
-  resolution: "@service/user@workspace:service/user"
+  resolution: "@service/main@workspace:service/main"
   dependencies:
+    "@packages/ui": "workspace:^"
     "@types/node": 18.15.11
     "@types/react": 18.0.35
     "@types/react-dom": 18.0.11
@@ -327,6 +328,28 @@ __metadata:
     eslint: 8.38.0
     eslint-config-next: 13.3.0
     next: 13.3.0
+    next-transpile-modules: ^10.0.0
+    postcss: 8.4.21
+    react: 18.2.0
+    react-dom: 18.2.0
+    tailwindcss: 3.3.1
+    typescript: 5.0.4
+  languageName: unknown
+  linkType: soft
+
+"@service/user@workspace:service/user":
+  version: 0.0.0-use.local
+  resolution: "@service/user@workspace:service/user"
+  dependencies:
+    "@packages/ui": "workspace:^"
+    "@types/node": 18.15.11
+    "@types/react": 18.0.35
+    "@types/react-dom": 18.0.11
+    autoprefixer: 10.4.14
+    eslint: 8.38.0
+    eslint-config-next: 13.3.0
+    next: 13.3.0
+    next-transpile-modules: ^10.0.0
     postcss: 8.4.21
     react: 18.2.0
     react-dom: 18.2.0
@@ -2463,25 +2486,6 @@ __metadata:
   checksum: e550d772384709deea3f141af34b6d4fa392e2e418c1498c078de0ee63670f1f46f5eee746e8ef7e69e1c895af0d4224e62ee33e66a543a14763b0f2e74c1356
   languageName: node
   linkType: hard
-
-"main@workspace:service/main":
-  version: 0.0.0-use.local
-  resolution: "main@workspace:service/main"
-  dependencies:
-    "@types/node": 18.15.11
-    "@types/react": 18.0.35
-    "@types/react-dom": 18.0.11
-    autoprefixer: 10.4.14
-    eslint: 8.38.0
-    eslint-config-next: 13.3.0
-    next: 13.3.0
-    postcss: 8.4.21
-    react: 18.2.0
-    react-dom: 18.2.0
-    tailwindcss: 3.3.1
-    typescript: 5.0.4
-  languageName: unknown
-  linkType: soft
 
 "make-fetch-happen@npm:^10.0.3":
   version: 10.2.1

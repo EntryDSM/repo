@@ -10,7 +10,7 @@ export const Github = () => (
       >
         <use transform="scale(0.00195312)" />
       </pattern>
-      <image id="image0_3244_1377" width="512" height="512" />
+      <image id="image0_2787_3547" width="512" height="512" />
     </defs>
   </svg>
 );
