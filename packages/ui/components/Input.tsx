@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { Preview } from "../assets/Preview";
 import { NonPreview } from "../assets";
 
 interface PropsType {
   kind?: "text" | "password" | "button";
   times?: string;
+  name: string;
   label: string;
+  value: string;
+  onChagne: (e: ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
   successMsg?: string;
   errorMsg?: string;
@@ -15,6 +18,9 @@ export const Input = ({
   kind = "text",
   times,
   label,
+  name,
+  value,
+  onChagne,
   errorMsg,
   successMsg,
 }: PropsType) => {
@@ -34,6 +40,9 @@ export const Input = ({
       >
         <input
           type={isPassword ? "password" : "text"}
+          name={name}
+          value={value}
+          onChange={onChagne}
           className={"w-full h-full focus:outline-none py-3 text-body7"}
         />
         {!borderFocus && (
