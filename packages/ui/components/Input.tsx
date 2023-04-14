@@ -5,7 +5,7 @@ import { NonPreview } from "../assets";
 interface PropsType {
   kind?: "text" | "password" | "button";
   times?: string;
-  name: string;
+  name?: string;
   label?: string;
   value: number | string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
