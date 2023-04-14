@@ -8,6 +8,6 @@ interface postSignUpBody {
   number: number;
 }
 
-export const postSignUp = () => {
-  return instance.post<postSignUpBody>("/student");
+export const postSignUp = (body: postSignUpBody) => {
+  return instance.post<postSignUpBody>("/student", body);
 };

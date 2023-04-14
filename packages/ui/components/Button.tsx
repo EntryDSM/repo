@@ -13,6 +13,7 @@ interface PropsType {
   disabled?: boolean;
   children: ReactNode;
   onClick?: () => void;
+  width?: number;
 }
 
 const defaultDisable = "bg-gray200 text-gray50";
@@ -58,14 +59,16 @@ export const Button = ({
   onClick,
   children,
   disabled = false,
+  width,
 }: PropsType) => {
   const { enable, disable } = buttonColor[kind];
   const borderRadius = radius === "circle" ? "100px" : "2px";
+  const widthValue = `${width}px` || "100%";
   return (
     <button
       className={`box-border flex items-center justify-center px-[18px] h-[46px] text-body8 rounded-[${borderRadius}] ${
         disabled ? disable : enable
-      }`}
+      } w-[${widthValue}]`}
       onClick={onClick}
       disabled={disabled}
     >

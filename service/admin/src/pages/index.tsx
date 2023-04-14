@@ -1,14 +1,13 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
-<<<<<<< Updated upstream
+import { Student } from "@/components/student";
 
 export default function Home() {
-  return <div></div>;
-=======
-import { Button } from "@packages/ui/components";
-import Input from "@packages/ui/components/Input";
-
-export default function Home() {
-  return <Input label="asf" errorMsg="asfgag" />;
->>>>>>> Stashed changes
+  return (
+    <div>
+      <p>학생 관리</p>
+      <p>학생을 관리해보세요</p>
+      <Student />
+    </div>
+  );
 }
