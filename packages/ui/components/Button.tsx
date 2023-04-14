@@ -66,7 +66,7 @@ export const Button = ({
       className={`px-[18px] py-[16px] text-body8 rounded-[${borderRadius}] ${
         disabled ? disable : enable
       }`}
-      onClick={() => !disabled && onClick}
+      onClick={onClick}
       disabled={disabled}
     >
       {children}
