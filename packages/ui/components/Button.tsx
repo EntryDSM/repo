@@ -6,6 +6,7 @@ interface PropsType {
   kind?:
     | "contained"
     | "outline"
+    | "outlineWhite"
     | "underline"
     | "text"
     | "success"
@@ -26,7 +27,12 @@ const buttonColor = {
   },
   outline: {
     enable:
-      "border-2 text-gray800 hover:text-gray50 hover:border-gray600 hover:bg-gray600 active:text-gray50 active:bg-gray500",
+      "border-2 text-gray800 hover:text-gray50 hover:border-gray600 hover:bg-gray600 active:text-gray50 active:bg-gray500 active:border-gray500",
+    disable: "border-2 border-gray300 text-gray300",
+  },
+  outlineWhite: {
+    enable:
+      "border-2 text-gray50 bg-gray800 hover:text-gray800 hover:border-gray600 hover:bg-gray100 active:text-gray50 active:bg-gray500 active:border-gray500",
     disable: "border-2 border-gray300 text-gray300",
   },
   underline: {
