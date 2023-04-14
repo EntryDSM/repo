@@ -2,6 +2,7 @@ import React from "react";
 
 interface PropsType {
   direction?: "left" | "top" | "right" | "bottom";
+  size?: number;
 }
 
 const rotate = {
@@ -11,12 +12,12 @@ const rotate = {
   bottom: 270,
 };
 
-export const Arrow = ({ direction = "left" }: PropsType) => {
+export const Arrow = ({ direction = "left", size = 28 }: PropsType) => {
   const rotatValue = `rotate-[${rotate[direction]}deg]`;
   return (
     <svg
-      width="50"
-      height="50"
+      width={size}
+      height={size}
       viewBox="0 0 50 50"
       fill="none"
       className={rotatValue}
