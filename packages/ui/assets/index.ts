@@ -18,3 +18,4 @@ export * from "./Stack";
 export * from "./Warning";
 export * from "./BlackRepoIcon";
 export * from "./Teacher";
+export * from "./Arrow";
