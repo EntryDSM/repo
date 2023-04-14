@@ -7,7 +7,7 @@ interface PropsType {
   times?: string;
   name: string;
   label: string;
-  value: string;
+  value: boolean | number | string;
   onChagne: (e: ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
   successMsg?: string;
