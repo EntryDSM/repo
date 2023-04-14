@@ -20,6 +20,7 @@ export const Input = ({
   label,
   name,
   value,
+  placeholder,
   onChagne,
   errorMsg,
   successMsg,
@@ -42,6 +43,7 @@ export const Input = ({
           type={isPassword ? "password" : "text"}
           name={name}
           value={value}
+          placeholder={placeholder}
           onChange={onChagne}
           className={"w-full h-full focus:outline-none py-3 text-body7"}
         />
