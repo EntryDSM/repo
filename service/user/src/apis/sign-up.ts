@@ -1,6 +1,6 @@
 import { instance } from ".";
 
-interface postSignUpBody {
+export interface postSignUpBody {
   name: string;
   email: string;
   grade: number;
@@ -9,5 +9,5 @@ interface postSignUpBody {
 }
 
 export const postSignUp = (body: postSignUpBody) => {
-  return instance.post<postSignUpBody>("/student", body);
+  return instance.post("/student", body);
 };

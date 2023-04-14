@@ -1,8 +1,10 @@
 import { Plus } from "@packages/ui/assets";
 import { Logo, Input, Button } from "@packages/ui";
 import { useState } from "react";
-import { postSignUp } from "@/apis/sign-up";
+import { postSignUp, postSignUpBody } from "@/apis/sign-up";
 import { useMutation } from "react-query";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 interface Form {
   name: string;
@@ -36,15 +38,16 @@ const SignUp = () => {
     }
   };
 
-  const submitSignUp = async () => {
-    const { data, mutate } = useMutation(postSignUp);
-    try {
-      const a = await postSignUp(form);
-      console.log(a);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  const navigate = useRouter();
+
+  const { data, mutate } = useMutation({
+    mutationFn: (body: postSignUpBody) => {
+      return postSignUp(body);
+    },
+    onSuccess: () => {
+      navigate.push("/");
+    },
+  });
 
   return (
     <div className="flex h-[100vh]">
@@ -59,6 +62,9 @@ const SignUp = () => {
         <p className="text-body5">프로필 추가</p>
       </div>
       <div className="w-[770px] pl-40 pr-40">
+        <Link href={"/"}>
+          <button>뒤로가기</button>
+        </Link>
         <div className="text-title1">회원가입</div>
         <div className="flex gap-8 flex-col">
           <Input
@@ -90,7 +96,7 @@ const SignUp = () => {
             value={form.class_num}
           />
         </div>
-        <Button onClick={submitSignUp} radius="normal" kind="contained">
+        <Button onClick={() => mutate(form)} radius="normal" kind="contained">
           회원가입
         </Button>
       </div>
