@@ -67,7 +67,7 @@ export const Button = ({
   console.log(widthValue);
   return (
     <button
-      className={`box-border pl-[18px] pr-[18px] px-[18px] h-[46px] text-body8 rounded-[${borderRadius}] ${
+      className={`w-auto box-border pl-[18px] pr-[18px] px-[18px] h-[46px] text-body8 flex items-center gap-x-[15px] rounded-[${borderRadius}] ${
         disabled ? disable : enable
       } ${widthValue}`}
       onClick={onClick}
