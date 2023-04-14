@@ -25,7 +25,7 @@ const buttonColor = {
   },
   outline: {
     enable:
-      "border-2 text-gray800 hover:text-gray50 hover:bg-gray600 active:text-gray50 active:bg-gray500",
+      "border-2 text-gray800 hover:text-gray50 hover:border-gray600 hover:bg-gray600 active:text-gray50 active:bg-gray500",
     disable: "border-2 border-gray300 text-gray300",
   },
   underline: {
