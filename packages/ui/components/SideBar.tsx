@@ -15,7 +15,7 @@ export const SideBar = ({ children }: Props) => {
         </div>
         <Home />
       </div>
-      {children}
+      <div>{children}</div>
     </div>
   );
 };

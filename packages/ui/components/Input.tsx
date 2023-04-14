@@ -8,7 +8,7 @@ interface PropsType {
   name: string;
   label?: string;
   value: number | string;
-  onChagne: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
   successMsg?: string;
   errorMsg?: string;
@@ -21,7 +21,7 @@ export const Input = ({
   name,
   value,
   placeholder,
-  onChagne,
+  onChange,
   errorMsg,
   successMsg,
 }: PropsType) => {
@@ -44,7 +44,7 @@ export const Input = ({
           name={name}
           value={value}
           placeholder={placeholder}
-          onChange={onChagne}
+          onChange={onChange}
           className={"w-full h-full focus:outline-none py-3 text-body7"}
         />
         {!borderFocus && (
