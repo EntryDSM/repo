@@ -6,7 +6,7 @@ interface PropsType {
   kind?: "text" | "password" | "button";
   times?: string;
   name: string;
-  label: string;
+  label?: string;
   value: number | string;
   onChagne: (e: ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
