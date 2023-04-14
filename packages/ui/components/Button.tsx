@@ -63,12 +63,13 @@ export const Button = ({
 }: PropsType) => {
   const { enable, disable } = buttonColor[kind];
   const borderRadius = radius === "circle" ? "100px" : "2px";
-  const widthValue = `${width}px` || "100%";
+  const widthValue = width ? `w-[${width}px]` : "w-full";
+  console.log(widthValue);
   return (
     <button
       className={`box-border flex items-center justify-center px-[18px] h-[46px] text-body8 rounded-[${borderRadius}] ${
         disabled ? disable : enable
-      } w-[${widthValue}]`}
+      } ${widthValue}`}
       onClick={onClick}
       disabled={disabled}
     >
