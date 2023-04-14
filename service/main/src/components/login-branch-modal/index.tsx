@@ -28,7 +28,10 @@ export const LoginBranchModal = ({ closeModal }: Props) => {
               선생님 로그인하기
             </NavigateButton>
           </div>
-          <div className="absolute top-[30px] right-[30px] cursor-pointer">
+          <div
+            onClick={closeModal}
+            className="absolute top-[30px] right-[30px] cursor-pointer"
+          >
             <Close size={24} />
           </div>
         </div>
