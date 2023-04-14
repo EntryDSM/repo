@@ -14,7 +14,7 @@ const technology = () => {
       <div className="m-auto w-[1120px]">
         <p className="text-title1 mt-28">전공관리</p>
         <p className="text-title4 mb-20">전공을 추가, 삭제 해보세요</p>
-
+        
         <div className="flex mb-14">
           <Input
             value={searchTechnology}
