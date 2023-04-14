@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
 
 interface PropsType {
-  radius: "normal" | "circle";
-  kind:
+  radius?: "normal" | "circle";
+  kind?:
     | "contained"
     | "outline"
     | "underline"
@@ -63,7 +63,7 @@ export const Button = ({
   const borderRadius = radius === "circle" ? "100px" : "2px";
   return (
     <button
-      className={`px-[18px] py-[16px] text-body8 rounded-[${borderRadius}] ${
+      className={`box-border flex items-center justify-center px-[18px] h-[46px] text-body8 rounded-[${borderRadius}] ${
         disabled ? disable : enable
       }`}
       onClick={onClick}
