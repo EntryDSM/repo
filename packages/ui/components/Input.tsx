@@ -16,10 +16,12 @@ interface PropsType {
   errorMsg?: string;
 }
 
-const defaultInputStyle = `rounded h-[46px] pl-5`;
+const defaultInputStyle =
+  "rounded w-full h-[46px] pl-5 focus:outline-none py-3";
+const defaultHintStyle = "absolute text-body7";
 
 export const Input = ({
-  className = "bg-gray100 [&>input]:text-body6",
+  className = "bg-gray100",
   kind = "custom",
   times,
   label,
@@ -42,45 +44,51 @@ export const Input = ({
   const isCustom = kind === "custom";
   return (
     <div className={"relative"}>
-      <div className="text-body8 mb-2.5 ml-[7px]">{label}</div>
+      <div className="absolute text-body8 -top-[31px] left-[7px]">{label}</div>
       <div className="absolute top-[1px] right-[7px] text-body7">{times}</div>
-      <div
-        className={`${defaultInputStyle} ${
+      <input
+        type={isPassword ? isOpenText : "text"}
+        name={name}
+        value={value}
+        placeholder={placeholder}
+        onChange={onChange}
+        className={`${
           isCustom
             ? className
             : `flex items-center bg-gray50 border-2 border-${borderError} ${borderFocus}`
-        }`}
-      >
-        <input
-          type={isPassword ? isOpenText : "text"}
-          name={name}
-          value={value}
-          placeholder={placeholder}
-          onChange={onChange}
-          className={"w-full h-full text-body7 focus:outline-none py-3 bg-transparent"}
-        />
-        {!borderFocus && (
-          <div
-            className={`flex items-center bg-${borderError} h-full px-[18px] text-gray50 text-body8`}
-          >
-            {kind}
+        } 
+         ${defaultInputStyle}`}
+      />
+      {!borderFocus && (
+        <div
+          className={`flex items-center bg-${borderError} h-full px-[18px] text-gray50 text-body8`}
+        >
+          {kind}
+        </div>
+      )}
+      <div className="mr-5">
+        {isPassword && (
+          <div onClick={PasswordTypeChange}>
+            <EyeIcon size={24} />
           </div>
         )}
-        <div className="mr-5">
-          {isPassword && (
-            <div onClick={PasswordTypeChange}>
-              <EyeIcon size={24} />
-            </div>
-          )}
-          {activeIcon}
-        </div>
+        {activeIcon}
       </div>
-      {successMsg && <div className="text-body7 text-green">{successMsg}</div>}
-      {errorMsg && <div className="text-body7 text-error">{errorMsg}</div>}
+
+      {successMsg && (
+        <div className={`${defaultHintStyle} text-green`}>{successMsg}</div>
+      )}
+      {errorMsg && (
+        <div className={`${defaultHintStyle} text-error`}>{errorMsg}</div>
+      )}
     </div>
   );
 };
 
 export const LabelInput = (args: PropsType) => {
-  return <Input {...args} />;
+  return (
+    <div className="flex justify-between">
+      <Input {...args} />
+    </div>
+  );
 };
