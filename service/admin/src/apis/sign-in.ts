@@ -5,6 +5,13 @@ export interface PostSignIn {
   password: string;
 }
 
+interface PostSignInResType {
+  access_expired_at: string;
+  access_token: string;
+  refresh_expired_at: string;
+  refresh_token: string;
+}
+
 export const postSignIn = (body: PostSignIn) => {
-  return instance.post("/teacher/auth", body);
+  return instance.post<PostSignInResType>("/teacher/auth", body);
 };
