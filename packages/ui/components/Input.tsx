@@ -4,7 +4,7 @@ import { NonPreview } from "../assets";
 
 interface PropsType {
   className?: string;
-  kind?: "text" | "password" | "button";
+  kind?: "text" | "password" | "button" | "custom";
   times?: string;
   activeIcon?: ReactNode;
   name?: string;
@@ -16,9 +16,11 @@ interface PropsType {
   errorMsg?: string;
 }
 
+const defaultInputStyle = `rounded h-[46px] pl-5`;
+
 export const Input = ({
-  className,
-  kind = "text",
+  className = "bg-gray100 [&>input]:text-body6",
+  kind = "custom",
   times,
   label,
   name,
@@ -37,12 +39,17 @@ export const Input = ({
   const borderFocus = kind === "button" ? "" : "focus-within:border-blue";
   const isPassword = kind === "password";
   const isOpenText = !open ? "password" : "text";
+  const isCustom = kind === "custom";
   return (
-    <div className={"relative" + className}>
+    <div className={"relative"}>
       <div className="text-body8 mb-2.5 ml-[7px]">{label}</div>
       <div className="absolute top-[1px] right-[7px] text-body7">{times}</div>
       <div
-        className={`flex items-center bg-gray50 rounded border-2 h-[46px] border-${borderError} pl-5 ${borderFocus}`}
+        className={`${defaultInputStyle} ${
+          isCustom
+            ? className
+            : `flex items-center bg-gray50 border-2 border-${borderError} ${borderFocus}`
+        }`}
       >
         <input
           type={isPassword ? isOpenText : "text"}
@@ -50,7 +57,7 @@ export const Input = ({
           value={value}
           placeholder={placeholder}
           onChange={onChange}
-          className={"w-full h-full focus:outline-none py-3 text-body7"}
+          className={"w-full h-full text-body7 focus:outline-none py-3 bg-transparent"}
         />
         {!borderFocus && (
           <div
