@@ -10,7 +10,11 @@ const Library = () => {
         <p className="text-title1 mt-28">도서관</p>
         <p className="text-title4 mb-20">레주메북 목록을 담은 도서관입니다.</p>
         <div className="mb-10">
-          <Dropdown className="w-40" lists={["년도"]} />
+          <Dropdown
+            className="w-40"
+            placeholder="년도"
+            lists={["2021", "2022", "2023", "2023", "2023"]}
+          />
         </div>
         <LibraryCard />
       </div>
