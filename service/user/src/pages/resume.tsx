@@ -1,9 +1,20 @@
 import { HeaderBack } from "@/components/HeaderBack";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
-import { Button, TextArea } from "@packages/ui";
-import { Plus } from "../../../../packages/ui/assets";
+import {
+  Button,
+  Dropdown,
+  Input,
+  SKillInput,
+  SkillList,
+  TextArea,
+} from "@packages/ui";
+import { Plus, Search } from "../../../../packages/ui/assets";
 import Link from "next/link";
+import { ReactNode } from "react";
+import { ImportLabel } from "@/components/ImportLabel";
+import { ResumeTitle } from "@/components/ResumeTitle";
+import { ResumeItem } from "@/components/ResumeItem";
 
 const Resume = () => {
   return (
@@ -25,16 +36,31 @@ const Resume = () => {
           </p>
 
           <div className="flex justify-between">
-            <div className="bg-gray50 w-[782px] pt-10 pb-10 pl-14 pr-14">
-              <p className="text-title2">자기소개</p>
-              <div className="flex gap-20">
-                <div className="text-body3 w-44">
-                  <span>한 줄 소개</span>
-                  <span className="text-red ml-1">*</span>
-                </div>
-                <TextArea name="" value="" placeholder="" onChange={() => {}} />
-              </div>
-              <TextArea name="" value="" placeholder="" onChange={() => {}} />
+            <div className="bg-gray50 w-[782px] p-5 rounded-[15px]">
+              <ResumeTitle value="자기소개" onClick={() => {}} />
+              <ResumeItem
+                value="앙기모띠"
+                onChange={() => {}}
+                onRemove={() => {}}
+                placeholder="asfsa"
+              >
+                <ImportLabel label="한 줄 소개" important>
+                  <TextArea
+                    name=""
+                    value=""
+                    placeholder=""
+                    onChange={() => {}}
+                  />
+                </ImportLabel>
+                <ImportLabel label="자기소개" important>
+                  <TextArea
+                    name=""
+                    value=""
+                    placeholder=""
+                    onChange={() => {}}
+                  />
+                </ImportLabel>
+              </ResumeItem>
             </div>
 
             <div className="w-72 flex gap-4 flex-col">

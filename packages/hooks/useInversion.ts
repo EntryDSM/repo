@@ -11,9 +11,14 @@ export const useInversion = () => {
     setState(false);
   };
 
+  const inversion = () => {
+    setState(!state);
+  };
+
   return {
     state,
     correct,
     inCorrect,
+    inversion,
   };
 };
