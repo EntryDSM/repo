@@ -54,8 +54,8 @@ export const Input = ({
         onChange={onChange}
         className={`${
           isCustom
-            ? className
-            : `flex items-center bg-gray50 border-2 border-${borderError} ${borderFocus}`
+            ? `${className} text-body6 focus:border-2`
+            : `flex items-center text-body7 bg-gray50 border-2 border-${borderError} ${borderFocus}`
         } 
          ${defaultInputStyle}`}
       />
