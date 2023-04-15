@@ -19,17 +19,17 @@ export const ResumeItem = ({
   children,
 }: PropsType) => {
   const { state: dropdown, inversion } = useInversion();
-  const height = dropdown ? "h-[130px]" : "h-auto";
+  const height = dropdown ? "h-[148px]" : "h-auto";
   return (
     <div
       className={`p-10 transition-all border-2 ${height} border-gray100 bg-gray50 flex flex-col gap-10 overflow-hidden`}
     >
-      <div className="flex justify-between">
-        <Input
+      <div className="flex h-[66px] shrink-0 justify-between items-center">
+        <input
           value={value}
           onChange={onChange}
           placeholder={placeholder}
-          className="focus:border-0 text-body1 flex flex-col pl-0"
+          className="visited:border-0 focus:border-0 focus-visible:border-gray50 text-body1 flex flex-col pl-0"
         />
         <div className="flex items-center gap-5">
           <div onClick={inversion}>

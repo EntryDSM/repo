@@ -44,7 +44,7 @@ export const Input = ({
   const isCustom = kind === "custom";
   return (
     <div className={`relative ${className}`}>
-      <div className="text-body8 pb-2 pl-2">{label}</div>
+      {label && <div className="text-body8 pb-2 pl-2">{label}</div>}
       <div className="absolute top-[1px] right-[7px] text-body7">{times}</div>
       <input
         type={isPassword ? isOpenText : "text"}
@@ -54,7 +54,7 @@ export const Input = ({
         onChange={onChange}
         className={`${
           isCustom
-            ? `w-full text-body6 focus:border-2`
+            ? `w-full bg-transparent text-body6 focus:border-2`
             : `flex items-center text-body7 bg-gray50 border-2 border-${borderError} ${borderFocus}`
         } 
          ${defaultInputStyle}`}
