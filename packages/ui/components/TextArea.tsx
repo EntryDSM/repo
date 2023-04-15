@@ -5,15 +5,22 @@ interface Props {
   value: string;
   placeholder: string;
   onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+  className?: string;
 }
 
-export const TextArea = ({ name, onChange, value, placeholder }: Props) => {
+export const TextArea = ({
+  name,
+  onChange,
+  value,
+  placeholder,
+  className,
+}: Props) => {
   return (
-    <div>
+    <div className="w-full">
       <textarea
         name={name}
         onChange={onChange}
-        className="resize-none h-96 bg-gray100"
+        className="resize-none h-96 bg-gray100 w-full"
         placeholder={placeholder}
         value={value}
       />

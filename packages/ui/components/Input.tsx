@@ -73,3 +73,7 @@ export const Input = ({
     </div>
   );
 };
+
+export const LabelInput = (args: PropsType) => {
+  return <Input {...args} />;
+};
