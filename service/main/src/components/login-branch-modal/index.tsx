@@ -1,14 +1,34 @@
 import ReactOutSideClickHandler from "react-outside-click-handler";
 import { User, Teacher, Close } from "@packages/ui/assets";
 import { Logo } from "@packages/ui";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { getOAuth } from "@/apis/getOAuth";
+import GoogleLogin from "react-google-login";
 
 interface Props {
   closeModal: () => void;
 }
 
 export const LoginBranchModal = ({ closeModal }: Props) => {
+  const route = useRouter();
+  const NavigateToTeacher = () => {
+    route.push("/");
+  };
+  // const { data, mutate } = useMutation({
+  //   mutationFn: (body: postSignUpBody) => {
+  //     return getOAuth(body);
+  //   },
+  //   onSuccess: () => {
+  //     navigate.push("/");
+  //   },
+  // });
+
+  const NavigateToStudent = () => {
+    getOAuth().then((res) => route.push(res.data.login_link));
+  };
+
   return (
     <div
       className="fixed top-0 right-0 left-0 h-[100vh] flex items-center justify-center "
@@ -21,10 +41,16 @@ export const LoginBranchModal = ({ closeModal }: Props) => {
             <div className="body6">로그인 유형을 선택해 주세요</div>
           </div>
           <div className="flex flex-col gap-y-[15px] w-full">
-            <NavigateButton icon={<User size={30} />}>
+            <NavigateButton
+              onClick={NavigateToStudent}
+              icon={<User size={30} />}
+            >
               학생 로그인하기
             </NavigateButton>
-            <NavigateButton icon={<Teacher size={30} />}>
+            <NavigateButton
+              onClick={NavigateToTeacher}
+              icon={<Teacher size={30} />}
+            >
               선생님 로그인하기
             </NavigateButton>
           </div>
@@ -43,18 +69,19 @@ export const LoginBranchModal = ({ closeModal }: Props) => {
 interface NaviType {
   icon: ReactNode;
   children: ReactNode;
-  to?: string;
+  onClick: () => void;
 }
 
-const NavigateButton = ({ icon, children, to = "" }: NaviType) => {
+const NavigateButton = ({ icon, children, onClick }: NaviType) => {
   return (
-    <Link href={to}>
-      <div className="w-full h-[50px] flex items-center bg-gray-50 gap-x-5 cursor-pointer hover:[*>div]:first:bg-gray-200">
-        <div className="w-[80px] h-full flex items-center justify-center bg-gray-900 rounded-s-md ">
-          {icon}
-        </div>
-        <div className="text-body5">{children}</div>
+    <div
+      onClick={onClick}
+      className="w-full h-[50px] flex items-center bg-gray-50 gap-x-5 cursor-pointer hover:[*>div]:first:bg-gray-200"
+    >
+      <div className="w-[80px] h-full flex items-center justify-center bg-gray-900 rounded-s-md ">
+        {icon}
       </div>
-    </Link>
+      <div className="text-body5">{children}</div>
+    </div>
   );
 };

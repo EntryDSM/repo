@@ -1,7 +1,7 @@
-import { Plus } from "@packages/ui/assets";
+import { Arrow, Plus } from "@packages/ui/assets";
 import { Logo, Input, Button } from "@packages/ui";
 import { useState } from "react";
-import { postSignUp, postSignUpBody } from "@/apis/sign-up";
+import { oAuthLogin, postSignUp, postSignUpBody } from "@/apis/sign-up";
 import { useMutation } from "react-query";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -49,6 +49,11 @@ const SignUp = () => {
     },
   });
 
+  const route = useRouter();
+  oAuthLogin(route.query.code)
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
+
   return (
     <div className="flex h-[100vh]">
       <div
@@ -56,41 +61,46 @@ const SignUp = () => {
         style={{ boxShadow: "inset 0px 4px 240px rgba(0, 0, 0, 0.25)" }}
       >
         <Logo />
-        <div className="bg-gray100 flex justify-center items-center w-52 h-52 rounded-full mt-14 mb-5">
+        <div className="bg-gray200 flex justify-center items-center w-52 h-52 rounded-full mt-14 mb-5 ">
           <Plus />
         </div>
         <p className="text-body5">프로필 추가</p>
       </div>
       <div className="w-[770px] pl-40 pr-40">
-        <Link href={"/"}>
+        <Link href={"/"} className="flex">
+          <Arrow />
           <button>뒤로가기</button>
         </Link>
         <div className="text-title1">회원가입</div>
         <div className="flex gap-8 flex-col">
           <Input
             name="name"
-            onChagne={onChange}
+            kind="text"
+            onChange={onChange}
             label="이름"
             placeholder="이름을 입력해주세요"
             value={form.name}
           />
           <Input
             name="grade"
-            onChagne={onChange}
+            kind="text"
+            onChange={onChange}
             label="학년"
             placeholder="학년을 선택해주세요"
             value={form.grade}
           />
           <Input
             name="number"
-            onChagne={onChange}
+            kind="text"
+            onChange={onChange}
             label="반"
             placeholder="반을 선택해주세요"
             value={form.number}
           />
           <Input
             name="class_num"
-            onChagne={onChange}
+            kind="text"
+            onChange={onChange}
             label="번호"
             placeholder="번호를 입력해주세요"
             value={form.class_num}

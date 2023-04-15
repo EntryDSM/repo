@@ -1,14 +1,19 @@
 import { ReactNode } from "react";
 import { Close } from "@packages/ui/assets";
+import { MajorList } from "@/apis/major";
 
 interface Props {
-  children: ReactNode;
+  data: MajorList;
+  onClick: (uuid: string) => void;
 }
 
-export const Tag = ({ children }: Props) => {
+export const Tag = ({ data, onClick }: Props) => {
   return (
-    <div className="bg-gray50 flex gap-3 items-center h-10 pl-5 pr-5 rounded">
-      {children}
+    <div
+      onClick={() => onClick(data.id)}
+      className="bg-gray50 flex gap-3 items-center h-10 pl-5 pr-5 rounded"
+    >
+      {data.name}
       <Close size={14} />
     </div>
   );

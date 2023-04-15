@@ -11,3 +11,7 @@ export interface postSignUpBody {
 export const postSignUp = (body: postSignUpBody) => {
   return instance.post("/student", body);
 };
+
+export const oAuthLogin = (code?: any) => {
+  return instance.post(`/auth/oauth/token?code=${code}`);
+};

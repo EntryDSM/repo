@@ -3,9 +3,10 @@ import { Button, Input, Logo } from "@packages/ui";
 import { PostSignIn, postSignIn } from "@/apis/sign-in";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { useMutation } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { toast } from "react-toastify";
 import { Arrow } from "@packages/ui/assets";
+import { searchMajor } from "@/apis/major";
 
 interface Form {
   account_id: string;
@@ -32,11 +33,14 @@ const SignIn = () => {
     mutationFn: (body: PostSignIn) => {
       return postSignIn(body);
     },
-    onSuccess: () => {
+    onSuccess: (res) => {
       toast("성공적으로 로그인하였습니다.", {
         autoClose: 1000,
         type: "success",
       });
+      const { access_token, refresh_token } = res.data;
+      localStorage.setItem("access_token", access_token || "");
+      localStorage.setItem("refresh_token", refresh_token || "");
       navigate.push("/");
     },
     onError: () => {

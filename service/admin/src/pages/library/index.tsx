@@ -1,8 +1,12 @@
+import { getLibrary } from "@/apis/library";
 import { Header } from "@/components/header";
 import { LibraryCard } from "@/components/library";
 import { Dropdown } from "@packages/ui";
+import { useQuery } from "react-query";
 
 const Library = () => {
+  const { data } = useQuery(["dwqdqwdq"], () => getLibrary());
+
   return (
     <>
       <Header />

@@ -3,8 +3,12 @@ import { Inter } from "next/font/google";
 import { Student } from "@/components/student";
 import { Header } from "@/components/header";
 import { Dropdown } from "@packages/ui";
+import { useQuery } from "react-query";
+import { getDocument } from "@/apis/document";
 
 export default function Home() {
+  const { data } = useQuery(["dwqdq"], getDocument);
+  console.log(data);
   return (
     <>
       <Header />
