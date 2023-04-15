@@ -4,11 +4,17 @@ import { Student } from "@/components/student";
 import { Header } from "@/components/header";
 import { Dropdown } from "@packages/ui";
 import { useQuery } from "react-query";
-import { getDocument } from "@/apis/document";
+import { useState } from "react";
+import { getStudent } from "@/apis/student";
 
 export default function Home() {
-  const { data } = useQuery(["dwqdq"], getDocument);
-  console.log(data);
+  const { data } = useQuery(["dwqdq"], getStudent);
+
+  const [option, setOption] = useState({
+    name: "조상현",
+    grade: 1,
+  });
+
   return (
     <>
       <Header />
@@ -16,9 +22,21 @@ export default function Home() {
         <p className="text-title1 mt-28">학생 관리</p>
         <p className="text-title4 mb-20">학생을 관리해보세요</p>
         <div className="mb-10 flex gap-5">
-          <Dropdown className="w-40" placeholder="학년" lists={["학년"]} />
-          <Dropdown className="w-40" placeholder="반" lists={["년도"]} />
-          <Dropdown className="w-40" placeholder="문서상태" lists={["년도"]} />
+          <Dropdown
+            className="w-40"
+            placeholder="학년"
+            lists={["1", "2", "3"]}
+          />
+          <Dropdown
+            className="w-40"
+            placeholder="반"
+            lists={["1", "2", "3", "4"]}
+          />
+          <Dropdown
+            className="w-40"
+            placeholder="문서상태"
+            lists={["PUBLIC", "STUDENT_ONLY", "PRIVATE"]}
+          />
         </div>
         <Student />
       </div>

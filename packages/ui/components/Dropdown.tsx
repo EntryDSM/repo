@@ -15,8 +15,6 @@ const kindColor = {
   contained: "bg-gray100",
 };
 
-const scroll = "";
-
 export const Dropdown = ({
   kind = "outline",
   lists,
