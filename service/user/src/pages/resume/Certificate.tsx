@@ -15,13 +15,13 @@ export const Certificate = () => {
         onRemove={() => {}}
       >
         <ImportLabel label="자격증 명" important>
-          <Input value={""} placeholder="" onChange={() => {}} />
+          <Input value={""} placeholder="자격증 이름을 입력해 주세요" onChange={() => {}} />
         </ImportLabel>
         <ImportLabel label="발급 기관" important>
-          <Input value={""} placeholder="" onChange={() => {}} />
+          <Input value={""} placeholder="발급 기관을 입력해 주세요" onChange={() => {}} />
         </ImportLabel>
         <ImportLabel label="취득일" important>
-          <Input value={""} placeholder="" onChange={() => {}} />
+          <Input value={""} placeholder="취득일을 입력해 주세요" onChange={() => {}} />
         </ImportLabel>
       </ResumeItem>
     </ResumeLayout>

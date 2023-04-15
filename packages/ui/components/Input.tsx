@@ -17,7 +17,7 @@ interface PropsType {
 }
 
 const defaultInputStyle =
-  "rounded w-full h-[46px] pl-5 pr-[60px] focus:outline-none py-3";
+  "w-full h-[46px] pl-5 pr-[60px] focus:outline-none py-3";
 const defaultHintStyle = "absolute text-body7";
 
 export const Input = ({
@@ -43,7 +43,7 @@ export const Input = ({
   const isOpenText = !open ? "password" : "text";
   const isCustom = kind === "custom";
   return (
-    <div className={`relative ${className}`}>
+    <div className={`relative rounded w-full ${className}`}>
       {label && <div className="text-body8 pb-2 pl-2">{label}</div>}
       <div className="absolute top-[1px] right-[7px] text-body7">{times}</div>
       <input

@@ -28,10 +28,20 @@ const Introduce = () => {
         placeholder="asfsa"
       >
         <ImportLabel label="한 줄 소개" important>
-          <TextArea name="" value="" placeholder="" onChange={() => {}} />
+          <TextArea
+            name=""
+            value=""
+            placeholder="한 줄 소개를 입력해주세요"
+            onChange={() => {}}
+          />
         </ImportLabel>
         <ImportLabel label="자기소개" important>
-          <TextArea name="" value="" placeholder="" onChange={() => {}} />
+          <TextArea
+            name=""
+            value=""
+            placeholder="자기소개를 입력해주세요"
+            onChange={() => {}}
+          />
         </ImportLabel>
       </ResumeItem>{" "}
     </ResumeLayout>

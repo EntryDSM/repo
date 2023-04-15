@@ -15,16 +15,16 @@ export const Awards = () => {
         onRemove={() => {}}
       >
         <ImportLabel label="상 이름" important>
-          <Input value={""} placeholder="" onChange={() => {}} />
+          <Input value={""} placeholder="수상한 상의 이름을 입력해주세요" onChange={() => {}} />
         </ImportLabel>
         <ImportLabel label="수여 기관" important>
-          <Input value={""} placeholder="" onChange={() => {}} />
+          <Input value={""} placeholder="상을 수여한 기관을 입력해주세요" onChange={() => {}} />
         </ImportLabel>
         <ImportLabel label="기간" important>
-          <Input value={""} placeholder="" onChange={() => {}} />
+          <Input value={""} placeholder="기간을 입력해 주세요" onChange={() => {}} />
         </ImportLabel>
         <ImportLabel label="내용" important>
-          <TextArea value="" placeholder="" name="" onChange={() => {}} />
+          <TextArea value="" placeholder="" name="내용을 입력해 주세요" onChange={() => {}} />
         </ImportLabel>
       </ResumeItem>
     </ResumeLayout>

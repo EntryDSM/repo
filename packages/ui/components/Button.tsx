@@ -5,6 +5,7 @@ interface PropsType {
   radius?: "normal" | "circle";
   kind?:
     | "contained"
+    | "containedWhite"
     | "outline"
     | "outlineWhite"
     | "underline"
@@ -23,6 +24,10 @@ const buttonColor = {
   contained: {
     enable: "bg-gray800 text-gray50 hover:bg-gray500 active:bg-gray400",
     disable: defaultDisable,
+  },
+  containedWhite: {
+    enable: "bg-gray50 text-gray900  hover:bg-gray100 :active:bg-gray200",
+    disable: "bg-gray600 text-gray500",
   },
   outline: {
     enable:
@@ -72,7 +77,7 @@ export const Button = ({
 
   return (
     <button
-      className={`w-auto box-border pl-[18px] pr-[18px] px-[18px] h-[46px] text-body8 flex items-center justify-center gap-x-[15px] shrink-0 ${borderRadius} ${
+      className={`w-auto rounded-[2px] box-border pl-[18px] pr-[18px] px-[18px] h-[46px] text-body8 flex items-center justify-center gap-x-[15px] shrink-0 ${borderRadius} ${
         disabled ? disable : enable
       } ${className}`}
       onClick={onClick}

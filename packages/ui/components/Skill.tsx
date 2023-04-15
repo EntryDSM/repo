@@ -16,12 +16,13 @@ export const SKillInput = ({ onAddSkill, className, name }: PropsType) => {
   const onClickAddSKill = () => onAddSkill({ keyword, name });
   return (
     <div>
-      <div className="gap-[15px] flex items-center justify-between">
+      <div className="w-full gap-[15px] flex items-center">
         <Input
           value={keyword}
           onChange={onChange}
           placeholder="기술 스택을 입력해 주세요"
           className={className}
+          kind="custom"
         />
         <Button kind="contained" onClick={onClickAddSKill}>
           추가
