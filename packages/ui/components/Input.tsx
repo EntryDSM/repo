@@ -17,7 +17,7 @@ interface PropsType {
 }
 
 const defaultInputStyle =
-  "rounded w-full h-[46px] pl-5 focus:outline-none py-3";
+  "rounded w-full h-[46px] pl-5 pr-15 focus:outline-none py-3";
 const defaultHintStyle = "absolute text-body7";
 
 export const Input = ({
@@ -66,7 +66,7 @@ export const Input = ({
           {kind}
         </div>
       )}
-      <div className="mr-5">
+      <div className="mr-5 absolute top-[11px] right-0">
         {isPassword && (
           <div onClick={PasswordTypeChange}>
             <EyeIcon size={24} />
