@@ -43,7 +43,7 @@ export const Input = ({
   const isOpenText = !open ? "password" : "text";
   const isCustom = kind === "custom";
   return (
-    <div className={"relative"}>
+    <div className="relative w-full">
       <div className="absolute text-body8 -top-[31px] left-[7px]">{label}</div>
       <div className="absolute top-[1px] right-[7px] text-body7">{times}</div>
       <input
