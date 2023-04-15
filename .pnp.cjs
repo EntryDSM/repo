@@ -397,7 +397,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:18.0.35"],\
             ["@types/react-dom", "npm:18.0.11"],\
             ["react", "npm:18.2.0"],\
-            ["react-dom", "virtual:429f1b8d68e7340a3b64de46c05ed489952f55c1bce814efcf9c475d84e07008d414fbf55bb9eb9f42d957c755a8a9167409ddf30772a81fee66d8a53507ad81#npm:18.2.0"]\
+            ["react-dom", "virtual:429f1b8d68e7340a3b64de46c05ed489952f55c1bce814efcf9c475d84e07008d414fbf55bb9eb9f42d957c755a8a9167409ddf30772a81fee66d8a53507ad81#npm:18.2.0"],\
+            ["react-outside-click-handler", "virtual:576cc4d2cc244f3af3c540317c2f84ae4d9a046d2b1519763846c613a93498d7e30080f38895c54cb2ed8b1a477d494fed6d10759b4dbb9b81d50d6a277d3c78#npm:1.3.0"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -470,7 +471,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["postcss", "npm:8.4.21"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:429f1b8d68e7340a3b64de46c05ed489952f55c1bce814efcf9c475d84e07008d414fbf55bb9eb9f42d957c755a8a9167409ddf30772a81fee66d8a53507ad81#npm:18.2.0"],\
-            ["react-outside-click-handler", "virtual:75a3693577b256f98b055709ea4550d6f3db7354cc22f8c0b91b65ddf921452ab815a4a5d6dd0e5cbb89999eeea8dbbc0924aa5a9c6af3934f5b123a89d125e2#npm:1.3.0"],\
+            ["react-outside-click-handler", "virtual:576cc4d2cc244f3af3c540317c2f84ae4d9a046d2b1519763846c613a93498d7e30080f38895c54cb2ed8b1a477d494fed6d10759b4dbb9b81d50d6a277d3c78#npm:1.3.0"],\
             ["tailwindcss", "virtual:41fe72e4f1f69320fab2b9b0a8de9a11b807f96dc0bdf2bac3f8aed1e8d970b37a8bc0f83fb0a695fb539d2a942d537caa95efbfb96ee4ef46b0f998b5e06f0f#npm:3.3.1"],\
             ["typescript", "patch:typescript@npm%3A5.0.4#~builtin<compat/typescript>::version=5.0.4&hash=85af82"]\
           ],\
@@ -760,10 +761,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:a41d1845e0112a51d22428974d5a898900c8ddc11daaa2a31f0b1febb2be69f6ba9d5b82bc12d62ea49d1e02ea5cc3035daf70a85df48e6f21f2de4c06cb229a#npm:2.16.0", {\
-          "packageLocation": "./.yarn/__virtual__/airbnb-prop-types-virtual-ac66d2e197/0/cache/airbnb-prop-types-npm-2.16.0-d794f5271c-393a5988b9.zip/node_modules/airbnb-prop-types/",\
+        ["virtual:0f9b9118d53e4d466721a745bf3d199e03ffd4c4b77abf24d1aede6bf53bf061f002bdef6bd0b4bcc489545511bf0e3e848a80dcfdf0f80fe8d0891f0a78e4b8#npm:2.16.0", {\
+          "packageLocation": "./.yarn/__virtual__/airbnb-prop-types-virtual-fc3443bea4/0/cache/airbnb-prop-types-npm-2.16.0-d794f5271c-393a5988b9.zip/node_modules/airbnb-prop-types/",\
           "packageDependencies": [\
-            ["airbnb-prop-types", "virtual:a41d1845e0112a51d22428974d5a898900c8ddc11daaa2a31f0b1febb2be69f6ba9d5b82bc12d62ea49d1e02ea5cc3035daf70a85df48e6f21f2de4c06cb229a#npm:2.16.0"],\
+            ["airbnb-prop-types", "virtual:0f9b9118d53e4d466721a745bf3d199e03ffd4c4b77abf24d1aede6bf53bf061f002bdef6bd0b4bcc489545511bf0e3e848a80dcfdf0f80fe8d0891f0a78e4b8#npm:2.16.0"],\
             ["@types/react", "npm:18.0.35"],\
             ["array.prototype.find", "npm:2.2.1"],\
             ["function.prototype.name", "npm:1.1.5"],\
@@ -4249,13 +4250,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:75a3693577b256f98b055709ea4550d6f3db7354cc22f8c0b91b65ddf921452ab815a4a5d6dd0e5cbb89999eeea8dbbc0924aa5a9c6af3934f5b123a89d125e2#npm:1.3.0", {\
-          "packageLocation": "./.yarn/__virtual__/react-outside-click-handler-virtual-a41d1845e0/0/cache/react-outside-click-handler-npm-1.3.0-7fa0d196a3-c3afc3ce1c.zip/node_modules/react-outside-click-handler/",\
+        ["virtual:576cc4d2cc244f3af3c540317c2f84ae4d9a046d2b1519763846c613a93498d7e30080f38895c54cb2ed8b1a477d494fed6d10759b4dbb9b81d50d6a277d3c78#npm:1.3.0", {\
+          "packageLocation": "./.yarn/__virtual__/react-outside-click-handler-virtual-0f9b9118d5/0/cache/react-outside-click-handler-npm-1.3.0-7fa0d196a3-c3afc3ce1c.zip/node_modules/react-outside-click-handler/",\
           "packageDependencies": [\
-            ["react-outside-click-handler", "virtual:75a3693577b256f98b055709ea4550d6f3db7354cc22f8c0b91b65ddf921452ab815a4a5d6dd0e5cbb89999eeea8dbbc0924aa5a9c6af3934f5b123a89d125e2#npm:1.3.0"],\
+            ["react-outside-click-handler", "virtual:576cc4d2cc244f3af3c540317c2f84ae4d9a046d2b1519763846c613a93498d7e30080f38895c54cb2ed8b1a477d494fed6d10759b4dbb9b81d50d6a277d3c78#npm:1.3.0"],\
             ["@types/react", "npm:18.0.35"],\
             ["@types/react-dom", "npm:18.0.11"],\
-            ["airbnb-prop-types", "virtual:a41d1845e0112a51d22428974d5a898900c8ddc11daaa2a31f0b1febb2be69f6ba9d5b82bc12d62ea49d1e02ea5cc3035daf70a85df48e6f21f2de4c06cb229a#npm:2.16.0"],\
+            ["airbnb-prop-types", "virtual:0f9b9118d53e4d466721a745bf3d199e03ffd4c4b77abf24d1aede6bf53bf061f002bdef6bd0b4bcc489545511bf0e3e848a80dcfdf0f80fe8d0891f0a78e4b8#npm:2.16.0"],\
             ["consolidated-events", "npm:2.0.2"],\
             ["document.contains", "npm:1.0.2"],\
             ["object.values", "npm:1.1.6"],\
