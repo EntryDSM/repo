@@ -5,3 +5,4 @@ export * from "./Dropdown";
 export * from "./SideBar";
 export * from "./TextArea";
 export * from "./Skill";
+export * from "./PreviewResume";

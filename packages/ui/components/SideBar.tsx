@@ -9,13 +9,14 @@ interface Props {
 export const SideBar = ({ children }: Props) => {
   return (
     <div className="flex h-[100vh]">
-      <div className="bg-gray800 w-20 flex gap-10 flex-col items-center pt-10">
+      <div className="fixed bottom-0 top-0 bg-gray800 w-20 flex gap-10 flex-col items-center pt-10">
         <div>
           <WhiteRepoIcon />
         </div>
         <Home />
       </div>
-      <div>{children}</div>
+      <div className="w-20" />
+      <div className="w-full">{children}</div>
     </div>
   );
 };
