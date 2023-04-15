@@ -50,9 +50,9 @@ const SignUp = () => {
   });
 
   const route = useRouter();
-  oAuthLogin(route.query.code)
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err));
+  // oAuthLogin(route.query.code)
+  //   .then((res) => console.log(res))
+  //   .catch((err) => console.log(err));
 
   return (
     <div className="flex h-[100vh]">
@@ -66,12 +66,12 @@ const SignUp = () => {
         </div>
         <p className="text-body5">프로필 추가</p>
       </div>
-      <div className="w-[770px] pl-40 pr-40">
+      <div className="w-[770px] pl-40 pr-40 flex flex-col justify-center">
         <Link href={"/"} className="flex">
-          <Arrow />
+          <Arrow direction="left" />
           <button>뒤로가기</button>
         </Link>
-        <div className="text-title1">회원가입</div>
+        <div className="text-title1 mt-14 mb-9">회원가입</div>
         <div className="flex gap-8 flex-col">
           <Input
             name="name"
@@ -106,7 +106,12 @@ const SignUp = () => {
             value={form.class_num}
           />
         </div>
-        <Button onClick={() => mutate(form)} radius="normal" kind="contained">
+        <Button
+          className="w-full mt-16"
+          onClick={() => mutate(form)}
+          radius="normal"
+          kind="contained"
+        >
           회원가입
         </Button>
       </div>

@@ -83,7 +83,7 @@ const SignIn = () => {
             value={form.password}
           />
           <Button
-            className="w-full text-start mt-16"
+            className="w-full mt-16"
             onClick={() => mutate(form)}
             radius="normal"
             kind="contained"
