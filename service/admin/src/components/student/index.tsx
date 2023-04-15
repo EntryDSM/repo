@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export const Student = () => {
   return (
-    <Link href={"/"}>
+    <Link href={"/qdwqqdw"}>
       <article className="flex w-[1120px] h-20 pl-10 pr-10 items-center bg-gray50 rounded-md">
         <Image width={46} height={46} src={dummy} alt="" />
         <div className="w-28 text-body4 ml-5">좌찬익</div>
