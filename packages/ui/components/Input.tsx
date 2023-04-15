@@ -17,7 +17,7 @@ interface PropsType {
 }
 
 const defaultInputStyle =
-  "rounded w-full h-[46px] pl-5 pr-15 focus:outline-none py-3";
+  "rounded w-full h-[46px] pl-5 pr-[60px] focus:outline-none py-3";
 const defaultHintStyle = "absolute text-body7";
 
 export const Input = ({
