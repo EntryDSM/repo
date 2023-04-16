@@ -1,6 +1,6 @@
 import { ImportLabel } from "@/components/ImportLabel";
-import { ResumeLayout } from "@/components/resume/ResumeLayout";
-import { ResumeTitle } from "@/components/resume/ResumeTitle";
+import { ResumeLayout } from "@/components/resume/Layout";
+import { ResumeTitle } from "@/components/resume/Title";
 import { Rectify } from "@packages/ui/assets";
 import { Dropdown, Input, SKillInput, SkillList } from "@packages/ui";
 import { ChangeEvent } from "react";

@@ -2,14 +2,13 @@ import { instance } from "..";
 
 interface GetFileReq {
   type: "PROFILE" | "DOCUMENT";
-  file: File;
+  file: FormData;
 }
 interface GetFileRes {
   image_path: string;
+  base_url: string;
 }
 
 export const getFile = ({ file, type }: GetFileReq) => {
-  const form = new FormData();
-  form.append("file", file);
-  return instance.post<GetFileRes>(`/file?type=${type}`, form);
+  return instance.post<GetFileRes>(`/file/image?type=${type}`, file);
 };

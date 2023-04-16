@@ -1,7 +1,7 @@
 import { instance } from "..";
 
 interface Major {
-  major_id: string;
+  id: string;
   name: string;
 }
 

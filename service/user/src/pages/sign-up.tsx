@@ -1,14 +1,15 @@
 import { Arrow, Plus } from "@packages/ui/assets";
 import { Logo, Input, Button, Dropdown } from "@packages/ui";
 import { useState } from "react";
-import { oAuthLogin, postSignUp, postSignUpBody } from "@/apis/sign-up";
+import { oAuthLogin, postSignUp, postSignUpBody } from "@/apis/auth";
 import { useMutation, useQuery } from "react-query";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
-import { getMajor } from "@/apis/getMajor";
-import { SaveImg } from "@/apis/save-img";
+import { getMajor } from "@/apis/major";
+import { getFile } from "@/apis/file";
 import Image from "next/image";
+import { AxiosError } from "axios";
 
 interface Form {
   name: string;
@@ -17,6 +18,7 @@ interface Form {
   class_num: number;
   number: number;
   profile_image_path: string;
+  major_id: string;
 }
 
 const SignUp = () => {
@@ -27,6 +29,7 @@ const SignUp = () => {
     class_num: 0,
     number: 0,
     profile_image_path: "",
+    major_id: "",
   });
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,23 +65,33 @@ const SignUp = () => {
   const { data: major } = useQuery(["dwqdqw"], getMajor);
 
   const route = useRouter();
-  // oAuthLogin(route.query.code)
-  //   .then((res) => {
-  //     const { access_token, refresh_token } = res.data;
+  oAuthLogin(route.query.code)
+    .then((res) => {
+      const { access_token, refresh_token } = res.data;
 
-  //     if (access_token && refresh_token) {
-  //       localStorage.setItem("access_token", access_token);
-  //       localStorage.setItem("refresh_token", refresh_token);
-  //       navigate.push("/");
-  //     }
-  //   })
-  //   .catch((err) => navigate.push("http://localhost:3001"));
+      if (access_token && refresh_token) {
+        localStorage.setItem("access_token", access_token);
+        localStorage.setItem("refresh_token", refresh_token);
+        navigate.push("/");
+      }
+    })
+    .catch((err: AxiosError) => {
+      //@ts-ignore
+      if (err.response?.data && err.response.data.status === 400) {
+        navigate.push("http://localhost:3001/");
+      }
+    });
+  const [imgUrl, setImgUrl] = useState("");
   const { mutate: imgUpload } = useMutation({
-    mutationFn: (req: FormData) => SaveImg("PROFILE", req),
+    mutationFn: (req: FormData) => getFile({ type: "PROFILE", file: req }),
     onSuccess: (res) => {
-      setForm({ ...form, profile_image_path: res.data.image_path });
+      const { base_url, image_path } = res.data;
+      setImgUrl(base_url + image_path);
+      setForm({ ...form, profile_image_path: image_path });
     },
   });
+
+  console.log(form.major_id);
 
   return (
     <div className="flex h-[100vh]">
@@ -91,7 +104,7 @@ const SignUp = () => {
           id="profile"
           onChange={(form) => {
             const formData = new FormData();
-            formData.append("file", form.target.value);
+            formData.append("file", form.target.files[0]);
             imgUpload(formData);
           }}
           type="file"
@@ -99,10 +112,16 @@ const SignUp = () => {
         />
         <label
           htmlFor="profile"
-          className="bg-gray200 flex justify-center items-center w-52 h-52 rounded-full mt-14 mb-5 cursor-pointer"
+          className="bg-gray200  flex justify-center items-center w-52 h-52 rounded-full mt-14 mb-5 cursor-pointer"
         >
-          {form.profile_image_path ? (
-            <Image src={form.profile_image_path} alt="" />
+          {imgUrl ? (
+            <Image
+              className="rounded-full object-cover"
+              width={200}
+              height={200}
+              src={imgUrl}
+              alt=""
+            />
           ) : (
             <Plus />
           )}
@@ -148,13 +167,23 @@ const SignUp = () => {
             placeholder="번호를 입력해주세요"
             value={form.class_num}
           />
-          {/* {major && (
+          {major && (
             <Dropdown
               className="mt-[29px]"
               placeholder="전공선택"
+              //@ts-ignore
               lists={major.data.major_list}
+              objectKey="name"
+              name="id"
+              onClick={({ keyword }) => {
+                //@ts-ignore
+                setForm({ ...form, major_id: keyword.id });
+              }}
+              value={
+                major.data.major_list.find((m) => form.major_id === m.id)?.name
+              }
             />
-          )} */}
+          )}
         </div>
         <Button
           className="w-full mt-10"

@@ -9,16 +9,16 @@ interface SearchMajorRes {
   major_list: MajorList[];
 }
 
-export const searchMajor = () => {
+export const getMajor = () => {
   return instance.get<SearchMajorRes>("/major");
 };
 
-export interface MajorCreate {
+export interface PostMajorReq {
   major_name: string;
 }
 
-export const createMajor = (name: string) => {
-  return instance.post("/major", { major_name: name });
+export const postMajor = (body: PostMajorReq) => {
+  return instance.post("/major", body);
 };
 
 export const deleteMajor = (name: string) => {
