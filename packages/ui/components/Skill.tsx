@@ -4,16 +4,19 @@ import { Button } from "./Button";
 import { Close } from "../assets";
 
 interface PropsType {
-  name?: string;
+  name: string;
   className?: string;
-  onAddSkill: (keyword: { keyword: string; name?: string }) => void;
+  onAddSkill: (keyword: { keyword: string; name: string }) => void;
 }
 
 export const SKillInput = ({ onAddSkill, className, name }: PropsType) => {
   const [keyword, setKeyword] = useState<string>("");
   const onChange = (e: ChangeEvent<HTMLInputElement>) =>
     setKeyword(e.target.value);
-  const onClickAddSKill = () => onAddSkill({ keyword, name });
+  const onClickAddSKill = () => {
+    onAddSkill({ keyword, name });
+    setKeyword("");
+  };
   return (
     <div>
       <div className="w-full gap-[15px] flex items-center">
@@ -47,15 +50,16 @@ export const SkillList = ({
 }: ListType) => {
   return (
     <div className="w-full flex flex-wrap gap-x-[14px] gap-y-5">
-      {list.map((skill, index) => (
-        <div
-          className={`h-10 cursor-pointer bg-gray100 hover:bg-gray200 text-body5 rounded-md flex items-center gap-3 px-5 ${className}`}
-          onClick={() => onClickRemove({ index, name })}
-        >
-          {skill}
-          <Close size={12} />
-        </div>
-      ))}
+      {list &&
+        list.map((skill, index) => (
+          <div
+            className={`h-10 cursor-pointer bg-gray100 hover:bg-gray200 text-body5 rounded-md flex items-center gap-3 px-5 ${className}`}
+            onClick={() => onClickRemove({ index, name })}
+          >
+            {skill}
+            <Close size={12} />
+          </div>
+        ))}
     </div>
   );
 };

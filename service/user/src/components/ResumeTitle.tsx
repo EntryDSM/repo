@@ -10,6 +10,10 @@ interface PropsType {
 export const ResumeTitle = ({ value, onClick }: PropsType) => (
   <div className="flex items-center justify-between h-[112px] px-10 ">
     <div className="text-title2">{value}</div>
-    {onClick && <Plus size={24} />}
+    {onClick && (
+      <div onClick={onClick}>
+        <Plus size={24} />
+      </div>
+    )}
   </div>
 );
