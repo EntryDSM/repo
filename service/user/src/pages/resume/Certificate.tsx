@@ -1,7 +1,9 @@
 import { ImportLabel } from "@/components/ImportLabel";
 import { Input } from "@packages/ui";
-import { ResumeTitle } from "@/components/ResumeTitle";
+import { ResumeTitle } from "@/components/resume/Title";
 import { useProfileWriteArray } from "@/hooks/useWriteProfile";
+import { ResumeItem } from "@/components/resume/Item";
+import { ResumeLayout } from "@/components/resume/Layout";
 
 export const Certificate = () => {
   const { state, handleChange, addItem, removeItem } = useProfileWriteArray(
