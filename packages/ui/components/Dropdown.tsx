@@ -2,12 +2,17 @@ import React, { useState } from "react";
 import { Arrow } from "../assets/Arrow";
 import ReactOutSideClickHandler from "react-outside-click-handler";
 
+type ListObjectType = { [key in string]: string };
+
 interface PropsType {
   kind?: "outline" | "contained";
+  label?: string;
+  hint?: string;
   name: string;
-  lists: string[];
+  lists: (string | ListObjectType)[];
   value?: string;
-  onClick: (value: { keyword: string; name: string }) => void;
+  onClick: (value: { keyword: string | ListObjectType; name: string }) => void;
+  objectKey?: string;
   className?: string;
   placeholder: string;
 }
@@ -19,15 +24,19 @@ const kindColor = {
 
 export const Dropdown = ({
   kind = "outline",
+  label,
+  hint,
   name,
   lists,
   value,
   onClick,
+  objectKey,
   className = "bg-gray100",
   placeholder,
 }: PropsType) => {
   const kindCss = kindColor[kind];
   const [dropdown, setDropDown] = useState(false);
+  console.log(objectKey);
   return (
     <ReactOutSideClickHandler
       display="inline-block"
@@ -35,6 +44,7 @@ export const Dropdown = ({
         setDropDown(false);
       }}
     >
+      {label && <div className="mb-2.5 ml-[7px] text-body8">{label}</div>}
       <div className={`${className} relative`}>
         <div
           onClick={() => setDropDown(true)}
@@ -45,27 +55,32 @@ export const Dropdown = ({
           </div>
           <Arrow direction="bottom" />
         </div>
+
         {dropdown && (
           <div className="absolute z-50 top-14 bg-gray100 rounded-md shadow-xl w-full max-h-[132px] overflow-y-auto flex flex-col items-center">
-            {lists.map((keyword, idx) => (
-              <>
-                <div
-                  onClick={() => {
-                    onClick({ keyword, name });
-                    setDropDown(false);
-                  }}
-                  className="w-full hover:bg-gray200 flex pl-4 py-2.5 items-center rounded cursor-pointer"
-                >
-                  {keyword}
-                </div>
-                {idx !== lists.length - 1 && (
-                  <div className="w-[95%] h-[1px]  bg-gray50 shrink-0" />
-                )}
-              </>
-            ))}
+            {lists.map((keyword, idx) => {
+              const isListObject = typeof keyword === "object";
+              return (
+                <>
+                  <div
+                    onClick={() => {
+                      onClick({ keyword, name });
+                      setDropDown(false);
+                    }}
+                    className="w-full hover:bg-gray200 flex pl-4 py-2.5 items-center rounded cursor-pointer"
+                  >
+                    {isListObject ? keyword[objectKey as string] : keyword}
+                  </div>
+                  {idx !== lists.length - 1 && (
+                    <div className="w-[95%] h-[1px]  bg-gray50 shrink-0" />
+                  )}
+                </>
+              );
+            })}
           </div>
         )}
       </div>
+      {hint && <div className="text-body8 text-gray300">{hint}</div>}
     </ReactOutSideClickHandler>
   );
 };
