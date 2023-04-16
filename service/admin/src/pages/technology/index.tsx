@@ -65,7 +65,7 @@ const technology = () => {
           <Input
             value={searchTechnology}
             kind="custom"
-            className="bg-50 w-[436px]"
+            className="bg-gray50 w-[436px]"
             activeIcon={<Search size={24} />}
             placeholder="검색할 전공을 입력해주세요"
             onChange={(e) => setSearchTechnology(e.target.value)}
@@ -74,7 +74,7 @@ const technology = () => {
             <Input
               value={technology}
               kind="custom"
-              className="bg-50 w-[436px] mr-5"
+              className="bg-gray50 w-[436px] mr-5"
               placeholder="추가할 전공을 입력해주세요"
               onChange={(e) => setTechnology(e.target.value)}
             />

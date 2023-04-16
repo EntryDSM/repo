@@ -22,7 +22,7 @@ const defaultDisable = "bg-gray200 text-gray50";
 
 const buttonColor = {
   contained: {
-    enable: "bg-gray800 text-gray50 hover:bg-gray500 active:bg-gray400",
+    enable: "bg-gray800 text-gray50 hover:bg-gray500 [&_path]:fill-gray50 active:bg-gray400 [&_path]:hover:fill-gray50",
     disable: defaultDisable,
   },
   containedWhite: {
@@ -31,7 +31,7 @@ const buttonColor = {
   },
   outline: {
     enable:
-      "border-2 text-gray800 hover:text-gray50 hover:border-gray600 hover:bg-gray600 active:text-gray50 active:bg-gray500 active:border-gray500",
+      "border-2 text-gray800 hover:text-gray50 hover:border-gray600 hover:bg-gray600 active:text-gray50 [&_path]:hover:fill-gray50 active:bg-gray500 active:border-gray500",
     disable: "border-2 border-gray300 text-gray300",
   },
   outlineWhite: {
