@@ -1,4 +1,4 @@
-import { fileToImg } from "@/apis/fileToUrl";
+import { fileToImg } from "@/apis/file";
 import { ChangeEvent, FormEvent, useState } from "react";
 
 export type ProfileType =
@@ -29,7 +29,10 @@ export const onChange = (
   };
 };
 
-export const onClickItem = <T>(state: T, value: { keyword: string; name: string }) => {
+export const onClickItem = <T>(
+  state: T,
+  value: { keyword: string; name: string }
+) => {
   const { keyword, name } = value;
   return { ...state, [name]: keyword };
 };
