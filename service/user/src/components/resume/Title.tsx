@@ -1,6 +1,4 @@
-import { ChangeEvent } from "react";
-import { Input } from "../../../../packages/ui";
-import { Plus } from "../../../../packages/ui/assets";
+import { Plus } from "@packages/ui/assets";
 
 interface PropsType {
   value: string;

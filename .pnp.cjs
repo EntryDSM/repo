@@ -433,6 +433,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./service/admin/",\
           "packageDependencies": [\
             ["@service/admin", "workspace:service/admin"],\
+            ["@packages/hooks", "workspace:packages/hooks"],\
             ["@packages/ui", "workspace:packages/ui"],\
             ["@types/node", "npm:18.15.11"],\
             ["@types/react", "npm:18.0.35"],\
@@ -487,6 +488,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./service/user/",\
           "packageDependencies": [\
             ["@service/user", "workspace:service/user"],\
+            ["@packages/hooks", "workspace:packages/hooks"],\
             ["@packages/ui", "workspace:packages/ui"],\
             ["@types/node", "npm:18.15.11"],\
             ["@types/react", "npm:18.0.35"],\

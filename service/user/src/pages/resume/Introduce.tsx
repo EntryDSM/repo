@@ -1,22 +1,8 @@
-import { HeaderBack } from "@/components/HeaderBack";
-import { Footer } from "@/components/footer";
-import { Header } from "@/components/header";
-import {
-  Button,
-  Dropdown,
-  Input,
-  SKillInput,
-  SkillList,
-  TextArea,
-} from "@packages/ui";
-import { Plus, Search } from "@packages/ui/assets";
-import Link from "next/link";
-import { ReactNode } from "react";
+import { TextArea } from "@packages/ui";
 import { ImportLabel } from "@/components/ImportLabel";
-import { ResumeTitle } from "@/components/ResumeTitle";
-import { ResumeItem } from "@/components/ResumeItem";
+import { ResumeTitle } from "@/components/resume/ResumeTitle";
 import { ResumeLayout } from "@/components/ResumeLayout";
-import { useProfileWrite } from "../../hook/useWriteProfile";
+import { useProfileWrite } from "@/hooks/useWriteProfile";
 
 const Introduce = () => {
   const { state, handleChange } = useProfileWrite(

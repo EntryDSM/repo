@@ -1,9 +1,6 @@
 import { ImportLabel } from "@/components/ImportLabel";
-import { ResumeItem } from "@/components/ResumeItem";
-import { ResumeLayout } from "@/components/ResumeLayout";
-import { ResumeTitle } from "@/components/ResumeTitle";
-import { Input, TextArea } from "../../../../../packages/ui";
-import { useProfileWriteArray } from "@/hook/useWriteProfile";
+import { Input, TextArea } from "@packages/ui";
+import { useProfileWriteArray } from "@/hooks/useWriteProfile";
 import { useMutation } from "react-query";
 import { AwardReqBody, documnetAward } from "@/apis/document/award";
 import { toast } from "react-toastify";

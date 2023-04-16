@@ -1,7 +1,6 @@
-import { ChangeEvent, Children, ReactNode } from "react";
-import { Arrow, Delete } from "../../../../packages/ui/assets";
-import { useInversion } from "../../../../packages/hooks/useInversion";
-import { Input } from "../../../../packages/ui";
+import { ChangeEvent, ReactNode } from "react";
+import { Arrow, Delete } from "@packages/ui/assets";
+import { useInversion } from "@packages/hooks/useInversion";
 
 interface PropsType {
   value: string;

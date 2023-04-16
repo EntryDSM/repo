@@ -1,10 +1,10 @@
-import { ReactNode } from "react";
-import { Button, TextArea } from "../../../../packages/ui";
-import { HeaderBack } from "./HeaderBack";
-import { Header } from "./header";
 import Link from "next/link";
-import { Footer } from "./footer";
-import { Check } from "../../../../packages/ui/assets";
+import { ReactNode } from "react";
+import { Button } from "@packages/ui";
+import { HeaderBack } from "../HeaderBack";
+import { Header } from "../header";
+import { Footer } from "../footer";
+import { Check } from "@packages/ui/assets";
 import { useRouter } from "next/router";
 
 interface PropsType {

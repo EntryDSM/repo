@@ -10,7 +10,7 @@ import {
   onChange,
   removeSkillFn,
   useProfileWriteArray,
-} from "../../hook/useWriteProfile";
+} from "../../hooks/useWriteProfile";
 
 export const Project = () => {
   const { state, setState, handleChange, addItem, removeItem } =

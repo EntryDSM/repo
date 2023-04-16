@@ -72,18 +72,6 @@ export const MyPage = ({
             );
           })}
           <Line width={80} />
-          {/* <Ball>
-            <div>작성</div>
-          </Ball>
-          <Line width={340} />
-          <Ball>
-            <div>제출됨</div>
-          </Ball>
-          <Line width={340} />
-          <Ball>
-            <div>공유됨</div>
-          </Ball>
-          <Line width={80} /> */}
         </div>
       </div>
 

@@ -1,11 +1,14 @@
 import { Arrow, Plus } from "@packages/ui/assets";
-import { Logo, Input, Button } from "@packages/ui";
+import { Logo, Input, Button, Dropdown } from "@packages/ui";
 import { useState } from "react";
 import { oAuthLogin, postSignUp, postSignUpBody } from "@/apis/sign-up";
-import { useMutation } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
+import { getMajor } from "@/apis/getMajor";
+import { SaveImg } from "@/apis/save-img";
+import Image from "next/image";
 
 interface Form {
   name: string;
@@ -13,6 +16,7 @@ interface Form {
   grade: number;
   class_num: number;
   number: number;
+  profile_image_path: string;
 }
 
 const SignUp = () => {
@@ -22,6 +26,7 @@ const SignUp = () => {
     grade: 0,
     class_num: 0,
     number: 0,
+    profile_image_path: "",
   });
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,18 +59,26 @@ const SignUp = () => {
     },
   });
 
-  const route = useRouter();
-  oAuthLogin(route.query.code)
-    .then((res) => {
-      const { access_token, refresh_token } = res.data;
+  const { data: major } = useQuery(["dwqdqw"], getMajor);
 
-      if (access_token && refresh_token) {
-        localStorage.setItem("access_token", access_token);
-        localStorage.setItem("refresh_token", refresh_token);
-        navigate.push("/");
-      }
-    })
-    .catch((err) => navigate.push("http://localhost:3001"));
+  const route = useRouter();
+  // oAuthLogin(route.query.code)
+  //   .then((res) => {
+  //     const { access_token, refresh_token } = res.data;
+
+  //     if (access_token && refresh_token) {
+  //       localStorage.setItem("access_token", access_token);
+  //       localStorage.setItem("refresh_token", refresh_token);
+  //       navigate.push("/");
+  //     }
+  //   })
+  //   .catch((err) => navigate.push("http://localhost:3001"));
+  const { mutate: imgUpload } = useMutation({
+    mutationFn: (req: FormData) => SaveImg("PROFILE", req),
+    onSuccess: (res) => {
+      setForm({ ...form, profile_image_path: res.data.image_path });
+    },
+  });
 
   return (
     <div className="flex h-[100vh]">
@@ -74,9 +87,26 @@ const SignUp = () => {
         style={{ boxShadow: "inset 0px 4px 240px rgba(0, 0, 0, 0.25)" }}
       >
         <Logo />
-        <div className="bg-gray200 flex justify-center items-center w-52 h-52 rounded-full mt-14 mb-5 ">
-          <Plus />
-        </div>
+        <input
+          id="profile"
+          onChange={(form) => {
+            const formData = new FormData();
+            formData.append("file", form.target.value);
+            imgUpload(formData);
+          }}
+          type="file"
+          className="hidden"
+        />
+        <label
+          htmlFor="profile"
+          className="bg-gray200 flex justify-center items-center w-52 h-52 rounded-full mt-14 mb-5 cursor-pointer"
+        >
+          {form.profile_image_path ? (
+            <Image src={form.profile_image_path} alt="" />
+          ) : (
+            <Plus />
+          )}
+        </label>
         <p className="text-body5">프로필 추가</p>
       </div>
       <div className="w-[770px] pl-40 pr-40 flex flex-col justify-center">
@@ -84,7 +114,7 @@ const SignUp = () => {
           <Arrow direction="left" />
           <button>뒤로가기</button>
         </Link>
-        <div className="text-title1 mt-14 mb-9">회원가입</div>
+        <div className="text-title1 mb-4">회원가입</div>
         <div className="flex gap-8 flex-col">
           <Input
             name="name"
@@ -118,9 +148,16 @@ const SignUp = () => {
             placeholder="번호를 입력해주세요"
             value={form.class_num}
           />
+          {/* {major && (
+            <Dropdown
+              className="mt-[29px]"
+              placeholder="전공선택"
+              lists={major.data.major_list}
+            />
+          )} */}
         </div>
         <Button
-          className="w-full mt-16"
+          className="w-full mt-10"
           onClick={() => mutate(form)}
           radius="normal"
           kind="contained"

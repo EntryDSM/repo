@@ -1,6 +1,6 @@
 import { ImportLabel } from "@/components/ImportLabel";
-import { ResumeLayout } from "@/components/ResumeLayout";
-import { ResumeTitle } from "@/components/ResumeTitle";
+import { ResumeLayout } from "@/components/resume/ResumeLayout";
+import { ResumeTitle } from "@/components/resume/ResumeTitle";
 import { Rectify } from "@packages/ui/assets";
 import { Dropdown, Input, SKillInput, SkillList } from "@packages/ui";
 import { ChangeEvent } from "react";
@@ -10,7 +10,7 @@ import {
   onClickItem,
   removeSkillFn,
   useProfileWrite,
-} from "../../hook/useWriteProfile";
+} from "@/hooks/useWriteProfile";
 
 const student = {
   grade: ["1학년", "2힉년", "3학년"],

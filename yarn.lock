@@ -312,6 +312,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@service/admin@workspace:service/admin"
   dependencies:
+    "@packages/hooks": "workspace:^"
     "@packages/ui": "workspace:^"
     "@types/node": 18.15.11
     "@types/react": 18.0.35
@@ -362,6 +363,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@service/user@workspace:service/user"
   dependencies:
+    "@packages/hooks": "workspace:^"
     "@packages/ui": "workspace:^"
     "@types/node": 18.15.11
     "@types/react": 18.0.35
