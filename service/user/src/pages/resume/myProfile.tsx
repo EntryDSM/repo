@@ -1,15 +1,16 @@
 import { ImportLabel } from "@/components/ImportLabel";
 import { ResumeLayout } from "@/components/ResumeLayout";
 import { ResumeTitle } from "@/components/ResumeTitle";
-import { Rectify } from "../../../../../packages/ui/assets";
-import {
-  Dropdown,
-  Input,
-  SKillInput,
-  SkillList,
-} from "../../../../../packages/ui";
+import { Rectify } from "@packages/ui/assets";
+import { Dropdown, Input, SKillInput, SkillList } from "@packages/ui";
 import { ChangeEvent } from "react";
-import { useProfileWrite } from "../../hook/useWriteProfile";
+import {
+  AddSkillFn,
+  onChange,
+  onClickItem,
+  removeSkillFn,
+  useProfileWrite,
+} from "../../hook/useWriteProfile";
 
 const student = {
   grade: ["1학년", "2힉년", "3학년"],
@@ -20,20 +21,39 @@ const student = {
 };
 
 export const My = () => {
-  const { state, handleChange, onImgChange, onDropdownSelect, AddSKill } =
-    useProfileWrite(
-      {
-        name: "",
-        profile_image_path: "",
-        email: "",
-        major: "",
-        grade: "",
-        class_num: "",
-        number: "",
-        skill: [],
-      },
-      "introduce"
-    );
+  const { state, setState, handleChange } = useProfileWrite(
+    {
+      name: "",
+      profile_image_path: "",
+      email: "",
+      major: "",
+      grade: "",
+      class_num: "",
+      number: "",
+      skill: [],
+    },
+    "introduce"
+  );
+
+  const onImgChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name } = e.target;
+    onChange((value) => setState({ ...state, [name]: value }), e);
+  };
+
+  const onDropdownSelect = (value: { keyword: string; name: string }) => {
+    const temp = onClickItem(state, value);
+    setState(temp);
+  };
+
+  const AddSKill = (value: { keyword: string; name: string }) => {
+    const temp = AddSkillFn(state, value);
+    setState(temp);
+  };
+
+  const removeSkill = (value: { index: number; name: string }) => {
+    const temp = removeSkillFn(state, value);
+    setState(temp);
+  };
 
   return (
     <ResumeLayout>
@@ -43,6 +63,7 @@ export const My = () => {
           <input
             id="profile"
             type="file"
+            name="profile_image_path"
             onChange={onImgChange}
             className="hidden"
           />
@@ -51,10 +72,8 @@ export const My = () => {
             className="relative inline-block cursor-pointer"
           >
             <img
-              width={160}
-              height={160}
               src={state.profile_image_path}
-              className="rounded-[80px] bg-gray200"
+              className="w-40 h-40 object-cover rounded-[80px] bg-gray200"
             />
             <div className="absolute bottom-0 right-0 bg-gray100 p-2 rounded-full">
               <Rectify size={24} />
@@ -127,7 +146,11 @@ export const My = () => {
               onAddSkill={AddSKill}
               className="w-full bg-gray100"
             />
-            <SkillList list={state.skill} onClickRemove={() => {}} />
+            <SkillList
+              name="skill"
+              list={state.skill}
+              onClickRemove={removeSkill}
+            />
           </div>
         </ImportLabel>
         <ImportLabel label="추가 포트폴리오">

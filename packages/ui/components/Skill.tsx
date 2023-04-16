@@ -37,8 +37,8 @@ export const SKillInput = ({ onAddSkill, className, name }: PropsType) => {
 
 interface ListType {
   list: string[];
-  name?: string;
-  onClickRemove: (index: { index: number; name?: string }) => void;
+  name: string;
+  onClickRemove: (index: { index: number; name: string }) => void;
   className?: string;
 }
 

@@ -12,9 +12,9 @@ interface PropsType {
 }
 
 const link = {
-  my: "내 정보",
+  myProfile: "내 정보",
   introduce: "자기소개",
-  project: "프로젝트",
+  projects: "프로젝트",
   awards: "수상",
   certificate: "자격증",
 };
