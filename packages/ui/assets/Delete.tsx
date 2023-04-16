@@ -1,13 +1,15 @@
 import React from "react";
 interface PropsType {
   size?: number;
+  onClick?: () => void;
 }
-export const Delete = ({ size = 50 }: PropsType) => (
+export const Delete = ({ size = 50, onClick }: PropsType) => (
   <svg
     width={size}
     height={size}
     className="cursor-pointer"
     viewBox="0 0 50 50"
+    onClick={onClick}
     fill="none"
   >
     <path

@@ -2,6 +2,7 @@ import React from "react";
 
 interface PropsType {
   size?: number;
+  onClick?: () => void;
 }
 
 export const Plus = ({ size = 50 }: PropsType) => (

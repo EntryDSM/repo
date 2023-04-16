@@ -3,6 +3,7 @@ import React from "react";
 interface PropsType {
   direction?: "left" | "top" | "right" | "bottom";
   size?: number;
+  onClick?: () => void;
 }
 
 const rotate = {
@@ -12,13 +13,18 @@ const rotate = {
   bottom: "rotate-[270deg]",
 };
 
-export const Arrow = ({ direction = "right", size = 28 }: PropsType) => {
+export const Arrow = ({
+  direction = "right",
+  size = 28,
+  onClick,
+}: PropsType) => {
   return (
     <svg
       width={size}
       height={size}
       viewBox="0 0 50 50"
       fill="none"
+      onClick={onClick}
       className={`cursor-pointer ${rotate[direction]}`}
     >
       <path

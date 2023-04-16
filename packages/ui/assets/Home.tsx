@@ -1,14 +1,15 @@
 import React from "react";
 interface PropsType {
   size?: number;
+  onClick?: () => void;
 }
-export const Home = ({ size = 28 }: PropsType) => (
+export const Home = ({ size = 28, onClick }: PropsType) => (
   <svg
     width={size}
     height={size}
     viewBox="0 0 24 24"
     fill="none"
-    xmlns="http://www.w3.org/2000/svg"
+    onClick={onClick}
   >
     <g clip-path="url(#clip0_2882_2110)">
       <path
