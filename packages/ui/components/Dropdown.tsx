@@ -36,7 +36,6 @@ export const Dropdown = ({
 }: PropsType) => {
   const kindCss = kindColor[kind];
   const [dropdown, setDropDown] = useState(false);
-  console.log(objectKey);
   return (
     <ReactOutSideClickHandler
       display="inline-block"
@@ -47,13 +46,13 @@ export const Dropdown = ({
       {label && <div className="mb-2.5 ml-[7px] text-body8">{label}</div>}
       <div className={`${className} relative`}>
         <div
-          onClick={() => setDropDown(true)}
+          onClick={() => setDropDown(!dropdown)}
           className={`h-[46px] flex items-center justify-between rounded-sm pl-4 pr-3 ${kindCss} cursor-pointer`}
         >
           <div className={`text-body6 ${value || "text-gray200"}`}>
             {value || placeholder}
           </div>
-          <Arrow direction="bottom" />
+          <Arrow direction={dropdown ? "top" : "bottom"} />
         </div>
 
         {dropdown && (
