@@ -38,7 +38,8 @@ export default function Home() {
             lists={["PUBLIC", "STUDENT_ONLY", "PRIVATE"]}
           />
         </div>
-        {data && data.data.map((student) => <Student {...student} />)}
+        {data &&
+          data.data.student_list.map((student) => <Student {...student} />)}
       </div>
     </>
   );

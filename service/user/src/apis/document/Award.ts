@@ -1,6 +1,6 @@
 import { instance } from "..";
 
-interface AwardReqBody {
+export interface AwardReqBody {
   name: string;
   awarding_institution: string;
   date: Date;
@@ -8,5 +8,5 @@ interface AwardReqBody {
 }
 
 export const documnetAward = (body: AwardReqBody[]) => {
-  return instance.patch("/document/award", body);
+  return instance.patch("/document/award", { award_list: body });
 };

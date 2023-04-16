@@ -16,5 +16,5 @@ export interface StudentType {
 }
 
 export const getStudent = () => {
-  return instance.get<StudentType[]>("/student");
+  return instance.get<{ student_list: StudentType[] }>("/student");
 };

@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export const useInversion = () => {
-  const [state, setState] = useState(true);
+  const [state, setState] = useState(false);
 
   const correct = () => {
     setState(true);

@@ -65,7 +65,7 @@ const SignUp = () => {
         navigate.push("/");
       }
     })
-    .catch((err) => console.log(err));
+    .catch((err) => navigate.push("http://localhost:3001"));
 
   return (
     <div className="flex h-[100vh]">

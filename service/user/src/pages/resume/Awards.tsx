@@ -4,19 +4,30 @@ import { ResumeLayout } from "@/components/ResumeLayout";
 import { ResumeTitle } from "@/components/ResumeTitle";
 import { Input, TextArea } from "../../../../../packages/ui";
 import { useProfileWriteArray } from "@/hook/useWriteProfile";
+import { useMutation } from "react-query";
+import { AwardReqBody, documnetAward } from "@/apis/document/award";
+import { toast } from "react-toastify";
 
 export const Awards = () => {
   const { state, handleChange, addItem, removeItem } = useProfileWriteArray(
     {
       name: "",
       awarding_institution: "",
-      date: "",
+      date: new Date(),
       description: "",
     },
     "award_list"
   );
+
+  const { mutate } = useMutation({
+    mutationFn: (body: AwardReqBody[]) => documnetAward(body),
+    onSuccess: () => {
+      toast("임시저장하였습니다.", { autoClose: 1000, type: "success" });
+    },
+  });
+
   return (
-    <ResumeLayout>
+    <ResumeLayout mutate={mutate} state={state}>
       <ResumeTitle value="수상" onClick={() => {}} />
       {state.map(({ name, awarding_institution, date, description }, index) => {
         const handleChangeArray = handleChange(index);

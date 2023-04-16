@@ -9,6 +9,8 @@ import { useRouter } from "next/router";
 
 interface PropsType {
   children: ReactNode;
+  mutate?: any;
+  state?: any;
 }
 
 const link = {
@@ -19,9 +21,8 @@ const link = {
   certificate: "자격증",
 };
 
-export const ResumeLayout = ({ children }: PropsType) => {
+export const ResumeLayout = ({ children, mutate, state }: PropsType) => {
   const { route } = useRouter();
-  console.log(route);
   return (
     <div>
       <Header />
@@ -32,10 +33,19 @@ export const ResumeLayout = ({ children }: PropsType) => {
             <p className="text-title4 flex justify-between text-gray50">
               Resumé Management
               <div className="flex gap-[15px]">
-                <Button width={88} kind="outlineWhite" radius="normal">
+                <Button
+                  onClick={() => mutate(state)}
+                  className="w-[100px]"
+                  kind="outlineWhite"
+                  radius="normal"
+                >
                   임시 저장
                 </Button>
-                <Button width={61} kind="containedWhite" radius="normal">
+                <Button
+                  className="w-[61px]"
+                  kind="containedWhite"
+                  radius="normal"
+                >
                   제출
                 </Button>
               </div>
