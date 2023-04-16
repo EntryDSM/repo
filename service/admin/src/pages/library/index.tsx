@@ -20,7 +20,7 @@ const Library = () => {
             lists={["2021", "2022", "2023", "2023", "2023"]}
           />
         </div>
-        <LibraryCard />
+        {data && data.data.map((libarary) => <LibraryCard {...libarary} />)}
       </div>
     </>
   );

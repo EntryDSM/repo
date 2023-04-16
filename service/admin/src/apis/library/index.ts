@@ -1,6 +1,6 @@
 import { instance } from "..";
 
-interface Library {
+export interface Library {
   id: string;
   access_right: string;
   year: number;

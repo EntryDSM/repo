@@ -22,5 +22,5 @@ export const createMajor = (name: string) => {
 };
 
 export const deleteMajor = (name: string) => {
-  return instance.delete(`/major/tags/${name}`);
+  return instance.delete(`/major/${name}`);
 };

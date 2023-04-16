@@ -1,6 +1,6 @@
 import { instance } from "..";
 
-export interface Student {
+export interface StudentType {
   student_id: string;
   name: string;
   document_id: string;
@@ -16,5 +16,5 @@ export interface Student {
 }
 
 export const getStudent = () => {
-  return instance.get<Student[]>("/student");
+  return instance.get<StudentType[]>("/student");
 };

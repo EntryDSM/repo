@@ -5,6 +5,7 @@ import { oAuthLogin, postSignUp, postSignUpBody } from "@/apis/sign-up";
 import { useMutation } from "react-query";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 interface Form {
   name: string;
@@ -45,14 +46,26 @@ const SignUp = () => {
       return postSignUp(body);
     },
     onSuccess: () => {
+      toast("성공적으로 회원가입하였습니다.", {
+        autoClose: 1000,
+        type: "success",
+      });
       navigate.push("/");
     },
   });
 
   const route = useRouter();
-  // oAuthLogin(route.query.code)
-  //   .then((res) => console.log(res))
-  //   .catch((err) => console.log(err));
+  oAuthLogin(route.query.code)
+    .then((res) => {
+      const { access_token, refresh_token } = res.data;
+
+      if (access_token && refresh_token) {
+        localStorage.setItem("access_token", access_token);
+        localStorage.setItem("refresh_token", refresh_token);
+        navigate.push("/");
+      }
+    })
+    .catch((err) => console.log(err));
 
   return (
     <div className="flex h-[100vh]">

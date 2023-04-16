@@ -366,6 +366,7 @@ __metadata:
     "@types/node": 18.15.11
     "@types/react": 18.0.35
     "@types/react-dom": 18.0.11
+    "@types/react-toastify": ^4.1.0
     autoprefixer: 10.4.14
     axios: ^1.3.5
     eslint: 8.38.0
@@ -376,6 +377,7 @@ __metadata:
     react: 18.2.0
     react-dom: 18.2.0
     react-query: ^3.39.3
+    react-toastify: ^9.1.2
     tailwindcss: 3.3.1
     typescript: 5.0.4
   languageName: unknown
@@ -433,6 +435,15 @@ __metadata:
   dependencies:
     "@types/react": "*"
   checksum: 514e5fe09adfee12dc790dc4bee008c8e44a814c6631e2374f08c0e77868ca77783396cc9c868406f952e48a5164a487a487e960d4ed3d77924b419cec5252c7
+  languageName: node
+  linkType: hard
+
+"@types/react-toastify@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "@types/react-toastify@npm:4.1.0"
+  dependencies:
+    react-toastify: "*"
+  checksum: ef8993d4c6019b97f725cabb56b15106f306ba3744acf0930148246608ee992b68459d6af46df16046c2ccf70e7d77de303339760cd0f27a7644d6d1d1d299ac
   languageName: node
   linkType: hard
 
@@ -3505,7 +3516,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-toastify@npm:^9.1.2":
+"react-toastify@npm:*, react-toastify@npm:^9.1.2":
   version: 9.1.2
   resolution: "react-toastify@npm:9.1.2"
   dependencies:

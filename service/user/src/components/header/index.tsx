@@ -15,12 +15,12 @@ export const Header = () => {
               </Link>
             </li>
             <li>
-              <Link className="text-gray50" href={"/my-page"}>
+              <Link className="text-gray50" href={"/"}>
                 마이페이지
               </Link>
             </li>
             <li>
-              <Link className="text-gray50" href={"/resume"}>
+              <Link className="text-gray50" href={"/resume/my"}>
                 이력서
               </Link>
             </li>

@@ -12,11 +12,11 @@ interface PropsType {
 }
 
 const link = {
-  My: "내 정보",
-  Introduce: "자기소개",
-  Project: "프로젝트",
-  Awards: "수상",
-  Certificate: "자격증",
+  my: "내 정보",
+  introduce: "자기소개",
+  project: "프로젝트",
+  awards: "수상",
+  certificate: "자격증",
 };
 
 export const ResumeLayout = ({ children }: PropsType) => {
@@ -26,7 +26,7 @@ export const ResumeLayout = ({ children }: PropsType) => {
     <div>
       <Header />
       <HeaderBack>
-        <div className="w-[1120px] m-auto flex flex-col gap-10">
+        <div className="w-[1120px] m-auto flex flex-col gap-10 mb-52">
           <div>
             <p className="text-title1 text-gray50">이력서 관리</p>
             <p className="text-title4 flex justify-between text-gray50">
