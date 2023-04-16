@@ -4,14 +4,14 @@ import ReactOutSideClickHandler from "react-outside-click-handler";
 
 type ListObjectType = { [key in string]: string };
 
-interface PropsType {
+interface PropsType<T> {
   kind?: "outline" | "contained";
   label?: string;
   hint?: string;
   name: string;
-  lists: (string | ListObjectType)[];
+  lists: T[];
   value?: string;
-  onClick: (value: { keyword: string | ListObjectType; name: string }) => void;
+  onClick: (value: { keyword: T; name: string }) => void;
   objectKey?: string;
   className?: string;
   placeholder: string;
@@ -22,7 +22,7 @@ const kindColor = {
   contained: "bg-gray100",
 };
 
-export const Dropdown = ({
+export const Dropdown = <T extends string | ListObjectType>({
   kind = "outline",
   label,
   hint,
@@ -33,7 +33,7 @@ export const Dropdown = ({
   objectKey,
   className = "bg-gray100",
   placeholder,
-}: PropsType) => {
+}: PropsType<T>) => {
   const kindCss = kindColor[kind];
   const [dropdown, setDropDown] = useState(false);
   return (
