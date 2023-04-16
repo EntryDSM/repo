@@ -1,7 +1,6 @@
 import { TextArea } from "@packages/ui";
 import { ImportLabel } from "@/components/ImportLabel";
-import { ResumeTitle } from "@/components/resume/ResumeTitle";
-import { ResumeLayout } from "@/components/ResumeLayout";
+import { ResumeTitle, ResumeLayout } from "@/components/resume";
 import { useProfileWrite } from "@/hooks/useWriteProfile";
 
 const Introduce = () => {

@@ -2,11 +2,9 @@ import { ImportLabel } from "@/components/ImportLabel";
 import { Input, TextArea } from "@packages/ui";
 import { useProfileWriteArray } from "@/hooks/useWriteProfile";
 import { useMutation } from "react-query";
+import { ResumeTitle, ResumeItem, ResumeLayout } from "@/components/resume";
 import { AwardReqBody, documnetAward } from "@/apis/document/Award";
 import { toast } from "react-toastify";
-import { ResumeLayout } from "@/components/resume/Layout";
-import { ResumeTitle } from "@/components/resume/Title";
-import { ResumeItem } from "@/components/resume/Item";
 
 export const Awards = () => {
   const { state, handleChange, addItem, removeItem } = useProfileWriteArray(

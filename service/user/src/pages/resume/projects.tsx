@@ -1,7 +1,5 @@
 import { ImportLabel } from "@/components/ImportLabel";
-import { ResumeItem } from "@/components/ResumeItem";
-import { ResumeLayout } from "@/components/ResumeLayout";
-import { ResumeTitle } from "@/components/ResumeTitle";
+import { ResumeTitle, ResumeItem, ResumeLayout } from "@/components/resume";
 import { Input, SKillInput, SkillList, TextArea } from "@packages/ui";
 import { Plus } from "@packages/ui/assets";
 import { ChangeEvent } from "react";
@@ -59,7 +57,6 @@ export const Project = () => {
                 ...state[index],
                 [name]: value as string,
               });
-              console.log(copy);
               setState(copy);
             }, e);
           };
