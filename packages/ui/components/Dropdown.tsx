@@ -13,7 +13,7 @@ interface PropsType {
 }
 
 const kindColor = {
-  outline: "border-2 border-gray-800 bg-gray50",
+  outline: "border-2 border-gray-800 bg-transparent",
   contained: "bg-gray100",
 };
 
@@ -23,7 +23,7 @@ export const Dropdown = ({
   lists,
   value,
   onClick,
-  className,
+  className = "bg-gray100",
   placeholder,
 }: PropsType) => {
   const kindCss = kindColor[kind];

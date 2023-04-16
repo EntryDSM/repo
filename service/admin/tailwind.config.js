@@ -22,6 +22,7 @@ module.exports = {
       check: "#04DF00",
       error: "#E84045",
       focus: "#006EFF",
+      transparent: "transparent",
     },
     fontSize: {
       title1: [

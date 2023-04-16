@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useState } from "react";
 import { WhiteRepoIcon } from "../assets/WhiteRepoIcon";
 import { Home, Setting, Stack } from "../assets";
 import { Button } from "./Button";
@@ -8,6 +8,8 @@ interface Props {
 }
 
 export const SideBar = ({ children }: Props) => {
+  const [side, setSide] = useState<number>(0);
+  const onClick = (to: number) => setSide(to === side ? 0 : to);
   return (
     <div className="flex h-[100vh]">
       <div className="fixed bottom-0 top-0 flex">
