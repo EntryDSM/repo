@@ -10,6 +10,7 @@ import {
   removeSkillFn,
   useProfileWrite,
 } from "../../hooks/useWriteProfile";
+import { WrtieInfoReqBody } from "../../apis/document/patch/WriteInfo";
 
 const student = {
   grade: ["1학년", "2힉년", "3학년"],
@@ -20,19 +21,20 @@ const student = {
 };
 
 export const My = () => {
-  const { state, setState, handleChange } = useProfileWrite(
-    {
-      name: "",
-      profile_image_path: "",
-      email: "",
-      major: "",
-      grade: "",
-      class_num: "",
-      number: "",
-      skill: [],
-    },
-    "introduce"
-  );
+  const { state, save, setState, handleChange } =
+    useProfileWrite<WrtieInfoReqBody>(
+      {
+        name: "",
+        profile_image_path: "",
+        email: "",
+        major_id: "",
+        grade: "",
+        class_num: "",
+        number: "",
+        skill_set: [],
+      },
+      "writer"
+    );
 
   const onImgChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name } = e.target;
@@ -55,7 +57,7 @@ export const My = () => {
   };
 
   return (
-    <ResumeLayout>
+    <ResumeLayout mutate={save}>
       <ResumeTitle value="자기소개" />
       <div className="px-[40px] flex flex-col gap-10">
         <ImportLabel label="프로필 이미지">
@@ -123,7 +125,7 @@ export const My = () => {
             <Dropdown
               kind="contained"
               name="major"
-              value={state.major}
+              value={state.major_id}
               onClick={onDropdownSelect}
               lists={["frontend"]}
               placeholder="frontend"
@@ -147,7 +149,7 @@ export const My = () => {
             />
             <SkillList
               name="skill"
-              list={state.skill}
+              list={state.skill_set}
               onClickRemove={removeSkill}
             />
           </div>

@@ -4,7 +4,7 @@ import { ResumeTitle, ResumeLayout } from "@/components/resume";
 import { useProfileWrite } from "@/hooks/useWriteProfile";
 
 const Introduce = () => {
-  const { state, handleChange } = useProfileWrite(
+  const { state, save, handleChange } = useProfileWrite(
     {
       heading: "",
       introduce: "",
@@ -12,7 +12,7 @@ const Introduce = () => {
     "introduce"
   );
   return (
-    <ResumeLayout>
+    <ResumeLayout mutate={save}>
       <ResumeTitle value="자기소개" />
       <div className="px-[40px] flex flex-col gap-10">
         <ImportLabel label="한 줄 소개" important>

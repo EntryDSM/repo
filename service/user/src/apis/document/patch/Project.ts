@@ -1,6 +1,6 @@
-import { instance } from "..";
+import { instance } from "../..";
 
-interface ProjectReqBody {
+export interface ProjectReqBody {
   name: string;
   represent_image_path: string;
   start_date: Date;

@@ -1,9 +1,9 @@
-import { instance } from "..";
+import { instance } from "../..";
 
-interface CertificateReqBody {
+export interface CertificateReqBody {
   name: string;
   issuing_institution: string;
-  date: Date;
+  issue_date: Date;
 }
 
 export const documnetCertificate = (body: CertificateReqBody[]) => {

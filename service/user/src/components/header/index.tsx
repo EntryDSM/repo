@@ -20,7 +20,7 @@ export const Header = () => {
               </Link>
             </li>
             <li>
-              <Link className="text-gray50" href={"/resume/myProfile"}>
+              <Link className="text-gray50" href={"/resume/my"}>
                 이력서
               </Link>
             </li>

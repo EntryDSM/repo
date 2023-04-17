@@ -2,7 +2,7 @@ import { Inter } from "next/font/google";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { useQuery } from "react-query";
-import { documentMy } from "@/apis/document/my";
+import { documentMy } from "@/apis/document/get/my";
 import { MyPage } from "@/components/MyPage";
 
 const inter = Inter({ subsets: ["latin"] });

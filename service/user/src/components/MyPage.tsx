@@ -1,4 +1,4 @@
-import { DocumentMyRes } from "@/apis/document/my";
+import { DocumentMyRes } from "@/apis/document/get/my";
 import { Button } from "@packages/ui";
 import Image from "next/image";
 import { ReactNode } from "react";

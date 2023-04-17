@@ -4,16 +4,16 @@ import { ResumeTitle, ResumeItem, ResumeLayout } from "@/components/resume";
 import { useProfileWriteArray } from "@/hooks/useWriteProfile";
 
 export const Certificate = () => {
-  const { state, handleChange, addItem, removeItem } = useProfileWriteArray(
+  const { state,save, handleChange, addItem, removeItem } = useProfileWriteArray(
     {
       name: "",
       issuing_institution: "",
-      issue_date: "",
+      issue_date: new Date(),
     },
     "certificate_list"
   );
   return (
-    <ResumeLayout>
+    <ResumeLayout mutate={save}>
       <ResumeTitle value="자격증" onClick={addItem} />
       {state.map(({ name, issue_date, issuing_institution }, index) => {
         const handleChangeArray = handleChange(index);

@@ -1,5 +1,5 @@
-import { ImportLabel } from "@/components/ImportLabel";
-import { ResumeTitle, ResumeItem, ResumeLayout } from "@/components/resume";
+import { ImportLabel } from "../../components/ImportLabel";
+import { ResumeTitle, ResumeItem, ResumeLayout } from "../../components/resume";
 import { Input, SKillInput, SkillList, TextArea } from "@packages/ui";
 import { Plus } from "@packages/ui/assets";
 import { ChangeEvent } from "react";
@@ -11,13 +11,13 @@ import {
 } from "../../hooks/useWriteProfile";
 
 export const Project = () => {
-  const { state, setState, handleChange, addItem, removeItem } =
+  const { state, save, setState, handleChange, addItem, removeItem } =
     useProfileWriteArray(
       {
         name: "",
         represent_image_path: "",
-        start_date: "",
-        end_date: "",
+        start_date: new Date(),
+        end_date: new Date(),
         skill_list: [],
         description: "",
         url: "",
@@ -25,7 +25,7 @@ export const Project = () => {
       "project_list"
     );
   return (
-    <ResumeLayout>
+    <ResumeLayout mutate={save}>
       <ResumeTitle value="프로젝트" onClick={addItem} />
       {state.map(
         (

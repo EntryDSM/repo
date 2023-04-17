@@ -1,4 +1,4 @@
-import { instance } from "..";
+import { instance } from "../..";
 
 export interface AwardReqBody {
   name: string;

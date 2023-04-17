@@ -15,7 +15,7 @@ interface PropsType {
 const link = {
   my: "내 정보",
   introduce: "자기소개",
-  projects: "프로젝트",
+  project: "프로젝트",
   awards: "수상",
   certificate: "자격증",
 };
@@ -82,22 +82,6 @@ export const ResumeLayout = ({ children, mutate, state }: PropsType) => {
                 </nav>
               </div>
             </div>
-            <Button className="rounded-2xl hover:bg-gray200">미리보기</Button>
-
-            <nav className="bg-gray50 p-5 rounded-2xl">
-              {Object.entries(link).map(([key, value]) => (
-                <Link href={"/resume/" + key}>
-                  <button
-                    className={`w-full rounded-[2px] box-border pl-[18px] pr-[18px] px-[18px] h-[46px] text-body8 flex items-center justify-between gap-x-[15px] shrink-0 hover:bg-gray100  ${
-                      route.includes(key) ? "bg-gray100" : ""
-                    }`}
-                  >
-                    {value}
-                    <Check size={24} color />
-                  </button>
-                </Link>
-              ))}
-            </nav>
           </div>
         </div>
       </div>
