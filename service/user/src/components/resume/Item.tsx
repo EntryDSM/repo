@@ -19,17 +19,15 @@ export const ResumeItem = ({
 }: PropsType) => {
   const { state: dropdown, inversion } = useInversion();
   const height = dropdown ? "h-[148px]" : "h-auto";
+  const isPlaceholder = !value && "text-gray300";
   return (
     <div
       className={`p-10 transition-all border-2 ${height} border-gray100 bg-gray50 flex flex-col gap-10 overflow-hidden`}
     >
       <div className="flex h-[66px] shrink-0 justify-between items-center">
-        <input
-          value={value}
-          onChange={onChange}
-          placeholder={placeholder}
-          className="visited:border-0 focus:border-0 focus-visible:border-gray50 text-body1 flex flex-col pl-0"
-        />
+        <div className={`text-body1 ${isPlaceholder}`}>
+          {value || placeholder}
+        </div>
         <div className="flex items-center gap-5">
           <div onClick={inversion}>
             <Arrow direction={dropdown ? "top" : "bottom"} />

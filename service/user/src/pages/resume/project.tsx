@@ -12,7 +12,7 @@ import {
 import { FeedBack } from "@/components/resume/FeedBack";
 
 export const Project = () => {
-  const { state, save, setState, handleChange, addItem, removeItem } =
+  const { state, mutate, setState, handleChange, addItem, removeItem } =
     useProfileWriteArray(
       {
         name: "",
@@ -29,7 +29,7 @@ export const Project = () => {
       "project_list"
     );
   return (
-    <ResumeLayout mutate={save}>
+    <ResumeLayout mutate={mutate}>
       <ResumeTitle value="프로젝트" onClick={addItem} />
       {state.map((item, index) => {
         const {

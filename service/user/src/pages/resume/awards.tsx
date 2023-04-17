@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { FeedBack } from "@/components/resume/FeedBack";
 
 export const Awards = () => {
-  const { state, save, handleChange, addItem, removeItem } =
+  const { state, mutate, handleChange, addItem, removeItem } =
     useProfileWriteArray(
       {
         name: "",
@@ -23,7 +23,7 @@ export const Awards = () => {
     );
 
   return (
-    <ResumeLayout mutate={save.mutate} state={state}>
+    <ResumeLayout mutate={mutate} state={state}>
       <ResumeTitle value="수상" onClick={addItem} />
       {state.map((item, index) => {
         const { name, awarding_institution, date, description, feedback } =

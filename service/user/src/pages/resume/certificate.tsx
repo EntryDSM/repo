@@ -5,7 +5,7 @@ import { useProfileWriteArray } from "@/hooks/useWriteProfile";
 import { FeedBack } from "@/components/resume/FeedBack";
 
 export const Certificate = () => {
-  const { state, save, handleChange, addItem, removeItem } =
+  const { state, mutate, handleChange, addItem, removeItem } =
     useProfileWriteArray(
       {
         name: "",
@@ -18,7 +18,7 @@ export const Certificate = () => {
       "certificate_list"
     );
   return (
-    <ResumeLayout mutate={save}>
+    <ResumeLayout mutate={mutate}>
       <ResumeTitle value="자격증" onClick={addItem} />
       {state.map((item, index) => {
         const { name, issue_date, issuing_institution, feedback } = item;

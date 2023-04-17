@@ -4,7 +4,11 @@ import {
   WriteInfoResType,
   WrtieInfoReqBody,
 } from "../apis/document/patch/WriteInfo";
-import { documnetAward, AwardReqBody, AwardResType } from "../apis/document/patch/Award";
+import {
+  documnetAward,
+  AwardReqBody,
+  AwardResType,
+} from "../apis/document/patch/Award";
 import {
   documnetCertificate,
   CertificateReqBody,
@@ -117,7 +121,7 @@ export const useProfileWrite = <T extends StateType>(
       setState(temp);
     },
   });
-  const save = useMutation({
+  const { mutate } = useMutation({
     mutationFn: (body: StateType) => {
       const Fn = typeFn[type];
       // @ts-ignore
@@ -127,7 +131,7 @@ export const useProfileWrite = <T extends StateType>(
       toast("임시저장하였습니다.", { autoClose: 1000, type: "success" });
     },
   });
-  useEffect(() => () => save.mutate(state), []);
+  useEffect(() => () => mutate(state), []);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -135,7 +139,7 @@ export const useProfileWrite = <T extends StateType>(
     const temp = handleChangeFn(state, e);
     setState(temp);
   };
-  return { state, save, setState, handleChange };
+  return { state, mutate, setState, handleChange };
 };
 
 export const useProfileWriteArray = <T extends StateArrayType>(
@@ -143,14 +147,14 @@ export const useProfileWriteArray = <T extends StateArrayType>(
   type: ProfileArrayType
 ) => {
   const [state, setState] = useState<T[]>([initial]);
-  useQuery(["write"], () => myDetail(), {
+  const { data } = useQuery(["write"], () => myDetail(), {
     onSuccess: ({ data }) => {
       let temp = data[type];
       //@ts-ignore
       setState(temp);
     },
   });
-  const save = useMutation({
+  const { mutate } = useMutation({
     mutationFn: (body: T[]) => {
       const Fn = typeFn[type];
       // @ts-ignore
@@ -160,7 +164,7 @@ export const useProfileWriteArray = <T extends StateArrayType>(
       toast("임시저장하였습니다.", { autoClose: 1000, type: "success" });
     },
   });
-  useEffect(() => () => save.mutate(state), []);
+  useEffect(() => () => mutate(state), [data]);
 
   const handleChange =
     (index: number) =>
@@ -181,7 +185,7 @@ export const useProfileWriteArray = <T extends StateArrayType>(
 
   return {
     state,
-    save,
+    mutate,
     setState,
     handleChange,
     addItem,

@@ -70,7 +70,7 @@ export const ResumeLayout = ({ children, mutate, state }: PropsType) => {
                   {Object.entries(link).map(([key, value]) => (
                     <Link href={"/resume/" + key}>
                       <button
-                        className={`w-full rounded-[2px] box-border pl-[18px] pr-[18px] px-[18px] h-[46px] text-body8 flex items-center justify-between gap-x-[15px] shrink-0 hover:bg-gray100  ${
+                        className={`w-full rounded-md box-border pl-[18px] pr-[18px] px-[18px] h-[60px] text-body8 flex items-center justify-between gap-x-[15px] shrink-0 hover:bg-gray100  ${
                           route.includes(key) ? "bg-gray100" : ""
                         }`}
                       >

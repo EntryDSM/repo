@@ -12,6 +12,8 @@ import {
 } from "../../hooks/useWriteProfile";
 import { WrtieInfoReqBody } from "../../apis/document/patch/WriteInfo";
 import { FeedBack } from "@/components/resume/FeedBack";
+import { getMajor } from "@/apis/major";
+import { useQuery } from "react-query";
 
 const student = {
   grade: ["1학년", "2힉년", "3학년"],
@@ -22,7 +24,7 @@ const student = {
 };
 
 export const My = () => {
-  const { state, save, setState, handleChange } = useProfileWrite(
+  const { state, mutate, setState, handleChange } = useProfileWrite(
     {
       name: "",
       profile_image_path: "",
@@ -39,6 +41,8 @@ export const My = () => {
     "writer"
   );
 
+  const { data: major } = useQuery(["skillList"], getMajor);
+
   const onImgChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name } = e.target;
     onChange((value) => setState({ ...state, [name]: value }), e);
@@ -50,7 +54,9 @@ export const My = () => {
   };
 
   const AddSKill = (value: { keyword: string; name: string }) => {
+    console.log(state);
     const temp = AddSkillFn(state, value);
+
     setState(temp);
   };
 
@@ -60,7 +66,7 @@ export const My = () => {
   };
 
   return (
-    <ResumeLayout mutate={save}>
+    <ResumeLayout mutate={mutate}>
       <ResumeTitle value="자기소개" />
       <div className="px-[40px] flex flex-col gap-10">
         <FeedBack
@@ -92,12 +98,7 @@ export const My = () => {
           </label>
         </ImportLabel>
         <ImportLabel label="이름" important>
-          <Input
-            value={state.name}
-            placeholder="이름을 입력해주세요"
-            onChange={handleChange}
-            name="name"
-          />
+          <div className="text-body4 h-[46px] pl-1">{state.name}</div>
         </ImportLabel>
         <ImportLabel label="학번" important>
           <div className="flex justify-between gap-[15px] [&>div]:w-full ">
@@ -132,14 +133,24 @@ export const My = () => {
         </ImportLabel>
         <ImportLabel label="분야" important>
           <div className="[&>div]:w-full">
-            <Dropdown
-              kind="contained"
-              name="major"
-              value={state.major_id}
-              onClick={onDropdownSelect}
-              lists={["frontend"]}
-              placeholder="frontend"
-            />
+            {major && (
+              <Dropdown
+                kind="contained"
+                name="major_id"
+                value={
+                  major.data.major_list.find((m) => state.major_id === m.id)
+                    ?.name
+                }
+                onClick={({ keyword }) => {
+                  //@ts-ignore
+                  setState({ ...state, major_id: keyword.id });
+                }}
+                //@ts-ignore
+                lists={major.data.major_list}
+                objectKey="name"
+                placeholder="frontend"
+              />
+            )}
           </div>
         </ImportLabel>
         <ImportLabel label="이메일" important>
@@ -153,24 +164,16 @@ export const My = () => {
         <ImportLabel label="기술 스택">
           <div className="flex flex-col gap-[30px]">
             <SKillInput
-              name="skill"
+              name="skill_set"
               onAddSkill={AddSKill}
               className="w-full bg-gray100"
             />
             <SkillList
-              name="skill"
+              name="skill_set"
               list={state.skill_set}
               onClickRemove={removeSkill}
             />
           </div>
-        </ImportLabel>
-        <ImportLabel label="추가 포트폴리오">
-          <Input
-            value={""}
-            placeholder="https://"
-            onChange={() => {}}
-            className="bg-gray100"
-          />
         </ImportLabel>
       </div>
     </ResumeLayout>
