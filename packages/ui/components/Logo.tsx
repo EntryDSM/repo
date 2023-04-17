@@ -2,19 +2,23 @@ import React from "react";
 import { BlackRepoIcon } from "../assets/BlackRepoIcon";
 import { WhiteRepoIcon } from "../assets/WhiteRepoIcon";
 
-export const Logo = () => {
+interface PropsType {
+  size?: number;
+}
+
+export const Logo = ({ size }: PropsType) => {
   return (
-    <div className="flex items-center gap-2 text-title1">
-      <BlackRepoIcon />
+    <div className="flex items-center gap-2 text-body4">
+      <BlackRepoIcon size={size} />
       REPO
     </div>
   );
 };
 
-export const WhiteLogo = () => {
+export const WhiteLogo = ({ size }: PropsType) => {
   return (
-    <div className="flex items-center gap-2 text-title1 text-gray50">
-      <WhiteRepoIcon />
+    <div className="flex items-center gap-2 text-body4 text-gray50">
+      <WhiteRepoIcon size={size} />
       REPO
     </div>
   );
