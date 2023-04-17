@@ -2,18 +2,23 @@ import { TextArea } from "@packages/ui";
 import { ImportLabel } from "@/components/ImportLabel";
 import { ResumeTitle, ResumeLayout } from "@/components/resume";
 import { useProfileWrite } from "@/hooks/useWriteProfile";
+import { FeedBack } from "@/components/resume/FeedBack";
 
 const Introduce = () => {
   const { state, save, handleChange } = useProfileWrite(
     {
       heading: "",
       introduce: "",
+      document_id: "",
+      element_id: "",
+      feedback: "",
     },
     "introduce"
   );
   return (
     <ResumeLayout mutate={save}>
       <ResumeTitle value="자기소개" />
+      <FeedBack id={state} content={state.feedback} />
       <div className="px-[40px] flex flex-col gap-10">
         <ImportLabel label="한 줄 소개" important>
           <TextArea

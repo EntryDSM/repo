@@ -6,6 +6,12 @@ export interface CertificateReqBody {
   issue_date: Date;
 }
 
+export interface CertificateResType extends CertificateReqBody {
+  document_id: string;
+  element_id: string;
+  feedback: string;
+}
+
 export const documnetCertificate = (body: CertificateReqBody[]) => {
   return instance.patch("/document/certificate", body);
 };

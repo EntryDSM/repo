@@ -1,20 +1,24 @@
 import { myDetail } from "@/apis/document/get/myDetail";
 import {
   documnetWriteInfo,
+  WriteInfoResType,
   WrtieInfoReqBody,
 } from "../apis/document/patch/WriteInfo";
-import { documnetAward, AwardReqBody } from "../apis/document/patch/Award";
+import { documnetAward, AwardReqBody, AwardResType } from "../apis/document/patch/Award";
 import {
   documnetCertificate,
   CertificateReqBody,
+  CertificateResType,
 } from "../apis/document/patch/Certificate";
 import {
   documnetIntroduce,
   IntroduceReqBody,
+  IntroduceResType,
 } from "../apis/document/patch/Introduce";
 import {
   documnetProject,
   ProjectReqBody,
+  ProjectResType,
 } from "../apis/document/patch/Project";
 
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
@@ -24,8 +28,14 @@ import { toast } from "react-toastify";
 export type ProfileType = "introduce" | "writer";
 type ProfileArrayType = "project_list" | "award_list" | "certificate_list";
 
-type StateArrayType = AwardReqBody | CertificateReqBody | ProjectReqBody;
-type StateType = WrtieInfoReqBody | IntroduceReqBody;
+export type EachStateType =
+  | AwardResType
+  | CertificateResType
+  | IntroduceResType
+  | ProjectResType
+  | WriteInfoResType;
+export type StateArrayType = AwardReqBody | CertificateReqBody | ProjectReqBody;
+export type StateType = WrtieInfoReqBody | IntroduceReqBody;
 
 const dummy = "";
 
@@ -124,7 +134,6 @@ export const useProfileWrite = <T extends StateType>(
   ) => {
     const temp = handleChangeFn(state, e);
     setState(temp);
-    
   };
   return { state, save, setState, handleChange };
 };

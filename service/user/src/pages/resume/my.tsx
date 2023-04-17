@@ -11,6 +11,7 @@ import {
   useProfileWrite,
 } from "../../hooks/useWriteProfile";
 import { WrtieInfoReqBody } from "../../apis/document/patch/WriteInfo";
+import { FeedBack } from "@/components/resume/FeedBack";
 
 const student = {
   grade: ["1학년", "2힉년", "3학년"],
@@ -21,20 +22,22 @@ const student = {
 };
 
 export const My = () => {
-  const { state, save, setState, handleChange } =
-    useProfileWrite<WrtieInfoReqBody>(
-      {
-        name: "",
-        profile_image_path: "",
-        email: "",
-        major_id: "",
-        grade: "",
-        class_num: "",
-        number: "",
-        skill_set: [],
-      },
-      "writer"
-    );
+  const { state, save, setState, handleChange } = useProfileWrite(
+    {
+      name: "",
+      profile_image_path: "",
+      email: "",
+      major_id: "",
+      grade: "",
+      class_num: "",
+      number: "",
+      skill_set: [],
+      document_id: "",
+      element_id: "",
+      feedback: "",
+    },
+    "writer"
+  );
 
   const onImgChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name } = e.target;
@@ -60,6 +63,13 @@ export const My = () => {
     <ResumeLayout mutate={save}>
       <ResumeTitle value="자기소개" />
       <div className="px-[40px] flex flex-col gap-10">
+        <FeedBack
+          id={{
+            ...state,
+            ...{ document_id: "", element_id: "", feedback: "" },
+          }}
+          content={state.feedback}
+        />
         <ImportLabel label="프로필 이미지">
           <input
             id="profile"

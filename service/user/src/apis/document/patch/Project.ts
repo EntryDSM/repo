@@ -10,6 +10,12 @@ export interface ProjectReqBody {
   url?: string;
 }
 
+export interface ProjectResType extends ProjectReqBody {
+  document_id: string;
+  element_id: string;
+  feedback: string;
+}
+
 export const documnetProject = (body: ProjectReqBody[]) => {
   return instance.patch("/document/project", body);
 };

@@ -5,6 +5,7 @@ import { useMutation } from "react-query";
 import { ResumeTitle, ResumeItem, ResumeLayout } from "@/components/resume";
 import { AwardReqBody, documnetAward } from "@/apis/document/patch/Award";
 import { toast } from "react-toastify";
+import { FeedBack } from "@/components/resume/FeedBack";
 
 export const Awards = () => {
   const { state, save, handleChange, addItem, removeItem } =
@@ -14,14 +15,19 @@ export const Awards = () => {
         awarding_institution: "",
         date: new Date(),
         description: "",
+        document_id: "",
+        element_id: "",
+        feedback: "",
       },
       "award_list"
     );
 
   return (
     <ResumeLayout mutate={save.mutate} state={state}>
-      <ResumeTitle value="수상" onClick={() => {}} />
-      {state.map(({ name, awarding_institution, date, description }, index) => {
+      <ResumeTitle value="수상" onClick={addItem} />
+      {state.map((item, index) => {
+        const { name, awarding_institution, date, description, feedback } =
+          item;
         const handleChangeArray = handleChange(index);
         const removeItemArray = removeItem(index);
         return (
@@ -31,6 +37,7 @@ export const Awards = () => {
             placeholder="상 이름"
             onRemove={removeItemArray}
           >
+            <FeedBack id={item} content={feedback} />
             <ImportLabel label="상 이름" important>
               <Input
                 value={name}

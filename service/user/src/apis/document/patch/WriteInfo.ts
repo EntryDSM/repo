@@ -11,6 +11,12 @@ export interface WrtieInfoReqBody {
   skill_set: string[];
 }
 
+export interface WriteInfoResType extends WrtieInfoReqBody {
+  document_id: string;
+  element_id: string;
+  feedback: string;
+}
+
 export const documnetWriteInfo = ({
   skill_set,
   name,

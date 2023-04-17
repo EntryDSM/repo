@@ -54,7 +54,7 @@ const buttonColor = {
   },
   point: {
     enable:
-      "bg-blue text-gray50 hover:blue200 active:bg-blue100 active:bg-blue",
+      "bg-blue text-gray50 hover:bg-blue200 active:bg-blue100 active:bg-blue [&_path]:fill-gray50",
     disable: defaultDisable,
   },
   critical: {
