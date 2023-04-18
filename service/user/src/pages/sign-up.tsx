@@ -1,6 +1,6 @@
 import { Arrow, Plus } from "@packages/ui/assets";
 import { Logo, Input, Button, Dropdown } from "@packages/ui";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { oAuthLogin, postSignUp, postSignUpBody } from "@/apis/auth";
 import { useMutation, useQuery } from "react-query";
 import Link from "next/link";
@@ -60,27 +60,36 @@ const SignUp = () => {
       });
       navigate.push("/");
     },
+    onError: () => {
+      toast("에러 발생");
+    },
   });
 
   const { data: major } = useQuery(["dwqdqw"], getMajor);
 
   const route = useRouter();
-  oAuthLogin(route.query.code)
-    .then((res) => {
-      const { access_token, refresh_token } = res.data;
+  useEffect(() => {
+    if (!route.query.code) return;
+    oAuthLogin(route.query)
+      .then((res) => {
+        const { access_token, refresh_token } = res.data;
 
-      if (access_token && refresh_token) {
-        localStorage.setItem("access_token", access_token);
-        localStorage.setItem("refresh_token", refresh_token);
-        navigate.push("/");
-      }
-    })
-    .catch((err: AxiosError) => {
-      //@ts-ignore
-      if (err.response?.data && err.response.data.status === 400) {
-        navigate.push("http://localhost:3001/");
-      }
-    });
+        if (access_token && refresh_token) {
+          localStorage.setItem("access_token", access_token);
+          localStorage.setItem("refresh_token", refresh_token);
+          navigate.push("/");
+        }
+      })
+      .catch(
+        ({ response }: AxiosError<{ status: number; message: string }>) => {
+          const data = response?.data;
+          if (!data) return;
+          if (data.status === 422) {
+            setForm({ ...form, email: data.message });
+          }
+        }
+      );
+  }, [route.query]);
   const [imgUrl, setImgUrl] = useState("");
   const { mutate: imgUpload } = useMutation({
     mutationFn: (req: FormData) => getFile({ type: "PROFILE", file: req }),
@@ -90,8 +99,6 @@ const SignUp = () => {
       setForm({ ...form, profile_image_path: image_path });
     },
   });
-
-  console.log(form.major_id);
 
   return (
     <div className="flex h-[100vh]">
