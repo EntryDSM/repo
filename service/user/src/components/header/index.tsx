@@ -11,7 +11,6 @@ const links = {
 
 export const Header = () => {
   const { route } = useRouter();
-  console.log(route);
   return (
     <header className="flex justify-center items-center bg-gray900 h-20">
       <div className="w-[1200px] flex justify-between">

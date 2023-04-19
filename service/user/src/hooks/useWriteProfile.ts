@@ -1,33 +1,26 @@
 import { myDetail } from "@/apis/document/get/myDetail";
 import {
-  documnetWriteInfo,
-  WriteInfoResType,
-  WrtieInfoReqBody,
-} from "../apis/document/patch/WriteInfo";
-import {
-  documnetAward,
-  AwardReqBody,
-  AwardResType,
-} from "../apis/document/patch/Award";
-import {
-  documnetCertificate,
-  CertificateReqBody,
-  CertificateResType,
-} from "../apis/document/patch/Certificate";
-import {
-  documnetIntroduce,
-  IntroduceReqBody,
-  IntroduceResType,
-} from "../apis/document/patch/Introduce";
-import {
   documnetProject,
   ProjectReqBody,
   ProjectResType,
-} from "../apis/document/patch/Project";
+  documnetIntroduce,
+  IntroduceReqBody,
+  IntroduceResType,
+  documnetCertificate,
+  CertificateReqBody,
+  CertificateResType,
+  documnetAward,
+  AwardReqBody,
+  AwardResType,
+  documnetWriteInfo,
+  WriteInfoResType,
+  WrtieInfoReqBody,
+} from "../apis/document/patch";
 
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useMutation, useQuery } from "react-query";
 import { toast } from "react-toastify";
+import { GetFileRes, getFile } from "@/apis/file";
 
 export type ProfileType = "introduce" | "writer";
 type ProfileArrayType = "project_list" | "award_list" | "certificate_list";
@@ -52,20 +45,13 @@ const typeFn = {
 } as const;
 
 export const onChange = (
-  setState: (value: string) => void,
+  setState: (value: GetFileRes) => void,
   e: ChangeEvent<HTMLInputElement>
 ) => {
   if (!e.target.files) return;
-  const file = e.target.files[0];
-  const render = new FileReader();
-  render.readAsDataURL(file);
-  render.onloadend = async () => {
-    // const { data } = await fileToImg("DOCUMENT", file);
-    const { data } = await new Promise<{ data: string }>((resolve) => {
-      setTimeout(() => resolve({ data: dummy }), 1000);
-    });
-    setState(data);
-  };
+  const file = new FormData();
+  file.append("file", e.target.files[0]);
+  getFile({ type: "DOCUMENT", file }).then(({ data }) => setState(data));
 };
 
 export const onClickItem = <T>(

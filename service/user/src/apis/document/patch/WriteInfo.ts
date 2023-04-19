@@ -20,8 +20,11 @@ export interface WriteInfoResType extends WrtieInfoReqBody {
 export const documnetWriteInfo = ({
   skill_set,
   name,
+  feedback,
+  document_id,
+  element_id,
   ...body
-}: WrtieInfoReqBody) => {
-  instance.patch("/document/skillset", skill_set);
-  return instance.patch("/document/writer-info", body);
+}: WriteInfoResType) => {
+  instance.patch("/document/skillset", { skill_list: skill_set });
+  return instance.patch("/document/write-info", body);
 };

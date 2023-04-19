@@ -3,14 +3,15 @@ import { Input } from "@packages/ui";
 import { ResumeTitle, ResumeItem, ResumeLayout } from "@/components/resume";
 import { useProfileWriteArray } from "@/hooks/useWriteProfile";
 import { FeedBack } from "@/components/resume/FeedBack";
+import { DateInput } from "@/components/date";
 
 export const Certificate = () => {
-  const { state, mutate, handleChange, addItem, removeItem } =
+  const { state, setState, mutate, handleChange, addItem, removeItem } =
     useProfileWriteArray(
       {
         name: "",
         issuing_institution: "",
-        issue_date: new Date(),
+        issue_date: "",
         document_id: "",
         element_id: "",
         feedback: "",
@@ -24,6 +25,17 @@ export const Certificate = () => {
         const { name, issue_date, issuing_institution, feedback } = item;
         const handleChangeArray = handleChange(index);
         const removeItemArray = removeItem(index);
+        const onDateChange = ({
+          value,
+          name,
+        }: {
+          value: string;
+          name: string;
+        }) => {
+          const copy = [...state];
+          copy.splice(index, 1, { ...item, [name]: value });
+          setState(copy);
+        };
         return (
           <ResumeItem
             value={name}
@@ -49,11 +61,11 @@ export const Certificate = () => {
               />
             </ImportLabel>
             <ImportLabel label="취득일" important>
-              <Input
+              <DateInput
                 value={issue_date}
                 name="issue_date"
                 placeholder="취득일을 입력해 주세요"
-                onChange={handleChangeArray}
+                onSubmitAtInput={onDateChange}
               />
             </ImportLabel>
           </ResumeItem>

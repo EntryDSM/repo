@@ -4,7 +4,7 @@ interface GetFileReq {
   type: "PROFILE" | "DOCUMENT";
   file: FormData;
 }
-interface GetFileRes {
+export interface GetFileRes {
   image_path: string;
   base_url: string;
 }

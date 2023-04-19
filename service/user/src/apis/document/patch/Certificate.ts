@@ -1,9 +1,10 @@
+import { disableId } from ".";
 import { instance } from "../..";
 
 export interface CertificateReqBody {
   name: string;
   issuing_institution: string;
-  issue_date: Date;
+  issue_date: string;
 }
 
 export interface CertificateResType extends CertificateReqBody {
@@ -12,6 +13,10 @@ export interface CertificateResType extends CertificateReqBody {
   feedback: string;
 }
 
-export const documnetCertificate = (body: CertificateReqBody[]) => {
-  return instance.patch("/document/certificate", body);
+export const documnetCertificate = (body: CertificateResType[]) => {
+  return instance.patch("/document/certificate", {
+    certificate_list: body
+      .map(disableId)
+      .map((date) => ({ ...date, date: date.issue_date })),
+  });
 };

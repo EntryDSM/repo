@@ -19,6 +19,22 @@ interface oAuthLoginResType {
   refresh_expired_at: string;
 }
 
-export const oAuthLogin = (code?: any) => {
-  return instance.get<oAuthLoginResType>(`/auth/oauth/token?code=${code}`);
+interface oAuthLoginReqType {
+  code: string;
+  scope: string;
+  authuser: string;
+  hd: string;
+  prompt: string;
+}
+
+export const oAuthLogin = ({
+  code,
+  scope,
+  authuser,
+  hd,
+  prompt,
+}: oAuthLoginReqType) => {
+  return instance.get<oAuthLoginResType>(
+    `/auth/oauth/token?code=${code}&prompt=${prompt}&hd=${hd}`
+  );
 };

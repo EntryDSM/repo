@@ -2,7 +2,7 @@ import { ImportLabel } from "../../components/ImportLabel";
 import { ResumeTitle, ResumeItem, ResumeLayout } from "../../components/resume";
 import { Input, SKillInput, SkillList, TextArea } from "@packages/ui";
 import { Plus } from "@packages/ui/assets";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import {
   AddSkillFn,
   onChange,
@@ -10,6 +10,7 @@ import {
   useProfileWriteArray,
 } from "../../hooks/useWriteProfile";
 import { FeedBack } from "@/components/resume/FeedBack";
+import { DateInput } from "@/components/date";
 
 export const Project = () => {
   const { state, mutate, setState, handleChange, addItem, removeItem } =
@@ -17,8 +18,8 @@ export const Project = () => {
       {
         name: "",
         represent_image_path: "",
-        start_date: new Date(),
-        end_date: new Date(),
+        start_date: "",
+        end_date: "",
         skill_list: [],
         description: "",
         url: "",
@@ -42,6 +43,10 @@ export const Project = () => {
           url,
           feedback,
         } = item;
+        const [img, setImg] = useState<string>("");
+        useEffect(() => {
+          setImg(represent_image_path);
+        }, [state]);
         const handleChangeArray = handleChange(index);
         const removeItemArray = removeItem(index);
 
@@ -54,17 +59,29 @@ export const Project = () => {
           const { name } = e.target;
           const copy = [...state];
 
-          onChange((value) => {
+          onChange(({ base_url, image_path }) => {
             copy.splice(index, 1, {
               ...state[index],
-              [name]: value as string,
+              [name]: base_url + image_path,
             });
             setState(copy);
+            setImg(image_path);
           }, e);
         };
         const removeSkillArray = (value: { index: number; name: string }) => {
           const copy = [...state];
           copy.splice(index, 1, removeSkillFn(state[index], value));
+          setState(copy);
+        };
+        const onDateChange = ({
+          value,
+          name,
+        }: {
+          value: string;
+          name: string;
+        }) => {
+          const copy = [...state];
+          copy.splice(index, 1, { ...item, [name]: value });
           setState(copy);
         };
 
@@ -97,29 +114,31 @@ export const Project = () => {
                 className="relative inline-block cursor-pointer"
               >
                 <img
-                  src={represent_image_path}
-                  alt=""
+                  src={img}
+                  alt="프로젝트 로고"
                   className="w-[100px] h-[100px] object-cover rounded bg-gray200"
                 />
-                <div className="absolute left-[38px] top-[38px] border-0">
-                  <Plus size={24} />
-                </div>
+                {!img && (
+                  <div className="absolute left-[38px] top-[38px] border-0">
+                    <Plus size={24} />
+                  </div>
+                )}
               </label>
             </ImportLabel>
             <ImportLabel label="기간" important>
               <div className="flex items-center justify-between gap-[14px]">
-                <Input
+                <DateInput
                   value={start_date}
                   name="start_date"
                   placeholder="시작일"
-                  onChange={handleChangeArray}
+                  onSubmitAtInput={onDateChange}
                 />
                 ~
-                <Input
+                <DateInput
                   value={end_date}
                   name="end_date"
                   placeholder="종료일"
-                  onChange={handleChangeArray}
+                  onSubmitAtInput={onDateChange}
                 />
               </div>
             </ImportLabel>

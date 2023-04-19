@@ -1,3 +1,4 @@
+import { disableId } from ".";
 import { instance } from "../..";
 
 export interface IntroduceReqBody {
@@ -11,6 +12,6 @@ export interface IntroduceResType extends IntroduceReqBody {
   feedback: string;
 }
 
-export const documnetIntroduce = (body: IntroduceReqBody) => {
-  return instance.patch("/document/introduce", body);
+export const documnetIntroduce = (body: IntroduceResType) => {
+  return instance.patch("/document/introduce", disableId(body));
 };

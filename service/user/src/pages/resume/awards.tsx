@@ -6,14 +6,15 @@ import { ResumeTitle, ResumeItem, ResumeLayout } from "@/components/resume";
 import { AwardReqBody, documnetAward } from "@/apis/document/patch/Award";
 import { toast } from "react-toastify";
 import { FeedBack } from "@/components/resume/FeedBack";
+import { DateInput } from "@/components/date";
 
 export const Awards = () => {
-  const { state, mutate, handleChange, addItem, removeItem } =
+  const { state, setState, mutate, handleChange, addItem, removeItem } =
     useProfileWriteArray(
       {
         name: "",
         awarding_institution: "",
-        date: new Date(),
+        date: "",
         description: "",
         document_id: "",
         element_id: "",
@@ -30,6 +31,17 @@ export const Awards = () => {
           item;
         const handleChangeArray = handleChange(index);
         const removeItemArray = removeItem(index);
+        const onDateChange = ({
+          value,
+          name,
+        }: {
+          value: string;
+          name: string;
+        }) => {
+          const copy = [...state];
+          copy.splice(index, 1, { ...item, [name]: value });
+          setState(copy)
+        };
         return (
           <ResumeItem
             value={name}
@@ -55,12 +67,17 @@ export const Awards = () => {
               />
             </ImportLabel>
             <ImportLabel label="기간" important>
-              <Input
+              <DateInput
+                value={date}
+                name="date"
+                onSubmitAtInput={onDateChange}
+              />
+              {/* <Input
                 value={date}
                 name="date"
                 placeholder="기간을 입력해 주세요"
                 onChange={handleChangeArray}
-              />
+              /> */}
             </ImportLabel>
             <ImportLabel label="내용" important>
               <TextArea

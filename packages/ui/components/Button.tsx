@@ -44,7 +44,7 @@ const buttonColor = {
     disable: "underline text-gray200",
   },
   text: {
-    enable: "bg-gray50 hover:bg-gray100 active:bg-gray200",
+    enable: "hover:bg-gray100 active:bg-gray200",
     disable: "text-gray200",
   },
   success: {
@@ -77,7 +77,7 @@ export const Button = ({
 
   return (
     <button
-      className={`w-auto rounded-[2px] box-border pl-[18px] pr-[18px] px-[18px] h-[46px] text-body8 flex items-center justify-center gap-x-[15px] shrink-0 ${borderRadius} ${
+      className={`w-auto box-border pl-[18px] pr-[18px] px-[18px] h-[46px] text-body8 flex items-center justify-center gap-x-[15px] shrink-0 ${borderRadius} ${
         disabled ? disable : enable
       } ${className}`}
       onClick={onClick}

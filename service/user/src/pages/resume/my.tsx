@@ -2,7 +2,7 @@ import { ImportLabel } from "@/components/ImportLabel";
 import { ResumeTitle, ResumeLayout } from "@/components/resume";
 import { Rectify } from "@packages/ui/assets";
 import { Dropdown, Input, SKillInput, SkillList } from "@packages/ui";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 import {
   AddSkillFn,
   onChange,
@@ -40,12 +40,16 @@ export const My = () => {
     },
     "writer"
   );
+  const [img, setImg] = useState<string>("");
 
   const { data: major } = useQuery(["skillList"], getMajor);
 
   const onImgChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name } = e.target;
-    onChange((value) => setState({ ...state, [name]: value }), e);
+    onChange(({ base_url, image_path }) => {
+      setState({ ...state, [name]: image_path });
+      setImg(base_url + image_path);
+    }, e);
   };
 
   const onDropdownSelect = (value: { keyword: string; name: string }) => {
@@ -54,7 +58,6 @@ export const My = () => {
   };
 
   const AddSKill = (value: { keyword: string; name: string }) => {
-    console.log(state);
     const temp = AddSkillFn(state, value);
 
     setState(temp);
@@ -89,7 +92,7 @@ export const My = () => {
             className="relative inline-block cursor-pointer"
           >
             <img
-              src={state.profile_image_path}
+              src={img}
               className="w-40 h-40 object-cover rounded-[80px] bg-gray200"
             />
             <div className="absolute bottom-0 right-0 bg-gray100 p-2 rounded-full">
