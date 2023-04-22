@@ -18,7 +18,7 @@ export const ResumeItem = ({
   children,
 }: PropsType) => {
   const { state: dropdown, inversion } = useInversion();
-  const height = dropdown ? "h-[148px]" : "h-auto overflow:hidden";
+  const height = dropdown ? "h-[148px] overflow-hidden" : "h-auto";
   const isPlaceholder = !value && "text-gray300";
   return (
     <div

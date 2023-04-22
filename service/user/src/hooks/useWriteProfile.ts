@@ -1,4 +1,4 @@
-import { myDetail } from "@/apis/document/get/myDetail";
+import { DetailType, StatusType, myDetail } from "@/apis/document/get/myDetail";
 import {
   documnetProject,
   ProjectReqBody,
@@ -16,14 +16,20 @@ import {
   WriteInfoResType,
   WrtieInfoReqBody,
 } from "../apis/document/patch";
-
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useMutation, useQuery } from "react-query";
 import { toast } from "react-toastify";
 import { GetFileRes, getFile } from "@/apis/file";
 
+interface Detail {
+  introduce: IntroduceResType;
+  writer: WriteInfoResType;
+  project_list: ProjectResType;
+  award_list: AwardResType;
+  certificate_list: CertificateResType;
+}
+type ProfileTypeAll = keyof Detail;
 export type ProfileType = "introduce" | "writer";
-type ProfileArrayType = "project_list" | "award_list" | "certificate_list";
 
 export type EachStateType =
   | AwardResType
@@ -31,10 +37,13 @@ export type EachStateType =
   | IntroduceResType
   | ProjectResType
   | WriteInfoResType;
-export type StateArrayType = AwardReqBody | CertificateReqBody | ProjectReqBody;
+export type StateArrayType =
+  | AwardReqBody
+  | CertificateReqBody
+  | ProjectReqBody
+  | WrtieInfoReqBody
+  | IntroduceReqBody;
 export type StateType = WrtieInfoReqBody | IntroduceReqBody;
-
-const dummy = "";
 
 const typeFn = {
   writer: documnetWriteInfo,
@@ -51,7 +60,9 @@ export const onChange = (
   if (!e.target.files) return;
   const file = new FormData();
   file.append("file", e.target.files[0]);
-  getFile({ type: "DOCUMENT", file }).then(({ data }) => setState(data));
+  getFile({ type: "DOCUMENT", file }).then(({ data }) => {
+    setState(data);
+  });
 };
 
 export const onClickItem = <T>(
@@ -96,6 +107,7 @@ export const useProfileWrite = <T extends StateType>(
   type: ProfileType
 ) => {
   const [state, setState] = useState<T>(initial);
+  const [status, setStatus] = useState<StatusType>("CREATED");
   useQuery(["write"], () => myDetail(), {
     onSuccess: ({ data }) => {
       let temp = data[type];
@@ -105,6 +117,7 @@ export const useProfileWrite = <T extends StateType>(
       }
       //@ts-ignore
       setState(temp);
+      setStatus(data.status);
     },
   });
   const { mutate } = useMutation({
@@ -117,7 +130,6 @@ export const useProfileWrite = <T extends StateType>(
       toast("임시저장하였습니다.", { autoClose: 1000, type: "success" });
     },
   });
-  useEffect(() => () => mutate(state), []);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -125,23 +137,32 @@ export const useProfileWrite = <T extends StateType>(
     const temp = handleChangeFn(state, e);
     setState(temp);
   };
-  return { state, mutate, setState, handleChange };
+  return { state, status, mutate: () => mutate(state), setState, handleChange };
 };
 
-export const useProfileWriteArray = <T extends StateArrayType>(
+export const useProfileWriteArray = <
+  T extends DetailType[U],
+  U extends ProfileTypeAll
+>(
   initial: T,
-  type: ProfileArrayType
+  type: U
 ) => {
-  const [state, setState] = useState<T[]>([initial]);
-  const { data } = useQuery(["write"], () => myDetail(), {
+  const [state, setState] = useState<T>(initial);
+  const [status, setStatus] = useState<StatusType>("CREATED");
+  useQuery(["write"], () => myDetail(), {
     onSuccess: ({ data }) => {
       let temp = data[type];
+      if (type === "writer") {
+        // @ts-ignore
+        temp = { ...temp, skill_set: temp.skill_set };
+      }
       //@ts-ignore
       setState(temp);
+      setStatus(data.status);
     },
   });
   const { mutate } = useMutation({
-    mutationFn: (body: T[]) => {
+    mutationFn: (body: T) => {
       const Fn = typeFn[type];
       // @ts-ignore
       return Fn(body);
@@ -150,28 +171,38 @@ export const useProfileWriteArray = <T extends StateArrayType>(
       toast("임시저장하였습니다.", { autoClose: 1000, type: "success" });
     },
   });
-  useEffect(() => () => mutate(state), [data]);
 
   const handleChange =
     (index: number) =>
     (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      const copy = [...state];
-      copy.splice(index, 1, handleChangeFn(state[index], e));
-      setState(copy);
+      if (Array.isArray(state)) {
+        const copy = [...state];
+        copy.splice(index, 1, handleChangeFn(state[index], e));
+        // @ts-ignore
+        setState(copy);
+        return copy;
+      } else setState(handleChangeFn(state, e));
     };
 
   const addItem = () => {
-    setState(state.concat(initial));
+    if (Array.isArray(state) && Array.isArray(initial)) {
+      // @ts-ignore
+      setState([...state, initial[0]]);
+    }
   };
   const removeItem = (index: number) => () => {
-    const copy = [...state];
-    copy.splice(index, 1);
-    setState(copy);
+    if (Array.isArray(state)) {
+      const copy = [...state];
+      copy.splice(index, 1);
+      // @ts-ignore
+      setState(copy);
+    }
   };
 
   return {
     state,
-    mutate,
+    status,
+    mutate: () => Array.isArray(state) && mutate(state),
     setState,
     handleChange,
     addItem,

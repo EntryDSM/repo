@@ -24,7 +24,7 @@ const student = {
 };
 
 export const My = () => {
-  const { state, mutate, setState, handleChange } = useProfileWrite(
+  const { state, status, mutate, setState, handleChange } = useProfileWrite(
     {
       name: "",
       profile_image_path: "",
@@ -42,13 +42,18 @@ export const My = () => {
   );
   const [img, setImg] = useState<string>("");
 
-  const { data: major } = useQuery(["skillList"], getMajor);
+  const { data: major } = useQuery(["skillList"], getMajor, {
+    onSuccess: ({ data }) => {
+      console.log(data.majorList);
+    },
+  });
 
   const onImgChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name } = e.target;
-    onChange(({ base_url, image_path }) => {
-      setState({ ...state, [name]: image_path });
-      setImg(base_url + image_path);
+    onChange(({ baseUrl, imagePath }) => {
+      console.log(baseUrl, imagePath);
+      setState({ ...state, [name]: imagePath });
+      setImg(baseUrl + imagePath);
     }, e);
   };
 
@@ -69,13 +74,13 @@ export const My = () => {
   };
 
   return (
-    <ResumeLayout mutate={mutate}>
+    <ResumeLayout mutate={mutate} status={status}>
       <ResumeTitle value="자기소개" />
       <div className="px-[40px] flex flex-col gap-10">
         <FeedBack
           id={{
             ...state,
-            ...{ document_id: "", element_id: "", feedback: "" },
+            ...{ student_id: "", element_id: "", feedback: "" },
           }}
           content={state.feedback}
         />
@@ -136,12 +141,12 @@ export const My = () => {
         </ImportLabel>
         <ImportLabel label="분야" important>
           <div className="[&>div]:w-full">
-            {major && (
+            {Array.isArray(major?.data.majorList) && (
               <Dropdown
                 kind="contained"
                 name="major_id"
                 value={
-                  major.data.major_list.find((m) => state.major_id === m.id)
+                  major?.data.majorList.find((m) => state.major_id === m.id)
                     ?.name
                 }
                 onClick={({ keyword }) => {
@@ -149,7 +154,7 @@ export const My = () => {
                   setState({ ...state, major_id: keyword.id });
                 }}
                 //@ts-ignore
-                lists={major.data.major_list}
+                lists={major.data.majorList}
                 objectKey="name"
                 placeholder="frontend"
               />

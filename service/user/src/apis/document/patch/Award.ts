@@ -9,7 +9,6 @@ export interface AwardReqBody {
 }
 
 export interface AwardResType extends AwardReqBody {
-  document_id: string;
   element_id: string;
   feedback: string;
 }

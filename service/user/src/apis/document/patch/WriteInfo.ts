@@ -12,7 +12,7 @@ export interface WrtieInfoReqBody {
 }
 
 export interface WriteInfoResType extends WrtieInfoReqBody {
-  document_id: string;
+  student_id: string;
   element_id: string;
   feedback: string;
 }
@@ -21,7 +21,7 @@ export const documnetWriteInfo = ({
   skill_set,
   name,
   feedback,
-  document_id,
+  student_id,
   element_id,
   ...body
 }: WriteInfoResType) => {

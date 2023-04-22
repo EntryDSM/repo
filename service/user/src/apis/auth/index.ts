@@ -35,6 +35,6 @@ export const oAuthLogin = ({
   prompt,
 }: oAuthLoginReqType) => {
   return instance.get<oAuthLoginResType>(
-    `/auth/oauth/token?code=${code}&prompt=${prompt}&hd=${hd}`
+    `/auth/oauth/token?code=${code}&prompt=${prompt}&hd=${hd}&scope=${scope}&authuser=${authuser}`
   );
 };

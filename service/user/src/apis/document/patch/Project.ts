@@ -12,7 +12,6 @@ export interface ProjectReqBody {
 }
 
 export interface ProjectResType extends ProjectReqBody {
-  document_id: string;
   element_id: string;
   feedback: string;
 }

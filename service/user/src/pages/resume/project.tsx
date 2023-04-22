@@ -13,24 +13,26 @@ import { FeedBack } from "@/components/resume/FeedBack";
 import { DateInput } from "@/components/date";
 
 export const Project = () => {
-  const { state, mutate, setState, handleChange, addItem, removeItem } =
+  const { state, status, mutate, setState, handleChange, addItem, removeItem } =
     useProfileWriteArray(
-      {
-        name: "",
-        represent_image_path: "",
-        start_date: "",
-        end_date: "",
-        skill_list: [],
-        description: "",
-        url: "",
-        document_id: "",
-        element_id: "",
-        feedback: "",
-      },
+      [
+        {
+          name: "",
+          represent_image_path: "",
+          start_date: "",
+          end_date: "",
+          skill_list: [],
+          description: "",
+          url: "",
+          document_id: "",
+          element_id: "",
+          feedback: "",
+        },
+      ],
       "project_list"
     );
   return (
-    <ResumeLayout mutate={mutate}>
+    <ResumeLayout mutate={mutate} status={status}>
       <ResumeTitle value="프로젝트" onClick={addItem} />
       {state.map((item, index) => {
         const {
@@ -59,13 +61,13 @@ export const Project = () => {
           const { name } = e.target;
           const copy = [...state];
 
-          onChange(({ base_url, image_path }) => {
+          onChange(({ baseUrl, imagePath }) => {
             copy.splice(index, 1, {
               ...state[index],
-              [name]: base_url + image_path,
+              [name]: baseUrl + imagePath,
             });
             setState(copy);
-            setImg(image_path);
+            setImg(imagePath);
           }, e);
         };
         const removeSkillArray = (value: { index: number; name: string }) => {

@@ -8,7 +8,6 @@ export interface CertificateReqBody {
 }
 
 export interface CertificateResType extends CertificateReqBody {
-  document_id: string;
   element_id: string;
   feedback: string;
 }

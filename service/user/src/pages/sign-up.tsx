@@ -65,11 +65,17 @@ const SignUp = () => {
     },
   });
 
-  const { data: major } = useQuery(["dwqdqw"], getMajor);
+  const { data: major } = useQuery(["dwqdqw"], getMajor, {
+    onSuccess: ({ data }) => {
+      console.log(data);
+    },
+  });
 
   const route = useRouter();
   useEffect(() => {
-    if (!route.query.code) return;
+    console.log(route.query);
+    if (!route.query) return;
+    //@ts-ignore
     oAuthLogin(route.query)
       .then((res) => {
         const { access_token, refresh_token } = res.data;
@@ -94,9 +100,10 @@ const SignUp = () => {
   const { mutate: imgUpload } = useMutation({
     mutationFn: (req: FormData) => getFile({ type: "PROFILE", file: req }),
     onSuccess: (res) => {
-      const { base_url, image_path } = res.data;
-      setImgUrl(base_url + image_path);
-      setForm({ ...form, profile_image_path: image_path });
+      const { baseUrl, imagePath } = res.data;
+      console.log(res.data);
+      setImgUrl(baseUrl + imagePath);
+      setForm({ ...form, profile_image_path: imagePath });
     },
   });
 
@@ -111,6 +118,7 @@ const SignUp = () => {
           id="profile"
           onChange={(form) => {
             const formData = new FormData();
+            // @ts-ignore
             formData.append("file", form.target.files[0]);
             imgUpload(formData);
           }}
@@ -159,27 +167,27 @@ const SignUp = () => {
             value={form.grade}
           />
           <Input
-            name="number"
+            name="class_num"
             kind="text"
             onChange={onChange}
             label="반"
             placeholder="반을 선택해주세요"
-            value={form.number}
+            value={form.class_num}
           />
           <Input
-            name="class_num"
+            name="number"
             kind="text"
             onChange={onChange}
             label="번호"
             placeholder="번호를 입력해주세요"
-            value={form.class_num}
+            value={form.number}
           />
-          {major && (
+          {Array.isArray(major?.data.majorList) && (
             <Dropdown
               className="mt-[29px]"
               placeholder="전공선택"
               //@ts-ignore
-              lists={major.data.major_list}
+              lists={major.data.majorList}
               objectKey="name"
               name="id"
               onClick={({ keyword }) => {
@@ -187,7 +195,8 @@ const SignUp = () => {
                 setForm({ ...form, major_id: keyword.id });
               }}
               value={
-                major.data.major_list.find((m) => form.major_id === m.id)?.name
+                //@ts-ignore
+                major.data.majorList.find((m) => form.major_id === m.id)?.name
               }
             />
           )}
