@@ -122,7 +122,7 @@ export const useProfileWrite = <
           .split("");
         temp = {
           ...temp,
-          skill_set: data.skill_set,
+          skill_list: data.skill_list,
           grade,
           class_num,
           number: Number(number.join("")),

@@ -37,7 +37,7 @@ export const Awards = () => {
           value,
           name,
         }: {
-          value: string;
+          value: number;
           name: string;
         }) => {
           const copy = [...state];
@@ -74,12 +74,6 @@ export const Awards = () => {
                 name="date"
                 onSubmitAtInput={onDateChange}
               />
-              {/* <Input
-                value={date}
-                name="date"
-                placeholder="기간을 입력해 주세요"
-                onChange={handleChangeArray}
-              /> */}
             </ImportLabel>
             <ImportLabel label="내용" important>
               <TextArea

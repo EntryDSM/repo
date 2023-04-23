@@ -33,7 +33,7 @@ export const My = () => {
       grade: "",
       class_num: "",
       number: "",
-      skill_set: [],
+      skill_list: [],
       student_id: "",
       element_id: "",
       feedback: "",
@@ -173,13 +173,13 @@ export const My = () => {
         <ImportLabel label="기술 스택">
           <div className="flex flex-col gap-[30px]">
             <SKillInput
-              name="skill_set"
+              name="skill_list"
               onAddSkill={AddSKill}
               className="w-full bg-gray100"
             />
             <SkillList
-              name="skill_set"
-              list={state.skill_set}
+              name="skill_list"
+              list={state.skill_list}
               onClickRemove={removeSkill}
             />
           </div>

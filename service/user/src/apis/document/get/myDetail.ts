@@ -14,7 +14,7 @@ export interface DetailType {
   writer: WriteInfoResType;
   status: StatusType;
   introduce: IntroduceResType;
-  skill_set: string[];
+  skill_list: string[];
   project_list: ProjectResType[];
   award_list: AwardResType[];
   certificate_list: CertificateResType[];

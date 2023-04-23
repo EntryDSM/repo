@@ -8,7 +8,7 @@ export interface WrtieInfoReqBody {
   grade: string;
   class_num: string;
   number: string;
-  skill_set: string[];
+  skill_list: string[];
 }
 
 export interface WriteInfoResType extends WrtieInfoReqBody {
@@ -18,13 +18,13 @@ export interface WriteInfoResType extends WrtieInfoReqBody {
 }
 
 export const documnetWriteInfo = ({
-  skill_set,
+  skill_list,
   name,
   feedback,
   student_id,
   element_id,
   ...body
 }: WriteInfoResType) => {
-  instance.patch("/document/skillset", { skill_list: skill_set });
+  instance.patch("/document/skillset", { skill_list });
   return instance.patch("/document/write-info", body);
 };

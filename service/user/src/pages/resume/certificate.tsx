@@ -12,7 +12,7 @@ export const Certificate = () => {
         {
           name: "",
           issuing_institution: "",
-          issue_date: "",
+          date: "",
           document_id: "",
           element_id: "",
           feedback: "",
@@ -24,14 +24,14 @@ export const Certificate = () => {
     <ResumeLayout mutate={mutate} status={status}>
       <ResumeTitle value="자격증" onClick={addItem} />
       {state.map((item, index) => {
-        const { name, issue_date, issuing_institution, feedback } = item;
+        const { name, date, issuing_institution, feedback } = item;
         const handleChangeArray = handleChange(index);
         const removeItemArray = removeItem(index);
         const onDateChange = ({
           value,
           name,
         }: {
-          value: string;
+          value: number;
           name: string;
         }) => {
           const copy = [...state];
@@ -64,8 +64,8 @@ export const Certificate = () => {
             </ImportLabel>
             <ImportLabel label="취득일" important>
               <DateInput
-                value={issue_date}
-                name="issue_date"
+                value={date}
+                name="date"
                 placeholder="취득일을 입력해 주세요"
                 onSubmitAtInput={onDateChange}
               />

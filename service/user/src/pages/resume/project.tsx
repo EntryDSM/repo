@@ -83,7 +83,7 @@ export const Project = () => {
           value,
           name,
         }: {
-          value: string;
+          value: number;
           name: string;
         }) => {
           const copy = [...state];

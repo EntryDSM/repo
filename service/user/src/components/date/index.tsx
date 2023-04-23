@@ -8,7 +8,7 @@ interface PropsType {
   name: string;
   value: string | undefined;
   placeholder?: string;
-  onSubmitAtInput: (value: { value: string; name: string }) => void;
+  onSubmitAtInput: (value: { value: number; name: string }) => void;
 }
 
 export const DateInput = ({
@@ -34,7 +34,8 @@ export const DateInput = ({
   };
 
   const submitOnInput = (value: string) => {
-    onSubmitAtInput({ value, name });
+    const date = new Date(value);
+    onSubmitAtInput({ value: date.getTime(), name });
   };
 
   return (

@@ -17,8 +17,10 @@ export interface ProjectResType extends ProjectReqBody {
 }
 
 export const documnetProject = (body: ProjectResType[]) => {
+  console.log(body)
   return instance.patch("/document/project", {
     title: '',
     project_list: body.map(disableId),
+    
   });
 };
