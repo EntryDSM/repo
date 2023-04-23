@@ -5,8 +5,8 @@ interface GetFileReq {
   file: FormData;
 }
 export interface GetFileRes {
-  imagePath: string;
-  baseUrl: string;
+  image_path: string;
+  base_url: string;
 }
 
 export const getFile = ({ file, type }: GetFileReq) => {

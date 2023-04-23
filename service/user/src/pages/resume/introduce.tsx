@@ -25,7 +25,7 @@ const Introduce = () => {
             name="heading"
             value={state.heading}
             placeholder="한 줄 소개를 입력해주세요"
-            onChange={handleChange}
+            onChange={handleChange(0)}
           />
         </ImportLabel>
         <ImportLabel label="자기소개" important>
@@ -33,7 +33,7 @@ const Introduce = () => {
             name="introduce"
             value={state.introduce}
             placeholder="자기소개를 입력해주세요"
-            onChange={handleChange}
+            onChange={handleChange(0)}
           />
         </ImportLabel>
       </div>

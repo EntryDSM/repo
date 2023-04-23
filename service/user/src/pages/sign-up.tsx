@@ -72,38 +72,35 @@ const SignUp = () => {
   });
 
   const route = useRouter();
-  useEffect(() => {
-    console.log(route.query);
-    if (!route.query) return;
-    //@ts-ignore
-    oAuthLogin(route.query)
-      .then((res) => {
-        const { access_token, refresh_token } = res.data;
-
-        if (access_token && refresh_token) {
-          localStorage.setItem("access_token", access_token);
-          localStorage.setItem("refresh_token", refresh_token);
-          navigate.push("/");
-        }
-      })
-      .catch(
-        ({ response }: AxiosError<{ status: number; message: string }>) => {
-          const data = response?.data;
-          if (!data) return;
-          if (data.status === 422) {
-            setForm({ ...form, email: data.message });
-          }
-        }
-      );
-  }, [route.query]);
+  // @ts-ignore
+  useQuery(["oauthlogIn"], () => oAuthLogin(route.query), {
+    onSuccess: ({ data }) => {
+      const { access_token, refresh_token } = data;
+      if (access_token && refresh_token) {
+        localStorage.setItem("access_token", access_token);
+        localStorage.setItem("refresh_token", refresh_token);
+        navigate.push("/");
+      }
+    },
+    onError: ({
+      response,
+    }: AxiosError<{ status: number; message: string }>) => {
+      const data = response?.data;
+      if (!data) return;
+      if (data.status === 422) {
+        setForm({ ...form, email: data.message });
+      }
+    },
+    enabled: !!route.query.code
+  });
   const [imgUrl, setImgUrl] = useState("");
   const { mutate: imgUpload } = useMutation({
     mutationFn: (req: FormData) => getFile({ type: "PROFILE", file: req }),
     onSuccess: (res) => {
-      const { baseUrl, imagePath } = res.data;
+      const { base_url, image_path } = res.data;
       console.log(res.data);
-      setImgUrl(baseUrl + imagePath);
-      setForm({ ...form, profile_image_path: imagePath });
+      setImgUrl(base_url + image_path);
+      setForm({ ...form, profile_image_path: image_path });
     },
   });
 
@@ -182,12 +179,12 @@ const SignUp = () => {
             placeholder="번호를 입력해주세요"
             value={form.number}
           />
-          {Array.isArray(major?.data.majorList) && (
+          {Array.isArray(major?.data.major_list) && (
             <Dropdown
               className="mt-[29px]"
               placeholder="전공선택"
               //@ts-ignore
-              lists={major.data.majorList}
+              lists={major.data.major_list}
               objectKey="name"
               name="id"
               onClick={({ keyword }) => {
@@ -196,7 +193,7 @@ const SignUp = () => {
               }}
               value={
                 //@ts-ignore
-                major.data.majorList.find((m) => form.major_id === m.id)?.name
+                major.data.major_list.find((m) => form.major_id === m.id)?.name
               }
             />
           )}

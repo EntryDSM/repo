@@ -2,7 +2,7 @@ import axios from "axios";
 import { instance } from ".";
 
 interface GetOAuthRes {
-  loginLink: string;
+  login_link: string;
 }
 
 export const getOAuth = () => {

@@ -7,14 +7,14 @@ import {
   AddSkillFn,
   onChange,
   removeSkillFn,
-  useProfileWriteArray,
+  useProfileWrite,
 } from "../../hooks/useWriteProfile";
 import { FeedBack } from "@/components/resume/FeedBack";
 import { DateInput } from "@/components/date";
 
 export const Project = () => {
   const { state, status, mutate, setState, handleChange, addItem, removeItem } =
-    useProfileWriteArray(
+    useProfileWrite(
       [
         {
           name: "",
@@ -31,6 +31,7 @@ export const Project = () => {
       ],
       "project_list"
     );
+  const [imgs, setImgs] = useState<string[]>([]);
   return (
     <ResumeLayout mutate={mutate} status={status}>
       <ResumeTitle value="프로젝트" onClick={addItem} />
@@ -45,10 +46,13 @@ export const Project = () => {
           url,
           feedback,
         } = item;
-        const [img, setImg] = useState<string>("");
-        useEffect(() => {
-          setImg(represent_image_path);
-        }, [state]);
+
+        const onImgChange = (value: string) => {
+          const copy = [...imgs];
+          copy[index] = value;
+          return copy;
+        };
+
         const handleChangeArray = handleChange(index);
         const removeItemArray = removeItem(index);
 
@@ -61,13 +65,13 @@ export const Project = () => {
           const { name } = e.target;
           const copy = [...state];
 
-          onChange(({ baseUrl, imagePath }) => {
+          onChange(({ base_url, image_path }) => {
             copy.splice(index, 1, {
               ...state[index],
-              [name]: baseUrl + imagePath,
+              [name]: image_path,
             });
             setState(copy);
-            setImg(imagePath);
+            setImgs(onImgChange(base_url + image_path));
           }, e);
         };
         const removeSkillArray = (value: { index: number; name: string }) => {
@@ -86,6 +90,8 @@ export const Project = () => {
           copy.splice(index, 1, { ...item, [name]: value });
           setState(copy);
         };
+
+        const imgUrl = imgs[index] || represent_image_path;
 
         return (
           <ResumeItem
@@ -116,11 +122,11 @@ export const Project = () => {
                 className="relative inline-block cursor-pointer"
               >
                 <img
-                  src={img}
+                  src={imgUrl}
                   alt="프로젝트 로고"
                   className="w-[100px] h-[100px] object-cover rounded bg-gray200"
                 />
-                {!img && (
+                {!imgUrl && (
                   <div className="absolute left-[38px] top-[38px] border-0">
                     <Plus size={24} />
                   </div>

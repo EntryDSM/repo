@@ -27,7 +27,7 @@ export const LoginBranchModal = ({ closeModal }: Props) => {
 
   const NavigateToStudent = () => {
     getOAuth().then(({ data }) => {
-      route.push(data.loginLink.split(" ")[0]);
+      route.push(data.login_link.split(" ")[0]);
     });
   };
 

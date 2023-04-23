@@ -14,5 +14,7 @@ export interface AwardResType extends AwardReqBody {
 }
 
 export const documnetAward = (body: AwardResType[]) => {
-  return instance.patch("/document/award", { award_list: body.map(disableId) });
+  return instance.patch("/document/award", {
+    award_list: body.map(disableId),
+  });
 };

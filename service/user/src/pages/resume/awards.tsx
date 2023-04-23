@@ -1,6 +1,6 @@
 import { ImportLabel } from "@/components/ImportLabel";
 import { Input, TextArea } from "@packages/ui";
-import { useProfileWriteArray } from "@/hooks/useWriteProfile";
+import { useProfileWrite } from "@/hooks/useWriteProfile";
 import { useMutation } from "react-query";
 import { ResumeTitle, ResumeItem, ResumeLayout } from "@/components/resume";
 import { AwardReqBody, documnetAward } from "@/apis/document/patch/Award";
@@ -10,7 +10,7 @@ import { DateInput } from "@/components/date";
 
 export const Awards = () => {
   const { state, status, setState, mutate, handleChange, addItem, removeItem } =
-    useProfileWriteArray(
+    useProfileWrite(
       [
         {
           name: "",

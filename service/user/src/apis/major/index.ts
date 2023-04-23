@@ -6,7 +6,7 @@ interface Major {
 }
 
 interface GetMajorRes {
-  majorList: Major[];
+  major_list: Major[];
 }
 
 export const getMajor = () => {

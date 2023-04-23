@@ -40,17 +40,22 @@ export interface DateValueType {
   day: number;
 }
 export const stringToDate = (str: string): DateValueType => {
-  const [year, month, day] = str.split("/").map(Number);
+  const [year, month, day] = MillsecondToDate(str).split(". ").map(Number);
   return { year, month, day };
 };
 
 export const dateToString = ({ year, month, day }: DateValueType) => {
-  return [year, month, day].join("/");
+  return [year, month, day].join(". ");
 };
 
 export const getInitDate = (includeDay?: boolean) => {
   const date = new Date();
-  return [date.getFullYear(), date.getMonth(), date.getDate()].join("/");
+  return [date.getFullYear(), date.getMonth(), date.getDate()].join(". ");
+};
+
+const MillsecondToDate = (str: string | number) => {
+  const date = new Date(str);
+  return typeof str === "number" ? date.toLocaleDateString() : str;
 };
 
 const onDateChange = (temp: DateValueType) => {
@@ -72,8 +77,10 @@ interface PropsType {
 }
 
 export const useCalender = ({ initialValue = getInitDate() }: PropsType) => {
-  const [date, setDate] = useState<string>(initialValue);
-  const [checkDate, setCheck] = useState<string>(initialValue);
+  const [date, setDate] = useState<string>(MillsecondToDate(initialValue));
+  const [checkDate, setCheck] = useState<string>(
+    MillsecondToDate(initialValue)
+  );
   const objectDate = stringToDate(date);
 
   const plusMinus = (type: DateKeyType, act: "plus" | "minus") => {

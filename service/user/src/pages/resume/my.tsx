@@ -2,7 +2,7 @@ import { ImportLabel } from "@/components/ImportLabel";
 import { ResumeTitle, ResumeLayout } from "@/components/resume";
 import { Rectify } from "@packages/ui/assets";
 import { Dropdown, Input, SKillInput, SkillList } from "@packages/ui";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import {
   AddSkillFn,
   onChange,
@@ -27,14 +27,14 @@ export const My = () => {
   const { state, status, mutate, setState, handleChange } = useProfileWrite(
     {
       name: "",
-      profile_image_path: "",
+      profile_image_url: "",
       email: "",
-      major_id: "",
+      major: { id: "", name: "" },
       grade: "",
       class_num: "",
       number: "",
       skill_set: [],
-      document_id: "",
+      student_id: "",
       element_id: "",
       feedback: "",
     },
@@ -42,18 +42,14 @@ export const My = () => {
   );
   const [img, setImg] = useState<string>("");
 
-  const { data: major } = useQuery(["skillList"], getMajor, {
-    onSuccess: ({ data }) => {
-      console.log(data.majorList);
-    },
-  });
+  const { data: major } = useQuery(["skillList"], getMajor);
 
   const onImgChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name } = e.target;
-    onChange(({ baseUrl, imagePath }) => {
-      console.log(baseUrl, imagePath);
-      setState({ ...state, [name]: imagePath });
-      setImg(baseUrl + imagePath);
+    onChange(({ base_url, image_path }) => {
+      console.log(base_url, image_path);
+      setState({ ...state, [name]: image_path });
+      setImg(base_url + image_path);
     }, e);
   };
 
@@ -63,6 +59,7 @@ export const My = () => {
   };
 
   const AddSKill = (value: { keyword: string; name: string }) => {
+    console.log(state, value.name);
     const temp = AddSkillFn(state, value);
 
     setState(temp);
@@ -97,7 +94,7 @@ export const My = () => {
             className="relative inline-block cursor-pointer"
           >
             <img
-              src={img}
+              src={state.profile_image_url || img}
               className="w-40 h-40 object-cover rounded-[80px] bg-gray200"
             />
             <div className="absolute bottom-0 right-0 bg-gray100 p-2 rounded-full">
@@ -141,20 +138,24 @@ export const My = () => {
         </ImportLabel>
         <ImportLabel label="분야" important>
           <div className="[&>div]:w-full">
-            {Array.isArray(major?.data.majorList) && (
+            {Array.isArray(major?.data.major_list) && (
               <Dropdown
                 kind="contained"
                 name="major_id"
                 value={
-                  major?.data.majorList.find((m) => state.major_id === m.id)
+                  major?.data.major_list.find((m) => state.major.id === m.id)
                     ?.name
                 }
                 onClick={({ keyword }) => {
                   //@ts-ignore
-                  setState({ ...state, major_id: keyword.id });
+                  const { id, name } = keyword;
+                  setState({
+                    ...state,
+                    major: { id: id, name: name },
+                  });
                 }}
                 //@ts-ignore
-                lists={major.data.majorList}
+                lists={major.data.major_list}
                 objectKey="name"
                 placeholder="frontend"
               />
@@ -166,7 +167,7 @@ export const My = () => {
             value={state.email}
             name="email"
             placeholder="이메일을 입력해주세요"
-            onChange={handleChange}
+            onChange={handleChange(0)}
           />
         </ImportLabel>
         <ImportLabel label="기술 스택">

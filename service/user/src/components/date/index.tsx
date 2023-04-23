@@ -25,7 +25,6 @@ export const DateInput = ({
   } = useInversion();
 
   const CalenderDateValue = () => {
-    console.log(value);
     if (value) {
       const { year, month, day } = stringToDate(value);
       const date = [year, month, day];
@@ -35,7 +34,6 @@ export const DateInput = ({
   };
 
   const submitOnInput = (value: string) => {
-    console.log(value);
     onSubmitAtInput({ value, name });
   };
 

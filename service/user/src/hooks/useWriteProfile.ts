@@ -16,7 +16,7 @@ import {
   WriteInfoResType,
   WrtieInfoReqBody,
 } from "../apis/document/patch";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useMutation, useQuery } from "react-query";
 import { toast } from "react-toastify";
 import { GetFileRes, getFile } from "@/apis/file";
@@ -102,45 +102,7 @@ const handleChangeFn = <T>(
   return { ...state, [name]: value };
 };
 
-export const useProfileWrite = <T extends StateType>(
-  initial: T,
-  type: ProfileType
-) => {
-  const [state, setState] = useState<T>(initial);
-  const [status, setStatus] = useState<StatusType>("CREATED");
-  useQuery(["write"], () => myDetail(), {
-    onSuccess: ({ data }) => {
-      let temp = data[type];
-      if (type === "writer") {
-        // @ts-ignore
-        temp = { ...temp, skill_set: temp.skill_set };
-      }
-      //@ts-ignore
-      setState(temp);
-      setStatus(data.status);
-    },
-  });
-  const { mutate } = useMutation({
-    mutationFn: (body: StateType) => {
-      const Fn = typeFn[type];
-      // @ts-ignore
-      return Fn(body);
-    },
-    onSuccess: () => {
-      toast("임시저장하였습니다.", { autoClose: 1000, type: "success" });
-    },
-  });
-
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const temp = handleChangeFn(state, e);
-    setState(temp);
-  };
-  return { state, status, mutate: () => mutate(state), setState, handleChange };
-};
-
-export const useProfileWriteArray = <
+export const useProfileWrite = <
   T extends DetailType[U],
   U extends ProfileTypeAll
 >(
@@ -149,18 +111,33 @@ export const useProfileWriteArray = <
 ) => {
   const [state, setState] = useState<T>(initial);
   const [status, setStatus] = useState<StatusType>("CREATED");
-  useQuery(["write"], () => myDetail(), {
+  const [renderOnce, setRender] = useState<boolean>(false);
+  useQuery(["madeDetail"], () => myDetail(), {
     onSuccess: ({ data }) => {
       let temp = data[type];
       if (type === "writer") {
         // @ts-ignore
-        temp = { ...temp, skill_set: temp.skill_set };
+        const [grade, class_num, ...number] = data.writer.student_number
+          .toString()
+          .split("");
+        temp = {
+          ...temp,
+          skill_set: data.skill_set,
+          grade,
+          class_num,
+          number: Number(number.join("")),
+        };
       }
+      const d = new Date(data.project_list[0].end_date);
+      console.log(d.toLocaleDateString().split(". "))
       //@ts-ignore
       setState(temp);
       setStatus(data.status);
+      setRender(true);
     },
+    enabled: !renderOnce,
   });
+
   const { mutate } = useMutation({
     mutationFn: (body: T) => {
       const Fn = typeFn[type];
@@ -202,7 +179,7 @@ export const useProfileWriteArray = <
   return {
     state,
     status,
-    mutate: () => Array.isArray(state) && mutate(state),
+    mutate: () => mutate(state),
     setState,
     handleChange,
     addItem,
