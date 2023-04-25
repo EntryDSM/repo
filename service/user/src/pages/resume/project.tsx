@@ -18,7 +18,7 @@ export const Project = () => {
       [
         {
           name: "",
-          represent_image_path: "",
+          represent_image_url: "",
           start_date: "",
           end_date: "",
           skill_list: [],
@@ -38,7 +38,7 @@ export const Project = () => {
       {state.map((item, index) => {
         const {
           name,
-          represent_image_path,
+          represent_image_url,
           start_date,
           end_date,
           skill_list,
@@ -91,8 +91,9 @@ export const Project = () => {
           setState(copy);
         };
 
-        const imgUrl = imgs[index] || represent_image_path;
+        const imgUrl = imgs[index] || represent_image_url;
 
+        console.log(imgs,represent_image_url)
         return (
           <ResumeItem
             value={name}

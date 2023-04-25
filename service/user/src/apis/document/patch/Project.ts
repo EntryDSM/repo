@@ -3,7 +3,7 @@ import { instance } from "../..";
 
 export interface ProjectReqBody {
   name: string;
-  represent_image_path: string;
+  represent_image_url: string;
   start_date: string;
   end_date: string;
   skill_list: string[];
@@ -21,6 +21,6 @@ export const documnetProject = (body: ProjectResType[]) => {
   return instance.patch("/document/project", {
     title: '',
     project_list: body.map(disableId),
-    
+
   });
 };
