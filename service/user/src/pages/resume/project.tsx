@@ -2,7 +2,7 @@ import { ImportLabel } from "../../components/ImportLabel";
 import { ResumeTitle, ResumeItem, ResumeLayout } from "../../components/resume";
 import { Input, SKillInput, SkillList, TextArea } from "@packages/ui";
 import { Plus } from "@packages/ui/assets";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import {
   AddSkillFn,
   onChange,
@@ -92,14 +92,15 @@ export const Project = () => {
         };
 
         const imgUrl = imgs[index] || represent_image_url;
+        const inputId = "projectLogo" + index;
 
-        console.log(imgs,represent_image_url)
         return (
           <ResumeItem
             value={name}
             onChange={() => {}}
             placeholder="프로젝트 명"
             onRemove={removeItemArray}
+            key={"projectListId" + index}
           >
             <FeedBack id={item} content={feedback} />
             <ImportLabel label="프로젝트 명" important>
@@ -112,14 +113,14 @@ export const Project = () => {
             </ImportLabel>
             <ImportLabel label="프로젝트 로고">
               <input
-                id="logo"
+                id={inputId}
                 type="file"
                 className="hidden"
                 name="represent_image_path"
                 onChange={onImgChangeArray}
               />
               <label
-                htmlFor="logo"
+                htmlFor={inputId}
                 className="relative inline-block cursor-pointer"
               >
                 <img

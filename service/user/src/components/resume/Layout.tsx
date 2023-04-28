@@ -66,7 +66,7 @@ export const ResumeLayout = ({
                     radius="normal"
                     onClick={submitChange}
                   >
-                    {submit ? "제출" : "취소"}
+                    {submit ? "취소" : "제출"}
                   </Button>
                 </div>
               </p>

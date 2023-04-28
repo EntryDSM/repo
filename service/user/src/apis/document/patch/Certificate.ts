@@ -13,7 +13,6 @@ export interface CertificateResType extends CertificateReqBody {
 }
 
 export const documnetCertificate = (body: CertificateResType[]) => {
-  console.log(body);
   return instance.patch("/document/certificate", {
     certificate_list: body.map(disableId),
   });

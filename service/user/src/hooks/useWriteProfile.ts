@@ -129,7 +129,6 @@ export const useProfileWrite = <
         };
       }
       const d = new Date(data.project_list[0].end_date);
-      console.log(d.toLocaleDateString().split(". "))
       //@ts-ignore
       setState(temp);
       setStatus(data.status);

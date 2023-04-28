@@ -47,7 +47,6 @@ export const My = () => {
   const onImgChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name } = e.target;
     onChange(({ base_url, image_path }) => {
-      console.log(base_url, image_path);
       setState({ ...state, [name]: image_path });
       setImg(base_url + image_path);
     }, e);
@@ -59,7 +58,6 @@ export const My = () => {
   };
 
   const AddSKill = (value: { keyword: string; name: string }) => {
-    console.log(state, value.name);
     const temp = AddSkillFn(state, value);
 
     setState(temp);

@@ -67,7 +67,6 @@ const SignUp = () => {
 
   const { data: major } = useQuery(["dwqdqw"], getMajor, {
     onSuccess: ({ data }) => {
-      console.log(data);
     },
   });
 
@@ -98,7 +97,6 @@ const SignUp = () => {
     mutationFn: (req: FormData) => getFile({ type: "PROFILE", file: req }),
     onSuccess: (res) => {
       const { base_url, image_path } = res.data;
-      console.log(res.data);
       setImgUrl(base_url + image_path);
       setForm({ ...form, profile_image_path: image_path });
     },
