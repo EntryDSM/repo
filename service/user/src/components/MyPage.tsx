@@ -33,7 +33,7 @@ export const MyPage = ({
               height={160}
               src={profile_image_url}
               alt="profile"
-              className="rounded-full"
+              className="rounded-full w-40 h-40 object-cover"
             />
             <div className="w-[2px] h-10 bg-gray200 rounded" />
           </div>

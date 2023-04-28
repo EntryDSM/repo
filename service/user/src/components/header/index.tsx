@@ -18,14 +18,17 @@ export const Header = () => {
           <ul className="flex gap-16 items-center">
             <li>
               <Link href={"/"}>
-                <WhiteLogo size={18}/>
+                <WhiteLogo size={18} />
               </Link>
             </li>
             {Object.entries(links).map(([key, value]) => (
               <li>
                 <Link
                   className={`text-body5 ${
-                    route === value ? "text-gray50" : "text-gray300"
+                    route === value ||
+                    (value.includes("resume") && route.includes("resume"))
+                      ? "text-gray50"
+                      : "text-gray300"
                   }`}
                   href={"/" + value}
                 >
