@@ -12,7 +12,7 @@ export type StatusType = "CREATED" | "SUBMITTED" | "SHARED";
 export interface DetailType {
   "document-id": string;
   writer: WriteInfoResType;
-  status: StatusType;
+  document_status: StatusType;
   introduce: IntroduceResType;
   skill_list: string[];
   project_list: ProjectResType[];

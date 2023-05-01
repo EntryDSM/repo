@@ -131,7 +131,7 @@ export const useProfileWrite = <
       const d = new Date(data.project_list[0].end_date);
       //@ts-ignore
       setState(temp);
-      setStatus(data.status);
+      setStatus(data.document_status);
       setRender(true);
     },
     enabled: !renderOnce,

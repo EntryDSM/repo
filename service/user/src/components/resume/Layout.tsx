@@ -36,6 +36,7 @@ export const ResumeLayout = ({
   const isNotSubmit = status !== "CREATED";
   const [submit, setSubmit] = useState<boolean>(!isNotSubmit);
 
+  useEffect(() => setSubmit(!isNotSubmit), [status]);
   const submitChange = () => {
     documentSubmit(submit);
     setSubmit(!submit);
@@ -66,7 +67,7 @@ export const ResumeLayout = ({
                     radius="normal"
                     onClick={submitChange}
                   >
-                    {submit ? "취소" : "제출"}
+                    {submit ? "제출" : "취소"}
                   </Button>
                 </div>
               </p>
@@ -80,10 +81,10 @@ export const ResumeLayout = ({
               <div className="w-72 flex gap-4 flex-col">
                 <div
                   className={`bg-gray50 text-title1 ${
-                    isNotSubmit ? "text-gray800" : "text-gray300"
+                    submit ? "text-gray300" : "text-gray800"
                   } pl-9 pt-16 pb-16 rounded-2xl`}
                 >
-                  {documentStatus[status]}
+                  {documentStatus[submit ? "CREATED" : "SUBMITTED"]}
                 </div>
                 <Button className="rounded-2xl bg-gray50 hover:bg-gray200">
                   미리보기
