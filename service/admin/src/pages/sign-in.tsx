@@ -6,7 +6,6 @@ import { useState } from "react";
 import { useMutation, useQuery } from "react-query";
 import { toast } from "react-toastify";
 import { Arrow } from "@packages/ui/assets";
-import { searchMajor } from "@/apis/major";
 
 interface Form {
   account_id: string;
