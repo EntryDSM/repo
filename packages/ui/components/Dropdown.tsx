@@ -17,16 +17,15 @@ interface PropsType<T, U> {
   placeholder: string;
 }
 
-type a<T> = T extends string ? {} : string;
-
-const b = (c: a<string>) => {};
-
 const kindColor = {
   outline: "border-2 border-gray-800 bg-transparent",
   contained: "bg-gray100",
 };
 
-export const Dropdown = <T extends string | ListObjectType, U extends string>({
+export const Dropdown = <
+  T extends (string | number) | ListObjectType,
+  U extends string
+>({
   kind = "outline",
   label,
   hint,

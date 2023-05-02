@@ -28,37 +28,33 @@ export interface PreviewType {
     introduce: string;
   };
   skill_list: string[];
-  project_list: [
-    {
-      element_id: string;
-      name: string;
-      represent_image_path: string;
-      skill_list: string[];
-      start_date: number;
-      end_date: number;
-      description: string;
-      url: string; //null 가능
-    }
-  ];
-  award_list: [
-    {
-      element_id: string;
-      name: string;
-      awarding_institution: string;
-
-      date: number;
-      description: string; //null 가능
-      url: string; //null 가능
-    }
-  ];
-  certificate_list: [
-    {
-      element_id: string;
-      name: string;
-      issuing_institution: string;
-      date: number;
-    }
-  ];
+  project_list: {
+    element_id: string;
+    name: string;
+    represent_image_path: string;
+    skill_list: string[];
+    start_date: number;
+    end_date: number;
+    description: string;
+    url: string; //null 가능
+    feedback?: string | null; // null 가능
+  }[];
+  award_list: {
+    element_id: string;
+    name: string;
+    awarding_institution: string;
+    date: number;
+    description: string; //null 가능
+    url: string; //null 가능
+    feedback?: string | null; // null 가능
+  }[];
+  certificate_list: {
+    element_id: string;
+    name: string;
+    issuing_institution: string;
+    date: number;
+    feedback?: string | null; // null 가능
+  }[];
   NextImage: any;
 }
 
@@ -153,7 +149,10 @@ export const PreviewResume = ({
                 />
                 <div>
                   <div className="text-title2">{name}</div>
-                  <div className="text-body7">{millsecondToDate(start_date)} ~ {millsecondToDate(end_date)}</div>
+                  <div className="text-body7">
+                    {millsecondToDate(start_date)} ~{" "}
+                    {millsecondToDate(end_date)}
+                  </div>
                 </div>
               </div>
               <div>

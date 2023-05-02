@@ -6,25 +6,33 @@ import { Dropdown } from "@packages/ui";
 import { useQuery } from "react-query";
 import { useState } from "react";
 import { getStudent } from "@/apis/student";
+import { getMajor } from "@/apis/major";
 
 const studentNum = [
-  { placeholder: "학년", lists: ["1", "2", "3"], name: "grade" },
-  { placeholder: "반", lists: ["1", "2", "3", "4"], name: "class" },
+  { placeholder: "학년", lists: [1, 2, 3], name: "grade" },
+  { placeholder: "반", lists: [1, 2, 3, 4], name: "class" },
   {
-    placeholder: "문서 상태",
-    lists: ["PUBLIC", "STUDENT_ONLY", "PRIVATE"],
-    name: "state",
+    placeholder: "번호",
+    lists: Array(20)
+      .fill(0)
+      .map((_, idx) => idx + 1),
+    name: "classNum",
   },
 ];
 
 export default function Home() {
   const { data } = useQuery(["dwqdq"], getStudent);
+  const { data: major } = useQuery(["asfaf"], getMajor);
 
   const [option, setOption] = useState({
     name: "조상현",
     grade: "1",
     class: "1",
-    state: "PUBLIC",
+    classNum: "1",
+    major: {
+      id: 0,
+      name: "",
+    },
   });
 
   return (
@@ -40,12 +48,31 @@ export default function Home() {
               placeholder={placeholder}
               lists={lists}
               name={name}
-              value={option[name as keyof typeof option]}
+              value={option[name as "grade"]}
               onClick={({ keyword, name }) =>
                 name && setOption({ ...option, [name]: keyword })
               }
             />
           ))}
+          {major?.data && (
+            <Dropdown
+              className="w-40"
+              placeholder="종보"
+              lists={major.data.major_list.map((e) => e.name)}
+              name="major"
+              value={option.major.name}
+              onClick={({ keyword, name }) => {
+                console.log(keyword);
+                name &&
+                  setOption({
+                    ...option,
+                    [name as "grade"]: major.data.major_list.find(
+                      (e) => e.name === keyword
+                    ) as any,
+                  });
+              }}
+            />
+          )}
         </div>
         {data &&
           data.data.student_list.map((student) => <Student {...student} />)}
