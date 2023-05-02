@@ -24,22 +24,23 @@ const student = {
 };
 
 export const My = () => {
-  const { state, status, mutate, setState, handleChange } = useProfileWrite(
-    {
-      name: "",
-      profile_image_url: "",
-      email: "",
-      major: { id: "", name: "" },
-      grade: "",
-      class_num: "",
-      number: "",
-      skill_list: [],
-      student_id: "",
-      element_id: "",
-      feedback: "",
-    },
-    "writer"
-  );
+  const { state, toPreview, status, mutate, setState, handleChange } =
+    useProfileWrite(
+      {
+        name: "",
+        profile_image_url: "",
+        email: "",
+        major: { id: "", name: "" },
+        grade: "",
+        class_num: "",
+        number: "",
+        skill_list: [],
+        student_id: "",
+        element_id: "",
+        feedback: "",
+      },
+      "writer"
+    );
   const [img, setImg] = useState<string>("");
 
   const { data: major } = useQuery(["skillList"], getMajor);
@@ -69,7 +70,7 @@ export const My = () => {
   };
 
   return (
-    <ResumeLayout mutate={mutate} status={status}>
+    <ResumeLayout mutate={mutate} status={status} toPreview={toPreview}>
       <ResumeTitle value="자기소개" />
       <div className="px-[40px] flex flex-col gap-10">
         <FeedBack

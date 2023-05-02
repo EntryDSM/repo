@@ -10,6 +10,7 @@ import { documentSubmit } from "@/apis/document/post/submit";
 interface PropsType {
   children: ReactNode;
   mutate?: any;
+  toPreview: () => string;
   status?: "CREATED" | "SUBMITTED" | "SHARED";
 }
 
@@ -30,9 +31,10 @@ const documentStatus = {
 export const ResumeLayout = ({
   children,
   mutate,
+  toPreview,
   status = "CREATED",
 }: PropsType) => {
-  const { route } = useRouter();
+  const { route, push } = useRouter();
   const isNotSubmit = status !== "CREATED";
   const [submit, setSubmit] = useState<boolean>(!isNotSubmit);
 
@@ -41,6 +43,8 @@ export const ResumeLayout = ({
     documentSubmit(submit);
     setSubmit(!submit);
   };
+
+  const toPathPreview = () => push("/" + toPreview());
   return (
     <div>
       <Header />
@@ -86,7 +90,10 @@ export const ResumeLayout = ({
                 >
                   {documentStatus[submit ? "CREATED" : "SUBMITTED"]}
                 </div>
-                <Button className="rounded-2xl bg-gray50 hover:bg-gray200">
+                <Button
+                  onClick={toPathPreview}
+                  className="rounded-2xl bg-gray50 hover:bg-gray200"
+                >
                   미리보기
                 </Button>
 

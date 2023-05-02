@@ -9,24 +9,32 @@ import { FeedBack } from "@/components/resume/FeedBack";
 import { DateInput } from "@/components/date";
 
 export const Awards = () => {
-  const { state, status, setState, mutate, handleChange, addItem, removeItem } =
-    useProfileWrite(
-      [
-        {
-          name: "",
-          awarding_institution: "",
-          date: "",
-          description: "",
-          document_id: "",
-          element_id: "",
-          feedback: "",
-        },
-      ],
-      "award_list"
-    );
+  const {
+    state,
+    toPreview,
+    status,
+    setState,
+    mutate,
+    handleChange,
+    addItem,
+    removeItem,
+  } = useProfileWrite(
+    [
+      {
+        name: "",
+        awarding_institution: "",
+        date: "",
+        description: "",
+        document_id: "",
+        element_id: "",
+        feedback: "",
+      },
+    ],
+    "award_list"
+  );
 
   return (
-    <ResumeLayout mutate={mutate} status={status}>
+    <ResumeLayout mutate={mutate} status={status} toPreview={toPreview}>
       <ResumeTitle value="수상" onClick={addItem} />
       {state.map((item, index) => {
         const { name, awarding_institution, date, description, feedback } =

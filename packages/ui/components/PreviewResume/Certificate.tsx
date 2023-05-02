@@ -1,15 +1,21 @@
 import React from "react";
+import { PreviewType, millsecondToDate } from ".";
 
-export const Certificate = () => {
+export const Certificate = ({
+  element_id,
+  name,
+  issuing_institution,
+  date,
+}: PreviewType["certificate_list"][0]) => {
   return (
     <>
       <div className="bg-gray50 rounded-md pl-5 pt-3 pb-3 pr-5">
         <div className="flex justify-between">
-          <div className="text-body5">정보처리기능사</div>
+          <div className="text-body5">{name}</div>
           <div className="text-gray400 flex text-body7 gap-2 items-center">
-            <div>전국SW마이스터고등학교</div>
+            <div>{issuing_institution}</div>
             <hr className="bg-gray300 h-[12px] border-none w-[1px]" />
-            <div>2022.06.15</div>
+            <div>{millsecondToDate(date)}</div>
           </div>
         </div>
       </div>

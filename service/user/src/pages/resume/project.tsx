@@ -13,27 +13,35 @@ import { FeedBack } from "@/components/resume/FeedBack";
 import { DateInput } from "@/components/date";
 
 export const Project = () => {
-  const { state, status, mutate, setState, handleChange, addItem, removeItem } =
-    useProfileWrite(
-      [
-        {
-          name: "",
-          represent_image_url: "",
-          start_date: "",
-          end_date: "",
-          skill_list: [],
-          description: "",
-          url: "",
-          document_id: "",
-          element_id: "",
-          feedback: "",
-        },
-      ],
-      "project_list"
-    );
+  const {
+    state,
+    toPreview,
+    status,
+    mutate,
+    setState,
+    handleChange,
+    addItem,
+    removeItem,
+  } = useProfileWrite(
+    [
+      {
+        name: "",
+        represent_image_url: "",
+        start_date: "",
+        end_date: "",
+        skill_list: [],
+        description: "",
+        url: "",
+        document_id: "",
+        element_id: "",
+        feedback: "",
+      },
+    ],
+    "project_list"
+  );
   const [imgs, setImgs] = useState<string[]>([]);
   return (
-    <ResumeLayout mutate={mutate} status={status}>
+    <ResumeLayout mutate={mutate} status={status} toPreview={toPreview}>
       <ResumeTitle value="프로젝트" onClick={addItem} />
       {state.map((item, index) => {
         const {

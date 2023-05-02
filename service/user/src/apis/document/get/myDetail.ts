@@ -10,7 +10,7 @@ import {
 export type StatusType = "CREATED" | "SUBMITTED" | "SHARED";
 
 export interface DetailType {
-  "document-id": string;
+  document_id: string;
   writer: WriteInfoResType;
   document_status: StatusType;
   introduce: IntroduceResType;

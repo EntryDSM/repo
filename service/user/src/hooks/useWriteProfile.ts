@@ -112,7 +112,7 @@ export const useProfileWrite = <
   const [state, setState] = useState<T>(initial);
   const [status, setStatus] = useState<StatusType>("CREATED");
   const [renderOnce, setRender] = useState<boolean>(false);
-  useQuery(["madeDetail"], () => myDetail(), {
+  const { data } = useQuery(["madeDetail"], () => myDetail(), {
     onSuccess: ({ data }) => {
       let temp = data[type];
       if (type === "writer") {
@@ -175,6 +175,11 @@ export const useProfileWrite = <
     }
   };
 
+  const toPreview = () => {
+    console.log(1)
+    mutate(state);
+    return data?.data["document_id"] || "";
+  };
   return {
     state,
     status,
@@ -183,5 +188,6 @@ export const useProfileWrite = <
     handleChange,
     addItem,
     removeItem,
+    toPreview,
   };
 };

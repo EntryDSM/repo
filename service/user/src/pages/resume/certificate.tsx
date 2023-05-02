@@ -6,22 +6,30 @@ import { FeedBack } from "@/components/resume/FeedBack";
 import { DateInput } from "@/components/date";
 
 export const Certificate = () => {
-  const { state, status, setState, mutate, handleChange, addItem, removeItem } =
-  useProfileWrite(
-      [
-        {
-          name: "",
-          issuing_institution: "",
-          date: "",
-          document_id: "",
-          element_id: "",
-          feedback: "",
-        },
-      ],
-      "certificate_list"
-    );
+  const {
+    state,
+    toPreview,
+    status,
+    setState,
+    mutate,
+    handleChange,
+    addItem,
+    removeItem,
+  } = useProfileWrite(
+    [
+      {
+        name: "",
+        issuing_institution: "",
+        date: "",
+        document_id: "",
+        element_id: "",
+        feedback: "",
+      },
+    ],
+    "certificate_list"
+  );
   return (
-    <ResumeLayout mutate={mutate} status={status}>
+    <ResumeLayout mutate={mutate} status={status} toPreview={toPreview}>
       <ResumeTitle value="자격증" onClick={addItem} />
       {state.map((item, index) => {
         const { name, date, issuing_institution, feedback } = item;
