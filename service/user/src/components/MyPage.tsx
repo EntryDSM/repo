@@ -1,4 +1,5 @@
 import { DocumentMyRes } from "@/apis/document/get/my";
+import { MyFeedbackResType } from "@/apis/feedback/my";
 import { Button } from "@packages/ui";
 import Image from "next/image";
 import { ReactNode } from "react";
@@ -10,19 +11,26 @@ const statusIdx = {
   SHARED: 2,
 };
 
-export const MyPage = ({
-  profile_image_url,
-  name,
-  major_name,
-  grade,
-  class_num,
-  number,
-  is_exist,
-  heading,
-  introduce,
-  email,
-  status,
-}: DocumentMyRes) => {
+interface PropsType {
+  profile: DocumentMyRes;
+  feedbacks: MyFeedbackResType;
+}
+
+export const MyPage = ({ profile, feedbacks }: PropsType) => {
+  const {
+    profile_image_url,
+    name,
+    major_name,
+    grade,
+    class_num,
+    number,
+    email,
+    is_exist,
+    status,
+    heading,
+    introduce,
+  } = profile;
+  const { feedback_list } = feedbacks;
   return (
     <div className="max-w-[1120px] w-full m-auto mt-[200px] px-4">
       <div className="relative bg-gray50 w-[1120px] rounded-[15px] px-40 pt-[170px] pb-[100px] mb-[120px]">
@@ -76,49 +84,24 @@ export const MyPage = ({
       </div>
 
       <div className="bg-gray50 rounded-2xl pl-12 pr-12 text-body3 mt-5 pt-14 pb-14 flex flex-col gap-10">
-        <div>
-          <span>피드백</span>
-          <span className="text-gray300 ml-2">4</span>
-        </div>
-        <div className="bg-gray100 rounded-2xl pl-10 pr-10 pt-12 pb-12">
-          <p>프로젝트 EXIT</p>
-          <div className="text-body6">
-            프로젝트에서 한 경험이나 그 프로젝트를 통해 배우거나 느낀점을 사례
-            중심으로 자세하게 적어주면 좋을 것 같아요. 그냥 ~~했다 라는 식으로
-            적고 끝내면 친구가 그 프로젝트를 통해 어떤 것을 얻었는지, 어떻게
-            성장하게 되었는지를 알 수 없어서 그 부분을 더 추가해주세요.
+        {!!feedback_list.length ? (
+          <>
+            <div>
+              <span>피드백</span>
+              <span className="text-gray300 ml-2">4</span>
+            </div>
+            {feedback_list.map(({ element_name, comment }) => (
+              <div className="bg-gray100 rounded-2xl pl-10 pr-10 pt-12 pb-12 flex flex-col gap-[30px]">
+                <p>{element_name}</p>
+                <div className="text-body6 whitespace-pre-wrap">{comment}</div>
+              </div>
+            ))}
+          </>
+        ) : (
+          <div className="w-full h-40 bg-gray100 rounded-2xl flex justify-center items-center whitespace-pre-wrap text-center text-body5">
+            {"이력서를 작성하고, 제출하여\n 피드백을 받아보세요"}
           </div>
-        </div>
-
-        <div className="bg-gray100 rounded-2xl pl-10 pr-10 pt-12 pb-12">
-          <p>프로젝트 EXIT</p>
-          <div className="text-body6">
-            프로젝트에서 한 경험이나 그 프로젝트를 통해 배우거나 느낀점을 사례
-            중심으로 자세하게 적어주면 좋을 것 같아요. 그냥 ~~했다 라는 식으로
-            적고 끝내면 친구가 그 프로젝트를 통해 어떤 것을 얻었는지, 어떻게
-            성장하게 되었는지를 알 수 없어서 그 부분을 더 추가해주세요.
-          </div>
-        </div>
-
-        <div className="bg-gray100 rounded-2xl pl-10 pr-10 pt-12 pb-12">
-          <p>프로젝트 EXIT</p>
-          <div className="text-body6">
-            프로젝트에서 한 경험이나 그 프로젝트를 통해 배우거나 느낀점을 사례
-            중심으로 자세하게 적어주면 좋을 것 같아요. 그냥 ~~했다 라는 식으로
-            적고 끝내면 친구가 그 프로젝트를 통해 어떤 것을 얻었는지, 어떻게
-            성장하게 되었는지를 알 수 없어서 그 부분을 더 추가해주세요.
-          </div>
-        </div>
-
-        <div className="bg-gray100 rounded-2xl pl-10 pr-10 pt-12 pb-12">
-          <p>프로젝트 EXIT</p>
-          <div className="text-body6">
-            프로젝트에서 한 경험이나 그 프로젝트를 통해 배우거나 느낀점을 사례
-            중심으로 자세하게 적어주면 좋을 것 같아요. 그냥 ~~했다 라는 식으로
-            적고 끝내면 친구가 그 프로젝트를 통해 어떤 것을 얻었는지, 어떻게
-            성장하게 되었는지를 알 수 없어서 그 부분을 더 추가해주세요.
-          </div>
-        </div>
+        )}
         <div className="flex justify-end gap-x-5 [&>button]:w-fit">
           <Button kind="contained" radius="circle">
             미리보기
