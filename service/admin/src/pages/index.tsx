@@ -14,7 +14,7 @@ const studentNum = [
 ];
 
 export default function Home() {
-  const { data } = useQuery(["dwqdq"], getStudent);
+  const [effect, setEffect] = useState<boolean>(true);
   const { data: major } = useQuery(["asfaf"], getMajor);
 
   const [option, setOption] = useState({
@@ -22,14 +22,28 @@ export default function Home() {
     grade: "",
     classNum: "",
     major: {
-      id: 0,
+      id: "",
       name: "",
     },
   });
+  const { data } = useQuery(
+    ["dwqdq"],
+    () => getStudent({ ...option, major: option.major.id }),
+    {
+      onSuccess: () => setEffect(false),
+      onError: () => setEffect(false),
+      enabled: effect,
+    }
+  );
+
+  const onOptionChange = (state: typeof option) => {
+    setEffect(true);
+    setOption(state);
+  };
 
   const onHandleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
-    setOption({ ...option, [name]: value });
+    onOptionChange({ ...option, [name]: value });
   };
 
   return (
@@ -68,7 +82,7 @@ export default function Home() {
               onClick={({ keyword, name }) => {
                 console.log(keyword);
                 name &&
-                  setOption({
+                  onOptionChange({
                     ...option,
                     [name as "grade"]: major.data.major_list.find(
                       (e) => e.name === keyword

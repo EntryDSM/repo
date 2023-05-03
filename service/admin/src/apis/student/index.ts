@@ -19,6 +19,15 @@ interface GetStudentRes {
   student_list: StudentType[];
 }
 
-export const getStudent = () => {
-  return instance.get<GetStudentRes>("/student");
+interface PropsType {
+  name: string;
+  grade: string;
+  classNum: string;
+  major: string;
+}
+
+export const getStudent = ({ name, grade, classNum, major }: PropsType) => {
+  return instance.get<GetStudentRes>(
+    `/student?name=${name}&grade=${grade}&classNum=${classNum}&major=${major}`
+  );
 };

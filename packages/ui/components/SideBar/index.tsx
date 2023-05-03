@@ -11,7 +11,7 @@ interface Props {
 
 export const SideBar = ({ preview, children }: Props) => {
   const [side, setSide] = useState<number>(0);
-  const onClick = (to: number) => setSide(to === side ? 0 : to);
+  
   return (
     <div className="flex h-[100vh]">
       <div className="fixed bottom-0 top-0 flex">
@@ -31,8 +31,8 @@ export const SideBar = ({ preview, children }: Props) => {
           <div className="bg-gray700 w-60 text-gray50 pl-6 pr-6 pt-10">
             {
               {
-                0: <Students />,
-                1: <Sharing />,
+                1: <Students />,
+                2: <Sharing />,
               }[side]
             }
           </div>
