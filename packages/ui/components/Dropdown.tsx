@@ -42,12 +42,15 @@ export const Dropdown = <
   return (
     <ReactOutSideClickHandler
       display="inline-block"
-      onOutsideClick={() => {
+      onOutsideClick={(e) => {
         setDropDown(false);
       }}
     >
       {label && <div className="mb-2.5 ml-[7px] text-body8">{label}</div>}
-      <div className={`${className} relative`}>
+      <div
+        className={`${className} relative`}
+        onClick={(e) => e.preventDefault()}
+      >
         <div
           onClick={() => setDropDown(!dropdown)}
           className={`h-[46px] flex items-center justify-between rounded-sm pl-4 pr-3 ${kindCss} cursor-pointer`}

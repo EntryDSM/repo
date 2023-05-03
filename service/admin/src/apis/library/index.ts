@@ -2,7 +2,7 @@ import { instance } from "..";
 
 export interface Library {
   id: string;
-  access_right: string;
+  access_right: "PUBLIC" | "STUDENT_ONLY" | "PRIVATE";
   year: number;
   grade: number;
   generation: number;

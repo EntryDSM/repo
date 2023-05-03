@@ -30,7 +30,7 @@ const Library = () => {
           id="asf"
           grade={1}
           generation={1}
-          access_right="asf"
+          access_right="PRIVATE"
           year={1}
           url=""
         />
