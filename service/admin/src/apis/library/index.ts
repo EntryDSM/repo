@@ -10,5 +10,5 @@ export interface Library {
 }
 
 export const getLibrary = () => {
-  return instance.get<Library[]>("/library/teacher&year=2023");
+  return instance.get<Library[]>("/library/teacher?year=2023");
 };

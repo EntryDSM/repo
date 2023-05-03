@@ -2,11 +2,13 @@ import { getLibrary } from "@/apis/library";
 import { Header } from "@/components/header";
 import { LibraryCard } from "@/components/library";
 import { Dropdown } from "@packages/ui";
+import { useState } from "react";
 import { useQuery } from "react-query";
 
 const Library = () => {
   const { data } = useQuery(["dwqdqwdq"], () => getLibrary());
 
+  const [year, setYear] = useState<string>("");
   return (
     <>
       <Header />
@@ -17,10 +19,21 @@ const Library = () => {
           <Dropdown
             className="w-40"
             placeholder="년도"
-            lists={["2021", "2022", "2023", "2023", "2023"]}
+            lists={["2021", "2022", "2023"]}
+            onClick={({ keyword }) => setYear(keyword)}
           />
         </div>
-        {data && data.data.map((libarary) => <LibraryCard {...libarary} />)}
+        {data &&
+          !!data.data.length &&
+          data.data.map((libarary) => <LibraryCard {...libarary} />)}
+        <LibraryCard
+          id="asf"
+          grade={1}
+          generation={1}
+          access_right="asf"
+          year={1}
+          url=""
+        />
       </div>
     </>
   );

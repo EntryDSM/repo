@@ -1,7 +1,8 @@
 import React, { ReactNode, useState } from "react";
-import { WhiteRepoIcon } from "../assets/WhiteRepoIcon";
-import { Home, Setting, Stack } from "../assets";
-import { Button } from "./Button";
+import { WhiteRepoIcon } from "../../assets/WhiteRepoIcon";
+import { Home, Setting, Stack } from "../../assets";
+import { Sharing } from "./Sharing";
+import { Students } from "./Students";
 
 interface Props {
   preview?: boolean;
@@ -18,30 +19,22 @@ export const SideBar = ({ preview, children }: Props) => {
           <div>
             <WhiteRepoIcon />
           </div>
-          <Home />
+          <Home onClick={() => setSide(0)} />
           {!preview && (
             <>
-              <Setting />
-              <Stack />
+              <Setting onClick={() => setSide(1)} />
+              <Stack onClick={() => setSide(2)} />
             </>
           )}
         </div>
         {!preview && (
           <div className="bg-gray700 w-60 text-gray50 pl-6 pr-6 pt-10">
-            <div className="text-title4">1316 장지성</div>
-
-            <div className="flex flex-col gap-[10px] mt-6">
-              <div className="text-body5">문서 공개 설정</div>
-              <div className="h-12 bg-gray600 rounded-md text-body6">
-                비공개
-              </div>
-              <div className="h-12 bg-gray600 rounded-md text-body6">공개</div>
-            </div>
-
-            <div className="text-body5 mt-6 mb-[10px]">내보내기</div>
-            <Button kind="containedWhite" className="w-full">
-              PDF로 내보내기
-            </Button>
+            {
+              {
+                0: <Students />,
+                1: <Sharing />,
+              }[side]
+            }
           </div>
         )}
       </div>
