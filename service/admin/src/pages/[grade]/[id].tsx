@@ -13,6 +13,7 @@ const detail = () => {
       enabled: !!query.id,
     }
   );
+  console.log(query)
   return (
     <div>
       <SideBar>{data && <PreviewResume {...data.data} NextImage={Image} />}</SideBar>
