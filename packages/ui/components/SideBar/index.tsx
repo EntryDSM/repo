@@ -4,14 +4,34 @@ import { Home, Setting, Stack } from "../../assets";
 import { Sharing } from "./Sharing";
 import { Students } from "./Students";
 
+export type StudentListType =
+  | {
+      student_id: string;
+      name: string;
+      document_id: string;
+      document_status: string;
+      feedback_count: number;
+      profile_image_url: string;
+      student_number: number;
+      email: string;
+      major: {
+        id: string;
+        name: string;
+      };
+    }[]
+  | undefined;
+
 interface Props {
   preview?: boolean;
+  studentList: StudentListType[];
+  id?: string;
   children: ReactNode;
 }
 
-export const SideBar = ({ preview, children }: Props) => {
+export const SideBar = ({ preview, studentList, id, children }: Props) => {
   const [side, setSide] = useState<number>(0);
-  
+
+  console.log(id);
   return (
     <div className="flex h-[100vh]">
       <div className="fixed bottom-0 top-0 flex">
@@ -31,7 +51,7 @@ export const SideBar = ({ preview, children }: Props) => {
           <div className="bg-gray700 w-60 text-gray50 pl-6 pr-6 pt-10">
             {
               {
-                1: <Students />,
+                1: <Students studentList={studentList} id={id} />,
                 2: <Sharing />,
               }[side]
             }

@@ -15,15 +15,15 @@ export interface StudentType {
   };
 }
 
-interface GetStudentRes {
+export interface GetStudentRes {
   student_list: StudentType[];
 }
 
 interface PropsType {
-  name: string;
-  grade: string;
-  classNum: string;
-  major: string;
+  name?: string;
+  grade?: string;
+  classNum?: string;
+  major?: string;
 }
 
 export const getStudent = ({ name, grade, classNum, major }: PropsType) => {

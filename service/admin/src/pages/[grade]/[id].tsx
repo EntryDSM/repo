@@ -7,6 +7,7 @@ import { useQueries, useQuery } from "react-query";
 
 const detail = () => {
   const { query } = useRouter();
+  const { grade, id } = query;
   const { data } = useQuery(
     ["teacherPreview"],
     () => studentDetail(query.id as string),
@@ -14,13 +15,21 @@ const detail = () => {
       enabled: !!query.id,
     }
   );
+  const studentListObject = (classNum: string) => ({
+    queryKey: ["class" + classNum],
+    queryFn: () => getStudent({ grade: grade as string, classNum }),
+    enabled: !!grade,
+  });
   const result = useQueries([
-    { queryKey: ["class1"], queryFn: () => getStudent() },
-  ]);
-  console.log(query);
+    studentListObject("1"),
+    studentListObject("2"),
+    studentListObject("3"),
+    studentListObject("4"),
+  ]).map((list) => list.data?.data.student_list);
+
   return (
     <div>
-      <SideBar>
+      <SideBar studentList={result} id={id as string}>
         {data && <PreviewResume {...data.data} NextImage={Image} />}
       </SideBar>
     </div>
