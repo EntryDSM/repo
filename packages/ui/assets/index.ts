@@ -20,3 +20,6 @@ export * from "./BlackRepoIcon";
 export * from "./Teacher";
 export * from "./Arrow";
 export * from "./Link";
+export * from "./Internet";
+export * from "./UnSelected";
+export * from "./Selected";

@@ -1,15 +1,22 @@
 import { studentDetail } from "@/apis/document/get/studentDetail";
+import { documentShare, documentUnShare } from "@/apis/document/post/shard";
 import { getStudent } from "@/apis/student";
 import { PreviewResume, SideBar, TextArea } from "@packages/ui";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useQueries, useQuery } from "react-query";
 
+const sharingFns = {
+  SHARING: documentShare,
+  UNSHARING: documentUnShare,
+};
+
 const detail = () => {
   const { query } = useRouter();
   const { grade, id } = query;
+
   const { data } = useQuery(
-    ["teacherPreview"],
+    ["teacherPreview", id],
     () => studentDetail(query.id as string),
     {
       enabled: !!query.id,
@@ -27,9 +34,17 @@ const detail = () => {
     studentListObject("4"),
   ]).map((list) => list.data?.data.student_list);
 
+  const sharingFn = (action: "SHARING" | "UNSHARING") =>
+    data && sharingFns[action](data?.data.document_id);
   return (
     <div>
-      <SideBar studentList={result} id={id as string}>
+      <SideBar
+        studentList={result}
+        id={id as string}
+        grade={grade as string}
+        status={data?.data.document_status}
+        sharingFn={sharingFn}
+      >
         {data && <PreviewResume {...data.data} NextImage={Image} />}
       </SideBar>
     </div>

@@ -15,7 +15,7 @@ export interface StudentDetailType {
     };
     feedback: string | null; // null 가능
   };
-  status: string;
+  document_status: "CREATED" | "SUBMITTED" | "SHARING";
   introduce: {
     element_id: string;
     heading: string;

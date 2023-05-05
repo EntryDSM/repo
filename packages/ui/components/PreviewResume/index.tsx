@@ -21,7 +21,7 @@ export interface PreviewType {
       name: string;
     };
   };
-  status: string;
+  document_status: string;
   introduce: {
     element_id: string;
     heading: string;
@@ -66,7 +66,7 @@ export const millsecondToDate = (str: number) => {
 export const PreviewResume = ({
   document_id,
   writer,
-  status,
+  document_status,
   introduce,
   skill_list,
   project_list,

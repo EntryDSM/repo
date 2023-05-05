@@ -4,34 +4,46 @@ import { Home, Setting, Stack } from "../../assets";
 import { Sharing } from "./Sharing";
 import { Students } from "./Students";
 
-export type StudentListType =
-  | {
-      student_id: string;
-      name: string;
-      document_id: string;
-      document_status: string;
-      feedback_count: number;
-      profile_image_url: string;
-      student_number: number;
-      email: string;
-      major: {
-        id: string;
-        name: string;
-      };
-    }[]
-  | undefined;
+interface StudentType {
+  student_id: string;
+  name: string;
+  document_id: string;
+  document_status: "CREATED" | "SUBMITTED" | "SHARING";
+  feedback_count: number;
+  profile_image_url: string;
+  student_number: number;
+  email: string;
+  major: {
+    id: string;
+    name: string;
+  };
+}
+
+export type StudentListType = StudentType[] | undefined;
+
+export type ShareFnType = (action: "SHARING" | "UNSHARING") => void;
 
 interface Props {
   preview?: boolean;
-  studentList: StudentListType[];
+  studentList: (StudentType[] | undefined)[];
+  status?: "CREATED" | "SUBMITTED" | "SHARING";
+  sharingFn: ShareFnType;
   id?: string;
+  grade?: string;
   children: ReactNode;
 }
 
-export const SideBar = ({ preview, studentList, id, children }: Props) => {
+export const SideBar = ({
+  preview,
+  studentList,
+  status,
+  sharingFn,
+  id,
+  grade,
+  children,
+}: Props) => {
   const [side, setSide] = useState<number>(0);
 
-  console.log(id);
   return (
     <div className="flex h-[100vh]">
       <div className="fixed bottom-0 top-0 flex">
@@ -51,8 +63,8 @@ export const SideBar = ({ preview, studentList, id, children }: Props) => {
           <div className="bg-gray700 w-60 text-gray50 pl-6 pr-6 pt-10">
             {
               {
-                1: <Students studentList={studentList} id={id} />,
-                2: <Sharing />,
+                1: <Students studentList={studentList} id={id} grade={grade} />,
+                2: <Sharing status={status} sharingFn={sharingFn} />,
               }[side]
             }
           </div>
