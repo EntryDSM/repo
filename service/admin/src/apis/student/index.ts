@@ -27,11 +27,9 @@ interface PropsType {
 }
 
 export const getStudent = ({ name, grade, classNum, major }: PropsType) => {
-  const nameStr = name ?? null;
-  const gradeStr = grade ?? null;
-  const classNumStr = classNum ?? null;
-  const majorStr = major ?? null;
   return instance.get<GetStudentRes>(
-    `/student?name=${nameStr}&grade=${gradeStr}&classNum=${classNumStr}&major=${majorStr}`
+    `/student?name=${name || ""}&grade=${grade || ""}&classNum=${
+      classNum || ""
+    }&major=${major || ""}`
   );
 };
