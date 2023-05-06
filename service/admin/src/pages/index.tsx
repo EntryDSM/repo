@@ -14,7 +14,6 @@ const studentNum = [
 ];
 
 export default function Home() {
-  const [effect, setEffect] = useState<boolean>(true);
   const { data: major } = useQuery(["asfaf"], getMajor);
 
   const [option, setOption] = useState({
@@ -26,18 +25,11 @@ export default function Home() {
       name: "",
     },
   });
-  const { data } = useQuery(
-    ["dwqdq"],
-    () => getStudent({ ...option, major: option.major.id }),
-    {
-      onSuccess: () => setEffect(false),
-      onError: () => setEffect(false),
-      enabled: effect,
-    }
+  const { data } = useQuery(["dwqdq", option], () =>
+    getStudent({ ...option, major: option.major.id })
   );
 
   const onOptionChange = (state: typeof option) => {
-    setEffect(true);
     setOption(state);
   };
 
