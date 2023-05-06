@@ -20,6 +20,7 @@ export const FeedbackBox = ({
 }: FeedbackBoxType) => {
   const [state, setState] = useState<string>(comment || "");
   const [dropdown, setDropdown] = useState<boolean>(false);
+  const [isChange, setIsChange] = useState<boolean>(!!comment);
   const openFeedBack = () => setDropdown(true);
   const closeFeedBack = () => setDropdown(false);
 
@@ -28,17 +29,27 @@ export const FeedbackBox = ({
   };
 
   const deleteFeedback = () => {
-    closeFeedBack();
-    feedbackRemove({ document_id, element_id });
+    try {
+      closeFeedBack();
+      feedbackRemove({ document_id, element_id });
+      setIsChange(false);
+    } catch (e) {
+      throw Error;
+    }
   };
   const changeFeedback = () => {
-    if (!state) {
-      toast("내용을 작성해 주세요", { type: "error", autoClose: 500 });
-      return;
+    try {
+      if (!state) {
+        toast("내용을 작성해 주세요", { type: "error", autoClose: 500 });
+        return;
+      }
+      const props = { document_id, element_id, comment: state };
+      closeFeedBack();
+      comment ? feedbackChange(props) : feedbackAdd(props);
+      setIsChange(true);
+    } catch {
+      throw Error;
     }
-    const props = { document_id, element_id, comment: state };
-    closeFeedBack();
-    comment ? feedbackChange(props) : feedbackAdd(props);
   };
 
   return (
@@ -46,7 +57,7 @@ export const FeedbackBox = ({
       <div
         onClick={openFeedBack}
         className={`mt-[10px] rounded-[4px] w-4 h-4 ${
-          comment ? "bg-blue" : "bg-gray200"
+          isChange ? "bg-blue" : "bg-gray200"
         }`}
       />
       {children}
