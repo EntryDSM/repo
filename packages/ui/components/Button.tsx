@@ -22,7 +22,8 @@ const defaultDisable = "bg-gray200 text-gray50";
 
 const buttonColor = {
   contained: {
-    enable: "bg-gray800 text-gray50 hover:bg-gray500 [&_path]:fill-gray50 active:bg-gray400 [&_path]:hover:fill-gray50",
+    enable:
+      "bg-gray800 text-gray50 hover:bg-gray500 [&_path]:fill-gray50 active:bg-gray400 [&_path]:hover:fill-gray50",
     disable: defaultDisable,
   },
   containedWhite: {
@@ -73,7 +74,8 @@ export const Button = ({
   disabled = false,
 }: PropsType) => {
   const { enable, disable } = buttonColor[kind];
-  const borderRadius = `rounded-[${radius === "circle" ? "100px" : "2px"}]`;
+  const borderRadius =
+    radius === "circle" ? `rounded-[100px]` : "rounded-[2px]";
 
   return (
     <button

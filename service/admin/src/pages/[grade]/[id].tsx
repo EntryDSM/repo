@@ -1,7 +1,8 @@
 import { studentDetail } from "@/apis/document/get/studentDetail";
 import { documentShare, documentUnShare } from "@/apis/document/post/shard";
 import { getStudent } from "@/apis/student";
-import { PreviewResume, SideBar, TextArea } from "@packages/ui";
+import { FeedbackBox } from "@/components/FeedbackBox";
+import { Button, PreviewResume, SideBar, TextArea } from "@packages/ui";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useQueries, useQuery } from "react-query";
@@ -45,7 +46,13 @@ const detail = () => {
         status={data?.data.document_status}
         sharingFn={sharingFn}
       >
-        {data && <PreviewResume {...data.data} NextImage={Image} />}
+        {data && (
+          <PreviewResume
+            {...data.data}
+            FeedbackBox={FeedbackBox}
+            NextImage={Image}
+          />
+        )}
       </SideBar>
     </div>
   );

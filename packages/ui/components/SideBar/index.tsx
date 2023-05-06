@@ -46,7 +46,7 @@ export const SideBar = ({
 
   return (
     <div className="flex h-[100vh]">
-      <div className="fixed bottom-0 top-0 flex">
+      <div className="fixed bottom-0 top-0 flex z-20">
         <div className=" bg-gray800 w-20 flex gap-10 flex-col items-center pt-10">
           <div>
             <WhiteRepoIcon />
@@ -59,7 +59,7 @@ export const SideBar = ({
             </>
           )}
         </div>
-        {!preview && (
+        {!preview && !!side && (
           <div className="bg-gray700 w-60 text-gray50 pl-6 pr-6 pt-10">
             {
               {
@@ -70,7 +70,7 @@ export const SideBar = ({
           </div>
         )}
       </div>
-      {!preview && <div className="w-[320px]" />}
+      {!preview && !!side && <div className="w-[320px]" />}
       <div className="flex-auto">{children}</div>
     </div>
   );
