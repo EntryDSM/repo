@@ -6,6 +6,18 @@ import { useMutation } from "react-query";
 import { accessRight } from "@/apis/library/access";
 import { toast } from "react-toastify";
 
+const krStatus = {
+  공개: "PUBLIC",
+  학생만: "STUDENT_ONLY",
+  개인: "PRIVATE",
+} as const;
+
+const enStatus = {
+  PUBLIC: "공개",
+  STUDENT_ONLY: "학생만",
+  PRIVATE: "개인",
+} as const;
+
 export const LibraryCard = ({
   id,
   access_right,
@@ -14,10 +26,12 @@ export const LibraryCard = ({
   generation,
   url,
 }: Library) => {
-  const [status, setStatus] = useState<typeof access_right>(access_right);
+  const [status, setStatus] = useState<keyof typeof krStatus>(
+    enStatus[access_right]
+  );
 
   const { mutate } = useMutation("asgagahdasgarw", () =>
-    accessRight(id, access_right)
+    accessRight(id, krStatus[status])
   );
 
   return (
@@ -29,7 +43,7 @@ export const LibraryCard = ({
         </div>
         <Dropdown
           placeholder="공개"
-          lists={["PUBLIC", "STUDENT_ONLY", "PRIVATE"]}
+          lists={["공개", "학생만", "개인"]}
           kind="contained"
           className="w-[150px]"
           value={status}
@@ -38,19 +52,21 @@ export const LibraryCard = ({
             mutate();
           }}
         />
-        <div
-          className="text-body4 ml-20 text-gray300"
-          onClick={(e) => {
-            e.preventDefault();
-            navigator.clipboard
-              .writeText(url)
-              .then(() =>
-                toast("복사됬습니다.", { type: "success", autoClose: 500 })
-              );
-          }}
-        >
-          링크 복사
-        </div>
+        {url && (
+          <div
+            className="text-body4 ml-20 text-gray300"
+            onClick={(e) => {
+              e.preventDefault();
+              navigator.clipboard
+                .writeText(url)
+                .then(() =>
+                  toast("복사됬습니다.", { type: "success", autoClose: 500 })
+                );
+            }}
+          >
+            링크 복사
+          </div>
+        )}
       </article>
     </Link>
   );

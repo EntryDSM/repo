@@ -6,9 +6,9 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 
 const Library = () => {
-  const { data } = useQuery(["dwqdqwdq"], () => getLibrary());
-
   const [year, setYear] = useState<string>("");
+  const { data } = useQuery(["dwqdqwdq", year], () => getLibrary(year));
+
   return (
     <>
       <Header />

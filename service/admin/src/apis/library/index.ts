@@ -9,6 +9,6 @@ export interface Library {
   url: string;
 }
 
-export const getLibrary = () => {
-  return instance.get<Library[]>("/library/teacher?year=2023");
+export const getLibrary = (year: string) => {
+  return instance.get<Library[]>(`/library/teacher?year=${year}`);
 };
