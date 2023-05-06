@@ -5,16 +5,16 @@ import { ShareFnType } from ".";
 
 const sharingButton = [
   { text: "비공개", button_Status: "CREATED SUBMITTED" },
-  { text: "공개", button_Status: "SHARING" },
+  { text: "공개", button_Status: "SHARED" },
 ];
 
 interface PropsType {
-  status: "CREATED" | "SUBMITTED" | "SHARING";
+  status: "CREATED" | "SUBMITTED" | "SHARED";
   sharingFn: ShareFnType;
 }
 
 export const Sharing = ({ status, sharingFn }: PropsType) => {
-  const [state, setState] = useState<boolean>(status === "SHARING");
+  const [state, setState] = useState<boolean>(status === "SHARED");
   const share = () => sharingFn(state ? "UNSHARING" : "SHARING");
 
   return (
@@ -25,7 +25,7 @@ export const Sharing = ({ status, sharingFn }: PropsType) => {
         <div className="text-body5">문서 공개 설정</div>
         {sharingButton.map(({ text, button_Status }) => {
           const includeShare = button_Status.includes(
-            state ? "SHARING" : "SUBMITTED"
+            state ? "SHARED" : "SUBMITTED"
           );
           const onClick = () => {
             try {

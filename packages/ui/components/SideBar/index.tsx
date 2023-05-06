@@ -8,7 +8,7 @@ interface StudentType {
   student_id: string;
   name: string;
   document_id: string;
-  document_status: "CREATED" | "SUBMITTED" | "SHARING";
+  document_status: "CREATED" | "SUBMITTED" | "SHARED";
   feedback_count: number;
   profile_image_url: string;
   student_number: number;
@@ -26,7 +26,7 @@ export type ShareFnType = (action: "SHARING" | "UNSHARING") => void;
 interface Props {
   preview?: boolean;
   studentList: (StudentType[] | undefined)[];
-  status?: "CREATED" | "SUBMITTED" | "SHARING";
+  status?: "CREATED" | "SUBMITTED" | "SHARED";
   sharingFn: ShareFnType;
   id?: string;
   grade?: string;

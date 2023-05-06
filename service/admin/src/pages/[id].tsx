@@ -14,7 +14,7 @@ const sharingFns = {
 
 const detail = () => {
   const { query } = useRouter();
-  const { grade, id } = query;
+  const { id } = query;
 
   const { data } = useQuery(
     ["teacherPreview", id],
@@ -23,6 +23,8 @@ const detail = () => {
       enabled: !!query.id,
     }
   );
+  const grade = data?.data.writer.student_number.toString()[0];
+  console.log(data?.data.writer);
   const studentListObject = (classNum: string) => ({
     queryKey: ["class" + classNum],
     queryFn: () => getStudent({ grade: grade as string, classNum }),
@@ -42,7 +44,7 @@ const detail = () => {
       <SideBar
         studentList={result}
         id={id as string}
-        grade={grade as string}
+        grade={grade}
         status={data?.data.document_status}
         sharingFn={sharingFn}
       >

@@ -4,7 +4,7 @@ export interface StudentType {
   student_id: string;
   name: string;
   document_id: string;
-  document_status: "CREATED" | "SUBMITTED" | "SHARING";
+  document_status: "CREATED" | "SUBMITTED" | "SHARED";
   feedback_count: number;
   profile_image_url: string;
   student_number: number;
