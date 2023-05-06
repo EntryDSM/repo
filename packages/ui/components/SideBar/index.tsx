@@ -44,10 +44,17 @@ export const SideBar = ({
 }: Props) => {
   const [side, setSide] = useState<number>(0);
 
+  const currentIcon = {
+    0: "[&_path]:[&>*:nth-child(2)]:fill-gray500",
+    1: "[&_path]:[&>*:nth-child(3)]:fill-gray500",
+    2: "[&_path]:[&>*:nth-child(4)]:fill-gray500",
+  }[side];
   return (
     <div className="flex h-[100vh]">
       <div className="fixed bottom-0 top-0 flex z-20">
-        <div className=" bg-gray800 w-20 flex gap-10 flex-col items-center pt-10">
+        <div
+          className={`bg-gray800 w-20 flex gap-10 flex-col items-center pt-10 ${currentIcon}`}
+        >
           <div>
             <WhiteRepoIcon />
           </div>
