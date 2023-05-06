@@ -64,7 +64,7 @@ export const SideBar = ({
             {
               {
                 1: <Students studentList={studentList} id={id} grade={grade} />,
-                2: <Sharing status={status} sharingFn={sharingFn} />,
+                2: status && <Sharing status={status} sharingFn={sharingFn} />,
               }[side]
             }
           </div>

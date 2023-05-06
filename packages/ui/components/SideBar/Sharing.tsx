@@ -9,13 +9,14 @@ const sharingButton = [
 ];
 
 interface PropsType {
-  status?: "CREATED" | "SUBMITTED" | "SHARING";
+  status: "CREATED" | "SUBMITTED" | "SHARING";
   sharingFn: ShareFnType;
-  document_id?: string;
 }
 
-export const Sharing = ({ status, sharingFn, document_id }: PropsType) => {
-  const share = () => sharingFn(status === "SHARING" ? "UNSHARING" : "SHARING");
+export const Sharing = ({ status, sharingFn }: PropsType) => {
+  const [state, setState] = useState<boolean>(status === "SHARING");
+  const share = () => sharingFn(state ? "UNSHARING" : "SHARING");
+
   return (
     <>
       <div className="text-title4">1316 장지성</div>
@@ -23,11 +24,22 @@ export const Sharing = ({ status, sharingFn, document_id }: PropsType) => {
       <div className="flex flex-col gap-[10px] mt-6">
         <div className="text-body5">문서 공개 설정</div>
         {sharingButton.map(({ text, button_Status }) => {
-          const includeShare = status && button_Status.includes(status);
-
+          const includeShare = button_Status.includes(
+            state ? "SHARING" : "SUBMITTED"
+          );
+          const onClick = () => {
+            try {
+              if (!includeShare) {
+                share();
+                setState(!state);
+              }
+            } catch (e) {
+              throw Error;
+            }
+          };
           return (
             <div
-              onClick={() => includeShare || share()}
+              onClick={onClick}
               className=" bg-gray600 rounded-md text-body6 px-3 py-[14px] flex items-center justify-between"
             >
               {text}
