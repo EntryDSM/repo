@@ -95,7 +95,7 @@ export const Awards = () => {
             </ImportLabel>
             <ImportLabel label="내용" important>
               <TextArea
-                value={description}
+                value={description || ''}
                 placeholder="내용을 입력해 주세요"
                 name="description"
                 onChange={handleChangeArray}

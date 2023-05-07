@@ -3,7 +3,6 @@ export * from "./Award";
 export * from "./Certificate";
 export * from "./Introduce";
 export * from "./Project";
-export * from "./SkillSet";
 export * from "./WriteInfo";
 
 interface PropsType {

@@ -45,12 +45,14 @@ export const documnetWriteInfo = ({
   ...body
 }: WrtieInfoReqBody & { skill_list: string[] }) => {
   instance.patch("/document/skill-set", { skill_list });
-  return instance.patch("/document/writer-info", {
+  instance.patch("/document/writer-info", {
     ...body,
-    profile_image_path: profile_image_url,
     major_id: major.id,
     grade: Number(grade),
     class_num: Number(class_num),
     number: Number(number),
+  });
+  instance.patch("/document/profile-image", {
+    profile_image_path: profile_image_url,
   });
 };
