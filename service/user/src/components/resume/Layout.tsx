@@ -44,6 +44,12 @@ export const ResumeLayout = ({
     setSubmit(!submit);
   };
 
+  const toOtherProfileWrite = (link: string) => {
+    if (route.includes(link)) return;
+    mutate();
+    push("/resume/" + link);
+  };
+
   const toPathPreview = () => push("/" + toPreview());
   return (
     <div>
@@ -99,16 +105,15 @@ export const ResumeLayout = ({
 
                 <nav className="bg-gray50 p-5 rounded-2xl">
                   {Object.entries(link).map(([key, value]) => (
-                    <Link href={"/resume/" + key} onClick={mutate}>
-                      <button
-                        className={`w-full rounded-md box-border pl-[18px] pr-[18px] px-[18px] h-[60px] text-body8 flex items-center justify-between gap-x-[15px] shrink-0 hover:bg-gray100  ${
-                          route.includes(key) ? "bg-gray100" : ""
-                        }`}
-                      >
-                        {value}
-                        <Check size={24} color />
-                      </button>
-                    </Link>
+                    <button
+                      className={`w-full rounded-md box-border pl-[18px] pr-[18px] px-[18px] h-[60px] text-body8 flex items-center justify-between gap-x-[15px] shrink-0 hover:bg-gray100  ${
+                        route.includes(key) ? "bg-gray100" : ""
+                      }`}
+                      onClick={() => toOtherProfileWrite(key)}
+                    >
+                      {value}
+                      <Check size={24} color />
+                    </button>
                   ))}
                 </nav>
               </div>
