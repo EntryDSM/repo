@@ -7,7 +7,7 @@ module.exports = {
     "../../packages/ui/components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {
+    colors: {
       gray900: "#000000",
       gray800: "#141414",
       gray700: "#1B1B1B",

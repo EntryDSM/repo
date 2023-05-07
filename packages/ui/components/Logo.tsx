@@ -8,7 +8,7 @@ interface PropsType {
 
 export const Logo = ({ size }: PropsType) => {
   return (
-    <div className="flex items-center gap-2 text-body4">
+    <div className="flex items-center gap-2 text-title2">
       <BlackRepoIcon size={size} />
       REPO
     </div>

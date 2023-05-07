@@ -33,14 +33,14 @@ export const LoginBranchModal = ({ closeModal }: Props) => {
 
   return (
     <div
-      className="fixed top-0 right-0 left-0 h-[100vh] flex items-center justify-center "
+      className="fixed top-0 right-0 left-0 h-[100vh] flex items-center justify-center z-20"
       style={{ background: "rgba(0, 0, 0, 0.7)" }}
     >
       <ReactOutSideClickHandler onOutsideClick={closeModal}>
-        <div className="w-[550px] h-[370px] relative rounded-lg bg-gray-100 flex flex-col items-center justify-center gap-y-10 px-20">
+        <div className="w-[550px] h-[370px] relative rounded-lg bg-gray100 flex flex-col items-center justify-center gap-y-10 px-20">
           <div className="flex flex-col items-center gap-y-2.5">
             <Logo />
-            <div className="body6">로그인 유형을 선택해 주세요</div>
+            <div className="text-body6">로그인 유형을 선택해 주세요</div>
           </div>
           <div className="flex flex-col gap-y-[15px] w-full">
             <NavigateButton
@@ -78,9 +78,9 @@ const NavigateButton = ({ icon, children, onClick }: NaviType) => {
   return (
     <div
       onClick={onClick}
-      className="w-full h-[50px] flex items-center bg-gray-50 gap-x-5 cursor-pointer hover:[*>div]:first:bg-gray-200"
+      className="w-full h-[50px] flex items-center bg-gray50 gap-x-5 cursor-pointer hover:[*>div]:first:bg-gray200"
     >
-      <div className="w-[80px] h-full flex items-center justify-center bg-gray-900 rounded-s-md ">
+      <div className="w-[80px] h-full flex items-center justify-center bg-gray900 rounded-s-md ">
         {icon}
       </div>
       <div className="text-body5">{children}</div>

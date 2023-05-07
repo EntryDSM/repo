@@ -1,9 +1,17 @@
+import React from "react";
 import { Github, FaceBook } from "@packages/ui/assets";
 import Link from "next/link";
 
-export const Footer = () => {
+interface PropsType {
+  black?: boolean;
+}
+
+export const Footer = ({ black }: PropsType) => {
+  const blackClass = black
+    ? "bg-gray900 [&_div]:text-gray50 [&_path]:fill-gray50"
+    : "bg-gray100";
   return (
-    <footer className="flex justify-center items-center h-72 bg-gray100">
+    <footer className={`flex justify-center items-center h-72 ${blackClass}`}>
       <div className="w-[1330px]">
         <div className="flex jusify-center items-center justify-between">
           <div className="text-title1">REPO</div>
