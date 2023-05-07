@@ -4,14 +4,14 @@ import {
   CertificateResType,
   IntroduceResType,
   ProjectResType,
-  WriteInfoResType,
+  WrtieInfoReqBody,
 } from "../patch";
 
 export type StatusType = "CREATED" | "SUBMITTED" | "SHARED";
 
 export interface DetailType {
   document_id: string;
-  writer: WriteInfoResType;
+  writer: WrtieInfoReqBody;
   document_status: StatusType;
   introduce: IntroduceResType;
   skill_list: string[];

@@ -15,13 +15,13 @@ export const Certificate = () => {
     handleChange,
     addItem,
     removeItem,
+    document_id,
   } = useProfileWrite(
     [
       {
         name: "",
         issuing_institution: "",
         date: "",
-        document_id: "",
         element_id: "",
         feedback: "",
       },
@@ -32,7 +32,7 @@ export const Certificate = () => {
     <ResumeLayout mutate={mutate} status={status} toPreview={toPreview}>
       <ResumeTitle value="자격증" onClick={addItem} />
       {state.map((item, index) => {
-        const { name, date, issuing_institution, feedback } = item;
+        const { name, date, issuing_institution, feedback, element_id } = item;
         const handleChangeArray = handleChange(index);
         const removeItemArray = removeItem(index);
         const onDateChange = ({
@@ -53,7 +53,11 @@ export const Certificate = () => {
             placeholder="자격증 이름"
             onRemove={removeItemArray}
           >
-            <FeedBack id={item} content={feedback} />
+            <FeedBack
+              document_id={document_id}
+              element_id={element_id}
+              content={feedback}
+            />
             <ImportLabel label="자격증 명" important>
               <Input
                 value={name}

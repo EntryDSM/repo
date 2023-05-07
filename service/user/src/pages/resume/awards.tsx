@@ -18,6 +18,7 @@ export const Awards = () => {
     handleChange,
     addItem,
     removeItem,
+    document_id,
   } = useProfileWrite(
     [
       {
@@ -37,8 +38,14 @@ export const Awards = () => {
     <ResumeLayout mutate={mutate} status={status} toPreview={toPreview}>
       <ResumeTitle value="수상" onClick={addItem} />
       {state.map((item, index) => {
-        const { name, awarding_institution, date, description, feedback } =
-          item;
+        const {
+          name,
+          awarding_institution,
+          date,
+          description,
+          feedback,
+          element_id,
+        } = item;
         const handleChangeArray = handleChange(index);
         const removeItemArray = removeItem(index);
         const onDateChange = ({
@@ -59,7 +66,11 @@ export const Awards = () => {
             placeholder="상 이름"
             onRemove={removeItemArray}
           >
-            <FeedBack id={item} content={feedback} />
+            <FeedBack
+              document_id={document_id}
+              element_id={element_id}
+              content={feedback}
+            />
             <ImportLabel label="상 이름" important>
               <Input
                 value={name}

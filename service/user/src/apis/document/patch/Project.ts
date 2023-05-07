@@ -4,8 +4,8 @@ import { instance } from "../..";
 export interface ProjectReqBody {
   name: string;
   represent_image_url: string;
-  start_date: string;
-  end_date: string;
+  start_date: number | string;
+  end_date: number | string;
   skill_list: string[];
   description: string;
   url?: string;
@@ -18,8 +18,7 @@ export interface ProjectResType extends ProjectReqBody {
 
 export const documnetProject = (body: ProjectResType[]) => {
   return instance.patch("/document/project", {
-    title: '',
+    title: "",
     project_list: body.map(disableId),
-
   });
 };

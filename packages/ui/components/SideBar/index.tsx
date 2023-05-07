@@ -25,9 +25,9 @@ export type ShareFnType = (action: "SHARING" | "UNSHARING") => void;
 
 interface Props {
   preview?: boolean;
-  studentList: (StudentType[] | undefined)[];
+  studentList?: (StudentType[] | undefined)[];
   status?: "CREATED" | "SUBMITTED" | "SHARED";
-  sharingFn: ShareFnType;
+  sharingFn?: ShareFnType;
   id?: string;
   grade?: string;
   children: ReactNode;
@@ -70,8 +70,12 @@ export const SideBar = ({
           <div className="bg-gray700 w-60 text-gray50 pl-6 pr-6 pt-10">
             {
               {
-                1: <Students studentList={studentList} id={id} grade={grade} />,
-                2: status && <Sharing status={status} sharingFn={sharingFn} />,
+                1: studentList && (
+                  <Students studentList={studentList} id={id} grade={grade} />
+                ),
+                2: status && sharingFn && (
+                  <Sharing status={status} sharingFn={sharingFn} />
+                ),
               }[side]
             }
           </div>

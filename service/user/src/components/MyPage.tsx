@@ -88,7 +88,7 @@ export const MyPage = ({ profile, feedbacks }: PropsType) => {
           <>
             <div>
               <span>피드백</span>
-              <span className="text-gray300 ml-2">4</span>
+              <span className="text-gray300 ml-2">{feedback_list.length}</span>
             </div>
             {feedback_list.map(({ element_name, comment }) => (
               <div className="bg-gray100 rounded-2xl pl-10 pr-10 pt-12 pb-12 flex flex-col gap-[30px]">

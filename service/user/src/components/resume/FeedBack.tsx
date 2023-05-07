@@ -11,12 +11,16 @@ import { WriteInfoResType } from "@/apis/document/patch/WriteInfo";
 import { EachStateType } from "@/hooks/useWriteProfile";
 
 interface PropsType {
-  id: EachStateType;
+  document_id?: string;
+  element_id: string;
   content: string;
 }
 
-export const FeedBack = ({ id, content }: PropsType) => {
-  const { document_id, element_id } = id;
+export const FeedBack = ({
+  document_id = "",
+  element_id,
+  content,
+}: PropsType) => {
   const [close, setClose] = useState<boolean>(true);
   const { mutate } = useMutation(() =>
     feedbackReflrect({ document_id, element_id })
@@ -27,7 +31,7 @@ export const FeedBack = ({ id, content }: PropsType) => {
   };
   return (
     <>
-      {close && document_id && element_id && (
+      {close && document_id && element_id && content && (
         <div
           className={`w-full rounded-md border-2 border-focus p-10 flex flex-col gap-5 text-focus`}
         >

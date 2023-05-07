@@ -7,6 +7,7 @@ export interface IntroduceReqBody {
 }
 
 export interface IntroduceResType extends IntroduceReqBody {
+  document_id: string;
   element_id: string;
   feedback: string;
 }

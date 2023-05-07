@@ -36,7 +36,7 @@ export type EachStateType =
   | CertificateResType
   | IntroduceResType
   | ProjectResType
-  | WriteInfoResType;
+  | WrtieInfoReqBody;
 export type StateArrayType =
   | AwardReqBody
   | CertificateReqBody
@@ -128,7 +128,6 @@ export const useProfileWrite = <
           number: Number(number.join("")),
         };
       }
-      const d = new Date(data.project_list[0].end_date);
       //@ts-ignore
       setState(temp);
       setStatus(data.document_status);
@@ -176,7 +175,7 @@ export const useProfileWrite = <
   };
 
   const toPreview = () => {
-    console.log(1)
+    console.log(1);
     mutate(state);
     return data?.data["document_id"] || "";
   };
@@ -189,5 +188,6 @@ export const useProfileWrite = <
     addItem,
     removeItem,
     toPreview,
+    document_id: data?.data.document_id,
   };
 };

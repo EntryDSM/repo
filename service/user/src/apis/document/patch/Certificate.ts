@@ -4,7 +4,7 @@ import { instance } from "../..";
 export interface CertificateReqBody {
   name: string;
   issuing_institution: string;
-  date: string;
+  date: number | string;
 }
 
 export interface CertificateResType extends CertificateReqBody {

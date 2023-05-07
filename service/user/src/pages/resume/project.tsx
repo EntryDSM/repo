@@ -22,6 +22,7 @@ export const Project = () => {
     handleChange,
     addItem,
     removeItem,
+    document_id,
   } = useProfileWrite(
     [
       {
@@ -53,6 +54,7 @@ export const Project = () => {
           description,
           url,
           feedback,
+          element_id,
         } = item;
 
         const onImgChange = (value: string) => {
@@ -110,7 +112,11 @@ export const Project = () => {
             onRemove={removeItemArray}
             key={"projectListId" + index}
           >
-            <FeedBack id={item} content={feedback} />
+            <FeedBack
+              document_id={document_id}
+              element_id={element_id}
+              content={feedback}
+            />
             <ImportLabel label="프로젝트 명" important>
               <Input
                 value={name}

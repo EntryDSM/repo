@@ -4,8 +4,8 @@ import { instance } from "../..";
 export interface AwardReqBody {
   name: string;
   awarding_institution: string;
-  date: string;
-  desctiption?: string;
+  date: number | string;
+  description: string;
 }
 
 export interface AwardResType extends AwardReqBody {

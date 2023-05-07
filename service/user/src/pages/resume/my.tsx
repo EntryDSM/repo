@@ -24,23 +24,30 @@ const student = {
 };
 
 export const My = () => {
-  const { state, toPreview, status, mutate, setState, handleChange } =
-    useProfileWrite(
-      {
-        name: "",
-        profile_image_url: "",
-        email: "",
-        major: { id: "", name: "" },
-        grade: "",
-        class_num: "",
-        number: "",
-        skill_list: [],
-        student_id: "",
-        element_id: "",
-        feedback: "",
-      },
-      "writer"
-    );
+  const {
+    state,
+    toPreview,
+    status,
+    mutate,
+    setState,
+    handleChange,
+    document_id,
+  } = useProfileWrite(
+    {
+      name: "",
+      profile_image_url: "",
+      email: "",
+      major: { id: "", name: "" },
+      grade: "",
+      class_num: "",
+      number: "",
+      skill_list: [],
+      student_id: "",
+      element_id: "",
+      feedback: "",
+    },
+    "writer"
+  );
   const [img, setImg] = useState<string>("");
 
   const { data: major } = useQuery(["skillList"], getMajor);
@@ -53,7 +60,8 @@ export const My = () => {
     }, e);
   };
 
-  const onDropdownSelect = (value: { keyword: string; name: string }) => {
+  const onDropdownSelect = (value: { keyword: string; name?: string }) => {
+    // @ts-ignore
     const temp = onClickItem(state, value);
     setState(temp);
   };
@@ -74,17 +82,15 @@ export const My = () => {
       <ResumeTitle value="자기소개" />
       <div className="px-[40px] flex flex-col gap-10">
         <FeedBack
-          id={{
-            ...state,
-            ...{ student_id: "", element_id: "", feedback: "" },
-          }}
+          document_id={document_id}
+          element_id={state.element_id}
           content={state.feedback}
         />
         <ImportLabel label="프로필 이미지">
           <input
             id="profile"
             type="file"
-            name="profile_image_path"
+            name="profile_image_url"
             onChange={onImgChange}
             className="hidden"
           />
@@ -93,7 +99,7 @@ export const My = () => {
             className="relative inline-block cursor-pointer"
           >
             <img
-              src={state.profile_image_url || img}
+              src={img || state.profile_image_url}
               className="w-40 h-40 object-cover rounded-[80px] bg-gray200"
             />
             <div className="absolute bottom-0 right-0 bg-gray100 p-2 rounded-full">

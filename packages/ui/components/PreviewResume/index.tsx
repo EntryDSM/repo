@@ -11,7 +11,7 @@ export interface FeedbackBoxType {
   part: string;
   document_id: string;
   element_id: string;
-  comment: string | null;
+  comment?: string | null;
   children?: ReactNode;
 }
 
@@ -20,7 +20,7 @@ export interface PreviewType {
   writer: {
     element_id: string;
     student_id: string;
-    feedback: string | null;
+    feedback?: string | null;
     name: string;
     profile_image_path: string;
     student_number: string; // 원하면 학년 반 번호로 각각 나눠서 줄 수도 있음
@@ -33,7 +33,7 @@ export interface PreviewType {
   document_status: string;
   introduce: {
     element_id: string;
-    feedback: string | null;
+    feedback?: string | null;
     heading: string;
     introduce: string;
   };
@@ -41,13 +41,13 @@ export interface PreviewType {
   project_list: {
     element_id: string;
     name: string;
-    represent_image_path: string;
+    represent_image_url: string;
     skill_list: string[];
     start_date: number;
     end_date: number;
     description: string;
-    url: string; //null 가능
-    feedback: string | null; // null 가능
+    url?: string; //null 가능
+    feedback?: string | null; // null 가능
   }[];
   award_list: {
     element_id: string;
@@ -55,15 +55,14 @@ export interface PreviewType {
     awarding_institution: string;
     date: number;
     description: string; //null 가능
-    url: string; //null 가능
-    feedback: string | null; // null 가능
+    feedback?: string | null; // null 가능
   }[];
   certificate_list: {
     element_id: string;
     name: string;
     issuing_institution: string;
     date: number;
-    feedback: string | null; // null 가능
+    feedback?: string | null; // null 가능
   }[];
   NextImage: any;
   FeedbackBox?: (props: FeedbackBoxType) => JSX.Element;

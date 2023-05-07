@@ -35,7 +35,7 @@ interface StudentPropsType {
 const StudentIcon = {
   CREATED: <Rectify size={16} />,
   SUBMITTED: <Check size={16} />,
-  SHARING: <Internet />,
+  SHARED: <Internet />,
 };
 
 const StudentDropdown = ({

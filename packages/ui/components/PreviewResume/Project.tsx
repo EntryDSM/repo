@@ -6,7 +6,7 @@ import { Tag } from "./Tag";
 import defaultImg from "../../assets/projectDefaultImg.png";
 
 interface PropsType {
-  represent_image_path: string;
+  represent_image_url: string;
   name: string;
   skill_list: string[];
   start_date: number;
@@ -16,7 +16,7 @@ interface PropsType {
 }
 
 export const Project = ({
-  represent_image_path,
+  represent_image_url,
   name,
   skill_list,
   start_date,
@@ -29,7 +29,7 @@ export const Project = ({
       <div className="flex items-center">
         <Image
           className={"w-20 h-20 mr-6"}
-          src={represent_image_path || defaultImg}
+          src={represent_image_url || defaultImg}
           alt="projectImg"
         />
         <div>
