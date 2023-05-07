@@ -45,7 +45,9 @@ export type StateArrayType =
   | IntroduceReqBody;
 export type StateType = WrtieInfoReqBody | IntroduceReqBody;
 
-const typeFn = {
+const typeFn: {
+  [key in keyof Detail]: (body: DetailType[key]) => Promise<any>;
+} = {
   writer: documnetWriteInfo,
   introduce: documnetIntroduce,
   project_list: documnetProject,
@@ -137,10 +139,8 @@ export const useProfileWrite = <
   });
 
   const { mutate } = useMutation({
-    mutationFn: (body: T) => {
-      const Fn = typeFn[type];
-      // @ts-ignore
-      return Fn(body);
+    mutationFn: (body: T): Promise<DetailType> => {
+      return typeFn[type](body);
     },
     onSuccess: () => {
       toast("임시저장하였습니다.", { autoClose: 1000, type: "success" });

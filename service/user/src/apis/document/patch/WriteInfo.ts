@@ -52,7 +52,7 @@ export const documnetWriteInfo = ({
     class_num: Number(class_num),
     number: Number(number),
   });
-  instance.patch("/document/profile-image", {
+  return instance.patch("/document/profile-image", {
     profile_image_path: profile_image_url,
   });
 };
