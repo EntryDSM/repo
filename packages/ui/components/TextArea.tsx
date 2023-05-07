@@ -14,14 +14,14 @@ export const TextArea = ({
   name,
   onChange,
   value,
-  limit,
+  limit = 240,
   maxLine,
   placeholder,
   className,
 }: Props) => {
   const ref = useRef<HTMLTextAreaElement | null>(null);
   const onChangeSlice = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    e.target.value = e.target.value.slice(limit);
+    e.target.value = e.target.value.slice(0, limit);
     onChange(e);
     if (!ref.current) return;
     ref.current.style.height = "24px";
@@ -37,11 +37,13 @@ export const TextArea = ({
         ref={ref}
         name={name}
         onChange={onChangeSlice}
-        className={`resize-none h-14 bg-gray100 w-full p-4 rounded ${className}`}
+        className={`resize-none h-50 bg-gray100 w-full p-4 rounded ${className}`}
         placeholder={placeholder}
         value={value}
       />
-      <div className="text-end text-body7">0/{limit}</div>
+      <div className="text-end text-body7">
+        {value.length}/{limit}
+      </div>
     </div>
   );
 };

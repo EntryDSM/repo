@@ -32,6 +32,7 @@ const Introduce = () => {
             placeholder="한 줄 소개를 입력해주세요"
             onChange={handleChange(0)}
             maxLine={2}
+            limit={72}
           />
         </ImportLabel>
         <ImportLabel label="자기소개" important>
@@ -40,6 +41,7 @@ const Introduce = () => {
             value={state.introduce}
             placeholder="자기소개를 입력해주세요"
             onChange={handleChange(0)}
+            maxLine={6}
           />
         </ImportLabel>
       </div>

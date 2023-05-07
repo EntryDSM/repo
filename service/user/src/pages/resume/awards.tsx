@@ -4,7 +4,6 @@ import { useProfileWrite } from "@/hooks/useWriteProfile";
 import { useMutation } from "react-query";
 import { ResumeTitle, ResumeItem, ResumeLayout } from "@/components/resume";
 import { AwardReqBody, documnetAward } from "@/apis/document/patch/Award";
-import { toast } from "react-toastify";
 import { FeedBack } from "@/components/resume/FeedBack";
 import { DateInput } from "@/components/date";
 

@@ -11,6 +11,7 @@ import {
 } from "../../hooks/useWriteProfile";
 import { FeedBack } from "@/components/resume/FeedBack";
 import { DateInput } from "@/components/date";
+import ""
 
 export const Project = () => {
   const {
@@ -40,7 +41,7 @@ export const Project = () => {
     ],
     "project_list"
   );
-  console.log(state)
+  console.log(state);
   const [imgs, setImgs] = useState<string[]>([]);
   return (
     <ResumeLayout mutate={mutate} status={status} toPreview={toPreview}>
@@ -187,6 +188,8 @@ export const Project = () => {
                 placeholder="프로젝트 내용을 입력해 주세요"
                 onChange={handleChangeArray}
                 name="description"
+                maxLine={20}
+                limit={876}
               />
             </ImportLabel>
             <ImportLabel label="url">
