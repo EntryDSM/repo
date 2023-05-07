@@ -22,8 +22,8 @@ export interface PreviewType {
     student_id: string;
     feedback?: string | null;
     name: string;
-    profile_image_path: string;
-    student_number: string; // 원하면 학년 반 번호로 각각 나눠서 줄 수도 있음
+    profile_image_url: string;
+    student_number?: string; // 원하면 학년 반 번호로 각각 나눠서 줄 수도 있음
     email: string;
     major: {
       id: string;
@@ -43,8 +43,8 @@ export interface PreviewType {
     name: string;
     represent_image_url: string;
     skill_list: string[];
-    start_date: number;
-    end_date: number;
+    start_date: number | string;
+    end_date: number | string;
     description: string;
     url?: string; //null 가능
     feedback?: string | null; // null 가능
@@ -53,7 +53,7 @@ export interface PreviewType {
     element_id: string;
     name: string;
     awarding_institution: string;
-    date: number;
+    date: number | string;
     description: string; //null 가능
     feedback?: string | null; // null 가능
   }[];
@@ -61,15 +61,15 @@ export interface PreviewType {
     element_id: string;
     name: string;
     issuing_institution: string;
-    date: number;
+    date: number | string;
     feedback?: string | null; // null 가능
   }[];
   NextImage: any;
   FeedbackBox?: (props: FeedbackBoxType) => JSX.Element;
 }
 
-export const millsecondToDate = (str: number) => {
-  const date = new Date(str);
+export const millsecondToDate = (str: number | string) => {
+  const date = new Date(str || 0);
   return date.toLocaleDateString();
 };
 

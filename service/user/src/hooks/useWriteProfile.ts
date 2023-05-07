@@ -175,9 +175,8 @@ export const useProfileWrite = <
   };
 
   const toPreview = () => {
-    console.log(1);
     mutate(state);
-    return data?.data["document_id"] || "";
+    return "preview";
   };
   return {
     state,

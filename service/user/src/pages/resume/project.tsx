@@ -40,6 +40,7 @@ export const Project = () => {
     ],
     "project_list"
   );
+  console.log(state)
   const [imgs, setImgs] = useState<string[]>([]);
   return (
     <ResumeLayout mutate={mutate} status={status} toPreview={toPreview}>
@@ -130,7 +131,7 @@ export const Project = () => {
                 id={inputId}
                 type="file"
                 className="hidden"
-                name="represent_image_path"
+                name="represent_image_url"
                 onChange={onImgChangeArray}
               />
               <label

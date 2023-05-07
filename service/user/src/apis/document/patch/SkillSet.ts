@@ -1,5 +1,5 @@
 import { instance } from "../..";
 
 export const documnetSkillSet = (body: string[]) => {
-  return instance.patch("/document/skillset", body);
+  return instance.patch("/document/skill-set", body);
 };

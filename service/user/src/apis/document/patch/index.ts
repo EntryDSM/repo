@@ -9,6 +9,7 @@ export * from "./WriteInfo";
 interface PropsType {
   document_id?: string;
   element_id?: string;
+  represent_image_url?: string;
   feedback: string;
 }
 
@@ -16,5 +17,6 @@ export const disableId = <T extends EachStateType>({
   document_id,
   element_id,
   feedback,
+  represent_image_url,
   ...arg
-}: PropsType & T) => arg;
+}: PropsType & T) => ({ ...arg, represent_image_path: represent_image_url });

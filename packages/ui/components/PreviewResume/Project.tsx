@@ -9,10 +9,10 @@ interface PropsType {
   represent_image_url: string;
   name: string;
   skill_list: string[];
-  start_date: number;
-  end_date: number;
+  start_date: number | string;
+  end_date: number | string;
   description: string;
-  url: string;
+  url?: string;
 }
 
 export const Project = ({
@@ -24,11 +24,14 @@ export const Project = ({
   description,
   url,
 }: PropsType) => {
+  console.log(represent_image_url);
   return (
     <div className="flex flex-col gap-7 rounded-md bg-gray50 pl-10 pr-10 pt-7 pb-7">
       <div className="flex items-center">
         <Image
-          className={"w-20 h-20 mr-6"}
+          width={80}
+          height={80}
+          className={"mr-6 bg-gray300 rounded-md"}
           src={represent_image_url || defaultImg}
           alt="projectImg"
         />
@@ -48,10 +51,12 @@ export const Project = ({
         </div>
       </div>
       <div>{description}</div>
-      <div className="flex gap-2 bg-gray100 pl-3 pr-3 pt-2 pb-2 rounded-md w-fit">
-        <LinkSvg />
-        <div>{url}</div>
-      </div>
+      {url && (
+        <div className="flex gap-2 bg-gray100 pl-3 pr-3 pt-2 pb-2 rounded-md w-fit">
+          <LinkSvg />
+          <div>{url}</div>
+        </div>
+      )}
     </div>
   );
 };

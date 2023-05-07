@@ -3,6 +3,7 @@ import { WhiteRepoIcon } from "../../assets/WhiteRepoIcon";
 import { Home, Setting, Stack } from "../../assets";
 import { Sharing } from "./Sharing";
 import { Students } from "./Students";
+import Link from "next/link";
 
 interface StudentType {
   student_id: string;
@@ -55,9 +56,9 @@ export const SideBar = ({
         <div
           className={`bg-gray800 w-20 flex gap-10 flex-col items-center pt-10 ${currentIcon}`}
         >
-          <div>
+          <Link href="/">
             <WhiteRepoIcon />
-          </div>
+          </Link>
           <Home onClick={() => setSide(0)} />
           {!preview && (
             <>

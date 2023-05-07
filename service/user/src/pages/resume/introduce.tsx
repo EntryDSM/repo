@@ -31,6 +31,7 @@ const Introduce = () => {
             value={state.heading}
             placeholder="한 줄 소개를 입력해주세요"
             onChange={handleChange(0)}
+            maxLine={2}
           />
         </ImportLabel>
         <ImportLabel label="자기소개" important>

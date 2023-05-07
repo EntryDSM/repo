@@ -2,6 +2,7 @@ import { DocumentMyRes } from "@/apis/document/get/my";
 import { MyFeedbackResType } from "@/apis/feedback/my";
 import { Button } from "@packages/ui";
 import Image from "next/image";
+import Link from "next/link";
 import { ReactNode } from "react";
 
 const statusList = ["작성", "제출됨", "공유됨"];
@@ -103,12 +104,16 @@ export const MyPage = ({ profile, feedbacks }: PropsType) => {
           </div>
         )}
         <div className="flex justify-end gap-x-5 [&>button]:w-fit">
-          <Button kind="contained" radius="circle">
-            미리보기
-          </Button>
-          <Button kind="contained" radius="circle">
-            내 이력서 관리하기
-          </Button>
+          <Link href="/preview">
+            <Button kind="contained" radius="circle">
+              미리보기
+            </Button>
+          </Link>
+          <Link href="/resume/my">
+            <Button kind="contained" radius="circle">
+              내 이력서 관리하기
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

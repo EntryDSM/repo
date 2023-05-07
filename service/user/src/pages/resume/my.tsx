@@ -16,8 +16,8 @@ import { getMajor } from "@/apis/major";
 import { useQuery } from "react-query";
 
 const student = {
-  grade: ["1학년", "2힉년", "3학년"],
-  class: ["1반", "2반", "3빈", "4반"],
+  grade: [1, 2, 3],
+  class: [1, 2, 3, 4],
   number: Array(20)
     .fill(1)
     .map((number, idx) => number + idx),
@@ -38,13 +38,14 @@ export const My = () => {
       profile_image_url: "",
       email: "",
       major: { id: "", name: "" },
-      grade: "",
-      class_num: "",
-      number: "",
+      grade: 0,
+      class_num: 0,
+      number: 0,
       skill_list: [],
       student_id: "",
       element_id: "",
       feedback: "",
+      student_number: 0,
     },
     "writer"
   );
@@ -116,8 +117,8 @@ export const My = () => {
               kind="contained"
               className="w-full"
               name="grade"
-              value={state.grade}
-              lists={student.grade}
+              value={state.grade as any}
+              lists={student.grade as any}
               onClick={onDropdownSelect}
               placeholder="학년"
             />
@@ -125,8 +126,8 @@ export const My = () => {
               kind="contained"
               className="w-full"
               name="class_num"
-              value={state.class_num}
-              lists={student.class}
+              value={state.class_num as any}
+              lists={student.class as any}
               onClick={onDropdownSelect}
               placeholder="반"
             />
@@ -134,8 +135,8 @@ export const My = () => {
               kind="contained"
               className="w-full"
               name="number"
-              value={state.number}
-              lists={student.number}
+              value={state.number as any}
+              lists={student.number as any}
               onClick={onDropdownSelect}
               placeholder="번호"
             />
@@ -147,12 +148,8 @@ export const My = () => {
               <Dropdown
                 kind="contained"
                 name="major_id"
-                value={
-                  major?.data.major_list.find((m) => state.major.id === m.id)
-                    ?.name
-                }
+                value={state.major}
                 onClick={({ keyword }) => {
-                  //@ts-ignore
                   const { id, name } = keyword;
                   setState({
                     ...state,

@@ -10,9 +10,9 @@ interface PropsType<T, U> {
   hint?: string;
   name?: U | undefined;
   lists: T[];
-  value?: string | number;
+  value?: T;
   onClick: (value: { keyword: T; name?: U | undefined }) => void;
-  objectKey?: string;
+  objectKey?: T extends ListObjectType ? keyof T : undefined;
   className?: string;
   placeholder: string;
 }
@@ -56,7 +56,9 @@ export const Dropdown = <
           className={`h-[46px] flex items-center justify-between rounded-sm pl-4 pr-3 ${kindCss} cursor-pointer`}
         >
           <div className={`text-body6 ${value || "text-gray200"}`}>
-            {value || placeholder}
+            {value !== undefined && typeof value === "object"
+              ? value[objectKey as string]
+              : value || placeholder}
           </div>
           <Arrow direction={dropdown ? "top" : "bottom"} />
         </div>
