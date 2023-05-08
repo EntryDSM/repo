@@ -24,7 +24,7 @@ const detail = () => {
     }
   );
   const grade = data?.data.writer.student_number.toString()[0];
-  console.log(data?.data.writer);
+
   const studentListObject = (classNum: string) => ({
     queryKey: ["class" + classNum],
     queryFn: () => getStudent({ grade: grade as string, classNum }),
@@ -52,7 +52,6 @@ const detail = () => {
           <PreviewResume
             {...data.data}
             FeedbackBox={FeedbackBox}
-            NextImage={Image}
           />
         )}
       </SideBar>

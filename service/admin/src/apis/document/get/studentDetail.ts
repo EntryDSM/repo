@@ -6,7 +6,7 @@ export interface StudentDetailType {
     element_id: string;
     student_id: string;
     name: string;
-    profile_image_path: string;
+    profile_image_url: string;
     student_number: string; // 원하면 학년 반 번호로 각각 나눠서 줄 수도 있음
     email: string;
     major: {
@@ -26,7 +26,7 @@ export interface StudentDetailType {
   project_list: {
     element_id: string;
     name: string;
-    represent_image_path: string;
+    represent_image_url: string;
     skill_list: string[];
     start_date: number;
     end_date: number;

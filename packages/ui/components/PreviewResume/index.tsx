@@ -6,6 +6,7 @@ import { Certificate } from "./Certificate";
 import { Project } from "./Project";
 import { Tag } from "./Tag";
 import { LinkSvg } from "../../assets";
+import Image from "next/image";
 
 export interface FeedbackBoxType {
   part: string;
@@ -23,7 +24,7 @@ export interface PreviewType {
     feedback?: string | null;
     name: string;
     profile_image_url: string;
-    student_number?: string; // 원하면 학년 반 번호로 각각 나눠서 줄 수도 있음
+    student_number: string; // 원하면 학년 반 번호로 각각 나눠서 줄 수도 있음
     email: string;
     major: {
       id: string;
@@ -64,13 +65,19 @@ export interface PreviewType {
     date: number | string;
     feedback?: string | null; // null 가능
   }[];
-  NextImage: any;
   FeedbackBox?: (props: FeedbackBoxType) => JSX.Element;
 }
 
 export const millsecondToDate = (str: number | string) => {
   const date = new Date(str || 0);
   return date.toLocaleDateString();
+};
+
+const subject = {
+  1: "소프트웨어과",
+  2: "소프트웨어과",
+  3: "임베디드과",
+  4: "정보기기과",
 };
 
 export const PreviewResume = ({
@@ -83,7 +90,6 @@ export const PreviewResume = ({
   award_list,
   certificate_list,
   FeedbackBox,
-  NextImage,
 }: PreviewType) => {
   const FeedBack = (props: Omit<FeedbackBoxType, "document_id">): JSX.Element =>
     FeedbackBox ? (
@@ -92,6 +98,8 @@ export const PreviewResume = ({
       <>{props.children}</>
     );
   const feedbackWidth = FeedbackBox ? "w-[848px]" : "w-[800px]";
+
+  const [grade, classNum] = writer.student_number.toString().split("");
 
   return (
     <div className={`${feedbackWidth} m-auto mt-28 flex flex-col gap-7`}>
@@ -107,12 +115,19 @@ export const PreviewResume = ({
           </div>
           <div className="flex">
             <div className="flex justify-between flex-col mr-6 text-end">
-              <p className="text-body7">{"소개과"}</p>
+              <p className="text-body7">
+                {grade !== "1" ? subject[classNum as "1"] : "공통학과"}
+              </p>
               <p className="text-body7">{writer.email}</p>
               <p className="text-body7">{"010-8355"}</p>
             </div>
             <div>
-              <NextImage src={qr} />
+              <Image
+                width={80}
+                height={80}
+                src={writer.profile_image_url}
+                alt="preview ProfileImg"
+              />
             </div>
           </div>
         </div>
@@ -131,14 +146,16 @@ export const PreviewResume = ({
         </div>
       </FeedBack>
 
-      <div>
-        <div className="text-body5 mb-3">기술 스택</div>
-        <div className="flex gap-3">
-          {skill_list.map((skill) => (
-            <Tag className="bg-gray50" technology={skill} />
-          ))}
+      {!!skill_list.length && (
+        <div>
+          <div className="text-body5 mb-3">기술 스택</div>
+          <div className="flex gap-3">
+            {skill_list.map((skill) => (
+              <Tag className="bg-gray50" technology={skill} />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       <div>
         <div className="text-body5 mb-3">수상 경력</div>

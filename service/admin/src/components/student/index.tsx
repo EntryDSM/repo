@@ -12,7 +12,7 @@ export const Student = ({
   profile_image_url,
 }: StudentType) => {
   return (
-    <Link href={`/${student_number.toString()[0]}/${student_id}`}>
+    <Link href={`/${student_id}`}>
       <article className="flex w-[1120px] h-20 pl-10 pr-10 items-center bg-gray50 rounded-md">
         <Image width={46} height={46} src={""} alt="" />
         <div className="w-28 text-body4 ml-5">{name}</div>
