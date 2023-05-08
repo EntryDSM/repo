@@ -28,8 +28,8 @@ interface PropsType {
 
 export const getStudent = ({ name, grade, classNum, major }: PropsType) => {
   return instance.get<GetStudentRes>(
-    `/student?name=${name || ""}&grade=${grade || ""}&classNum=${
-      classNum || ""
-    }&major=${major || ""}`
+    `/student?name=${name || ""}&grade=${
+      grade !== "전체" ? name : ""
+    }&classNum=${classNum !== "전체" ? name : ""}&major=${major || ""}`
   );
 };

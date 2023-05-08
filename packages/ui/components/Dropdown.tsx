@@ -56,9 +56,11 @@ export const Dropdown = <
           className={`h-[46px] flex items-center justify-between rounded-sm pl-4 pr-3 ${kindCss} cursor-pointer`}
         >
           <div className={`text-body6 ${value || "text-gray200"}`}>
-            {value !== undefined && typeof value === "object"
-              ? value[objectKey as string]
-              : value || placeholder}
+            {(value !== undefined &&
+              (typeof value === "object"
+                ? value[objectKey as string]
+                : value)) ||
+              placeholder}
           </div>
           <Arrow direction={dropdown ? "top" : "bottom"} />
         </div>

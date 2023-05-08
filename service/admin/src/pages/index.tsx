@@ -9,8 +9,8 @@ import { getStudent } from "@/apis/student";
 import { getMajor } from "@/apis/major";
 
 const studentNum = [
-  { placeholder: "학년", lists: [1, 2, 3], name: "grade" },
-  { placeholder: "반", lists: [1, 2, 3, 4], name: "classNum" },
+  { placeholder: "학년", lists: ["전체", "1", "2", "3"], name: "grade" },
+  { placeholder: "반", lists: ["전체", "1", "2", "3", "4"], name: "classNum" },
 ];
 
 export default function Home() {
@@ -18,8 +18,8 @@ export default function Home() {
 
   const [option, setOption] = useState({
     name: "",
-    grade: "",
-    classNum: "",
+    grade: "전체",
+    classNum: "전체",
     major: {
       id: "",
       name: "",
@@ -68,17 +68,15 @@ export default function Home() {
             <Dropdown
               className="w-40"
               placeholder="기술 스택"
-              lists={major.data.major_list.map((e) => e.name)}
+              lists={[{ name: "전체", id: "" }, ...major.data.major_list]}
               name="major"
-              value={option.major.name}
+              objectKey="name"
+              value={option.major}
               onClick={({ keyword, name }) => {
-                console.log(keyword);
                 name &&
                   onOptionChange({
                     ...option,
-                    [name as "grade"]: major.data.major_list.find(
-                      (e) => e.name === keyword
-                    ) as any,
+                    [name]: keyword,
                   });
               }}
             />

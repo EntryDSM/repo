@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { ReactNode, useEffect, useState } from "react";
-import { Button } from "@packages/ui";
+import { Button, Footer } from "@packages/ui";
 import { Header } from "../header";
-import { Footer } from "../footer";
 import { Check } from "@packages/ui/assets";
 import { useRouter } from "next/router";
 import { documentSubmit } from "@/apis/document/post/submit";

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
-import { useState } from "react";
 import { LoginBranchModal } from "@/components/login-branch-modal";
 import { useInversion } from "@packages/hooks";
 import { BlackRepoIcon } from "../../../../packages/ui/assets";
@@ -22,7 +21,9 @@ export default function Home() {
 
   return (
     <main className=" bg-gray100 flex flex-col">
-      <header className=" fixed top-0 bg-gray50 z-10 w-full h-20 px-[300px] flex items-center justify-between">
+      <header
+        className={`fixed top-0 bg-gray50 z-10 w-full h-20 px-[300px] flex items-center justify-between `}
+      >
         <div className="flex text-body4 gap-1">
           <BlackRepoIcon />
           Repo
@@ -36,10 +37,10 @@ export default function Home() {
       </header>
       <div className="absolute w-full h-[680px] bg-gray50 top-0 z-[0]" />
       <section className="relative h-[100vh] flex justify-between px-[200px] pt-[280px] z-[5]">
-        <div>
+        <div className="flex flex-col gap-3">
           <div className=" text-[64px] font-bold">Repo</div>
           <div className="text-title4">이력서 온라인 작성 서비스</div>
-          <Button kind="outline" onClick={openModal}>
+          <Button kind="outline" onClick={openModal} className="mt-5 w-fit">
             Repo 시작하기
           </Button>
         </div>

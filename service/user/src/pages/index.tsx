@@ -1,10 +1,10 @@
 import { Inter } from "next/font/google";
-import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { useQueries, useQuery } from "react-query";
 import { documentMy } from "@/apis/document/get/my";
 import { MyPage } from "@/components/MyPage";
 import { myFeedback } from "@/apis/feedback/my";
+import { Footer } from "../../../../packages/ui";
 
 const inter = Inter({ subsets: ["latin"] });
 
