@@ -7,11 +7,10 @@ export interface IntroduceReqBody {
 }
 
 export interface IntroduceResType extends IntroduceReqBody {
-  document_id: string;
   element_id: string;
   feedback: string;
 }
 
-export const documnetIntroduce = (body: IntroduceResType) => {
-  return instance.patch("/document/introduce", disableId(body));
+export const documnetIntroduce = (body: IntroduceReqBody) => {
+  return instance.patch("/document/introduce", body);
 };

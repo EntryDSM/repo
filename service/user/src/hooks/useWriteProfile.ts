@@ -15,6 +15,7 @@ import {
   documnetWriteInfo,
   WriteInfoResType,
   WrtieInfoReqBody,
+  disableId,
 } from "../apis/document/patch";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useMutation, useQuery } from "react-query";
@@ -46,7 +47,7 @@ export type StateArrayType =
 export type StateType = WrtieInfoReqBody | IntroduceReqBody;
 
 const typeFn: {
-  [key in keyof Detail]: (body: DetailType[key]) => Promise<any>;
+  [key in keyof Detail]: (body: any) => Promise<any>;
 } = {
   writer: documnetWriteInfo,
   introduce: documnetIntroduce,
@@ -116,7 +117,7 @@ export const useProfileWrite = <
   const [renderOnce, setRender] = useState<boolean>(false);
   const { data } = useQuery(["madeDetail"], () => myDetail(), {
     onSuccess: ({ data }) => {
-      let temp = data[type];
+      let temp = Object.assign(data[type]);
       if (type === "writer") {
         // @ts-ignore
         const [grade, class_num, ...number] = data.writer.student_number
@@ -140,7 +141,8 @@ export const useProfileWrite = <
 
   const { mutate } = useMutation({
     mutationFn: (body: T): Promise<DetailType> => {
-      return typeFn[type](body);
+      const newBody = disableId(body);
+      return typeFn[type](newBody);
     },
     onSuccess: () => {
       toast("임시저장하였습니다.", { autoClose: 1000, type: "success" });

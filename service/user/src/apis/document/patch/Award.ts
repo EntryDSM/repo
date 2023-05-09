@@ -9,12 +9,12 @@ export interface AwardReqBody {
 }
 
 export interface AwardResType extends AwardReqBody {
-  element_id: string;
+  element_id: string | null;
   feedback: string;
 }
 
-export const documnetAward = (body: AwardResType[]) => {
+export const documnetAward = (body: AwardReqBody[]) => {
   return instance.patch("/document/award", {
-    award_list: body.map(disableId),
+    award_list: body,
   });
 };

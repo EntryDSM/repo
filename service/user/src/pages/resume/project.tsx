@@ -27,20 +27,18 @@ export const Project = () => {
     [
       {
         name: "",
-        represent_image_url: "",
+        represent_image_path: "",
         start_date: "",
         end_date: "",
         skill_list: [],
         description: "",
         url: "",
-        document_id: "",
-        element_id: "",
+        element_id: null,
         feedback: "",
       },
     ],
     "project_list"
   );
-  console.log(state);
   const [imgs, setImgs] = useState<string[]>([]);
   return (
     <ResumeLayout mutate={mutate} status={status} toPreview={toPreview}>
@@ -48,7 +46,7 @@ export const Project = () => {
       {state.map((item, index) => {
         const {
           name,
-          represent_image_url,
+          represent_image_path,
           start_date,
           end_date,
           skill_list,
@@ -102,7 +100,7 @@ export const Project = () => {
           setState(copy);
         };
 
-        const imgUrl = imgs[index] || represent_image_url;
+        const imgUrl = imgs[index] || represent_image_path;
         const inputId = "projectLogo" + index;
 
         return (
@@ -131,7 +129,7 @@ export const Project = () => {
                 id={inputId}
                 type="file"
                 className="hidden"
-                name="represent_image_url"
+                name="represent_image_path"
                 onChange={onImgChangeArray}
               />
               <label

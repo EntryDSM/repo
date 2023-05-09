@@ -1,21 +1,21 @@
 import { EachStateType, StateArrayType } from "@/hooks/useWriteProfile";
+import { DetailType } from "../get/myDetail";
 export * from "./Award";
 export * from "./Certificate";
 export * from "./Introduce";
 export * from "./Project";
 export * from "./WriteInfo";
 
-interface PropsType {
-  document_id?: string;
-  element_id?: string;
-  represent_image_url?: string;
-  feedback: string;
-}
+type ValueOf<T> = T[keyof T];
 
-export const disableId = <T extends EachStateType>({
-  document_id,
-  element_id,
-  feedback,
-  represent_image_url,
-  ...arg
-}: PropsType & T) => ({ ...arg, represent_image_path: represent_image_url });
+export const disableId = <
+  T extends ValueOf<
+    Omit<DetailType, "document_id" | "skill_list" | "document_status">
+  >
+>(
+  body: T
+) => {
+  if (Array.isArray(body)) return body.map(({ feedback, ...arg }) => arg);
+  const { element_id, feedback, ...arg } = body;
+  return arg;
+};

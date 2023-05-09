@@ -12,7 +12,7 @@ import { EachStateType } from "@/hooks/useWriteProfile";
 
 interface PropsType {
   document_id?: string;
-  element_id: string;
+  element_id: string | null;
   content: string;
 }
 

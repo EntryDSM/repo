@@ -1,8 +1,8 @@
 import { instance } from "../..";
 
 export interface WrtieInfoReqBody {
-  element_id: string;
-  student_id: string;
+  element_id?: string;
+  student_id?: string;
   feedback?: string;
   name: string;
   profile_image_url: string;
@@ -12,7 +12,7 @@ export interface WrtieInfoReqBody {
   class_num: number;
   number: number;
   skill_list: string[];
-  student_number: number;
+  student_number?: number;
 }
 
 export interface WriteInfoResType {

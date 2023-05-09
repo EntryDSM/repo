@@ -22,7 +22,7 @@ export const Certificate = () => {
         name: "",
         issuing_institution: "",
         date: "",
-        element_id: "",
+        element_id: null,
         feedback: "",
       },
     ],

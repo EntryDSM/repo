@@ -3,7 +3,7 @@ import { instance } from "..";
 
 export interface ReflrectIdType {
   document_id: string;
-  element_id: string;
+  element_id: string | null;
 }
 
 export const feedbackReflrect = ({
