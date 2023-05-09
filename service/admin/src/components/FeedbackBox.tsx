@@ -33,8 +33,12 @@ export const FeedbackBox = ({
       closeFeedBack();
       feedbackRemove({ document_id, element_id });
       setIsChange(false);
+      setState("");
     } catch (e) {
-      throw Error;
+      toast("피드백 삭제에 오류가 발생했습니다", {
+        type: "error",
+        autoClose: 500,
+      });
     }
   };
   const changeFeedback = () => {
@@ -45,10 +49,13 @@ export const FeedbackBox = ({
       }
       const props = { document_id, element_id, comment: state };
       closeFeedBack();
-      comment ? feedbackChange(props) : feedbackAdd(props);
+      isChange ? feedbackChange(props) : feedbackAdd(props);
       setIsChange(true);
     } catch {
-      throw Error;
+      toast("피드백 제출에 오류가 발생했습니다", {
+        type: "error",
+        autoClose: 500,
+      });
     }
   };
 
