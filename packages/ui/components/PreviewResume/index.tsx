@@ -24,7 +24,7 @@ export interface PreviewType {
     feedback?: string | null;
     name: string;
     profile_image_url: string;
-    student_number: string; // 원하면 학년 반 번호로 각각 나눠서 줄 수도 있음
+    student_number: number; // 원하면 학년 반 번호로 각각 나눠서 줄 수도 있음
     email: string;
     major: {
       id: string;
@@ -102,7 +102,7 @@ export const PreviewResume = ({
   const [grade, classNum] = writer.student_number.toString().split("");
 
   return (
-    <div className={`${feedbackWidth} m-auto mt-28 flex flex-col gap-7`}>
+    <div className={`${feedbackWidth} m-auto my-28 flex flex-col gap-7`}>
       <FeedBack
         part="기본정보"
         element_id={writer.element_id}
@@ -119,14 +119,14 @@ export const PreviewResume = ({
                 {grade !== "1" ? subject[classNum as "1"] : "공통학과"}
               </p>
               <p className="text-body7">{writer.email}</p>
-              <p className="text-body7">{"010-8355"}</p>
+              <p className="text-body7">{"010-1234-5678"}</p>
             </div>
             <div>
               <Image
                 width={80}
                 height={80}
-                src={writer.profile_image_url}
-                alt="preview ProfileImg"
+                src={qr}
+                alt="qr img"
               />
             </div>
           </div>

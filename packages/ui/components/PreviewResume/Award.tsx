@@ -7,7 +7,6 @@ export const Award = ({
   awarding_institution,
   date,
   description,
-  url,
 }: PreviewType["award_list"][0]) => {
   return (
     <>
@@ -20,7 +19,7 @@ export const Award = ({
             <div>{millsecondToDate(date)}</div>
           </div>
         </div>
-        <div className="text-body7">{description}</div>
+        {description && <div className="text-body7">{description}</div>}
       </div>
     </>
   );

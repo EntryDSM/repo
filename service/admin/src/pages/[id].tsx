@@ -48,12 +48,7 @@ const detail = () => {
         status={data?.data.document_status}
         sharingFn={sharingFn}
       >
-        {data && (
-          <PreviewResume
-            {...data.data}
-            FeedbackBox={FeedbackBox}
-          />
-        )}
+        {data && <PreviewResume {...data.data} FeedbackBox={FeedbackBox} />}
       </SideBar>
     </div>
   );

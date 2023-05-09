@@ -4,6 +4,7 @@ import { millsecondToDate } from ".";
 import { LinkSvg } from "../../assets";
 import { Tag } from "./Tag";
 import defaultImg from "../../assets/projectDefaultImg.png";
+import Link from "next/link";
 
 interface PropsType {
   represent_image_url: string;
@@ -26,7 +27,7 @@ export const Project = ({
 }: PropsType) => {
   console.log(represent_image_url);
   return (
-    <div className="flex flex-col gap-7 rounded-md bg-gray50 pl-10 pr-10 pt-7 pb-7">
+    <div className="flex flex-col gap-10 rounded-md bg-gray50 pl-10 pr-10 pt-7 pb-7">
       <div className="flex items-center">
         <Image
           width={80}
@@ -43,8 +44,8 @@ export const Project = ({
         </div>
       </div>
       <div>
-        <div className="text-body5 mb-3">사용 기술</div>
-        <div className="flex gap-3">
+        <div className="text-body5 mb-2">사용 기술</div>
+        <div className="flex gap-2">
           {skill_list.map((technology) => (
             <Tag className="bg-gray100" technology={technology} />
           ))}
@@ -52,10 +53,13 @@ export const Project = ({
       </div>
       <div>{description}</div>
       {url && (
-        <div className="flex gap-2 bg-gray100 pl-3 pr-3 pt-2 pb-2 rounded-md w-fit">
+        <Link
+          href={url}
+          className="flex gap-2 bg-gray100 pl-3 pr-3 pt-2 pb-2 rounded-md w-fit"
+        >
           <LinkSvg />
           <div>{url}</div>
-        </div>
+        </Link>
       )}
     </div>
   );

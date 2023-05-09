@@ -11,7 +11,7 @@ const Preview = () => {
   });
   return (
     <SideBar preview>
-      {data && <PreviewResume {...data.data} NextImage={Image} />}
+      {data && <PreviewResume {...data.data} />}
     </SideBar>
   );
 };

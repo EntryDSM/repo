@@ -83,7 +83,7 @@ export const SideBar = ({
         )}
       </div>
       {!preview && !!side && <div className="w-[320px]" />}
-      <div className="flex-auto">{children}</div>
+      <div className="m-auto">{children}</div>
     </div>
   );
 };
