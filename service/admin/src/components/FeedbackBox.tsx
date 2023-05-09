@@ -20,7 +20,7 @@ export const FeedbackBox = ({
 }: FeedbackBoxType) => {
   const [state, setState] = useState<string>(comment || "");
   const [dropdown, setDropdown] = useState<boolean>(false);
-  const [isChange, setIsChange] = useState<boolean>(!!comment);
+  const [isFeedbackChange, setIsFeedbackChange] = useState<boolean>(!!comment);
   const openFeedBack = () => setDropdown(true);
   const closeFeedBack = () => setDropdown(false);
 
@@ -32,7 +32,7 @@ export const FeedbackBox = ({
     try {
       closeFeedBack();
       feedbackRemove({ document_id, element_id });
-      setIsChange(false);
+      setIsFeedbackChange(false);
       setState("");
     } catch (e) {
       toast("피드백 삭제에 오류가 발생했습니다", {
@@ -49,8 +49,8 @@ export const FeedbackBox = ({
       }
       const props = { document_id, element_id, comment: state };
       closeFeedBack();
-      isChange ? feedbackChange(props) : feedbackAdd(props);
-      setIsChange(true);
+      isFeedbackChange ? feedbackChange(props) : feedbackAdd(props);
+      setIsFeedbackChange(true);
     } catch {
       toast("피드백 제출에 오류가 발생했습니다", {
         type: "error",
@@ -64,7 +64,7 @@ export const FeedbackBox = ({
       <div
         onClick={openFeedBack}
         className={`mt-[10px] rounded-[4px] w-4 h-4 ${
-          isChange ? "bg-blue" : "bg-gray200"
+          isFeedbackChange ? "bg-blue" : "bg-gray200"
         }`}
       />
       <div>
