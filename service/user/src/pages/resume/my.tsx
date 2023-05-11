@@ -31,6 +31,9 @@ export const My = () => {
     mutate,
     setState,
     handleChange,
+    addSkill,
+    removeSkill,
+    onDropdownSelect,
     document_id,
   } = useProfileWrite(
     {
@@ -59,23 +62,6 @@ export const My = () => {
       setState({ ...state, [name]: image_path });
       setImg(base_url + image_path);
     }, e);
-  };
-
-  const onDropdownSelect = (value: { keyword: string; name?: string }) => {
-    // @ts-ignore
-    const temp = onClickItem(state, value);
-    setState(temp);
-  };
-
-  const AddSKill = (value: { keyword: string; name: string }) => {
-    const temp = AddSkillFn(state, value);
-
-    setState(temp);
-  };
-
-  const removeSkill = (value: { index: number; name: string }) => {
-    const temp = removeSkillFn(state, value);
-    setState(temp);
   };
 
   return (
@@ -176,13 +162,13 @@ export const My = () => {
           <div className="flex flex-col gap-[30px]">
             <SKillInput
               name="skill_list"
-              onAddSkill={AddSKill}
+              onAddSkill={addSkill(0)}
               className="w-full bg-gray100"
             />
             <SkillList
               name="skill_list"
               list={state.skill_list}
-              onClickRemove={removeSkill}
+              onClickRemove={removeSkill(0)}
             />
           </div>
         </ImportLabel>

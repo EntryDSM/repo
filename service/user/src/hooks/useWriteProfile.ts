@@ -176,6 +176,43 @@ export const useProfileWrite = <
     }
   };
 
+  const removeSkill =
+    (index: number) => (value: { index: number; name: string }) => {
+      if (Array.isArray(state)) {
+        const copy = [...state];
+        copy.splice(index, 1, removeSkillFn(state[index], value));
+        // @ts-ignore
+        setState(copy);
+      } else setState(removeSkillFn(state, value));
+    };
+
+  const addSkill =
+    (index: number) => (value: { keyword: string; name: string }) => {
+      if (Array.isArray(state)) {
+        const copy = [...state];
+        copy.splice(index, 1, AddSkillFn(state[index], value));
+        // @ts-ignore
+        setState(copy);
+      } else setState(AddSkillFn(state, value));
+    };
+    
+  const onDateChange =
+    (index: number) =>
+    ({ value, name }: { value: number; name: string }) => {
+      if (Array.isArray(state)) {
+        const copy = [...state];
+        copy.splice(index, 1, { ...state[index], [name]: value });
+        // @ts-ignore
+        setState(copy);
+      }
+    };
+
+  const onDropdownSelect = (value: { keyword: string; name?: string }) => {
+    // @ts-ignore
+    const temp = onClickItem(state, value);
+    setState(temp);
+  };
+
   const toPreview = () => {
     mutate(state);
     return "preview";
@@ -189,6 +226,10 @@ export const useProfileWrite = <
     addItem,
     removeItem,
     toPreview,
+    removeSkill,
+    addSkill,
+    onDateChange,
+    onDropdownSelect,
     document_id: data?.data.document_id,
   };
 };

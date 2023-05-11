@@ -22,6 +22,9 @@ export const Project = () => {
     handleChange,
     addItem,
     removeItem,
+    addSkill,
+    removeSkill,
+    onDateChange,
     document_id,
   } = useProfileWrite(
     [
@@ -64,12 +67,10 @@ export const Project = () => {
 
         const handleChangeArray = handleChange(index);
         const removeItemArray = removeItem(index);
+        const addSKillArray = addSkill(index);
+        const removeSKillArray = removeSkill(index);
+        const onDateChangeArray = onDateChange(index);
 
-        const addSkillArray = (value: { keyword: string; name: string }) => {
-          const copy = [...state];
-          copy.splice(index, 1, AddSkillFn(state[index], value));
-          setState(copy);
-        };
         const onImgChangeArray = (e: ChangeEvent<HTMLInputElement>) => {
           const { name } = e.target;
           const copy = [...state];
@@ -82,22 +83,6 @@ export const Project = () => {
             setState(copy);
             setImgs(onImgChange(base_url + image_path));
           }, e);
-        };
-        const removeSkillArray = (value: { index: number; name: string }) => {
-          const copy = [...state];
-          copy.splice(index, 1, removeSkillFn(state[index], value));
-          setState(copy);
-        };
-        const onDateChange = ({
-          value,
-          name,
-        }: {
-          value: number;
-          name: string;
-        }) => {
-          const copy = [...state];
-          copy.splice(index, 1, { ...item, [name]: value });
-          setState(copy);
         };
 
         const imgUrl = imgs[index] || represent_image_path;
@@ -154,14 +139,14 @@ export const Project = () => {
                   value={start_date}
                   name="start_date"
                   placeholder="시작일"
-                  onSubmitAtInput={onDateChange}
+                  onSubmitAtInput={onDateChangeArray}
                 />
                 ~
                 <DateInput
                   value={end_date}
                   name="end_date"
                   placeholder="종료일"
-                  onSubmitAtInput={onDateChange}
+                  onSubmitAtInput={onDateChangeArray}
                 />
               </div>
             </ImportLabel>
@@ -170,12 +155,12 @@ export const Project = () => {
                 <SKillInput
                   name="skill_list"
                   className="w-full bg-gray100"
-                  onAddSkill={addSkillArray}
+                  onAddSkill={addSKillArray}
                 />
                 <SkillList
                   name="skill_list"
                   list={skill_list}
-                  onClickRemove={removeSkillArray}
+                  onClickRemove={removeSKillArray}
                 />
               </div>
             </ImportLabel>
