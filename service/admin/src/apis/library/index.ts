@@ -6,9 +6,13 @@ export interface Library {
   year: number;
   grade: number;
   generation: number;
-  url: string;
+  document_url: string;
+}
+
+interface LibraryType {
+  library_document_list: Library[];
 }
 
 export const getLibrary = (year: string) => {
-  return instance.get<Library[]>(`/library/teacher?year=${year}`);
+  return instance.get<LibraryType>(`/library/teacher?year=${year}`);
 };

@@ -9,6 +9,7 @@ const Library = () => {
   const [year, setYear] = useState<string>("");
   const { data } = useQuery(["dwqdqwdq", year], () => getLibrary(year));
 
+  console.log(data);
   return (
     <>
       <Header />
@@ -24,16 +25,10 @@ const Library = () => {
           />
         </div>
         {data &&
-          !!data.data.length &&
-          data.data.map((libarary) => <LibraryCard {...libarary} />)}
-        <LibraryCard
-          id="asf"
-          grade={1}
-          generation={1}
-          access_right="PRIVATE"
-          year={1}
-          url=""
-        />
+          !!data.data.library_document_list.length &&
+          data.data.library_document_list.map((libarary) => (
+            <LibraryCard {...libarary} />
+          ))}
       </div>
     </>
   );

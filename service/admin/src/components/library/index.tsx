@@ -24,7 +24,7 @@ export const LibraryCard = ({
   year,
   grade,
   generation,
-  url,
+  document_url,
 }: Library) => {
   const [status, setStatus] = useState<keyof typeof krStatus>(
     enStatus[access_right]
@@ -52,13 +52,13 @@ export const LibraryCard = ({
             mutate();
           }}
         />
-        {url && (
+        {document_url && (
           <div
             className="text-body4 ml-20 text-gray300"
             onClick={(e) => {
               e.preventDefault();
               navigator.clipboard
-                .writeText(url)
+                .writeText(document_url)
                 .then(() =>
                   toast("복사됬습니다.", { type: "success", autoClose: 500 })
                 );

@@ -44,6 +44,7 @@ const StudentDropdown = ({
   id,
   grade,
 }: StudentPropsType) => {
+  console.log(classList);
   const isClass = classList?.some((list) => list.student_id === id);
   const [open, setOpen] = useState<boolean>(isClass || false);
   const closeList = () => setOpen(!open);
@@ -72,7 +73,7 @@ const StudentDropdown = ({
                   } py-2 rounded-md px-3 justify-between items-center [&_path]:fill-gray400`}
                 >
                   {student_number} {name}
-                  {StudentIcon[document_status]}
+                  {document_status && StudentIcon[document_status]}
                 </div>
               </Link>
             );

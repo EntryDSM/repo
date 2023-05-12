@@ -6,15 +6,15 @@ import { Students } from "./Students";
 import Link from "next/link";
 
 interface StudentType {
-  student_id: string;
+  student_id?: string;
   name: string;
-  document_id: string;
-  document_status: "CREATED" | "SUBMITTED" | "SHARED";
-  feedback_count: number;
-  profile_image_url: string;
+  document_id?: string;
+  document_status?: "CREATED" | "SUBMITTED" | "SHARED";
+  feedback_count?: number;
+  profile_image_url?: string;
   student_number: number;
-  email: string;
-  major: {
+  email?: string;
+  major?: {
     id: string;
     name: string;
   };
@@ -62,8 +62,8 @@ export const SideBar = ({
           <Home onClick={() => setSide(0)} />
           {!preview && (
             <>
-              <Setting onClick={() => setSide(1)} />
-              <Stack onClick={() => setSide(2)} />
+              {studentList && <Setting onClick={() => setSide(1)} />}
+              {status && sharingFn && <Stack onClick={() => setSide(2)} />}
             </>
           )}
         </div>
