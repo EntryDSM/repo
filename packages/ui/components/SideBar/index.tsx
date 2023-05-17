@@ -6,15 +6,15 @@ import { Students } from "./Students";
 import Link from "next/link";
 
 interface StudentType {
-  student_id?: string;
+  student_id: string;
   name: string;
-  document_id?: string;
-  document_status?: "CREATED" | "SUBMITTED" | "SHARED";
-  feedback_count?: number;
+  document_id: string;
+  document_status: "CREATED" | "SUBMITTED" | "SHARED";
+  feedback_count: number;
   profile_image_url?: string;
   student_number: number;
-  email?: string;
-  major?: {
+  email: string;
+  major: {
     id: string;
     name: string;
   };
