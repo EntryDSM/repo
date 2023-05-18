@@ -11,6 +11,7 @@ import {
 } from "../../hooks/useWriteProfile";
 import { FeedBack } from "@/components/resume/FeedBack";
 import { DateInput } from "@/components/date";
+import { ResumeImg } from "@/components/ResumeImg";
 
 export const Project = () => {
   const {
@@ -121,7 +122,7 @@ export const Project = () => {
                 htmlFor={inputId}
                 className="relative inline-block cursor-pointer"
               >
-                <img
+                <ResumeImg
                   src={imgUrl}
                   alt="프로젝트 로고"
                   className="w-[100px] h-[100px] object-cover rounded bg-gray200"

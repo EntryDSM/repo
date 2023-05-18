@@ -5,7 +5,7 @@ export interface WrtieInfoReqBody {
   student_id?: string;
   feedback?: string;
   name: string;
-  profile_image_url: string;
+  profile_image_path: string;
   major: { id: string; name: string };
   email: string;
   grade: number;
@@ -21,7 +21,7 @@ export interface WriteInfoResType {
   student_id: string;
   feedback?: string | null;
   name: string;
-  profile_image_url: string;
+  profile_image_path: string;
   student_number: string; // 원하면 학년 반 번호로 각각 나눠서 줄 수도 있음
   email: string;
   major: {
@@ -36,7 +36,7 @@ export const documnetWriteInfo = ({
   feedback,
   student_id,
   element_id,
-  profile_image_url,
+  profile_image_path,
   grade,
   class_num,
   number,
@@ -53,6 +53,6 @@ export const documnetWriteInfo = ({
     number: Number(number),
   });
   return instance.patch("/document/profile-image", {
-    profile_image_path: profile_image_url,
+    profile_image_path: profile_image_path,
   });
 };
