@@ -5,20 +5,21 @@ import { Sharing } from "./Sharing";
 import { Students } from "./Students";
 import Link from "next/link";
 
-interface StudentType {
-  student_id: string;
+type StudentType = {
+  student_id?: string;
   name: string;
-  document_id: string;
-  document_status: "CREATED" | "SUBMITTED" | "SHARED";
-  feedback_count: number;
+  document_id?: string;
+  document_status?: "CREATED" | "SUBMITTED" | "SHARED";
+  feedback_count?: number;
   profile_image_url?: string;
   student_number: number;
-  email: string;
-  major: {
+  email?: string;
+  major?: {
     id: string;
     name: string;
   };
-}
+  page?: number;
+};
 
 export type StudentListType = StudentType[] | undefined;
 
@@ -26,6 +27,7 @@ export type ShareFnType = (action: "SHARING" | "UNSHARING") => void;
 
 interface Props {
   preview?: boolean;
+  moveClickedPage?: (page: number) => void;
   studentList?: (StudentType[] | undefined)[];
   status?: "CREATED" | "SUBMITTED" | "SHARED";
   sharingFn?: ShareFnType;
@@ -36,6 +38,7 @@ interface Props {
 
 export const SideBar = ({
   preview,
+  moveClickedPage,
   studentList,
   status,
   sharingFn,
@@ -72,7 +75,12 @@ export const SideBar = ({
             {
               {
                 1: studentList && (
-                  <Students studentList={studentList} id={id} grade={grade} />
+                  <Students
+                    studentList={studentList}
+                    id={id}
+                    grade={grade}
+                    moveClickedPage={moveClickedPage}
+                  />
                 ),
                 2: status && sharingFn && (
                   <Sharing status={status} sharingFn={sharingFn} />

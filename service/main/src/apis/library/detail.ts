@@ -7,7 +7,6 @@ interface DetailLibraryType {
   document_url: string;
   index: {
     name: string;
-    major: string; // 사용되지 않는 정보
     student_number: number;
     page: number;
   }[];

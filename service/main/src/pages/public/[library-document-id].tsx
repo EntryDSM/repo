@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { SideBar } from "../../../../../packages/ui";
 import { useQuery } from "@tanstack/react-query";
 import { detailLibrary } from "@/apis/library/detail";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import { listLibrary } from "@/apis/library/list";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
@@ -29,15 +29,38 @@ const Library = () => {
   );
   const onPDFOpen = ({ numPages }: { numPages: number }) => {
     setPage(numPages);
-    console.log(onPDFOpen);
+    console.log(numPages);
+  };
+
+  const data = detail?.data;
+
+  const moveClickedPage = (page: number) => {
+    const usersPageTop = data?.index[page].page;
+    console.log(usersPageTop);
+    if (usersPageTop !== undefined)
+      document.documentElement.scrollTo({
+        top: 1648 * usersPageTop,
+        behavior: "smooth",
+      });
   };
 
   return (
-    <SideBar>
-      <Document file={detail?.data.document_url}>
-        <Page pageNumber={1} />
-      </Document>
-    </SideBar>
+    data && (
+      <SideBar studentList={[data.index]} moveClickedPage={moveClickedPage}>
+        <Document file={data.document_url} onLoadSuccess={onPDFOpen}>
+          {Array(page)
+            .fill(0)
+            .map((_, idx) => (
+              <Page
+                pageIndex={idx}
+                key={idx}
+                renderAnnotationLayer={false}
+                renderTextLayer={false}
+              />
+            ))}
+        </Document>
+      </SideBar>
+    )
   );
 };
 
