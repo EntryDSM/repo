@@ -2,6 +2,7 @@ import { studentDetail } from "@/apis/document/get/studentDetail";
 import { documentShare, documentUnShare } from "@/apis/document/post/shard";
 import { getStudent } from "@/apis/student";
 import { FeedbackBox } from "@/components/FeedbackBox";
+import { Sharing } from "@/components/Sharing";
 import { Button, PreviewResume, SideBar, TextArea } from "@packages/ui";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -37,8 +38,18 @@ const detail = () => {
     studentListObject("4"),
   ]).map((list) => list.data?.data.student_list);
 
-  const sharingFn = (action: "SHARING" | "UNSHARING") =>
-    data && sharingFns[action](data?.data.document_id);
+  const Shared = () => {
+    if (!data) return <></>;
+    const { writer, document_status, document_id } = data.data;
+    const { student_number, name } = writer;
+    return (
+      <Sharing
+        status={document_status}
+        name={student_number + name}
+        document_id={document_id}
+      />
+    );
+  };
   return (
     <div>
       <SideBar
@@ -46,7 +57,7 @@ const detail = () => {
         id={id as string}
         grade={grade}
         status={data?.data.document_status}
-        sharingFn={sharingFn}
+        Sharing={Shared}
       >
         {data && <PreviewResume {...data.data} FeedbackBox={FeedbackBox} />}
       </SideBar>

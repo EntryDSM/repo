@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Button } from "../Button";
-import { Selected, UnSelected } from "../../assets";
-import { ShareFnType } from ".";
+import { useState } from "react";
+import { Selected, UnSelected } from "../../../../packages/ui/assets";
+import { Button } from "../../../../packages/ui";
+import { documentShare, documentUnShare } from "@/apis/document/post/shard";
 
 const sharingButton = [
   { text: "비공개", button_Status: "CREATED SUBMITTED" },
@@ -11,16 +11,19 @@ const sharingButton = [
 interface PropsType {
   name?: string;
   status: "CREATED" | "SUBMITTED" | "SHARED";
-  sharingFn: ShareFnType;
+  document_id: string;
 }
 
-export const Sharing = ({ status, sharingFn }: PropsType) => {
+export const Sharing = ({ name, status, document_id }: PropsType) => {
   const [state, setState] = useState<boolean>(status === "SHARED");
-  const share = () => sharingFn(state ? "UNSHARING" : "SHARING");
+  const share = state
+    ? () => documentUnShare(document_id)
+    : () => documentShare(document_id);
 
+  console.log(share);
   return (
     <>
-      <div className="text-title4">1316 장지성</div>
+      <div className="text-title4">{name}</div>
 
       <div className="flex flex-col gap-[10px] mt-6">
         <div className="text-body5">문서 공개 설정</div>
