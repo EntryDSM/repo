@@ -30,8 +30,9 @@ export const LibraryCard = ({
     enStatus[access_right]
   );
 
-  const { mutate } = useMutation("asgagahdasgarw", () =>
-    accessRight(id, krStatus[status])
+  const { mutate } = useMutation(
+    "asgagahdasgarw",
+    (body: keyof typeof enStatus) => accessRight(id, body)
   );
 
   return (
@@ -49,7 +50,7 @@ export const LibraryCard = ({
           value={status}
           onClick={({ keyword }) => {
             setStatus(keyword);
-            mutate();
+            mutate(krStatus[keyword]);
           }}
         />
         {document_url && (

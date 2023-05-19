@@ -82,7 +82,7 @@ export default function Home() {
             />
           )}
         </div>
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5 mb-20">
           {data &&
             data.data.student_list.map((student) => <Student {...student} />)}
         </div>

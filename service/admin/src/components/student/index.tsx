@@ -27,7 +27,7 @@ export const Student = ({
           height={46}
           src={profile_image_url}
           alt="학생관리 프로필 이미지"
-          className=" rounded-full"
+          className="rounded-full"
         />
         <div className="w-28 text-body3 ml-5">{name}</div>
         <div className="text-body4 w-96">{student_number}</div>

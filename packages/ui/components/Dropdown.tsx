@@ -55,7 +55,7 @@ export const Dropdown = <
           onClick={() => setDropDown(!dropdown)}
           className={`h-[46px] flex items-center justify-between rounded-sm pl-4 pr-3 ${kindCss} cursor-pointer`}
         >
-          <div className={`text-body6 ${value || "text-gray200"}`}>
+          <div className={`text-body6 ${value || "text-gray300"}`}>
             {(value !== undefined &&
               (typeof value === "object"
                 ? value[objectKey as string]

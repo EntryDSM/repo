@@ -13,8 +13,8 @@ const Library = () => {
   return (
     <>
       <Header />
-      <div className="m-auto w-[1120px]">
-        <p className="text-title1 mt-28">도서관</p>
+      <div className="m-auto w-[1120px] mb-20">
+        <p className="text-title1 mt-28 ">도서관</p>
         <p className="text-title4 mb-20">레주메북 목록을 담은 도서관입니다.</p>
         <div className="mb-10">
           <Dropdown
@@ -24,6 +24,7 @@ const Library = () => {
             onClick={({ keyword }) => setYear(keyword)}
           />
         </div>
+
         {data &&
           !!data.data.library_document_list.length &&
           data.data.library_document_list.map((libarary) => (
