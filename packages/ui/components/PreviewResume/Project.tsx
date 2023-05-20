@@ -25,7 +25,6 @@ export const Project = ({
   description,
   url,
 }: PropsType) => {
-  console.log(represent_image_url);
   return (
     <div className="flex flex-col gap-10 rounded-md bg-gray50 pl-10 pr-10 pt-7 pb-7">
       <div className="flex items-center">

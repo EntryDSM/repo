@@ -125,6 +125,8 @@ export const Project = () => {
                 <ResumeImg
                   src={imgUrl}
                   alt="프로젝트 로고"
+                  width={100}
+                  height={100}
                   className="w-[100px] h-[100px] object-cover rounded bg-gray200"
                 />
                 {!imgUrl && (

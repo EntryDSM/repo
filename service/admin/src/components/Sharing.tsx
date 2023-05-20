@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { MutableRefObject, Ref, cloneElement, useState } from "react";
 import { Selected, UnSelected } from "../../../../packages/ui/assets";
 import { Button } from "../../../../packages/ui";
 import { documentShare, documentUnShare } from "@/apis/document/post/shard";
+import { jsPDF } from "jspdf";
+import html2canvas from "html2canvas";
 
 const sharingButton = [
   { text: "비공개", button_Status: "CREATED SUBMITTED" },
@@ -12,15 +14,22 @@ interface PropsType {
   name?: string;
   status: "CREATED" | "SUBMITTED" | "SHARED";
   document_id: string;
+  targetRef?: MutableRefObject<HTMLDivElement | null>;
 }
 
-export const Sharing = ({ name, status, document_id }: PropsType) => {
+export const Sharing = ({
+  name,
+  status,
+  document_id,
+  targetRef,
+}: PropsType) => {
   const [state, setState] = useState<boolean>(status === "SHARED");
   const share = state
     ? () => documentUnShare(document_id)
     : () => documentShare(document_id);
 
-  console.log(share);
+  const onClickPdf = () =>
+    targetRef && getPdf(targetRef, `대마고 ${name} 이력서`);
   return (
     <>
       <div className="text-title4">{name}</div>
@@ -54,9 +63,56 @@ export const Sharing = ({ name, status, document_id }: PropsType) => {
       </div>
 
       <div className="text-body5 mt-6 mb-[10px]">내보내기</div>
-      <Button kind="outlineWhite" className="w-full">
+
+      <Button onClick={onClickPdf} kind="outlineWhite" className="w-full">
         PDF로 내보내기
       </Button>
     </>
   );
+};
+
+export const getPdf = async (
+  { current }: MutableRefObject<HTMLElement | null>,
+  fileName: string
+) => {
+  if (!current) return;
+  const canvas = await html2canvas(current);
+  const imgData = canvas.toDataURL("image/png");
+
+  const imgWidth = 210;
+  const pageHeight = 295;
+  const imgHeight = (canvas.height * imgWidth) / canvas.width;
+  let heightLeft = imgHeight;
+
+  const doc = new jsPDF("p", "mm", "a4", true);
+  let position = 0;
+
+  doc.addImage(
+    imgData,
+    "PNG",
+    0,
+    position,
+    imgWidth,
+    imgHeight,
+    undefined,
+    "FAST"
+  );
+  heightLeft -= pageHeight;
+
+  while (heightLeft >= 0) {
+    position = heightLeft - imgHeight;
+    doc.addPage();
+    doc.addImage(
+      imgData,
+      "PNG",
+      0,
+      position,
+      imgWidth,
+      imgHeight,
+      undefined,
+      "FAST"
+    );
+    heightLeft -= pageHeight;
+  }
+  doc.save(fileName + ".pdf");
 };

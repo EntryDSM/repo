@@ -102,93 +102,90 @@ export const PreviewResume = ({
   const [grade, classNum] = writer.student_number.toString().split("");
 
   return (
-    <div className={`${feedbackWidth} m-auto my-28 flex flex-col gap-7`}>
-      <FeedBack
-        part="기본정보"
-        element_id={writer.element_id}
-        comment={writer.feedback}
-      >
-        <div className="flex justify-between">
-          <div>
-            <p className="text-title1">{writer.name}</p>
-            <p className="text-title4">{writer.major.name}</p>
-          </div>
-          <div className="flex">
-            <div className="flex justify-between flex-col mr-6 text-end">
-              <p className="text-body7">
-                {grade !== "1" ? subject[classNum as "1"] : "공통학과"}
-              </p>
-              <p className="text-body7">{writer.email}</p>
-              <p className="text-body7">{"010-1234-5678"}</p>
-            </div>
+    <div className={`${feedbackWidth} m-auto my-28 flex flex-col gap-3 p-8`}>
+      <div>
+        <FeedBack
+          part="기본정보"
+          element_id={writer.element_id}
+          comment={writer.feedback}
+        >
+          <div className="flex justify-between">
             <div>
-              <Image
-                width={80}
-                height={80}
-                src={qr}
-                alt="qr img"
-              />
+              <p className="text-title1">{writer.name}</p>
+              <p className="text-title4">{writer.major.name}</p>
+            </div>
+            <div className="flex">
+              <div className="flex justify-between flex-col mr-6 text-end">
+                <p className="text-body7">
+                  {grade !== "1" ? subject[classNum as "1"] : "공통학과"}
+                </p>
+                <p className="text-body7">{writer.email}</p>
+                <p className="text-body7">{"010-1234-5678"}</p>
+              </div>
+              <div>
+                <Image width={80} height={80} src={qr} alt="qr img" />
+              </div>
             </div>
           </div>
-        </div>
-      </FeedBack>
-
-      <FeedBack
-        part="자기소개"
-        element_id={introduce.element_id}
-        comment={introduce.feedback}
-      >
-        <div>
-          <div className="text-body3">{introduce.heading}</div>
-          <div className="text-body8 text-gray400 mt-4">
-            {introduce.introduce}
-          </div>
-        </div>
-      </FeedBack>
-
-      {!!skill_list.length && (
-        <div>
-          <div className="text-body5 mb-3">기술 스택</div>
-          <div className="flex gap-3">
-            {skill_list.map((skill) => (
-              <Tag className="bg-gray50" technology={skill} />
-            ))}
-          </div>
-        </div>
-      )}
-
-      <div>
-        <div className="text-body5 mb-3">수상 경력</div>
-        <div className="flex gap-3 flex-col">
-          {award_list.map((award) => (
-            <FeedBack
-              part={award.name}
-              element_id={award.element_id}
-              comment={award.feedback}
-            >
-              <Award {...award} />
-            </FeedBack>
-          ))}
-        </div>
+        </FeedBack>
       </div>
 
       <div>
-        <div className="text-body5 mb-3">자격증</div>
-        <div className="flex gap-3 flex-col">
-          {certificate_list.map((data) => (
-            <FeedBack
-              part={data.name}
-              element_id={data.element_id}
-              comment={data.feedback}
-            >
-              <Certificate {...data} />
-            </FeedBack>
-          ))}
-        </div>
+        <FeedBack
+          part="자기소개"
+          element_id={introduce.element_id}
+          comment={introduce.feedback}
+        >
+          <div>
+            <div className="text-body3">{introduce.heading}</div>
+            <div className="text-body8 text-gray400 mt-4">
+              {introduce.introduce}
+            </div>
+          </div>
+        </FeedBack>
       </div>
 
-      <div className="flex flex-col gap-5">
-        <div className="text-body1 mb-2">Project</div>
+      <div>
+        {!!skill_list.length && (
+          <div>
+            <div className="text-body5 mb-3">기술 스택</div>
+            <div className="flex gap-3">
+              {skill_list.map((skill) => (
+                <Tag className="bg-gray50" technology={skill} />
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      <div className="text-body5 mb-3">수상 경력</div>
+      <div className="flex gap-3 flex-col">
+        {award_list.map((award) => (
+          <FeedBack
+            part={award.name}
+            element_id={award.element_id}
+            comment={award.feedback}
+          >
+            <Award {...award} />
+          </FeedBack>
+        ))}
+      </div>
+
+      <div className="text-body5 mb-3">자격증</div>
+      <div className="flex gap-3 flex-col">
+        {certificate_list.map((data) => (
+          <FeedBack
+            part={data.name}
+            element_id={data.element_id}
+            comment={data.feedback}
+          >
+            <Certificate {...data} />
+          </FeedBack>
+        ))}
+      </div>
+
+      <div className="text-body1 mb-2">Project</div>
+      <div className="flex flex-col gap-3">
         {project_list.map((data) => (
           <FeedBack
             part={data.name}

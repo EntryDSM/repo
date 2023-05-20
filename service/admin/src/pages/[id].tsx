@@ -6,16 +6,13 @@ import { Sharing } from "@/components/Sharing";
 import { Button, PreviewResume, SideBar, TextArea } from "@packages/ui";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useRef } from "react";
 import { useQueries, useQuery } from "react-query";
-
-const sharingFns = {
-  SHARING: documentShare,
-  UNSHARING: documentUnShare,
-};
 
 const detail = () => {
   const { query } = useRouter();
   const { id } = query;
+  const pdfRef = useRef<HTMLDivElement | null>(null);
 
   const { data } = useQuery(
     ["teacherPreview", id],
@@ -47,6 +44,7 @@ const detail = () => {
         status={document_status}
         name={student_number + name}
         document_id={document_id}
+        targetRef={pdfRef}
       />
     );
   };
@@ -59,7 +57,9 @@ const detail = () => {
         status={data?.data.document_status}
         Sharing={Shared}
       >
-        {data && <PreviewResume {...data.data} FeedbackBox={FeedbackBox} />}
+        <div ref={pdfRef}>
+          {data && <PreviewResume {...data.data} FeedbackBox={FeedbackBox} />}
+        </div>
       </SideBar>
     </div>
   );

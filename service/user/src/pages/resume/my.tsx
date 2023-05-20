@@ -14,6 +14,7 @@ import { WrtieInfoReqBody } from "../../apis/document/patch/WriteInfo";
 import { FeedBack } from "@/components/resume/FeedBack";
 import { getMajor } from "@/apis/major";
 import { useQuery } from "react-query";
+import { ResumeImg } from "@/components/ResumeImg";
 
 const student = {
   grade: [1, 2, 3],
@@ -38,7 +39,7 @@ export const My = () => {
   } = useProfileWrite(
     {
       name: "",
-      profile_image_url: "",
+      profile_image_path: "",
       email: "",
       major: { id: "", name: "" },
       grade: 0,
@@ -77,7 +78,7 @@ export const My = () => {
           <input
             id="profile"
             type="file"
-            name="profile_image_url"
+            name="profile_image_path"
             onChange={onImgChange}
             className="hidden"
           />
@@ -85,8 +86,11 @@ export const My = () => {
             htmlFor="profile"
             className="relative inline-block cursor-pointer"
           >
-            <img
-              src={img || state.profile_image_url}
+            <ResumeImg
+              src={img || state.profile_image_path}
+              alt="자기소개 이미지"
+              width={160}
+              height={160}
               className="w-40 h-40 object-cover rounded-[80px] bg-gray200"
             />
             <div className="absolute bottom-0 right-0 bg-gray100 p-2 rounded-full">
