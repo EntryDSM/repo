@@ -97,6 +97,7 @@ export const ResumeLayout = ({
                 </div>
                 <Button
                   onClick={toPathPreview}
+                  radius="medium"
                   className="rounded-2xl bg-gray50 hover:bg-gray200"
                 >
                   미리보기
@@ -111,7 +112,6 @@ export const ResumeLayout = ({
                       onClick={() => toOtherProfileWrite(key)}
                     >
                       {value}
-                      <Check size={24} color />
                     </button>
                   ))}
                 </nav>

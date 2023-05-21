@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Button, Input, Logo } from "@packages/ui";
 import { PostSignIn, postSignIn } from "@/apis/sign-in";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMutation, useQuery } from "react-query";
 import { toast } from "react-toastify";
 import { Arrow } from "@packages/ui/assets";
@@ -12,11 +12,39 @@ interface Form {
   password: string;
 }
 
+const saveEmailKey = "saveEmail";
+const emailDataKey = "emailData";
+
+const getSaveEmail = () => {
+  const isSaveEmail = !!localStorage.getItem(saveEmailKey);
+  const email = localStorage.getItem(emailDataKey) || "";
+  return { isSaveEmail, email };
+};
+
+const setSaveEmail = (isSave: boolean, email?: string) => {
+  localStorage.setItem(saveEmailKey, isSave ? "1" : "");
+  email && localStorage.setItem(emailDataKey, email);
+};
+
 const SignIn = () => {
   const [form, setForm] = useState<Form>({
     account_id: "teacher123",
     password: "qwerty!1",
   });
+  const [saveEmail, setSave] = useState<boolean>(false);
+
+  useEffect(() => {
+    const { isSaveEmail, email } = getSaveEmail();
+    console.log(isSaveEmail, email);
+    setSave(isSaveEmail);
+    setForm({ ...form, account_id: email });
+  }, []);
+
+  const { push } = useRouter();
+  useEffect(() => {
+    const isLogin = localStorage.getItem("access_token");
+    if (isLogin) push("/");
+  }, []);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -24,6 +52,10 @@ const SignIn = () => {
       ...form,
       [name]: value,
     });
+    if (saveEmail) {
+      setSave(true);
+      setSaveEmail(saveEmail, value);
+    }
   };
 
   const navigate = useRouter();
@@ -50,8 +82,13 @@ const SignIn = () => {
     },
   });
 
+  const invertEmailSave = () => {
+    setSave(!saveEmail);
+    setSaveEmail(!saveEmail);
+  };
+
   return (
-    <div className="flex h-[100vh]">
+    <div className="flex h-[100vh] bg-gray50">
       <div
         className="flex justify-center items-center flex-col flex-1 backdrop-blur-3xl"
         style={{ boxShadow: "inset 0px 4px 240px rgba(0, 0, 0, 0.25)" }}
@@ -59,30 +96,45 @@ const SignIn = () => {
         <Logo />
       </div>
       <div className="w-[770px] pl-40 pr-40 flex flex-col justify-center">
-        <Link href={"/"}>
-          <button className="flex">
-            <Arrow direction="left" />
-            back
-          </button>
-        </Link>
-        <div className="text-title1 mt-14 mb-9">선생님 로그인</div>
+        <div>
+          <Link href={"/"}>
+            <button className="flex text-body5 text-gray400 [&_path]:fill-gray400">
+              <Arrow direction="left" />
+              back
+            </button>
+          </Link>
+          <div className="text-title1  mb-9">선생님 로그인</div>
+        </div>
+
         <div className="flex gap-8 flex-col">
           <Input
+            kind="text"
             name="account_id"
             onChange={onChange}
             label="이메일"
             placeholder="이메일을 입력해주세요"
             value={form.account_id}
+            className="bg-gray50"
           />
           <Input
+            kind="password"
             name="password"
             onChange={onChange}
             label="비밀번호"
             placeholder="비밀번호를 입력해주세요"
             value={form.password}
+            className="bg-gray50"
           />
+          <div onClick={invertEmailSave} className="flex gap-3">
+            <div
+              className={`rounded-sm border-2 border-gray400 w-6 h-6 ${
+                saveEmail && "bg-blue200 border-none"
+              }`}
+            ></div>
+            이메일 저장
+          </div>
           <Button
-            className="w-full mt-16"
+            className="w-full mt-16 text-body3"
             onClick={() => mutate(form)}
             radius="normal"
             kind="contained"

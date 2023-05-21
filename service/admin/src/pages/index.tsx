@@ -18,8 +18,8 @@ export default function Home() {
 
   const [option, setOption] = useState({
     name: "",
-    grade: "전체",
-    classNum: "전체",
+    grade: "",
+    classNum: "",
     major: {
       id: "",
       name: "",
@@ -51,6 +51,7 @@ export default function Home() {
             placeholder="이름을 입려해 주세요"
             onChange={onHandleChange}
             name="name"
+            className="bg-transparent"
           />
           {studentNum.map(({ placeholder, lists, name }) => (
             <Dropdown

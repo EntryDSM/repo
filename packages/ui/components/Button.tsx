@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 interface PropsType {
   className?: string;
-  radius?: "normal" | "circle";
+  radius?: "normal" | "medium" | "circle";
   kind?:
     | "contained"
     | "containedWhite"
@@ -65,6 +65,12 @@ const buttonColor = {
   },
 };
 
+const radiusObj = {
+  normal: "rounded-[2px]",
+  medium: "rounded-[16px]",
+  circle: "rounded-[100px]",
+};
+
 export const Button = ({
   className,
   radius = "normal",
@@ -74,8 +80,7 @@ export const Button = ({
   disabled = false,
 }: PropsType) => {
   const { enable, disable } = buttonColor[kind];
-  const borderRadius =
-    radius === "circle" ? `rounded-[100px]` : "rounded-[2px]";
+  const borderRadius = radiusObj[radius];
 
   return (
     <button

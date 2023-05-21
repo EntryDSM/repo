@@ -17,7 +17,7 @@ interface PropsType {
 }
 
 const defaultInputStyle =
-  "w-full h-[46px] pl-5 pr-[60px] focus:outline-none py-3";
+  "w-full h-[46px] pl-5 pr-[60px] focus:outline-none py-3 rounded";
 const defaultHintStyle = "absolute text-body7";
 
 export const Input = ({
@@ -43,7 +43,7 @@ export const Input = ({
   const isOpenText = !open ? "password" : "text";
   const isCustom = kind === "custom";
   return (
-    <div className={`relative rounded ${className}`}>
+    <div className={`relative ${className}`}>
       {label && <div className="text-body8 pb-2 pl-2">{label}</div>}
       <div className="absolute top-[1px] right-[7px] text-body7">{times}</div>
       <input
@@ -54,10 +54,10 @@ export const Input = ({
         onChange={onChange}
         className={`${
           isCustom
-            ? `w-full bg-transparent text-body6 focus:border-2`
-            : `flex items-center text-body7 bg-gray50 border-2 border-${borderError} ${borderFocus}`
+            ? `w-full text-body6 focus:border-2`
+            : `flex items-center text-body7 border-2 border-${borderError} ${borderFocus}`
         } 
-         ${defaultInputStyle}`}
+         ${defaultInputStyle} ${className}`}
       />
       {!borderFocus && (
         <div
@@ -66,7 +66,7 @@ export const Input = ({
           {kind}
         </div>
       )}
-      <div className="mr-5 absolute top-[11px] right-0">
+      <div className="mr-5 absolute top-[40px] right-0">
         {isPassword && (
           <div onClick={PasswordTypeChange}>
             <EyeIcon size={24} />

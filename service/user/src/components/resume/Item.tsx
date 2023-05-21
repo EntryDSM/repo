@@ -22,7 +22,7 @@ export const ResumeItem = ({
   const isPlaceholder = !value && "text-gray300";
   return (
     <div
-      className={`p-10 transition-all border-2 ${height} border-gray100 bg-gray50 flex flex-col gap-10`}
+      className={`p-10 transition-all border-2 ${height} border-gray100 rounded-2xl bg-gray50 flex flex-col gap-10`}
     >
       <div className="flex h-[66px] shrink-0 justify-between items-center">
         <div className={`text-body1 ${isPlaceholder}`}>

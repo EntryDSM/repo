@@ -21,6 +21,14 @@ interface Form {
   major_id: string;
 }
 
+const dropdownList = {
+  grade: [1, 2, 3],
+  class: [1, 2, 3, 4],
+  number: Array(20)
+    .fill(0)
+    .map((_, idx) => idx + 1),
+};
+
 const SignUp = () => {
   const [form, setForm] = useState<Form>({
     name: "",
@@ -46,6 +54,15 @@ const SignUp = () => {
       });
     }
   };
+  const onDropdownChange = ({
+    keyword,
+    name,
+  }: {
+    keyword: number;
+    name?: string;
+  }) => {
+    name && setForm({ ...form, [name]: keyword });
+  };
 
   const navigate = useRouter();
 
@@ -66,8 +83,7 @@ const SignUp = () => {
   });
 
   const { data: major } = useQuery(["dwqdqw"], getMajor, {
-    onSuccess: ({ data }) => {
-    },
+    onSuccess: ({ data }) => {},
   });
 
   const route = useRouter();
@@ -90,7 +106,7 @@ const SignUp = () => {
         setForm({ ...form, email: data.message });
       }
     },
-    enabled: !!route.query.code
+    enabled: !!route.query.code,
   });
   const [imgUrl, setImgUrl] = useState("");
   const { mutate: imgUpload } = useMutation({
@@ -126,7 +142,7 @@ const SignUp = () => {
         >
           {imgUrl ? (
             <Image
-              className="rounded-full object-cover"
+              className="rounded-full object-cover w-[200px] h-[200px]"
               width={200}
               height={200}
               src={imgUrl}
@@ -153,34 +169,37 @@ const SignUp = () => {
             placeholder="이름을 입력해주세요"
             value={form.name}
           />
-          <Input
+          <Dropdown
             name="grade"
-            kind="text"
-            onChange={onChange}
+            kind="outline"
+            onClick={onDropdownChange}
             label="학년"
             placeholder="학년을 선택해주세요"
+            lists={dropdownList.grade}
             value={form.grade}
           />
-          <Input
+          <Dropdown
             name="class_num"
-            kind="text"
-            onChange={onChange}
+            kind="outline"
+            onClick={onDropdownChange}
             label="반"
             placeholder="반을 선택해주세요"
+            lists={dropdownList.class}
             value={form.class_num}
           />
-          <Input
+          <Dropdown
             name="number"
-            kind="text"
-            onChange={onChange}
+            kind="outline"
+            onClick={onDropdownChange}
             label="번호"
             placeholder="번호를 입력해주세요"
             value={form.number}
+            lists={dropdownList.number}
           />
           {Array.isArray(major?.data.major_list) && (
             <Dropdown
-              className="mt-[29px]"
               placeholder="전공선택"
+              label="전공"
               //@ts-ignore
               lists={major.data.major_list}
               objectKey="name"

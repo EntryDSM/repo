@@ -82,7 +82,7 @@ const StudentDropdown = ({
                 onClick={() =>
                   moveClickedPage
                     ? moveClickedPage(idx)
-                    : push(`/${grade}/${student_id}`)
+                    : push(`/${student_id}`)
                 }
                 className={`flex text-[14px] ${
                   id === student_id && "bg-gray100 text-gray700"
