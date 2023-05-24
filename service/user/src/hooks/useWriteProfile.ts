@@ -164,6 +164,7 @@ export const useProfileWrite = <
       // @ts-ignore
       setState([...state, initial[0]]);
     }
+    toast("아이템이 추가되었습니다!", { type: "success", autoClose: 1000 });
   };
   const removeItem = (index: number) => () => {
     if (Array.isArray(state)) {
@@ -172,6 +173,7 @@ export const useProfileWrite = <
       // @ts-ignore
       setState(copy);
     }
+    toast("아이템이 삭제되었습니다!", { type: "success", autoClose: 1000 });
   };
 
   const removeSkill =

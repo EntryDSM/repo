@@ -9,6 +9,7 @@ import { IntroduceResType } from "@/apis/document/patch/Introduce";
 import { ProjectResType } from "@/apis/document/patch/Project";
 import { WriteInfoResType } from "@/apis/document/patch/WriteInfo";
 import { EachStateType } from "@/hooks/useWriteProfile";
+import { toast } from "react-toastify";
 
 interface PropsType {
   document_id?: string;
@@ -22,8 +23,13 @@ export const FeedBack = ({
   content,
 }: PropsType) => {
   const [close, setClose] = useState<boolean>(true);
-  const { mutate } = useMutation(() =>
-    feedbackReflrect({ document_id, element_id })
+  const { mutate } = useMutation(
+    () => feedbackReflrect({ document_id, element_id }),
+    {
+      onSuccess: () => {
+        toast("피드백이 반영되었습니다", { type: "success", autoClose: 1000 });
+      },
+    }
   );
   const reflrectonClick = () => {
     setClose(false);

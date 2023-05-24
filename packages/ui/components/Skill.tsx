@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, KeyboardEvent, useState } from "react";
 import { Input } from "./Input";
 import { Button } from "./Button";
 import { Close } from "../assets";
@@ -17,6 +17,9 @@ export const SKillInput = ({ onAddSkill, className, name }: PropsType) => {
     onAddSkill({ keyword, name });
     setKeyword("");
   };
+  const onEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.keyCode === 13) onClickAddSKill();
+  };
   return (
     <div>
       <div className="w-full gap-[15px] flex items-center">
@@ -25,6 +28,7 @@ export const SKillInput = ({ onAddSkill, className, name }: PropsType) => {
           onChange={onChange}
           placeholder="기술 스택을 입력해 주세요"
           className={className}
+          onKeyDown={onEnter}
           kind="custom"
         />
         <Button kind="contained" onClick={onClickAddSKill}>

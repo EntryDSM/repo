@@ -45,6 +45,7 @@ export const Project = () => {
     "project_list"
   );
   const [imgs, setImgs] = useState<string[]>([]);
+  console.log(imgs);
   return (
     <ResumeLayout
       mutate={mutate}
@@ -82,13 +83,13 @@ export const Project = () => {
           const { name } = e.target;
           const copy = [...state];
 
-          onChange(({ base_url, image_path }) => {
+          onChange(({ image_path }) => {
             copy.splice(index, 1, {
               ...state[index],
               [name]: image_path,
             });
             setState(copy);
-            setImgs(onImgChange(base_url + image_path));
+            setImgs(onImgChange(image_path));
           }, e);
         };
 

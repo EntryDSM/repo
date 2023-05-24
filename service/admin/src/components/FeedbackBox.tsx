@@ -62,14 +62,14 @@ export const FeedbackBox = ({
   };
 
   return (
-    <div className="flex gap-8 relative left-[-48px] [&>*:nth-child(2)]:w-full">
+    <section className="flex gap-8 relative left-[-48px]">
       <div
         onClick={openFeedBack}
-        className={`mt-[10px] rounded-[4px] w-4 h-4 ${
+        className={`mt-[10px] rounded-[4px] w-4 h-4 shrink-0 ${
           isFeedbackChange ? "bg-blue" : "bg-gray200"
         }`}
       />
-      <div>
+      <div className="w-[736px]">
         {children}
         {dropdown && (
           <OutsideClickHandler onOutsideClick={closeFeedBack}>
@@ -92,6 +92,6 @@ export const FeedbackBox = ({
           </OutsideClickHandler>
         )}
       </div>
-    </div>
+    </section>
   );
 };

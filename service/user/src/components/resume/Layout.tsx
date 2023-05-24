@@ -53,7 +53,7 @@ export const ResumeLayout = ({
 
   const toPathPreview = () => push("/" + toPreview());
   return (
-    <div>
+    <>
       <Header profileImg={profileImg} />
       <div className="mt-[120px]">
         <div className="absolute top-20 w-full h-[360px] bg-gray900" />
@@ -85,7 +85,7 @@ export const ResumeLayout = ({
             </div>
 
             <div className="flex justify-between">
-              <div className="bg-gray50 w-[782px] p-10 rounded-[15px] flex flex-col gap-10">
+              <div className="bg-gray50 w-[782px] py-10 px-5 rounded-[15px] flex flex-col gap-10">
                 {children}
               </div>
 
@@ -123,6 +123,6 @@ export const ResumeLayout = ({
         </div>
       </div>
       <Footer />
-    </div>
+    </>
   );
 };

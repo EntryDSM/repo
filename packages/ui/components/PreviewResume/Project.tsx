@@ -26,7 +26,7 @@ export const Project = ({
   url,
 }: PropsType) => {
   return (
-    <div className="flex flex-col gap-10 rounded-md bg-gray50 pl-10 pr-10 pt-7 pb-7">
+    <div className="flex flex-col gap-10 rounded-md bg-gray50 pl-10 pr-10 pt-7 pb-7 w-full">
       <div className="flex items-center">
         <Image
           width={80}
@@ -54,10 +54,13 @@ export const Project = ({
       {url && (
         <Link
           href={url}
-          className="flex gap-2 bg-gray100 pl-3 pr-3 pt-2 pb-2 rounded-md w-fit"
+          className="flex gap-2 bg-gray100 pl-3 pr-3 pt-2 pb-2 rounded-md w-fit max-w-full flex-1"
         >
           <LinkSvg />
-          <div>{url}</div>
+
+          <div className=" text-ellipsis overflow-hidden whitespace-normal">
+            {url}
+          </div>
         </Link>
       )}
     </div>

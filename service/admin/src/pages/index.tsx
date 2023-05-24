@@ -38,6 +38,7 @@ export default function Home() {
     onOptionChange({ ...option, [name]: value });
   };
 
+  const studentList = data?.data.student_list;
   return (
     <>
       <Header />
@@ -84,9 +85,12 @@ export default function Home() {
             />
           )}
         </div>
-        <div className="flex flex-col gap-5 mb-20">
-          {data &&
-            data.data.student_list.map((student) => <Student {...student} />)}
+        <div className="flex flex-col items-center gap-5 mb-20">
+          {!!studentList?.length ? (
+            studentList.map((student) => <Student {...student} />)
+          ) : (
+            <div className=" text-body3 mt-10">조건에 맞는 학생이 없습니다. 다른 조건을 선택해 주세요</div>
+          )}
         </div>
       </div>
     </>

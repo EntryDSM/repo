@@ -43,7 +43,7 @@ export const TextArea = ({
         ref={ref}
         name={name}
         onChange={onChangeSlice}
-        className={`resize-none h-50 bg-gray100 w-full p-4 rounded ${className}`}
+        className={`resize-none h-50 bg-gray100 w-full p-3 rounded ${className}`}
         placeholder={placeholder}
         value={value}
       />

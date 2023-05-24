@@ -54,13 +54,13 @@ export const Sharing = ({
             }
           };
           return (
-            <div
+            <button
               onClick={onClick}
               className=" bg-gray600 rounded-md text-body6 px-3 py-[14px] flex items-center justify-between"
             >
               {text}
               {includeShare ? <Selected /> : <UnSelected />}
-            </div>
+            </button>
           );
         })}
       </div>

@@ -97,13 +97,15 @@ export const PreviewResume = ({
     ) : (
       <>{props.children}</>
     );
-  const feedbackWidth = FeedbackBox ? "w-[848px]" : "w-[800px]";
+  const feedbackWidth = FeedbackBox ? "w-[848px] ml-[48px]" : "w-[800px] ";
 
   const [grade, classNum] = writer.student_number.toString().split("");
 
   return (
-    <div className={`${feedbackWidth} m-auto my-20 flex flex-col gap-8 p-8`}>
-      <div>
+    <main
+      className={`${feedbackWidth} m-auto my-20 flex flex-col gap-8 p-8 justify-between`}
+    >
+      <article>
         <FeedBack
           part="기본정보"
           element_id={writer.element_id}
@@ -128,9 +130,9 @@ export const PreviewResume = ({
             </div>
           </div>
         </FeedBack>
-      </div>
+      </article>
 
-      <div>
+      <article>
         <FeedBack
           part="자기소개"
           element_id={introduce.element_id}
@@ -143,22 +145,20 @@ export const PreviewResume = ({
             </div>
           </div>
         </FeedBack>
-      </div>
+      </article>
 
-      <div>
-        {!!skill_list.length && (
-          <div>
-            <div className="text-body5 mb-3">기술 스택</div>
-            <div className="flex gap-3">
-              {skill_list.map((skill) => (
-                <Tag className="bg-gray50" technology={skill} />
-              ))}
-            </div>
+      {!!skill_list.length && (
+        <article>
+          <div className="text-body5 mb-3">기술 스택</div>
+          <div className="flex gap-3">
+            {skill_list.map((skill) => (
+              <Tag className="bg-gray50" technology={skill} />
+            ))}
           </div>
-        )}
-      </div>
+        </article>
+      )}
 
-      <div className="flex gap-3 flex-col">
+      <article className="flex gap-3 flex-col">
         <div className="text-body5">수상 경력</div>
         {award_list.map((award) => (
           <FeedBack
@@ -169,9 +169,9 @@ export const PreviewResume = ({
             <Award {...award} />
           </FeedBack>
         ))}
-      </div>
+      </article>
 
-      <div className="flex gap-2 flex-col">
+      <article className="flex gap-2 flex-col">
         <div className="text-body5">자격증</div>
         {certificate_list.map((data) => (
           <FeedBack
@@ -182,9 +182,9 @@ export const PreviewResume = ({
             <Certificate {...data} />
           </FeedBack>
         ))}
-      </div>
+      </article>
 
-      <div className="flex flex-col gap-2">
+      <article className="flex flex-col gap-2">
         <div className="text-body1">Project</div>
         {project_list.map((data) => (
           <FeedBack
@@ -195,7 +195,7 @@ export const PreviewResume = ({
             <Project {...data} />
           </FeedBack>
         ))}
-      </div>
-    </div>
+      </article>
+    </main>
   );
 };

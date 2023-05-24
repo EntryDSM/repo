@@ -54,14 +54,16 @@ export const SideBar = ({
     2: "[&_path]:[&>*:nth-child(4)]:fill-gray500",
   }[side];
   return (
-    <div className="flex h-[100vh]">
+    <header className="flex h-[100vh]">
       <div className="fixed bottom-0 top-0 flex z-20">
-        <div
+        <nav
           className={`bg-gray800 w-20 flex gap-10 flex-col items-center pt-10 ${currentIcon}`}
         >
-          <Link href="/">
-            <WhiteRepoIcon />
-          </Link>
+          <ul>
+            <Link href="/">
+              <WhiteRepoIcon />
+            </Link>
+          </ul>
           <Home onClick={() => setSide(0)} />
           {!preview && (
             <>
@@ -69,7 +71,7 @@ export const SideBar = ({
               {status && Sharing && <Stack onClick={() => setSide(2)} />}
             </>
           )}
-        </div>
+        </nav>
         {!preview && !!side && (
           <div className="bg-gray700 w-60 text-gray50 pl-6 pr-6 pt-10">
             {
@@ -90,6 +92,6 @@ export const SideBar = ({
       </div>
       {!preview && !!side && <div className="w-[320px]" />}
       <div className="m-auto">{children}</div>
-    </div>
+    </header>
   );
 };

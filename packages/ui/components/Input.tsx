@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ReactNode, useState } from "react";
+import React, { ChangeEvent, KeyboardEvent, ReactNode, useState } from "react";
 import { Preview } from "../assets/Preview";
 import { NonPreview } from "../assets";
 
@@ -10,14 +10,15 @@ interface PropsType {
   name?: string;
   label?: string;
   value: number | string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
   successMsg?: string;
   errorMsg?: string;
+  onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const defaultInputStyle =
-  "w-full h-[46px] pl-5 pr-[60px] focus:outline-none py-3 rounded";
+  "w-full h-[46px] pl-5 focus:outline-none py-3 rounded";
 const defaultHintStyle = "absolute text-body7";
 
 export const Input = ({
@@ -30,6 +31,7 @@ export const Input = ({
   activeIcon,
   placeholder,
   onChange,
+  onKeyDown,
   errorMsg,
   successMsg,
 }: PropsType) => {
@@ -52,12 +54,14 @@ export const Input = ({
         value={value}
         placeholder={placeholder}
         onChange={onChange}
+        onKeyDown={onKeyDown}
         className={`${
           isCustom
             ? `w-full text-body6 focus:border-2`
             : `flex items-center text-body7 border-2 border-${borderError} ${borderFocus}`
         } 
-         ${defaultInputStyle} ${className}`}
+        ${isPassword ? "pr-[60px]" : "pr-5"}
+         ${defaultInputStyle}  ${className}`}
       />
       {!borderFocus && (
         <div

@@ -74,26 +74,30 @@ const StudentDropdown = ({
           <Arrow direction={arrowDirection} size={16} />
         </div>
       )}
-      {open &&
-        classList?.map(
-          ({ name, student_number, student_id, document_status }, idx) => {
-            return (
-              <div
-                onClick={() =>
-                  moveClickedPage
-                    ? moveClickedPage(idx)
-                    : push(`/${student_id}`)
-                }
-                className={`flex text-[14px] cursor-pointer ${
-                  id === student_id && "bg-gray100 text-gray700"
-                } py-2 rounded-md px-3 justify-between items-center [&_path]:fill-gray400`}
-              >
-                {student_number} {name}
-                {document_status && StudentIcon[document_status]}
-              </div>
-            );
-          }
-        )}
+      <nav>
+        <ul>
+          {open &&
+            classList?.map(
+              ({ name, student_number, student_id, document_status }, idx) => {
+                return (
+                  <li
+                    onClick={() =>
+                      moveClickedPage
+                        ? moveClickedPage(idx)
+                        : push(`/${student_id}`)
+                    }
+                    className={`flex text-[14px] cursor-pointer ${
+                      id === student_id && "bg-gray100 text-gray700"
+                    } py-2 rounded-md px-3 justify-between items-center [&_path]:fill-gray400`}
+                  >
+                    {student_number} {name}
+                    {document_status && StudentIcon[document_status]}
+                  </li>
+                );
+              }
+            )}
+        </ul>
+      </nav>
     </>
   );
 };
