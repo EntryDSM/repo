@@ -10,6 +10,7 @@ interface PropsType {
   children: ReactNode;
   mutate?: any;
   toPreview: () => string;
+  profileImg?: string;
   status?: "CREATED" | "SUBMITTED" | "SHARED";
 }
 
@@ -30,6 +31,7 @@ const documentStatus = {
 export const ResumeLayout = ({
   children,
   mutate,
+  profileImg,
   toPreview,
   status = "CREATED",
 }: PropsType) => {
@@ -52,7 +54,7 @@ export const ResumeLayout = ({
   const toPathPreview = () => push("/" + toPreview());
   return (
     <div>
-      <Header />
+      <Header profileImg={profileImg} />
       <div className="mt-[120px]">
         <div className="absolute top-20 w-full h-[360px] bg-gray900" />
         <div className="relative z-2">
@@ -83,7 +85,7 @@ export const ResumeLayout = ({
             </div>
 
             <div className="flex justify-between">
-              <div className="bg-gray50 w-[782px] p-5 rounded-[15px] flex flex-col gap-10">
+              <div className="bg-gray50 w-[782px] p-10 rounded-[15px] flex flex-col gap-10">
                 {children}
               </div>
 

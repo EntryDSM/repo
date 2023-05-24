@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useRef } from "react";
+import React, { ChangeEvent, useEffect, useRef } from "react";
 
 interface Props {
   name: string;
@@ -20,17 +20,23 @@ export const TextArea = ({
   className,
 }: Props) => {
   const ref = useRef<HTMLTextAreaElement | null>(null);
+  const textareaSizing = ({ current }: typeof ref) => {
+    if (!current) return;
+    current.style.height = "24px";
+
+    const height = current.scrollHeight;
+    if (maxLine && maxLine * 24 + 32 < height)
+      current.style.height = (maxLine || 0) * 24 + 32 + "px";
+    else current.style.height = height + "px";
+  };
+  
   const onChangeSlice = (e: ChangeEvent<HTMLTextAreaElement>) => {
     e.target.value = e.target.value.slice(0, limit);
     onChange(e);
-    if (!ref.current) return;
-    ref.current.style.height = "24px";
-
-    const height = ref.current.scrollHeight;
-    if (maxLine && maxLine * 24 + 32 < height)
-      ref.current.style.height = (maxLine || 0) * 24 + 32 + "px";
-    else ref.current.style.height = height + "px";
   };
+
+  useEffect(() => textareaSizing(ref), [value]);
+
   return (
     <div className="w-full">
       <textarea

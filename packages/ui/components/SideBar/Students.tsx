@@ -19,7 +19,7 @@ export const Students = ({
 }: PropsType) => {
   return (
     <div className="flex flex-col gap-[10px]">
-      <div className="text-body5">2022 1학년 8기</div>
+      <div className="text-body5">{grade}학년</div>
       {studentList.map((classList, classNum) => (
         <StudentDropdown
           classList={classList}
@@ -84,7 +84,7 @@ const StudentDropdown = ({
                     ? moveClickedPage(idx)
                     : push(`/${student_id}`)
                 }
-                className={`flex text-[14px] ${
+                className={`flex text-[14px] cursor-pointer ${
                   id === student_id && "bg-gray100 text-gray700"
                 } py-2 rounded-md px-3 justify-between items-center [&_path]:fill-gray400`}
               >

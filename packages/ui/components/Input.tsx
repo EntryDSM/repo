@@ -66,7 +66,11 @@ export const Input = ({
           {kind}
         </div>
       )}
-      <div className="mr-5 absolute top-[40px] right-0">
+      <div
+        className={`mr-5 absolute ${
+          isPassword ? "top-[40px]" : "top-[11px]"
+        } right-0`}
+      >
         {isPassword && (
           <div onClick={PasswordTypeChange}>
             <EyeIcon size={24} />

@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Inter } from "next/font/google";
 import { Student } from "@/components/student";
 import { Header } from "@/components/header";
-import { Dropdown, Input } from "@packages/ui";
+import { Dropdown, Input, dropdownAll } from "@packages/ui";
 import { useQuery } from "react-query";
 import { ChangeEvent, useState } from "react";
 import { getStudent } from "@/apis/student";
@@ -41,7 +41,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <div className="m-auto w-[1120px]">
+      <div className="m-auto w-[1120px] mt-40">
         <p className="text-title1 mt-28">학생 관리</p>
         <p className="text-title4 mb-20">학생을 관리해보세요</p>
         <div className="mb-10 flex gap-5">
@@ -51,7 +51,7 @@ export default function Home() {
             placeholder="이름을 입려해 주세요"
             onChange={onHandleChange}
             name="name"
-            className="bg-transparent"
+            className="bg-transparent rounded-sm"
           />
           {studentNum.map(({ placeholder, lists, name }) => (
             <Dropdown
@@ -61,7 +61,7 @@ export default function Home() {
               name={name}
               value={option[name as "grade"]}
               onClick={({ keyword, name }) =>
-                name && setOption({ ...option, [name]: keyword })
+                name && setOption({ ...option, [name]: dropdownAll(keyword) })
               }
             />
           ))}
@@ -74,6 +74,7 @@ export default function Home() {
               objectKey="name"
               value={option.major}
               onClick={({ keyword, name }) => {
+                keyword.name = dropdownAll(keyword.name);
                 name &&
                   onOptionChange({
                     ...option,

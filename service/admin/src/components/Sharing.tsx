@@ -1,4 +1,10 @@
-import { MutableRefObject, Ref, cloneElement, useState } from "react";
+import {
+  MutableRefObject,
+  Ref,
+  cloneElement,
+  useEffect,
+  useState,
+} from "react";
 import { Selected, UnSelected } from "../../../../packages/ui/assets";
 import { Button } from "../../../../packages/ui";
 import { documentShare, documentUnShare } from "@/apis/document/post/shard";
@@ -12,19 +18,20 @@ const sharingButton = [
 
 interface PropsType {
   name?: string;
-  status: "CREATED" | "SUBMITTED" | "SHARED";
   document_id: string;
   targetRef?: MutableRefObject<HTMLDivElement | null>;
+  shared: boolean;
+  changeSharing: () => void;
 }
 
 export const Sharing = ({
   name,
-  status,
   document_id,
   targetRef,
+  shared,
+  changeSharing,
 }: PropsType) => {
-  const [state, setState] = useState<boolean>(status === "SHARED");
-  const share = state
+  const share = shared
     ? () => documentUnShare(document_id)
     : () => documentShare(document_id);
 
@@ -38,16 +45,12 @@ export const Sharing = ({
         <div className="text-body5">문서 공개 설정</div>
         {sharingButton.map(({ text, button_Status }) => {
           const includeShare = button_Status.includes(
-            state ? "SHARED" : "SUBMITTED"
+            shared ? "SHARED" : "SUBMITTED"
           );
           const onClick = () => {
-            try {
-              if (!includeShare) {
-                share();
-                setState(!state);
-              }
-            } catch (e) {
-              throw Error;
+            if (!includeShare) {
+              share();
+              changeSharing();
             }
           };
           return (
@@ -76,7 +79,7 @@ export const getPdf = async (
   fileName: string
 ) => {
   if (!current) return;
-  const canvas = await html2canvas(current);
+  const canvas = await html2canvas(current, { backgroundColor: "#f6f6f6" });
   const imgData = canvas.toDataURL("image/png");
 
   const imgWidth = 210;

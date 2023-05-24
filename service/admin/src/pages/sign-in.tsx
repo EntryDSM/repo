@@ -35,15 +35,8 @@ const SignIn = () => {
 
   useEffect(() => {
     const { isSaveEmail, email } = getSaveEmail();
-    console.log(isSaveEmail, email);
     setSave(isSaveEmail);
-    setForm({ ...form, account_id: email });
-  }, []);
-
-  const { push } = useRouter();
-  useEffect(() => {
-    const isLogin = localStorage.getItem("access_token");
-    if (isLogin) push("/");
+    if (isSaveEmail) setForm({ ...form, account_id: email });
   }, []);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {

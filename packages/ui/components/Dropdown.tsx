@@ -4,7 +4,8 @@ import ReactOutSideClickHandler from "react-outside-click-handler";
 
 type ListObjectType = { [key in string]: string };
 
-
+export const dropdownAll = (keyword: string) =>
+  keyword === "전체" ? "" : keyword;
 
 interface PropsType<T, U> {
   kind?: "outline" | "contained";
@@ -41,6 +42,10 @@ export const Dropdown = <
 }: PropsType<T, U>) => {
   const kindCss = kindColor[kind];
   const [dropdown, setDropDown] = useState(false);
+  const valueObject =
+    typeof value === "object"
+      ? (value[objectKey as string] as string)
+      : (value as string | undefined);
   return (
     <ReactOutSideClickHandler
       display="inline-block"
@@ -57,12 +62,8 @@ export const Dropdown = <
           onClick={() => setDropDown(!dropdown)}
           className={`h-[46px] flex items-center justify-between rounded-sm pl-4 pr-3 ${kindCss} cursor-pointer`}
         >
-          <div className={`text-body6 ${value || "text-gray300"}`}>
-            {(value !== undefined &&
-              (typeof value === "object"
-                ? value[objectKey as string]
-                : value)) ||
-              placeholder}
+          <div className={`text-body6 ${valueObject || "text-gray300"}`}>
+            {valueObject || placeholder}
           </div>
           <Arrow direction={dropdown ? "top" : "bottom"} />
         </div>

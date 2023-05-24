@@ -25,7 +25,7 @@ export type StudentListType = StudentType[] | undefined;
 
 export type ShareFnType = (action: "SHARING" | "UNSHARING") => void;
 
-interface Props {
+interface PropType {
   preview?: boolean;
   moveClickedPage?: (page: number) => void;
   studentList?: (StudentType[] | undefined)[];
@@ -45,7 +45,7 @@ export const SideBar = ({
   id,
   grade,
   children,
-}: Props) => {
+}: PropType) => {
   const [side, setSide] = useState<number>(0);
 
   const currentIcon = {

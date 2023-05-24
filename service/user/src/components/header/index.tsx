@@ -3,13 +3,18 @@ import Link from "next/link";
 import dummy from "@packages/ui/assets/dummy.png";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { ResumeImg } from "../ResumeImg";
 
 const links = {
   마이페이지: "/",
   이력서: "/resume/my",
 };
 
-export const Header = () => {
+interface PropsType {
+  profileImg?: string;
+}
+
+export const Header = ({ profileImg }: PropsType) => {
   const { route } = useRouter();
   return (
     <header className="flex justify-center items-center bg-gray900 h-20">
@@ -39,7 +44,13 @@ export const Header = () => {
           </ul>
         </nav>
         <div>
-          <Image width={40} height={40} src={dummy} alt="프로필 이미지" />
+          <ResumeImg
+            width={40}
+            height={40}
+            src={profileImg}
+            alt="프로필 이미지"
+            className="w-10 h-10 object-cover rounded-full"
+          />
         </div>
       </div>
     </header>

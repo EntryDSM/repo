@@ -18,6 +18,7 @@ export const Project = () => {
     state,
     toPreview,
     status,
+    profileImg,
     mutate,
     setState,
     handleChange,
@@ -45,7 +46,12 @@ export const Project = () => {
   );
   const [imgs, setImgs] = useState<string[]>([]);
   return (
-    <ResumeLayout mutate={mutate} status={status} toPreview={toPreview}>
+    <ResumeLayout
+      mutate={mutate}
+      profileImg={profileImg}
+      status={status}
+      toPreview={toPreview}
+    >
       <ResumeTitle value="프로젝트" onClick={addItem} />
       {state.map((item, index) => {
         const {

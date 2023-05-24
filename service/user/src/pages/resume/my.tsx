@@ -29,6 +29,7 @@ export const My = () => {
     state,
     toPreview,
     status,
+    profileImg,
     mutate,
     setState,
     handleChange,
@@ -66,7 +67,12 @@ export const My = () => {
   };
 
   return (
-    <ResumeLayout mutate={mutate} status={status} toPreview={toPreview}>
+    <ResumeLayout
+      mutate={mutate}
+      profileImg={profileImg}
+      status={status}
+      toPreview={toPreview}
+    >
       <ResumeTitle value="자기소개" />
       <div className="px-[40px] flex flex-col gap-10">
         <FeedBack

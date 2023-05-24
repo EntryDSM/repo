@@ -102,7 +102,7 @@ export const PreviewResume = ({
   const [grade, classNum] = writer.student_number.toString().split("");
 
   return (
-    <div className={`${feedbackWidth} m-auto my-20 flex flex-col gap-7 p-8`}>
+    <div className={`${feedbackWidth} m-auto my-20 flex flex-col gap-8 p-8`}>
       <div>
         <FeedBack
           part="기본정보"
@@ -159,7 +159,7 @@ export const PreviewResume = ({
       </div>
 
       <div className="flex gap-3 flex-col">
-        <div className="text-body5 mb-3">수상 경력</div>
+        <div className="text-body5">수상 경력</div>
         {award_list.map((award) => (
           <FeedBack
             part={award.name}
@@ -171,8 +171,8 @@ export const PreviewResume = ({
         ))}
       </div>
 
-      <div className="flex gap-3 flex-col">
-        <div className="text-body5 mb-3">자격증</div>
+      <div className="flex gap-2 flex-col">
+        <div className="text-body5">자격증</div>
         {certificate_list.map((data) => (
           <FeedBack
             part={data.name}
@@ -184,8 +184,8 @@ export const PreviewResume = ({
         ))}
       </div>
 
-      <div className="flex flex-col gap-3">
-        <div className="text-body1 mb-2">Project</div>
+      <div className="flex flex-col gap-2">
+        <div className="text-body1">Project</div>
         {project_list.map((data) => (
           <FeedBack
             part={data.name}

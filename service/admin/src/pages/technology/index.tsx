@@ -69,7 +69,7 @@ const technology = () => {
   return (
     <div>
       <Header />
-      <div className="m-auto w-[1120px]">
+      <div className="m-auto w-[1120px] mt-40">
         <p className="text-title1 mt-28">전공관리</p>
         <p className="text-title4 mb-20">전공을 추가, 삭제 해보세요</p>
 
@@ -90,7 +90,7 @@ const technology = () => {
               placeholder="추가할 전공을 입력해주세요"
               onChange={(e) => setTechnology(e.target.value)}
             />
-            <Button kind="outline">
+            <Button kind="contained" className=" opacity-30">
               <Plus size={18} />
               전공 추가
             </Button>

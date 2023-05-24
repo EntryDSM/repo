@@ -14,7 +14,7 @@ export default function Home() {
 
   return (
     <main>
-      <Header />
+      <Header profileImg={profile?.data.profile_image_url} />
       <div className="absolute w-full h-[360px] bg-gray900" />
       {profile && feedbacks && (
         <MyPage profile={profile.data} feedbacks={feedbacks.data} />

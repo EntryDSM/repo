@@ -29,34 +29,36 @@ export const FeedbackBox = ({
   };
 
   const deleteFeedback = () => {
-    try {
-      closeFeedBack();
-      feedbackRemove({ document_id, element_id });
-      setIsFeedbackChange(false);
-      setState("");
-    } catch (e) {
-      toast("피드백 삭제에 오류가 발생했습니다", {
-        type: "error",
-        autoClose: 500,
+    feedbackRemove({ document_id, element_id })
+      .then(() => {
+        closeFeedBack();
+        setIsFeedbackChange(false);
+        setState("");
+      })
+      .catch(() => {
+        toast("피드백 삭제에 오류가 발생했습니다", {
+          type: "error",
+          autoClose: 500,
+        });
       });
-    }
   };
   const changeFeedback = () => {
-    try {
-      if (!state) {
-        toast("내용을 작성해 주세요", { type: "error", autoClose: 500 });
-        return;
-      }
-      const props = { document_id, element_id, comment: state };
-      closeFeedBack();
-      isFeedbackChange ? feedbackChange(props) : feedbackAdd(props);
-      setIsFeedbackChange(true);
-    } catch {
-      toast("피드백 제출에 오류가 발생했습니다", {
-        type: "error",
-        autoClose: 500,
-      });
+    if (!state) {
+      toast("내용을 작성해 주세요", { type: "error", autoClose: 500 });
+      return;
     }
+    const props = { document_id, element_id, comment: state };
+    (isFeedbackChange ? feedbackChange(props) : feedbackAdd(props))
+      .then(() => {
+        closeFeedBack();
+        setIsFeedbackChange(true);
+      })
+      .catch(() =>
+        toast("피드백 제출에 오류가 발생했습니다", {
+          type: "error",
+          autoClose: 1000,
+        })
+      );
   };
 
   return (
@@ -71,13 +73,13 @@ export const FeedbackBox = ({
         {children}
         {dropdown && (
           <OutsideClickHandler onOutsideClick={closeFeedBack}>
-            <div className="fixed bg-gray50 z-10 rounded-[10px] shadow-[0 80px 0 0] top-[20%] left-[50%] w-[400px] px-5 py-10 flex flex-col gap-5 shadow-[0_0_80px_0_rgba(0,0,0,0.04)] ">
+            <div className="fixed bg-gray50 z-10 rounded-[10px] shadow-[0 80px 0 0] top-[calc(50%-200px)] left-[calc(50%-200px)] w-[400px] px-5 py-10 flex flex-col gap-5 shadow-[0_0_80px_0_rgba(0,0,0,0.04)] ">
               <div className="flex justify-between text-body3 text-blue [&_path]:fill-blue">
                 {part}
                 <Delete size={24} onClick={deleteFeedback} />
               </div>
               <textarea
-                className="bg-gray100 w-full h-[200px] p-3 text-body7 resize-none rounded-[4px]"
+                className="bg-gray100 w-full h-[200px] p-3 text-body7 resize-none rounded-[4px] focus:outline-0 focus:border-2 focus:border-gray300"
                 name=""
                 placeholder="내용을 입력해 주세요"
                 onChange={onChange}

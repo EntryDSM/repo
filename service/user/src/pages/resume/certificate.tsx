@@ -10,6 +10,7 @@ export const Certificate = () => {
     state,
     toPreview,
     status,
+    profileImg,
     setState,
     mutate,
     handleChange,
@@ -29,7 +30,12 @@ export const Certificate = () => {
     "certificate_list"
   );
   return (
-    <ResumeLayout mutate={mutate} status={status} toPreview={toPreview}>
+    <ResumeLayout
+      mutate={mutate}
+      profileImg={profileImg}
+      status={status}
+      toPreview={toPreview}
+    >
       <ResumeTitle value="자격증" onClick={addItem} />
       {state.map((item, index) => {
         const { name, date, issuing_institution, feedback, element_id } = item;

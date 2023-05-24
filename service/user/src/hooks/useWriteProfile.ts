@@ -113,7 +113,6 @@ export const useProfileWrite = <
   type: U
 ) => {
   const [state, setState] = useState<T>(initial);
-  const [status, setStatus] = useState<StatusType>("CREATED");
   const [renderOnce, setRender] = useState<boolean>(false);
   const { data } = useQuery(["madeDetail"], () => myDetail(), {
     onSuccess: ({ data }) => {
@@ -133,7 +132,6 @@ export const useProfileWrite = <
       }
       //@ts-ignore
       setState(temp);
-      setStatus(data.document_status);
       setRender(true);
     },
     enabled: !renderOnce,
@@ -195,7 +193,7 @@ export const useProfileWrite = <
         setState(copy);
       } else setState(AddSkillFn(state, value));
     };
-    
+
   const onDateChange =
     (index: number) =>
     ({ value, name }: { value: number; name: string }) => {
@@ -217,9 +215,13 @@ export const useProfileWrite = <
     mutate(state);
     return "preview";
   };
+
+  const status = data?.data.document_status || "CREATED";
+  const profileImg = data?.data.writer.profile_image_path;
   return {
     state,
     status,
+    profileImg,
     mutate: () => mutate(state),
     setState,
     handleChange,

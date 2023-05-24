@@ -5,19 +5,31 @@ import { useProfileWrite } from "@/hooks/useWriteProfile";
 import { FeedBack } from "@/components/resume/FeedBack";
 
 const Introduce = () => {
-  const { state, toPreview, status, mutate, handleChange, document_id } =
-    useProfileWrite(
-      {
-        heading: "",
-        introduce: "",
-        document_id: "",
-        element_id: "",
-        feedback: "",
-      },
-      "introduce"
-    );
+  const {
+    state,
+    toPreview,
+    profileImg,
+    status,
+    mutate,
+    handleChange,
+    document_id,
+  } = useProfileWrite(
+    {
+      heading: "",
+      introduce: "",
+      document_id: "",
+      element_id: "",
+      feedback: "",
+    },
+    "introduce"
+  );
   return (
-    <ResumeLayout mutate={mutate} status={status} toPreview={toPreview}>
+    <ResumeLayout
+      mutate={mutate}
+      profileImg={profileImg}
+      status={status}
+      toPreview={toPreview}
+    >
       <ResumeTitle value="자기소개" />
       <FeedBack
         document_id={document_id}
@@ -32,7 +44,7 @@ const Introduce = () => {
             placeholder="한 줄 소개를 입력해주세요"
             onChange={handleChange(0)}
             maxLine={2}
-            limit={72}
+            limit={70}
           />
         </ImportLabel>
         <ImportLabel label="자기소개" important>

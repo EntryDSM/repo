@@ -33,7 +33,7 @@ export const MyPage = ({ profile, feedbacks }: PropsType) => {
   } = profile;
   const { feedback_list } = feedbacks;
   return (
-    <div className="max-w-[1120px] w-full m-auto mt-[200px] px-4">
+    <div className="max-w-[1120px] w-full m-auto my-[200px] px-4">
       <div className="relative bg-gray50 w-[1120px] rounded-[15px] px-40 pt-[170px] pb-[100px] mb-[120px]">
         <div className="absolute -top-20 -ml-20 flex gap-x-[30px]">
           <div className="flex flex-col items-center gap-y-5">
@@ -54,14 +54,20 @@ export const MyPage = ({ profile, feedbacks }: PropsType) => {
             <p className="text-body5 mb-6">
               {grade}학년 {class_num}반 {number}번
             </p>
-            <p className="text-body5">{email}</p>
+            <p className="text-body5">
+              {email || "이메일이 등록되지 않았습니다"}
+            </p>
           </div>
         </div>
 
         {is_exist ? (
           <>
-            <div className="text-body3 mb-[44px]">{heading}</div>
-            <div className="text-body6 text-gray400">{introduce}</div>
+            <div className="text-body3 mb-[44px] whitespace-pre-wrap">
+              {heading}
+            </div>
+            <div className="text-body6 text-gray400 whitespace-pre-wrap">
+              {introduce}
+            </div>
           </>
         ) : (
           <div className="text-body6 text-gray400">문서를 작성해주세요</div>

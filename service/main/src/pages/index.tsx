@@ -24,7 +24,7 @@ export default function Home() {
       <header
         className={`fixed top-0 bg-gray50 z-10 w-full h-20 px-[300px] flex items-center justify-between `}
       >
-        <div className="flex text-body4 gap-1">
+        <div className="flex text-body3 gap-1">
           <BlackRepoIcon />
           Repo
         </div>

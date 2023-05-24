@@ -161,14 +161,6 @@ const SignUp = () => {
         </Link>
         <div className="text-title1 mb-4">회원가입</div>
         <div className="flex gap-8 flex-col">
-          <Input
-            name="name"
-            kind="text"
-            onChange={onChange}
-            label="이름"
-            placeholder="이름을 입력해주세요"
-            value={form.name}
-          />
           <Dropdown
             name="grade"
             kind="outline"
@@ -214,6 +206,14 @@ const SignUp = () => {
               }
             />
           )}
+          <Input
+            name="name"
+            kind="text"
+            onChange={onChange}
+            label="이름"
+            placeholder="이름을 입력해주세요"
+            value={form.name}
+          />
         </div>
         <Button
           className="w-full mt-10"

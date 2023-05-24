@@ -25,6 +25,7 @@ const Library = () => {
     () => detailLibrary(id as string),
     {
       enabled: !!id,
+      staleTime: Infinity,
     }
   );
   const onPDFOpen = ({ numPages }: { numPages: number }) => {
@@ -39,28 +40,28 @@ const Library = () => {
     console.log(usersPageTop);
     if (usersPageTop !== undefined)
       document.documentElement.scrollTo({
-        top: 1648 * usersPageTop,
+        top: 1002 * usersPageTop,
         behavior: "smooth",
       });
   };
 
-  return (
-    data && (
-      <SideBar studentList={[data.index]} moveClickedPage={moveClickedPage}>
-        <Document file={data.document_url} onLoadSuccess={onPDFOpen}>
-          {Array(page)
-            .fill(0)
-            .map((_, idx) => (
-              <Page
-                pageIndex={idx}
-                key={idx}
-                renderAnnotationLayer={false}
-                renderTextLayer={false}
-              />
-            ))}
-        </Document>
-      </SideBar>
-    )
+  return data ? (
+    <SideBar studentList={[data.index]} moveClickedPage={moveClickedPage}>
+      <Document file={data.document_url} onLoadSuccess={onPDFOpen}>
+        {Array(page)
+          .fill(0)
+          .map((_, idx) => (
+            <Page
+              pageIndex={idx}
+              key={idx}
+              renderAnnotationLayer={false}
+              renderTextLayer={false}
+            />
+          ))}
+      </Document>
+    </SideBar>
+  ) : (
+    <SideBar>접근 권한이 있는 지, 문서가 있는 지 확인해 보세요.</SideBar>
   );
 };
 
