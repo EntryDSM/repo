@@ -81,7 +81,11 @@ export const MyPage = ({ profile, feedbacks }: PropsType) => {
           {statusList.map((statusItem, idx) => {
             const progress = statusIdx[status || "CREATED"];
             return (
-              <Ball complete={idx <= progress} isFirstLine={idx === 0}>
+              <Ball
+                key={statusItem}
+                complete={idx <= progress}
+                isFirstLine={idx === 0}
+              >
                 <div>{statusItem}</div>
               </Ball>
             );
@@ -98,7 +102,10 @@ export const MyPage = ({ profile, feedbacks }: PropsType) => {
               <span className="text-gray300 ml-2">{feedback_list.length}</span>
             </div>
             {feedback_list.map(({ element_name, comment }) => (
-              <div className="bg-gray100 rounded-2xl pl-10 pr-10 pt-12 pb-12 flex flex-col gap-[30px]">
+              <div
+                key={element_name}
+                className="bg-gray100 rounded-2xl pl-10 pr-10 pt-12 pb-12 flex flex-col gap-[30px]"
+              >
                 <p>{element_name}</p>
                 <div className="text-body6 whitespace-pre-wrap">{comment}</div>
               </div>

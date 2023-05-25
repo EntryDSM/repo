@@ -29,7 +29,6 @@ export const DayCalender = ({
     plusDate,
     minusDate,
   } = useCalender({ initialValue: initialValue || undefined });
-  
 
   const setChangeAtInput = () => {
     onSubmitAtInput(date);
@@ -54,17 +53,20 @@ export const DayCalender = ({
       <div className="flex justify-center">
         <div className="flex w-auto h-[336px] flex-wrap">
           {weekArray.map((day) => (
-            <div className={weekClassName}>{day}</div>
+            <div className={weekClassName} key={day}>
+              {day}
+            </div>
           ))}
           {Array(startDay)
             .fill(0)
-            .map(() => (
-              <div className={weekClassName} />
+            .map((_, idx) => (
+              <div key={idx + "space"} className={weekClassName} />
             ))}
           {Array(dayArray)
             .fill(0)
             .map((_, idx) => (
               <div
+                key={idx + "realShowDay"}
                 className={`cursor-pointer rounded-full ${
                   isCurrentDay(idx + 1) && "bg-gray300 text-gray50"
                 } hover:bg-gray200  hover:text-gray50 ${weekClassName}`}

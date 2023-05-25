@@ -58,6 +58,7 @@ export const Certificate = () => {
             onChange={() => {}}
             placeholder="자격증 이름"
             onRemove={removeItemArray}
+            key={element_id}
           >
             <FeedBack
               document_id={document_id}

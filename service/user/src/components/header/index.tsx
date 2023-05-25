@@ -27,7 +27,7 @@ export const Header = ({ profileImg }: PropsType) => {
               </Link>
             </li>
             {Object.entries(links).map(([key, value]) => (
-              <li>
+              <li key={key}>
                 <Link
                   className={`text-body5 ${
                     route === value ||

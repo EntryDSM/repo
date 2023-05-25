@@ -69,6 +69,7 @@ export const Awards = () => {
             onChange={() => {}}
             placeholder="상 이름"
             onRemove={removeItemArray}
+            key={element_id}
           >
             <FeedBack
               document_id={document_id}
