@@ -55,6 +55,7 @@ export const Sharing = ({
           };
           return (
             <button
+              key={text}
               onClick={onClick}
               className=" bg-gray600 rounded-md text-body6 px-3 py-[14px] flex items-center justify-between"
             >

@@ -57,6 +57,7 @@ export default function Home() {
           {studentNum.map(({ placeholder, lists, name }) => (
             <Dropdown
               className="w-40"
+              key={placeholder}
               placeholder={placeholder}
               lists={lists}
               name={name}
@@ -87,7 +88,7 @@ export default function Home() {
         </div>
         <div className="flex flex-col items-center gap-5 mb-20">
           {!!studentList?.length ? (
-            studentList.map((student) => <Student {...student} />)
+            studentList.map((student) => <Student key={student.document_id} {...student} />)
           ) : (
             <div className=" text-body3 mt-10">조건에 맞는 학생이 없습니다. 다른 조건을 선택해 주세요</div>
           )}

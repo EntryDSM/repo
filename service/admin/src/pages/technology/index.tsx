@@ -7,7 +7,7 @@ import { getMajor, postMajor, deleteMajor } from "@/apis/major";
 import { useMutation, useQuery } from "react-query";
 import { toast } from "react-toastify";
 
-const technology = () => {
+const Technology = () => {
   const [searchTechnology, setSearchTechnology] = useState("");
   const [technology, setTechnology] = useState("");
   const [newMajor, setNewMajor] = useState<boolean>(true);
@@ -103,7 +103,7 @@ const technology = () => {
         </div>
         <div className="flex gap-3 mt-5 flex-wrap">
           {filterdList?.map((major) => (
-            <Tag onClick={deleteTag} data={major} />
+            <Tag key={major.id} onClick={deleteTag} data={major} />
           ))}
         </div>
       </div>
@@ -111,4 +111,4 @@ const technology = () => {
   );
 };
 
-export default technology;
+export default Technology;

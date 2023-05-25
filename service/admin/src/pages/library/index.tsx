@@ -30,7 +30,7 @@ const Library = () => {
           {data &&
             !!data.data.library_document_list.length &&
             data.data.library_document_list.map((libarary) => (
-              <LibraryCard {...libarary} />
+              <LibraryCard key={libarary.id} {...libarary} />
             ))}
         </div>
       </div>

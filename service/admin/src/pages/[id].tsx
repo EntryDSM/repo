@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { useQueries, useQuery } from "react-query";
 
-const detail = () => {
+const Detail = () => {
   const { query } = useRouter();
   const { id } = query;
   const pdfRef = useRef<HTMLDivElement | null>(null);
@@ -77,4 +77,4 @@ const detail = () => {
   );
 };
 
-export default detail;
+export default Detail;
