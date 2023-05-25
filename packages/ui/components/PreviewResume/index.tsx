@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { MutableRefObject, ReactNode } from "react";
 import qr from "../../assets/qr.png";
 import dummy from "../../assets/dummy.png";
 import { Award } from "./Award";
@@ -65,6 +65,7 @@ export interface PreviewType {
     date: number | string;
     feedback?: string | null; // null 가능
   }[];
+  targetRef?: MutableRefObject<HTMLDivElement | null>;
   FeedbackBox?: (props: FeedbackBoxType) => JSX.Element;
 }
 
@@ -89,6 +90,7 @@ export const PreviewResume = ({
   project_list,
   award_list,
   certificate_list,
+  targetRef,
   FeedbackBox,
 }: PreviewType) => {
   const FeedBack = (props: Omit<FeedbackBoxType, "document_id">): JSX.Element =>
@@ -104,6 +106,7 @@ export const PreviewResume = ({
   return (
     <main
       className={`${feedbackWidth} m-auto my-20 flex flex-col gap-8 p-8 justify-between`}
+      ref={targetRef}
     >
       <article>
         <FeedBack

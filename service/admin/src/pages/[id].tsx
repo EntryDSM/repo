@@ -62,14 +62,13 @@ const detail = () => {
         status={data?.data.document_status}
         Sharing={Shared}
       >
-        <div ref={pdfRef}>
-          {data && (
-            <PreviewResume
-              {...data.data}
-              FeedbackBox={shared ? undefined : FeedbackBox}
-            />
-          )}
-        </div>
+        {data && (
+          <PreviewResume
+            {...data.data}
+            FeedbackBox={shared ? undefined : FeedbackBox}
+            targetRef={pdfRef}
+          />
+        )}
       </SideBar>
     </div>
   );
