@@ -8,9 +8,11 @@ const client = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <QueryClientProvider client={client}>
-      <Component {...pageProps} />
-      <ToastContainer />
-    </QueryClientProvider>
+    <div className=" [&_*]:font-['Pretendard-Regular'] [&_*]:leading-tight">
+      <QueryClientProvider client={client}>
+        <Component {...pageProps} />
+        <ToastContainer />
+      </QueryClientProvider>
+    </div>
   );
 }

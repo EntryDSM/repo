@@ -13,10 +13,12 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     isView && (
-      <QueryClientProvider client={queryClient}>
-        <Component {...pageProps} />
-        <ToastContainer />
-      </QueryClientProvider>
+      <div className=" [&_*]:font-['Pretendard-Regular'] [&_*]:leading-tight">
+        <QueryClientProvider client={queryClient}>
+          <Component {...pageProps} />
+          <ToastContainer autoClose={1000} />
+        </QueryClientProvider>
+      </div>
     )
   );
 }

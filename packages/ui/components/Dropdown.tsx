@@ -69,7 +69,7 @@ export const Dropdown = <
         </div>
 
         {dropdown && (
-          <div className="absolute z-50 top-14 bg-gray100 rounded-md shadow-xl w-full max-h-[132px] overflow-y-auto flex flex-col items-center">
+          <div className="absolute z-50 top-14 bg-gray100 rounded-sm shadow-xl w-full max-h-[132px] overflow-y-auto flex flex-col items-center">
             {lists.map((keyword, idx) => {
               const isListObject = typeof keyword === "object";
               return (

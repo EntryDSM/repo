@@ -29,8 +29,7 @@ interface PropType {
   preview?: boolean;
   moveClickedPage?: (page: number) => void;
   studentList?: (StudentType[] | undefined)[];
-  status?: "CREATED" | "SUBMITTED" | "SHARED";
-  Sharing?: () => JSX.Element;
+  Sharing?: () => JSX.Element | null;
   id?: string;
   grade?: string;
   children: ReactNode;
@@ -40,7 +39,6 @@ export const SideBar = ({
   preview,
   moveClickedPage,
   studentList,
-  status,
   Sharing,
   id,
   grade,
@@ -68,7 +66,7 @@ export const SideBar = ({
           {!preview && (
             <>
               {studentList && <Setting onClick={() => setSide(1)} />}
-              {status && Sharing && <Stack onClick={() => setSide(2)} />}
+              {Sharing && <Stack onClick={() => setSide(2)} />}
             </>
           )}
         </nav>
@@ -84,7 +82,7 @@ export const SideBar = ({
                     moveClickedPage={moveClickedPage}
                   />
                 ),
-                2: status && Sharing && <Sharing />,
+                2: Sharing && <Sharing />,
               }[side]
             }
           </div>

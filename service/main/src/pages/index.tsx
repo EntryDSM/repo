@@ -30,8 +30,7 @@ export default function Home() {
         </div>
         <nav>
           <ul className="flex gap-5">
-            <Button onClick={openModal}>로그인하기</Button>
-            <Button onClick={openModal}>회원가입</Button>
+            <Button onClick={openModal}>로그인</Button>
           </ul>
         </nav>
       </header>
@@ -76,7 +75,9 @@ export default function Home() {
             피드백 확인
           </div>
           <div className="text-body4 mt-5">
-            <div>선생님이 피드백 해주신 내용을 바탕으로</div>
+            <div className=" whitespace-nowrap">
+              선생님이 피드백 해주신 내용을 바탕으로
+            </div>
             <div>레주메를 수정해 보세요</div>
           </div>
         </div>
@@ -85,12 +86,12 @@ export default function Home() {
         <Image
           src={myResume}
           alt="myResume"
-          className="w-full h-full absolute"
+          className="w-full h-full absolute object-cover"
         />
         <div className="absolute w-full h-full bg-gray900 opacity-60" />
         <div className="relative z-10 text-gray50 flex flex-col items-center gap-5">
-          <div className=" text-[64px] font-bold">Repo</div>
-          <div className="text-title4">이력서 온라인 작성 서비스</div>
+          <div className=" text-[64px] font-bold">깔끔한</div>
+          <div className="text-[40px]">나만의 레주메</div>
           <Button
             onClick={openModal}
             kind="outlineWhite"

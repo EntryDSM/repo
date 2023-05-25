@@ -75,7 +75,7 @@ const StudentDropdown = ({
         </div>
       )}
       <nav>
-        <ul>
+        <ul className="flex flex-col gap-1">
           {open &&
             classList?.map(
               ({ name, student_number, student_id, document_status }, idx) => {

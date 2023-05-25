@@ -14,6 +14,8 @@ export const SKillInput = ({ onAddSkill, className, name }: PropsType) => {
   const onChange = (e: ChangeEvent<HTMLInputElement>) =>
     setKeyword(e.target.value);
   const onClickAddSKill = () => {
+    console.log(keyword);
+    if (!keyword) return;
     onAddSkill({ keyword, name });
     setKeyword("");
   };
@@ -57,7 +59,7 @@ export const SkillList = ({
       {list &&
         list.map((skill, index) => (
           <div
-            className={`h-10 cursor-pointer bg-gray100 hover:bg-gray200 text-body5 rounded-md flex items-center gap-3 px-5 ${className}`}
+            className={`h-10 cursor-pointer bg-gray100 hover:bg-gray200 text-body5 rounded-sm flex items-center gap-3 px-5 ${className}`}
             onClick={() => onClickRemove({ index, name })}
           >
             {skill}

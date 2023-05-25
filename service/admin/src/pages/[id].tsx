@@ -20,7 +20,6 @@ const detail = () => {
     () => studentDetail(query.id as string),
     {
       enabled: !!query.id,
-      staleTime: Infinity,
       onSuccess: ({ data }) => setShared(data.document_status === "SHARED"),
     }
   );
@@ -30,6 +29,7 @@ const detail = () => {
     queryKey: ["class" + classNum],
     queryFn: () => getStudent({ grade: grade as string, classNum }),
     enabled: !!grade,
+    staleTime: Infinity,
   });
   const result = useQueries([
     studentListObject("1"),
@@ -38,34 +38,37 @@ const detail = () => {
     studentListObject("4"),
   ]).map((list) => list.data?.data.student_list);
 
-  const Shared = () => {
-    if (!data) return <></>;
-    const { writer, document_id } = data.data;
-    const { student_number, name } = writer;
-    return (
-      <Sharing
-        name={student_number + name}
-        document_id={document_id}
-        targetRef={pdfRef}
-        shared={shared}
-        changeSharing={() => setShared(!shared)}
-      />
-    );
-  };
-  console.log(shared);
+  const isCreated = data?.data.document_status === "CREATED";
+  const Shared =
+    isCreated || !data
+      ? undefined
+      : () => {
+          const { writer, document_id } = data.data;
+          const { student_number, name } = writer;
+          return (
+            <Sharing
+              name={student_number + name}
+              document_id={document_id}
+              targetRef={pdfRef}
+              shared={shared}
+              changeSharing={() => setShared(!shared)}
+            />
+          );
+        };
+  const FeedBackBoxUnShared = isCreated || shared ? undefined : FeedbackBox;
+
   return (
     <div>
       <SideBar
         studentList={result}
         id={id as string}
         grade={grade}
-        status={data?.data.document_status}
         Sharing={Shared}
       >
         {data && (
           <PreviewResume
             {...data.data}
-            FeedbackBox={shared ? undefined : FeedbackBox}
+            FeedbackBox={FeedBackBoxUnShared}
             targetRef={pdfRef}
           />
         )}

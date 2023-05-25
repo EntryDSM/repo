@@ -39,8 +39,8 @@ export const Input = ({
   const EyeIcon = open ? Preview : NonPreview;
   const PasswordTypeChange = () => setOpen(!open);
 
-  const borderError = errorMsg ? "error" : "gray900";
-  const borderFocus = kind === "button" ? "" : "focus-within:border-blue";
+  const borderError = errorMsg ? "border-error" : "border-gray900";
+  const borderFocus = kind !== "button" && "focus-within:border-blue";
   const isPassword = kind === "password";
   const isOpenText = !open ? "password" : "text";
   const isCustom = kind === "custom";
@@ -57,8 +57,8 @@ export const Input = ({
         onKeyDown={onKeyDown}
         className={`${
           isCustom
-            ? `w-full text-body6 focus:border-2`
-            : `flex items-center text-body7 border-2 border-${borderError} ${borderFocus}`
+            ? `w-full text-body6 focus:border-2  focus:pl-[18px]`
+            : `flex items-center text-body7 border-2 ${borderError} ${borderFocus}`
         } 
         ${isPassword ? "pr-[60px]" : "pr-5"}
          ${defaultInputStyle}  ${className}`}

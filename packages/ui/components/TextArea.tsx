@@ -29,7 +29,7 @@ export const TextArea = ({
       current.style.height = (maxLine || 0) * 24 + 32 + "px";
     else current.style.height = height + "px";
   };
-  
+
   const onChangeSlice = (e: ChangeEvent<HTMLTextAreaElement>) => {
     e.target.value = e.target.value.slice(0, limit);
     onChange(e);
@@ -43,7 +43,7 @@ export const TextArea = ({
         ref={ref}
         name={name}
         onChange={onChangeSlice}
-        className={`resize-none h-50 bg-gray100 w-full p-3 rounded ${className}`}
+        className={`resize-none h-50 bg-gray100 w-full py-3 px-5  rounded-sm ${className}`}
         placeholder={placeholder}
         value={value}
       />

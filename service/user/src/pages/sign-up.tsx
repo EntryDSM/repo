@@ -1,5 +1,5 @@
 import { Arrow, Plus } from "@packages/ui/assets";
-import { Logo, Input, Button, Dropdown } from "@packages/ui";
+import { Logo, Input, Button, Dropdown, pageRouteLinks } from "@packages/ui";
 import { useEffect, useState } from "react";
 import { oAuthLogin, postSignUp, postSignUpBody } from "@/apis/auth";
 import { useMutation, useQuery } from "react-query";
@@ -64,7 +64,7 @@ const SignUp = () => {
     name && setForm({ ...form, [name]: keyword });
   };
 
-  const navigate = useRouter();
+  const { push, back } = useRouter();
 
   const { data, mutate } = useMutation({
     mutationFn: (body: postSignUpBody) => {
@@ -75,7 +75,7 @@ const SignUp = () => {
         autoClose: 1000,
         type: "success",
       });
-      navigate.push("/");
+      push("/");
     },
     onError: () => {
       toast("에러 발생");
@@ -90,23 +90,32 @@ const SignUp = () => {
   // @ts-ignore
   useQuery(["oauthlogIn"], () => oAuthLogin(route.query), {
     onSuccess: ({ data }) => {
+      console.log(data);
       const { access_token, refresh_token } = data;
       if (access_token && refresh_token) {
         localStorage.setItem("access_token", access_token);
         localStorage.setItem("refresh_token", refresh_token);
-        navigate.push("/");
+        push(pageRouteLinks.user);
       }
     },
-    onError: ({
-      response,
-    }: AxiosError<{ status: number; message: string }>) => {
+    onError: ({ response }) => {
       const data = response?.data;
+
       if (!data) return;
-      if (data.status === 422) {
-        setForm({ ...form, email: data.message });
+
+      switch (data.status) {
+        case 422:
+          setForm({ ...form, email: data.message });
+          return;
+        case 403:
+        case 400:
+          push(pageRouteLinks.main);
+          toast("학교 이메일이 아닙니다.", { type: "error" });
+          return;
       }
     },
     enabled: !!route.query.code,
+    retry: 0,
   });
   const [imgUrl, setImgUrl] = useState("");
   const { mutate: imgUpload } = useMutation({
@@ -155,10 +164,10 @@ const SignUp = () => {
         <p className="text-body5">프로필 추가</p>
       </div>
       <div className="w-[770px] pl-40 pr-40 flex flex-col justify-center">
-        <Link href={"/"} className="flex">
+        <button onClick={back} className="flex items-center">
           <Arrow direction="left" />
-          <button>뒤로가기</button>
-        </Link>
+          뒤로가기
+        </button>
         <div className="text-title1 mb-4">회원가입</div>
         <div className="flex gap-8 flex-col">
           <Dropdown

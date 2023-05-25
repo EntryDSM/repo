@@ -43,7 +43,7 @@ export const DateInput = ({
       <div className="relative w-full">
         <div className="text-body2">{label}</div>
         <div
-          className=" cursor-pointer relative bg-gray100 rounded-[4px]  w-full h-[46px] flex items-center pr-1 pl-3 "
+          className=" cursor-pointer relative bg-gray100 rounded-sm  w-full h-[46px] flex items-center pr-1 pl-5 "
           onClick={openDropdown}
         >
           <input
