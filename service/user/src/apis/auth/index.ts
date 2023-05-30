@@ -6,6 +6,7 @@ export interface postSignUpBody {
   grade: number;
   class_num: number;
   number: number;
+  profile_image_path: string;
 }
 
 export const postSignUp = (body: postSignUpBody) => {

@@ -1,6 +1,6 @@
 import { Arrow, Plus } from "@packages/ui/assets";
 import { Logo, Input, Button, Dropdown, pageRouteLinks } from "@packages/ui";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { oAuthLogin, postSignUp, postSignUpBody } from "@/apis/auth";
 import { useMutation, useQuery } from "react-query";
 import Link from "next/link";
@@ -18,7 +18,12 @@ interface Form {
   class_num: number;
   number: number;
   profile_image_path: string;
-  major_id: string;
+  major_id: { id: string; name: string };
+}
+
+interface ImgFileType {
+  file: File | null;
+  preview: string;
 }
 
 const dropdownList = {
@@ -37,7 +42,11 @@ const SignUp = () => {
     class_num: 0,
     number: 0,
     profile_image_path: "",
-    major_id: "",
+    major_id: { id: "", name: "" },
+  });
+  const [img, setImg] = useState<ImgFileType>({
+    file: null,
+    preview: "",
   });
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,9 +75,13 @@ const SignUp = () => {
 
   const { push, back } = useRouter();
 
-  const { data, mutate } = useMutation({
-    mutationFn: (body: postSignUpBody) => {
-      return postSignUp(body);
+  const { mutate } = useMutation({
+    mutationFn: async (body: postSignUpBody) => {
+      const formData = new FormData();
+      console.log(img);
+      if (img.file) formData.append("file", img.file);
+      const { data } = await getFile({ type: "PROFILE", file: formData });
+      return postSignUp({ ...body, profile_image_path: data.image_path });
     },
     onSuccess: () => {
       toast("성공적으로 회원가입하였습니다.", {
@@ -82,15 +95,12 @@ const SignUp = () => {
     },
   });
 
-  const { data: major } = useQuery(["dwqdqw"], getMajor, {
-    onSuccess: ({ data }) => {},
-  });
+  const { data: major } = useQuery(["dwqdqw"], getMajor);
 
   const route = useRouter();
   // @ts-ignore
   useQuery(["oauthlogIn"], () => oAuthLogin(route.query), {
     onSuccess: ({ data }) => {
-      console.log(data);
       const { access_token, refresh_token } = data;
       if (access_token && refresh_token) {
         localStorage.setItem("access_token", access_token);
@@ -117,15 +127,26 @@ const SignUp = () => {
     enabled: !!route.query.code,
     retry: 0,
   });
-  const [imgUrl, setImgUrl] = useState("");
   const { mutate: imgUpload } = useMutation({
     mutationFn: (req: FormData) => getFile({ type: "PROFILE", file: req }),
-    onSuccess: (res) => {
-      const { base_url, image_path } = res.data;
-      setImgUrl(base_url + image_path);
-      setForm({ ...form, profile_image_path: image_path });
-    },
   });
+
+  const onUploadProfile = (e: ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) return;
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      const base64 = reader.result;
+      if (typeof base64 !== "string") return;
+      setImg({ file, preview: base64 });
+    };
+    const formData = new FormData();
+    formData.append("file", file);
+    imgUpload(formData);
+  };
+
+  const majorData = major?.data.major_list;
 
   return (
     <div className="flex h-[100vh]">
@@ -136,12 +157,7 @@ const SignUp = () => {
         <Logo />
         <input
           id="profile"
-          onChange={(form) => {
-            const formData = new FormData();
-            // @ts-ignore
-            formData.append("file", form.target.files[0]);
-            imgUpload(formData);
-          }}
+          onChange={onUploadProfile}
           type="file"
           className="hidden"
         />
@@ -149,12 +165,12 @@ const SignUp = () => {
           htmlFor="profile"
           className="bg-gray200  flex justify-center items-center w-52 h-52 rounded-full mt-14 mb-5 cursor-pointer"
         >
-          {imgUrl ? (
+          {img.preview ? (
             <Image
               className="rounded-full object-cover w-[200px] h-[200px]"
               width={200}
               height={200}
-              src={imgUrl}
+              src={img.preview}
               alt=""
             />
           ) : (
@@ -201,18 +217,13 @@ const SignUp = () => {
             <Dropdown
               placeholder="전공선택"
               label="전공"
-              //@ts-ignore
-              lists={major.data.major_list}
+              lists={majorData || []}
               objectKey="name"
-              name="id"
-              onClick={({ keyword }) => {
-                //@ts-ignore
-                setForm({ ...form, major_id: keyword.id });
-              }}
-              value={
-                //@ts-ignore
-                major.data.major_list.find((m) => form.major_id === m.id)?.name
+              name="major_id"
+              onClick={({ keyword, name }) =>
+                name && setForm({ ...form, [name]: keyword })
               }
+              value={form.major_id}
             />
           )}
           <Input
