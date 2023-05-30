@@ -3,7 +3,7 @@ on:
     branches:
       - main
     paths:
-      - "services/**"
+      - "service/**"
 
 jobs:
   build:
@@ -15,14 +15,6 @@ jobs:
       - name: Get Service
         id: get_service
         run: echo ::set-output name=SERVICE::$(echo ${{ matrix.workspaces.name }} | cut -d / -f 2)
-
-      - name: Login to ECR
-        id: ecr
-        uses: elgohr/ecr-login-action@master
-        with:
-          access_key: ${{ secrets.AWS_ACCESS_KEY }}
-          secret_access_key: ${{ secrets.AWS_SECRET_KEY }}
-          region: ${{ secrets.AWS_REGION }}
 
       - name: Login to Docker
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} ${{ secrets.REGISTRY_URL }}
