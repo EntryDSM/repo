@@ -5,7 +5,7 @@ RUN apk add --no-cache libc6-compat
 
 COPY manifests ./
 
-RUN yarn install --immutable
+RUN yarn install --immutable --immutable-cache
 
 COPY packs ./
 
@@ -22,9 +22,5 @@ RUN adduser --system --uid 1001 nextjs
 COPY --from=builder --chown=nextjs:nodejs /app/./ ./
 
 USER nextjs
-
-EXPOSE 3000
-
-ENV PORT 3000
 
 CMD yarn workspace @service/admin start
