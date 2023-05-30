@@ -5,7 +5,7 @@ RUN apk add --no-cache libc6-compat
 
 COPY manifests ./
 
-RUN yarn install --immutable --immutable-cache
+RUN yarn install --immutable
 
 COPY packs ./
 
