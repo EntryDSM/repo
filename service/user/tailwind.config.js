@@ -104,7 +104,7 @@ module.exports = {
       body8: [
         "14px",
         {
-          fontWeight: "600",
+          fontWeight: "400",
         },
       ],
     },
