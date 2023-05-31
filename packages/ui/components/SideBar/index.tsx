@@ -65,8 +65,8 @@ export const SideBar = ({
           <Home onClick={() => setSide(0)} />
           {!preview && (
             <>
-              {studentList && <Setting onClick={() => setSide(1)} />}
-              {Sharing && <Stack onClick={() => setSide(2)} />}
+              {studentList && <Stack onClick={() => setSide(1)} />}
+              {Sharing && <Setting onClick={() => setSide(2)} />}
             </>
           )}
         </nav>
