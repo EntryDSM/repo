@@ -1,4 +1,5 @@
 import axios, { AxiosError } from "axios";
+import { useRouter } from "next/router";
 
 export const instance = axios.create({
   baseURL: "https://api.dsm-repo.com",
@@ -7,17 +8,18 @@ export const instance = axios.create({
 
 instance.interceptors.request.use(
   async function (config) {
+    const { push } = useRouter();
     const accessToken = localStorage.getItem("access_token");
-    accessToken
-      ? //@ts-ignore
-        (config.headers = {
-          Authorization: `Bearer ${accessToken}`,
-        })
-      : null;
+    if (accessToken) {
+      // @ts-ignore
+      config.headers = {
+        Authorization: `Bearer ${accessToken}`,
+      };
+    } else push("https://www.dsm-repo.com/");
+
     return config;
   },
   function (error: AxiosError) {
     return Promise.reject(error);
   }
 );
-
