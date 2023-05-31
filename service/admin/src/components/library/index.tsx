@@ -36,7 +36,7 @@ export const LibraryCard = ({
   );
 
   return (
-    <Link href={`/public/${id}`}>
+    <Link href={`https://www.dsm-repo.com/public/${id}`}>
       <article className="flex w-[1120px] h-20 items-center bg-gray50 rounded-lg">
         <hr className="h-full block bg-gray300 border-none rounded-tl-lg rounded-bl-lg w-2" />
         <div className="text-body4 ml-9 w-[655px]">
