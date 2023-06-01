@@ -27,9 +27,9 @@ export const DateInput = ({
   const CalenderDateValue = () => {
     if (value) {
       const { year, month, day } = stringToDate(value);
-      const date = [year, month, day];
+      const date = [year + "년", month + "월", day + "일"];
 
-      return date.join("-");
+      return date.join(" ");
     }
   };
 

@@ -9,6 +9,7 @@ export const dropdownAll = (keyword: string) =>
 
 interface PropsType<T, U> {
   kind?: "outline" | "contained";
+  roleName?: string;
   label?: string;
   hint?: string;
   name?: U | undefined;
@@ -31,6 +32,7 @@ export const Dropdown = <
 >({
   kind = "outline",
   label,
+  roleName,
   hint,
   name,
   lists,
@@ -63,7 +65,7 @@ export const Dropdown = <
           className={`h-[46px] flex items-center justify-between rounded-sm pl-4 pr-3 ${kindCss} cursor-pointer`}
         >
           <div className={`text-body6 ${valueObject || "text-gray300"}`}>
-            {valueObject || placeholder}
+            {valueObject ? valueObject + roleName : placeholder}
           </div>
           <Arrow direction={dropdown ? "top" : "bottom"} />
         </div>

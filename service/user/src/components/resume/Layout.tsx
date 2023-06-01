@@ -109,7 +109,7 @@ export const ResumeLayout = ({
                   {Object.entries(link).map(([key, value]) => (
                     <button
                       key={key}
-                      className={`w-full rounded-md box-border pl-[18px] pr-[18px] px-[18px] h-[60px] text-body8 flex items-center justify-between gap-x-[15px] shrink-0 hover:bg-gray100  ${
+                      className={`w-full rounded-md box-border pl-[18px] pr-[18px] px-[18px] h-[60px] text-body5 flex items-center justify-between gap-x-[15px] shrink-0 hover:bg-gray100  ${
                         route.includes(key) ? "bg-gray100" : ""
                       }`}
                       onClick={() => toOtherProfileWrite(key)}

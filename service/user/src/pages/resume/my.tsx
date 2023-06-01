@@ -117,6 +117,7 @@ export const My = () => {
               lists={student.grade as any}
               onClick={onDropdownSelect}
               placeholder="학년"
+              roleName="학년"
             />
             <Dropdown
               kind="contained"
@@ -126,6 +127,7 @@ export const My = () => {
               lists={student.class as any}
               onClick={onDropdownSelect}
               placeholder="반"
+              roleName="반"
             />
             <Dropdown
               kind="contained"
@@ -135,6 +137,7 @@ export const My = () => {
               lists={student.number as any}
               onClick={onDropdownSelect}
               placeholder="번호"
+              roleName="번호"
             />
           </div>
         </ImportLabel>
