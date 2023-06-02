@@ -4,11 +4,6 @@ import { useRouter } from "next/router";
 export const instance = axios.create({
   baseURL: "https://api.dsm-repo.com",
   timeout: 3000,
-  headers: {
-    Authorization: `Bearer ${
-      typeof window ?? localStorage.getItem("access_token")
-    }`,
-  },
 });
 
 instance.interceptors.request.use(
