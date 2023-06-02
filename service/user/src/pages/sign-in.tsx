@@ -91,7 +91,7 @@ const SignUp = () => {
       push("/");
     },
     onError: () => {
-      toast("에러 발생");
+      toast("에러 발생", { type: "error" });
     },
   });
 
