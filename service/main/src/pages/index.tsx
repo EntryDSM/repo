@@ -22,7 +22,7 @@ export default function Home() {
   return (
     <main className=" bg-gray100 flex flex-col">
       <header
-        className={`fixed top-0 bg-gray50 z-10 h-20 flex items-center justify-center`}
+        className={`fixed top-0 bg-gray50 z-10 h-20 flex items-center justify-center w-full`}
       >
         <div className="flex w-full justify-between items-center px-4 max-w-[900px]">
           <div className="flex text-[20px] font-semibold gap-1">
