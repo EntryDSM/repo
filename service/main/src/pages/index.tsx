@@ -22,17 +22,19 @@ export default function Home() {
   return (
     <main className=" bg-gray100 flex flex-col">
       <header
-        className={`fixed top-0 bg-gray50 z-10 w-full h-20 px-[300px] flex items-center justify-between `}
+        className={`fixed top-0 bg-gray50 z-10 h-20 flex items-center justify-center`}
       >
-        <div className="flex text-body3 gap-1">
-          <BlackRepoIcon />
-          Repo
+        <div className="flex w-full justify-between items-center px-4 max-w-[900px]">
+          <div className="flex text-[20px] font-semibold gap-1">
+            <BlackRepoIcon />
+            Repo
+          </div>
+          <nav>
+            <ul className="flex gap-5">
+              <Button onClick={openModal}>로그인</Button>
+            </ul>
+          </nav>
         </div>
-        <nav>
-          <ul className="flex gap-5">
-            <Button onClick={openModal}>로그인</Button>
-          </ul>
-        </nav>
       </header>
       <div className="absolute w-full h-[680px] bg-gray50 top-0 z-[0]" />
       <section className="relative h-[100vh] flex justify-between px-[200px] pt-[280px] z-[5]">
