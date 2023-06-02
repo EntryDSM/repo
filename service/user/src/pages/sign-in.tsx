@@ -190,6 +190,7 @@ const SignUp = () => {
             name="grade"
             kind="outline"
             onClick={onDropdownChange}
+            roleName="학년"
             label="학년"
             placeholder="학년을 선택해주세요"
             lists={dropdownList.grade}
@@ -200,6 +201,7 @@ const SignUp = () => {
             kind="outline"
             onClick={onDropdownChange}
             label="반"
+            roleName="반"
             placeholder="반을 선택해주세요"
             lists={dropdownList.class}
             value={form.class_num}
@@ -209,6 +211,7 @@ const SignUp = () => {
             kind="outline"
             onClick={onDropdownChange}
             label="번호"
+            roleName="번"
             placeholder="번호를 입력해주세요"
             value={form.number}
             lists={dropdownList.number}

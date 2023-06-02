@@ -32,7 +32,7 @@ export const Dropdown = <
 >({
   kind = "outline",
   label,
-  roleName,
+  roleName = '',
   hint,
   name,
   lists,
