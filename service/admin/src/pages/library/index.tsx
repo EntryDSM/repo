@@ -3,7 +3,7 @@ import { Header } from "@/components/header";
 import { LibraryCard } from "@/components/library";
 import { Dropdown, dropdownAll } from "@packages/ui";
 import { useState } from "react";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 const Library = () => {
   const [year, setYear] = useState<string>("");

@@ -4,7 +4,7 @@ import { FormEvent, useState } from "react";
 import { Plus, Search } from "@packages/ui/assets";
 import { Tag } from "@/components/technology/Tag";
 import { getMajor, postMajor, deleteMajor } from "@/apis/major";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
 const Technology = () => {

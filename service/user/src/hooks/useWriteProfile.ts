@@ -18,7 +18,7 @@ import {
   disableId,
 } from "../apis/document/patch";
 import { ChangeEvent, useEffect, useState } from "react";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { GetFileRes, getFile } from "@/apis/file";
 

@@ -2,7 +2,7 @@ import { Arrow, Plus } from "@packages/ui/assets";
 import { Logo, Input, Button, Dropdown, pageRouteLinks } from "@packages/ui";
 import { ChangeEvent, useEffect, useState } from "react";
 import { oAuthLogin, postSignUp, postSignUpBody } from "@/apis/auth";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";

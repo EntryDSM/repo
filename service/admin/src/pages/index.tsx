@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import { Student } from "@/components/student";
 import { Header } from "@/components/header";
 import { Dropdown, Input, dropdownAll } from "@packages/ui";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { ChangeEvent, useState } from "react";
 import { getStudent } from "@/apis/student";
 import { getMajor } from "@/apis/major";
@@ -88,9 +88,13 @@ export default function Home() {
         </div>
         <div className="flex flex-col items-center gap-5 mb-20">
           {!!studentList?.length ? (
-            studentList.map((student) => <Student key={student.document_id} {...student} />)
+            studentList.map((student) => (
+              <Student key={student.document_id} {...student} />
+            ))
           ) : (
-            <div className=" text-body3 mt-10">조건에 맞는 학생이 없습니다. 다른 조건을 선택해 주세요</div>
+            <div className=" text-body3 mt-10">
+              조건에 맞는 학생이 없습니다. 다른 조건을 선택해 주세요
+            </div>
           )}
         </div>
       </div>

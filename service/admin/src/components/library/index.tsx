@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Dropdown } from "@packages/ui";
 import { Library } from "@/apis/library";
 import { useState } from "react";
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { accessRight } from "@/apis/library/access";
 import { toast } from "react-toastify";
 
@@ -31,7 +31,7 @@ export const LibraryCard = ({
   );
 
   const { mutate } = useMutation(
-    "asgagahdasgarw",
+    ["asgagahdasgarw"],
     (body: keyof typeof enStatus) => accessRight(id, body)
   );
 

@@ -7,7 +7,7 @@ import { Button, PreviewResume, SideBar, TextArea } from "@packages/ui";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
-import { useQueries, useQuery } from "react-query";
+import { useQueries, useQuery } from "@tanstack/react-query";
 
 const Detail = () => {
   const { query } = useRouter();
@@ -31,12 +31,14 @@ const Detail = () => {
     enabled: !!grade,
     staleTime: Infinity,
   });
-  const result = useQueries([
-    studentListObject("1"),
-    studentListObject("2"),
-    studentListObject("3"),
-    studentListObject("4"),
-  ]).map((list) => list.data?.data.student_list);
+  const result = useQueries({
+    queries: [
+      studentListObject("1"),
+      studentListObject("2"),
+      studentListObject("3"),
+      studentListObject("4"),
+    ],
+  }).map((list) => list.data?.data.student_list);
 
   const isCreated = data?.data.document_status === "CREATED";
   const Shared =

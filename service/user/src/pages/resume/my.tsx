@@ -13,7 +13,7 @@ import {
 import { WrtieInfoReqBody } from "../../apis/document/patch/WriteInfo";
 import { FeedBack } from "@/components/resume/FeedBack";
 import { getMajor } from "@/apis/major";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { ResumeImg } from "@/components/ResumeImg";
 
 const student = {

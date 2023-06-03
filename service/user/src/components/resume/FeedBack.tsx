@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Arrow, Check, Info } from "../../../../../packages/ui/assets";
 import { Button } from "../../../../../packages/ui";
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { ReflrectIdType, feedbackReflrect } from "@/apis/feedback/reflrect";
 import { AwardResType } from "@/apis/document/patch/Award";
 import { CertificateResType } from "@/apis/document/patch/Certificate";

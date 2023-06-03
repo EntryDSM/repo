@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
 import { Header } from "@/components/header";
-import { useQueries, useQuery } from "react-query";
+import { useQueries, useQuery } from "@tanstack/react-query";
 import { documentMy } from "@/apis/document/get/my";
 import { MyPage } from "@/components/MyPage";
 import { myFeedback } from "@/apis/feedback/my";

@@ -3,7 +3,7 @@ import { Button, Input, Logo } from "@packages/ui";
 import { PostSignIn, postSignIn } from "@/apis/sign-in";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { Arrow } from "@packages/ui/assets";
 
