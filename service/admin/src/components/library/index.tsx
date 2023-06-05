@@ -38,7 +38,7 @@ export const LibraryCard = ({
   const clipUrl = `https://www.dsm-repo.com/public/${id}`;
 
   return (
-    <Link href={`https://admin.dsm-repo.com/library/${id}`}>
+    <Link href={`https://teacher.dsm-repo.com/library/${id}`}>
       <article className="flex w-[1120px] h-20 items-center bg-gray50 rounded-lg">
         <hr className="h-full block bg-gray300 border-none rounded-tl-lg rounded-bl-lg w-2" />
         <div className="text-body4 ml-9 w-[655px]">

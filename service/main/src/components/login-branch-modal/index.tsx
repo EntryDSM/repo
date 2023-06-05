@@ -14,7 +14,7 @@ interface Props {
 export const LoginBranchModal = ({ closeModal }: Props) => {
   const route = useRouter();
   const NavigateToTeacher = () => {
-    route.push("https://admin.dsm-repo.com/sign-in");
+    route.push("https://teacher.dsm-repo.com/sign-in");
   };
   // const { data, mutate } = useMutation({
   //   mutationFn: (body: postSignUpBody) => {
