@@ -76,26 +76,39 @@ const SignUp = () => {
   const { push, back } = useRouter();
 
   const { mutate } = useMutation({
-    mutationFn: async (body: postSignUpBody) => {
-      const formData = new FormData();
-      console.log(img);
-      if (img.file) formData.append("file", img.file);
-      const { data } = await getFile({ type: "PROFILE", file: formData });
-      return postSignUp({ ...body, profile_image_path: data.image_path });
+    mutationFn: async (body: Form) => {
+      try {
+        if (!img.file) throw Error;
+        const formData = new FormData();
+        console.log(img);
+        formData.append("file", img.file);
+        const { data } = await getFile({ type: "PROFILE", file: formData });
+        return postSignUp({
+          ...body,
+          profile_image_path: data.image_path,
+          major_id: form.major_id.id,
+        });
+      } catch (e) {
+        console.log(e);
+        throw e;
+      }
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
+      console.log(data);
       toast("성공적으로 회원가입하였습니다.", {
         autoClose: 1000,
         type: "success",
       });
-      push("/");
     },
-    onError: () => {
+    onError: (error) => {
+      console.log(error);
       toast("에러 발생", { type: "error" });
     },
   });
 
-  const { data: major } = useQuery(["dwqdqw"], getMajor);
+  const { data: major } = useQuery(["dwqdqw"], getMajor, {
+    staleTime: Infinity,
+  });
 
   const route = useRouter();
   // @ts-ignore
@@ -111,6 +124,7 @@ const SignUp = () => {
     onError: ({ response }) => {
       const data = response?.data;
 
+      console.log(response);
       if (!data) return;
 
       switch (data.status) {
@@ -126,9 +140,7 @@ const SignUp = () => {
     },
     enabled: !!route.query.code,
     retry: 0,
-  });
-  const { mutate: imgUpload } = useMutation({
-    mutationFn: (req: FormData) => getFile({ type: "PROFILE", file: req }),
+    staleTime: Infinity,
   });
 
   const onUploadProfile = (e: ChangeEvent<HTMLInputElement>) => {
@@ -141,9 +153,6 @@ const SignUp = () => {
       if (typeof base64 !== "string") return;
       setImg({ file, preview: base64 });
     };
-    const formData = new FormData();
-    formData.append("file", file);
-    imgUpload(formData);
   };
 
   const majorData = major?.data.major_list;

@@ -6,6 +6,7 @@ export interface postSignUpBody {
   grade: number;
   class_num: number;
   number: number;
+  major_id: string;
   profile_image_path: string;
 }
 
@@ -28,14 +29,6 @@ interface oAuthLoginReqType {
   prompt: string;
 }
 
-export const oAuthLogin = ({
-  code,
-  scope,
-  authuser,
-  hd,
-  prompt,
-}: oAuthLoginReqType) => {
-  return instance.get<oAuthLoginResType>(
-    `/auth/oauth/token?code=${code}&prompt=${prompt}&hd=${hd}&scope=${scope}&authuser=${authuser}`
-  );
+export const oAuthLogin = ({ code }: oAuthLoginReqType) => {
+  return instance.get<oAuthLoginResType>(`/auth/oauth/token?code=${code}`);
 };
