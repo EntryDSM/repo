@@ -111,6 +111,7 @@ const SignUp = () => {
   // @ts-ignore
   useQuery(["oauthlogIn"], () => oAuthLogin(route.query), {
     onSuccess: ({ data }) => {
+      console.log(data);
       const { access_token, refresh_token } = data;
       if (access_token && refresh_token) {
         localStorage.setItem("access_token", access_token);
@@ -128,7 +129,6 @@ const SignUp = () => {
         case 422:
           setForm({ ...form, email: data.message });
           return;
-        case 403:
         case 400:
           push(pageRouteLinks.main);
           toast("학교 이메일이 아닙니다.", { type: "error" });
@@ -137,7 +137,7 @@ const SignUp = () => {
     },
     enabled: !!route.query.code,
     retry: 0,
-    staleTime: Infinity,
+    refetchOnWindowFocus: false,
   });
 
   const onUploadProfile = (e: ChangeEvent<HTMLInputElement>) => {

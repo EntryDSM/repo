@@ -29,6 +29,6 @@ interface oAuthLoginReqType {
   prompt: string;
 }
 
-export const oAuthLogin = ({ code }: oAuthLoginReqType) => {
+export const oAuthLogin = async ({ code }: oAuthLoginReqType) => {
   return instance.get<oAuthLoginResType>(`/auth/oauth/token?code=${code}`);
 };
