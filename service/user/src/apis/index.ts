@@ -31,7 +31,9 @@ instance.interceptors.response.use(undefined, function (error) {
         window.location.href = "https://www.dsm-repo.com/";
         break;
       default:
-        return Promise.reject(error);
+        return error;
     }
   }
+  console.log(error);
+  return error;
 });

@@ -77,21 +77,18 @@ const SignUp = () => {
 
   const { mutate } = useMutation({
     mutationFn: async (body: Form) => {
-      try {
-        if (!img.file) throw Error;
-        const formData = new FormData();
-        console.log(img);
-        formData.append("file", img.file);
-        const { data } = await getFile({ type: "PROFILE", file: formData });
-        return postSignUp({
-          ...body,
-          profile_image_path: data.image_path,
-          major_id: form.major_id.id,
-        });
-      } catch (e) {
-        console.log(e);
+      if (!img.file) throw Error;
+      const formData = new FormData();
+      console.log(img);
+      formData.append("file", img.file);
+      const { data } = await getFile({ type: "PROFILE", file: formData });
+      return postSignUp({
+        ...body,
+        profile_image_path: data.image_path,
+        major_id: form.major_id.id,
+      }).catch((e) => {
         throw e;
-      }
+      });
     },
     onSuccess: (data) => {
       console.log(data);
@@ -155,7 +152,7 @@ const SignUp = () => {
     };
   };
 
-  const majorData = major?.data.major_list;
+  const majorData = major?.data?.major_list;
 
   return (
     <div className="flex h-[100vh]">
@@ -225,7 +222,7 @@ const SignUp = () => {
             value={form.number}
             lists={dropdownList.number}
           />
-          {Array.isArray(major?.data.major_list) && (
+          {Array.isArray(majorData) && (
             <Dropdown
               placeholder="전공선택"
               label="전공"
