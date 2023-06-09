@@ -10,6 +10,7 @@ import { getMajor } from "@/apis/major";
 import { getFile } from "@/apis/file";
 import Image from "next/image";
 import { AxiosError } from "axios";
+import { getOAuth } from "@/apis/getOAuth";
 
 interface Form {
   name: string;
@@ -37,7 +38,7 @@ const dropdownList = {
 const SignUp = () => {
   const [form, setForm] = useState<Form>({
     name: "",
-    email: "email@dsm.hs.kr",
+    email: "",
     grade: 0,
     class_num: 0,
     number: 0,
@@ -86,6 +87,7 @@ const SignUp = () => {
         ...body,
         profile_image_path: data.image_path,
         major_id: form.major_id.id,
+        email: body.email || localStorage.getItem("email") || "",
       }).catch((e) => {
         throw e;
       });
@@ -119,7 +121,7 @@ const SignUp = () => {
         push(pageRouteLinks.user);
       }
     },
-    onError: ({ response }) => {
+    onError: async ({ response }) => {
       const data = response?.data;
 
       console.log(response);
@@ -128,7 +130,12 @@ const SignUp = () => {
       switch (data.status) {
         case 422:
           setForm({ ...form, email: data.message });
+          localStorage.setItem("email", data.message);
           return;
+        case 403:
+          getOAuth().then(({ data }) => {
+            push(data.login_link.split(" ")[0]);
+          });
         case 400:
           push(pageRouteLinks.main);
           toast("학교 이메일이 아닙니다.", { type: "error" });
