@@ -98,6 +98,7 @@ const SignUp = () => {
         autoClose: 1000,
         type: "success",
       });
+      push(pageRouteLinks.user)
     },
     onError: (error) => {
       console.log(error);
