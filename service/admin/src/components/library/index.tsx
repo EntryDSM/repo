@@ -9,13 +9,13 @@ import { toast } from "react-toastify";
 const krStatus = {
   공개: "PUBLIC",
   학생만: "STUDENT_ONLY",
-  개인: "PRIVATE",
+  비공개: "PRIVATE",
 } as const;
 
 const enStatus = {
   PUBLIC: "공개",
   STUDENT_ONLY: "학생만",
-  PRIVATE: "개인",
+  PRIVATE: "비공개",
 } as const;
 
 export const LibraryCard = ({
@@ -46,7 +46,7 @@ export const LibraryCard = ({
         </div>
         <Dropdown
           placeholder="공개"
-          lists={["공개", "학생만", "개인"]}
+          lists={["공개", "학생만", "비공개"]}
           kind="contained"
           className="w-[150px]"
           value={status}
