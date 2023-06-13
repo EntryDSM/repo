@@ -55,7 +55,7 @@ export const LibraryCard = ({
             mutate(krStatus[keyword]);
           }}
         />
-        {document_url && (
+        {document_url && status == "공개" && (
           <div
             className="text-body4 ml-20 text-gray300"
             onClick={(e) => {
@@ -63,7 +63,7 @@ export const LibraryCard = ({
               navigator.clipboard
                 .writeText(clipUrl)
                 .then(() =>
-                  toast("복사됬습니다.", { type: "success", autoClose: 500 })
+                  toast("복사되었습니다.", { type: "success", autoClose: 500 })
                 );
             }}
           >
