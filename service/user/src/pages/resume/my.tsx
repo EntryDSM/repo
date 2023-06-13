@@ -137,7 +137,7 @@ export const My = () => {
               lists={student.number as any}
               onClick={onDropdownSelect}
               placeholder="번호"
-              roleName="번호"
+              roleName="번"
             />
           </div>
         </ImportLabel>
