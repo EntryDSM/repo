@@ -124,7 +124,7 @@ const SignIn = () => {
                 saveEmail && "bg-blue200 border-none"
               }`}
             ></div>
-            이메일 저장
+            자동 로그인
           </div>
           <Button
             className="w-full mt-16 text-body3"
