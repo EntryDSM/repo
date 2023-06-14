@@ -565,6 +565,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react-dom", "npm:18.0.11"],\
             ["@types/react-outside-click-handler", "npm:1.3.1"],\
             ["next", "virtual:576cc4d2cc244f3af3c540317c2f84ae4d9a046d2b1519763846c613a93498d7e30080f38895c54cb2ed8b1a477d494fed6d10759b4dbb9b81d50d6a277d3c78#npm:13.4.1"],\
+            ["qrcode.react", "virtual:576cc4d2cc244f3af3c540317c2f84ae4d9a046d2b1519763846c613a93498d7e30080f38895c54cb2ed8b1a477d494fed6d10759b4dbb9b81d50d6a277d3c78#npm:3.1.0"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:429f1b8d68e7340a3b64de46c05ed489952f55c1bce814efcf9c475d84e07008d414fbf55bb9eb9f42d957c755a8a9167409ddf30772a81fee66d8a53507ad81#npm:18.2.0"],\
             ["react-outside-click-handler", "virtual:576cc4d2cc244f3af3c540317c2f84ae4d9a046d2b1519763846c613a93498d7e30080f38895c54cb2ed8b1a477d494fed6d10759b4dbb9b81d50d6a277d3c78#npm:1.3.0"],\
@@ -4866,6 +4867,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/punycode-npm-2.3.0-df4bdce06b-39f760e09a.zip/node_modules/punycode/",\
           "packageDependencies": [\
             ["punycode", "npm:2.3.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["qrcode.react", [\
+        ["npm:3.1.0", {\
+          "packageLocation": "./.yarn/cache/qrcode.react-npm-3.1.0-068f53fc24-94a2942ecf.zip/node_modules/qrcode.react/",\
+          "packageDependencies": [\
+            ["qrcode.react", "npm:3.1.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:576cc4d2cc244f3af3c540317c2f84ae4d9a046d2b1519763846c613a93498d7e30080f38895c54cb2ed8b1a477d494fed6d10759b4dbb9b81d50d6a277d3c78#npm:3.1.0", {\
+          "packageLocation": "./.yarn/__virtual__/qrcode.react-virtual-e6f2eee078/0/cache/qrcode.react-npm-3.1.0-068f53fc24-94a2942ecf.zip/node_modules/qrcode.react/",\
+          "packageDependencies": [\
+            ["qrcode.react", "virtual:576cc4d2cc244f3af3c540317c2f84ae4d9a046d2b1519763846c613a93498d7e30080f38895c54cb2ed8b1a477d494fed6d10759b4dbb9b81d50d6a277d3c78#npm:3.1.0"],\
+            ["@types/react", "npm:18.0.35"],\
+            ["react", "npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
           ],\
           "linkType": "HARD"\
         }]\

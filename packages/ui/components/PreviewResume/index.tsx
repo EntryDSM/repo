@@ -1,12 +1,11 @@
 import React, { MutableRefObject, ReactNode } from "react";
-import qr from "../../assets/qr.png";
-import dummy from "../../assets/dummy.png";
 import { Award } from "./Award";
 import { Certificate } from "./Certificate";
 import { Project } from "./Project";
 import { Tag } from "./Tag";
 import { LinkSvg } from "../../assets";
 import Image from "next/image";
+import QRCode from "qrcode.react";
 
 export interface FeedbackBoxType {
   part: string;
@@ -26,6 +25,7 @@ export interface PreviewType {
     profile_image_url: string;
     student_number: number; // 원하면 학년 반 번호로 각각 나눠서 줄 수도 있음
     email: string;
+    url?: string | null;
     major: {
       id: string;
       name: string;
@@ -75,10 +75,10 @@ export const millsecondToDate = (str: number | string) => {
 };
 
 const subject = {
-  1: "소프트웨어과",
-  2: "소프트웨어과",
-  3: "임베디드과",
-  4: "정보기기과",
+  1: "소프트웨어개발과",
+  2: "소프트웨어개발과",
+  3: "임베디드소프트웨어과",
+  4: "정보보안과",
 };
 
 export const PreviewResume = ({
@@ -121,15 +121,17 @@ export const PreviewResume = ({
             </div>
             <div className="flex">
               <div className="flex justify-between flex-col mr-6 text-end">
+                <p className="text-body7">{writer.student_number}</p>
                 <p className="text-body7">
-                  {grade !== "1" ? subject[classNum as "1"] : "공통학과"}
+                  {grade !== "1" ? subject[classNum as "1"] : "공통과정"}
                 </p>
                 <p className="text-body7">{writer.email}</p>
-                <p className="text-body7">{"010-1234-5678"}</p>
               </div>
-              <div>
-                <Image width={80} height={80} src={qr} alt="qr img" />
-              </div>
+              { writer.url &&
+                (<div>
+                  <QRCode size={80} value= {writer.url} />
+                </div>)
+              }
             </div>
           </div>
         </FeedBack>

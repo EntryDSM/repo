@@ -50,6 +50,7 @@ export const My = () => {
       student_id: "",
       element_id: "",
       feedback: "",
+      url: "",
       student_number: 0,
     },
     "writer"
@@ -184,6 +185,14 @@ export const My = () => {
               onClickRemove={removeSkill(0)}
             />
           </div>
+        </ImportLabel>
+        <ImportLabel label="url">
+          <Input
+            value={state.url}
+            name="url"
+            placeholder="추가할 포트폴리오 링크가 있다면 입력해주세요"
+            onChange={handleChange(0)}
+          />
         </ImportLabel>
       </div>
     </ResumeLayout>

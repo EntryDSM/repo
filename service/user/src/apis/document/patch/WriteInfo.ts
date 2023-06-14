@@ -13,6 +13,7 @@ export interface WrtieInfoReqBody {
   number: number;
   skill_list: string[];
   student_number?: number;
+  url?: string | null;
 }
 
 export interface WriteInfoResType {
@@ -22,8 +23,9 @@ export interface WriteInfoResType {
   feedback?: string | null;
   name: string;
   profile_image_path: string;
-  student_number: string; // 원하면 학년 반 번호로 각각 나눠서 줄 수도 있음
+  student_number: string;
   email: string;
+  url?: string | null;
   major: {
     id: string;
     name: string;
