@@ -21,13 +21,13 @@ export const Students = ({
     <div className="flex flex-col gap-[10px]">
       <div className="text-body5">{grade}학년</div>
       {studentList.map((classList, classNum) => (
-        <StudentDropdown
-          classList={classList}
-          grade={grade}
-          moveClickedPage={moveClickedPage}
-          classNum={classNum}
-          id={id}
-        />
+          <StudentDropdown
+              classList={classList}
+              grade={grade}
+              moveClickedPage={moveClickedPage}
+              classNum={classNum}
+              id={id}
+          />
       ))}
     </div>
   );
@@ -74,7 +74,7 @@ const StudentDropdown = ({
           <Arrow direction={arrowDirection} size={16} />
         </div>
       )}
-      <nav>
+      <nav className="overflow-scroll h-[calc(100vh-71.25px)]">
         <ul className="flex flex-col gap-1">
           {open &&
             classList?.map(
