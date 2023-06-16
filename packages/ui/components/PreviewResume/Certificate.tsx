@@ -11,11 +11,11 @@ export const Certificate = ({
     <>
       <div className="bg-gray50 rounded-md pl-5 pt-3 pb-3 pr-5">
         <div className="flex justify-between">
-          <div className="text-body5">{name}</div>
+          <h4 className="text-body5">{name}</h4>
           <div className="text-gray400 flex text-body7 gap-2 items-center">
-            <div>{issuing_institution}</div>
+            <p>{issuing_institution}</p>
             <hr className="bg-gray300 h-[12px] border-none w-[1px]" />
-            <div>{millsecondToDate(date)}</div>
+            <pre>{millsecondToDate(date)}</pre>
           </div>
         </div>
       </div>

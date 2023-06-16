@@ -127,11 +127,11 @@ export const PreviewResume = ({
                 </p>
                 <p className="text-body7">{writer.email}</p>
               </div>
-              { writer.url &&
-                (<div>
-                  <QRCode size={80} value= {writer.url} />
-                </div>)
-              }
+              {writer.url && (
+                <div>
+                  <QRCode size={80} value={writer.url} />
+                </div>
+              )}
             </div>
           </div>
         </FeedBack>
@@ -144,27 +144,27 @@ export const PreviewResume = ({
           comment={introduce.feedback}
         >
           <div>
-            <div className="text-body3">{introduce.heading}</div>
-            <div className="text-body8 text-gray400 mt-4">
+            <h3 className="text-body3">{introduce.heading}</h3>
+            <pre className="text-body8 text-gray400 mt-4">
               {introduce.introduce}
-            </div>
+            </pre>
           </div>
         </FeedBack>
       </article>
 
       {!!skill_list.length && (
         <article>
-          <div className="text-body5 mb-3">기술 스택</div>
-          <div className="flex gap-3">
+          <h3 className="text-body5 mb-3">기술 스택</h3>
+          <pre className="flex gap-3">
             {skill_list.map((skill) => (
               <Tag className="bg-gray50" technology={skill} />
             ))}
-          </div>
+          </pre>
         </article>
       )}
 
       <article className="flex gap-3 flex-col">
-        <div className="text-body5">수상 경력</div>
+        <h3 className="text-body5">수상 경력</h3>
         {award_list.map((award) => (
           <FeedBack
             part={award.name}
@@ -177,7 +177,7 @@ export const PreviewResume = ({
       </article>
 
       <article className="flex gap-2 flex-col">
-        <div className="text-body5">자격증</div>
+        <h3 className="text-body5">자격증</h3>
         {certificate_list.map((data) => (
           <FeedBack
             part={data.name}
@@ -190,7 +190,7 @@ export const PreviewResume = ({
       </article>
 
       <article className="flex flex-col gap-2">
-        <div className="text-body1">Project</div>
+        <h3 className="text-body1">Project</h3>
         {project_list.map((data) => (
           <FeedBack
             part={data.name}

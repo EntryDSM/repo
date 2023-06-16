@@ -12,14 +12,14 @@ export const Award = ({
     <>
       <div className="bg-gray50 rounded-md pl-5 pt-3 pb-3 pr-5 flex flex-col gap-3">
         <div className="flex justify-between">
-          <div className="text-body5">{name}</div>
+          <h4 className="text-body5">{name}</h4>
           <div className="text-gray400 flex text-body7 gap-2 items-center">
-            <div>{awarding_institution}</div>
+            <p>{awarding_institution}</p>
             <hr className="bg-gray300 h-[12px] border-none w-[1px]" />
-            <div>{millsecondToDate(date)}</div>
+            <p>{millsecondToDate(date)}</p>
           </div>
         </div>
-        {description && <div className="text-body7">{description}</div>}
+        {description && <pre className="text-body7">{description}</pre>}
       </div>
     </>
   );

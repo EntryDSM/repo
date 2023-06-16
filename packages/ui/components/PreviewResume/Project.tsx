@@ -36,21 +36,21 @@ export const Project = ({
           alt="projectImg"
         />
         <div>
-          <div className="text-title2">{name}</div>
-          <div className="text-body7">
+          <p className="text-title2">{name}</p>
+          <p className="text-body7">
             {millsecondToDate(start_date)} ~ {millsecondToDate(end_date)}
-          </div>
+          </p>
         </div>
       </div>
       <div>
-        <div className="text-body5 mb-2">사용 기술</div>
+        <h4 className="text-body5 mb-2">사용 기술</h4>
         <div className="flex gap-2">
           {skill_list.map((technology) => (
             <Tag className="bg-gray100" technology={technology} />
           ))}
         </div>
       </div>
-      <div>{description}</div>
+      <pre>{description}</pre>
       {url && (
         <Link
           href={url}
@@ -58,9 +58,9 @@ export const Project = ({
         >
           <LinkSvg />
 
-          <div className=" text-ellipsis overflow-hidden whitespace-normal">
+          <a className="text-ellipsis overflow-hidden whitespace-normal">
             {url}
-          </div>
+          </a>
         </Link>
       )}
     </div>
