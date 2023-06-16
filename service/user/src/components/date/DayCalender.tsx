@@ -7,7 +7,7 @@ import {
 import { Button } from "../../../../../packages/ui";
 
 interface PropsType {
-  initialValue: string | undefined;
+  initialValue: string | number | undefined;
   closeDropdown: () => void;
   onSubmitAtInput: (value: string) => void;
 }

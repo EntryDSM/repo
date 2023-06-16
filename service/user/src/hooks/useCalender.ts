@@ -39,7 +39,7 @@ export interface DateValueType {
   month: number;
   day: number;
 }
-export const stringToDate = (str: string): DateValueType => {
+export const stringToDate = (str: string | number): DateValueType => {
   const [year, month, day] = MillsecondToDate(str).split(". ").map(Number);
   return { year, month, day };
 };
@@ -50,6 +50,7 @@ export const dateToString = ({ year, month, day }: DateValueType) => {
 
 export const getInitDate = (includeDay?: boolean) => {
   const date = new Date();
+
   return [date.getFullYear(), date.getMonth(), date.getDate()].join(". ");
 };
 
@@ -73,7 +74,7 @@ const onDateChange = (temp: DateValueType) => {
 type DateKeyType = keyof DateValueType;
 
 interface PropsType {
-  initialValue?: string;
+  initialValue?: string | number;
 }
 
 export const useCalender = ({ initialValue = getInitDate() }: PropsType) => {

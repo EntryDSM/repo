@@ -2,11 +2,12 @@ import OutsideClickHandler from "react-outside-click-handler";
 import { DateValueType, stringToDate } from "../../hooks/useCalender";
 import { useInversion } from "../../../../../packages/hooks/useInversion";
 import { DayCalender } from "./DayCalender";
+import { millsecondToDate } from "../../../../../packages/ui";
 
 interface PropsType {
   label?: string;
   name: string;
-  value: string | undefined;
+  value: string | number | undefined;
   placeholder?: string;
   onSubmitAtInput: (value: { value: number; name: string }) => void;
 }
@@ -24,9 +25,11 @@ export const DateInput = ({
     inCorrect: closeDropdown,
   } = useInversion();
 
+  const checkValue = typeof value === "string" ? undefined : value;
+
   const CalenderDateValue = () => {
-    if (value) {
-      const { year, month, day } = stringToDate(value);
+    if (checkValue) {
+      const { year, month, day } = stringToDate(checkValue);
       const date = [year + "년", month + "월", day + "일"];
 
       return date.join(" ");
@@ -56,7 +59,7 @@ export const DateInput = ({
         {dropdown && (
           <div className="w-[345px] rounded-[4px] border-[1px] bg-gray50 absolute z-10 top-[60px] right-0">
             <DayCalender
-              initialValue={value}
+              initialValue={checkValue}
               closeDropdown={closeDropdown}
               onSubmitAtInput={submitOnInput}
             />
