@@ -50,7 +50,7 @@ export const Project = ({
           ))}
         </div>
       </div>
-      <pre>{description}</pre>
+      <pre className=" whitespace-pre-wrap">{description}</pre>
       {url && (
         <Link
           href={url}
