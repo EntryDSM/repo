@@ -99,7 +99,7 @@ export const Awards = () => {
                 onSubmitAtInput={onDateChange}
               />
             </ImportLabel>
-            <ImportLabel label="내용" important>
+            <ImportLabel label="내용">
               <TextArea
                 value={description || ""}
                 placeholder="내용을 입력해 주세요"

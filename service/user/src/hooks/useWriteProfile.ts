@@ -65,7 +65,13 @@ export const onChange = (
   file.append("file", e.target.files[0]);
   getFile({ type: "DOCUMENT", file }).then(({ data }) => {
     setState(data);
-  });
+  })
+  .catch(() =>
+    toast("1MB 이하의 파일을 선택해주세요.", {
+      type: "error",
+      autoClose: 1000,
+    })
+  );;;
 };
 
 export const onClickItem = <T>(
@@ -141,10 +147,7 @@ export const useProfileWrite = <
     mutationFn: (body: T): Promise<DetailType> => {
       const newBody = disableId(body);
       return typeFn[type](newBody);
-    },
-    onSuccess: () => {
-      toast("임시저장하였습니다.", { autoClose: 1000, type: "success" });
-    },
+    }
   });
 
   const handleChange =

@@ -82,13 +82,7 @@ const SignUp = () => {
       const formData = new FormData();
       console.log(img);
       formData.append("file", img.file);
-      const { data } = await getFile({ type: "PROFILE", file: formData })
-        .catch(() =>
-          toast("1MB 이하의 파일을 선택해주세요.", {
-            type: "error",
-            autoClose: 1000,
-          })
-        );;;
+      const { data } = await getFile({ type: "PROFILE", file: formData });;;
       return postSignUp({
         ...body,
         profile_image_path: data?.image_path,
