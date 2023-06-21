@@ -4,6 +4,7 @@ on:
       - main
     paths:
       - "service/admin/**"
+      - "packages/**"
 
 jobs:
   build:
