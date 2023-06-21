@@ -49,7 +49,7 @@ export default function Home() {
           <Input
             kind="text"
             value={option.name}
-            placeholder="이름을 입려해 주세요"
+            placeholder="이름을 입력해 주세요"
             onChange={onHandleChange}
             name="name"
             className="bg-transparent rounded-sm"
