@@ -1,4 +1,5 @@
 import { instance } from "..";
+import { toast } from "react-toastify";
 
 interface GetFileReq {
   type: "PROFILE" | "DOCUMENT";
@@ -10,5 +11,5 @@ export interface GetFileRes {
 }
 
 export const getFile = ({ file, type }: GetFileReq) => {
-  return instance.post<GetFileRes>(`/file/image?type=${type}`, file);
+  return instance.post<GetFileRes>(`/file/image?type=${type}`, file)
 };
