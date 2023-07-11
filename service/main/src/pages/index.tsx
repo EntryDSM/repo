@@ -6,8 +6,8 @@ import { BlackRepoIcon } from "../../../../packages/ui/assets";
 import { Button, Footer } from "../../../../packages/ui";
 import iMac from "../assets/iMac.png";
 import macBook from "../assets/macBook.png";
-import simple from "../assets/simple.png";
-import feedback from "../assets/feedback.png";
+import simple from "../assets/simple.gif";
+import feedback from "../assets/feedback.gif";
 import myResume from "../assets/myResume.png";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -67,10 +67,10 @@ export default function Home() {
             <div>멋진 이력서를 생성해 보세요</div>
           </div>
         </div>
-        <Image src={simple} width={800} height={450} alt="simple" />
+        <Image src={simple} width={500} height={450} alt="simple" />
       </section>
       <section className="px-[200px] flex justify-between items-center h-[100vh] bg-gray50">
-        <Image src={feedback} width={800} height={450} alt="fastFeedback" />
+        <Image src={feedback} width={600} height={450} alt="fastFeedback" />
         <div className="flex flex-col gap-1">
           <div className="text-[64px] font-semibold">빠른</div>
           <div className="text-[40px] font-semobold text-gray400">

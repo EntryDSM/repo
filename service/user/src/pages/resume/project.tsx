@@ -1,17 +1,15 @@
-import { ImportLabel } from "../../components/ImportLabel";
-import { ResumeTitle, ResumeItem, ResumeLayout } from "../../components/resume";
+import { ResumeImg } from "@/components/ResumeImg";
+import { DateInput } from "@/components/date";
+import { FeedBack } from "@/components/resume/FeedBack";
 import { Input, SKillInput, SkillList, TextArea } from "@packages/ui";
 import { Plus } from "@packages/ui/assets";
 import { ChangeEvent, useState } from "react";
+import { ImportLabel } from "../../components/ImportLabel";
+import { ResumeItem, ResumeLayout, ResumeTitle } from "../../components/resume";
 import {
-  AddSkillFn,
   onChange,
-  removeSkillFn,
-  useProfileWrite,
+  useProfileWrite
 } from "../../hooks/useWriteProfile";
-import { FeedBack } from "@/components/resume/FeedBack";
-import { DateInput } from "@/components/date";
-import { ResumeImg } from "@/components/ResumeImg";
 
 export const Project = () => {
   const {
@@ -45,7 +43,9 @@ export const Project = () => {
     "project_list"
   );
   const [imgs, setImgs] = useState<string[]>([]);
-  console.log(imgs);
+
+  console.log(state)
+  
   return (
     <ResumeLayout
       mutate={mutate}

@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { Arrow, Check, Internet, LinkSvg, Rectify } from "../../assets";
-import { StudentListType } from ".";
-import Link from "next/link";
 import { useRouter } from "next/router";
+import { useState } from "react";
+import { StudentListType } from ".";
+import { Arrow, Check, Internet, Rectify } from "../../assets";
 
 interface PropsType {
   studentList: StudentListType[];
   moveClickedPage?: (page: number) => void;
   id?: string;
   grade?: string;
+  currentPage?: string;
 }
 
 export const Students = ({
@@ -16,6 +16,7 @@ export const Students = ({
   id,
   moveClickedPage,
   grade,
+  currentPage
 }: PropsType) => {
   return (
     <div className="flex flex-col gap-[10px]">
@@ -27,6 +28,7 @@ export const Students = ({
               moveClickedPage={moveClickedPage}
               classNum={classNum}
               id={id}
+              currentPage={currentPage}
           />
       ))}
     </div>
@@ -39,6 +41,7 @@ interface StudentPropsType {
   classNum: number;
   id?: string;
   grade?: string;
+  currentPage?: string;
 }
 
 const StudentIcon = {
@@ -53,12 +56,14 @@ const StudentDropdown = ({
   moveClickedPage,
   id,
   grade,
+  currentPage
 }: StudentPropsType) => {
   const { push } = useRouter();
   const isClass = classList?.some((list) => list.student_id === id);
   const [open, setOpen] = useState<boolean>(isClass || false);
   const closeList = () => setOpen(!open);
   const arrowDirection = open ? "bottom" : "top";
+
   return (
     <>
       {!moveClickedPage && (
@@ -74,30 +79,78 @@ const StudentDropdown = ({
           <Arrow direction={arrowDirection} size={16} />
         </div>
       )}
-      <nav className="overflow-scroll h-[calc(100vh-71.25px)]">
-        <ul className="flex flex-col gap-1">
-          {open &&
-            classList?.map(
-              ({ name, student_number, student_id, document_status }, idx) => {
-                return (
-                  <li
-                    onClick={() =>
-                      moveClickedPage
-                        ? moveClickedPage(idx)
-                        : push(`/${student_id}`)
-                    }
-                    className={`flex text-[14px] cursor-pointer ${
-                      id === student_id && "bg-gray100 text-gray700"
-                    } py-2 rounded-md px-3 justify-between items-center [&_path]:fill-gray400`}
-                  >
-                    {student_number} {name}
-                    {document_status && StudentIcon[document_status]}
-                  </li>
-                );
-              }
-            )}
-        </ul>
-      </nav>
+      {!moveClickedPage && open &&
+          classList?.map(
+            ({ name, student_number, student_id, document_status, page }) => {
+              return (
+                <li
+                  onClick={() =>
+                      push(`/${student_id}`)
+                  }
+                  className={`flex text-[14px] cursor-pointer ${
+                    id === student_id && "bg-gray100 text-gray700"
+                  } py-2 rounded-md px-3 justify-between items-center [&_path]:fill-gray400`}
+                >
+                  <span className={"flex"}>{student_number} {name}</span>
+                  {document_status && StudentIcon[document_status]}
+                </li>
+            );
+          }
+        )
+      }
+      {moveClickedPage && (
+        <>
+          <ClassDropdown classNumber={1} classList={classList} moveClickedPage={moveClickedPage} id={id} currentPage={currentPage}/>
+          <ClassDropdown classNumber={2} classList={classList} moveClickedPage={moveClickedPage} id={id} currentPage={currentPage}/>
+          <ClassDropdown classNumber={3} classList={classList} moveClickedPage={moveClickedPage} id={id} currentPage={currentPage}/>
+          <ClassDropdown classNumber={4} classList={classList} moveClickedPage={moveClickedPage} id={id} currentPage={currentPage}/>
+        </>
+      )}
     </>
   );
 };
+
+function ClassDropdown({classList, moveClickedPage, id, classNumber, currentPage}:{
+  classList: StudentListType,
+  moveClickedPage?: (page: number) => void;
+  id?: string;
+  classNumber: number;
+  currentPage?: string;
+}){
+  const { push } = useRouter();
+
+  const getNameByList = (list: StudentListType) => {
+    return list?.filter((l) => l.page <= Number(currentPage)).pop()?.name
+  }
+  
+  return (
+    <nav className="overflow-scroll">
+        <ul className="flex flex-col gap-2">
+          <div>
+            <input type="checkbox" className="peer appearance-none" id={"classCheckbox" + classNumber}/>
+            <label className="flex h-12 rounded-md bg-gray600 justify-between items-center px-4 peer-checked:[&_svg]:rotate-90 peer-checked:[&_svg_path]:fill-gray900 peer-checked:bg-gray50 peer-checked:text-gray900" htmlFor={"classCheckbox" + classNumber}>
+              <h1>{classNumber}반</h1>
+              <Arrow size={24} direction="bottom" className={"[&_path]:fill-gray50"}/>
+            </label>
+            <div className="peer-checked:flex hidden flex-col gap-1 mt-2">
+              {classList?.filter(c => c.student_number.toString().slice(1,2) === String(classNumber)).map(({student_id, student_number, document_status, name, page}) => (
+                <li
+                  onClick={() =>
+                    moveClickedPage
+                      ? moveClickedPage(page!)
+                      : push(`/${student_id}`)
+                  }
+                className={`flex text-[14px] cursor-pointer ${
+                  name === getNameByList(classList) && "bg-gray100 text-gray700"
+                } py-2 rounded-md px-3 justify-between items-center [&_path]:fill-gray400`}
+              >
+                <span className={"flex"}>{student_number} {name}</span>
+                {document_status && StudentIcon[document_status]}
+              </li>
+              ))}
+            </div>
+          </div>
+        </ul>
+      </nav>
+  )
+}

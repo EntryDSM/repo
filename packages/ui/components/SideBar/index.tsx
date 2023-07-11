@@ -1,11 +1,10 @@
-import React, { ReactNode, useState } from "react";
-import { WhiteRepoIcon } from "../../assets/WhiteRepoIcon";
-import { Home, Setting, Stack } from "../../assets";
-import { Sharing } from "./Sharing";
-import { Students } from "./Students";
 import Link from "next/link";
+import { ReactNode, useState } from "react";
+import { Home, Setting, Stack } from "../../assets";
+import { WhiteRepoIcon } from "../../assets/WhiteRepoIcon";
+import { Students } from "./Students";
 
-type StudentType = {
+export type StudentType = {
   student_id?: string;
   name: string;
   document_id?: string;
@@ -32,6 +31,7 @@ interface PropType {
   Sharing?: () => JSX.Element | null;
   id?: string;
   grade?: string;
+  currentPage?: string;
   children: ReactNode;
 }
 
@@ -43,6 +43,7 @@ export const SideBar = ({
   id,
   grade,
   children,
+  currentPage
 }: PropType) => {
   const [side, setSide] = useState<number>(0);
 
@@ -51,6 +52,7 @@ export const SideBar = ({
     1: "[&_path]:[&>*:nth-child(3)]:fill-gray500",
     2: "[&_path]:[&>*:nth-child(4)]:fill-gray500",
   }[side];
+
   return (
     <header className="flex h-[100vh]">
       <div className="fixed bottom-0 top-0 flex z-20">
@@ -71,7 +73,7 @@ export const SideBar = ({
           )}
         </nav>
         {!preview && !!side && (
-          <div className="bg-gray700 w-60 text-gray50 pl-6 pr-6 pt-10">
+          <div className="bg-gray700 w-60 text-gray50 pl-6 pr-6 pt-10 overflow-y-scroll">
             {
               {
                 1: studentList && (
@@ -80,6 +82,7 @@ export const SideBar = ({
                     id={id}
                     grade={grade}
                     moveClickedPage={moveClickedPage}
+                    currentPage={currentPage}
                   />
                 ),
                 2: Sharing && <Sharing />,
