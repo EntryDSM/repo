@@ -1,4 +1,4 @@
- import { useState } from "react";
+ import React, { useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import { SideBar, StudentListType } from "./SideBar";
 import "./pdfDocument.css";
