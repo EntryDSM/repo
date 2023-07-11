@@ -120,7 +120,7 @@ function ClassDropdown({classList, moveClickedPage, id, classNumber, currentPage
   const { push } = useRouter();
 
   const getNameByList = (list: StudentListType) => {
-    return list?.filter((l) => l.page ?? 0 <= Number(currentPage)).pop()?.name
+    return list?.filter((l) => (l.page as number) <= Number(currentPage)).pop()?.name
   }
   
   return (

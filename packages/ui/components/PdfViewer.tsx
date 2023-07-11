@@ -1,6 +1,6 @@
  import React, { useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
-import { SideBar, StudentListType } from "./SideBar";
+import {SideBar, StudentListType, StudentType} from "./SideBar";
 import "./pdfDocument.css";
 
 interface PropsType {
@@ -21,7 +21,7 @@ export const PdfViewer = ({ url, list }: PropsType) => {
   };
 
   const getNameByList = (list: StudentListType) => {
-    return list?.filter((l) => l.page ?? 0 <= currentPage).pop()?.name
+    return list?.filter((l) => (l.page as number) <= currentPage).pop()?.name
   }
 
   const getPageByList = (list: StudentListType) => {
@@ -33,8 +33,6 @@ export const PdfViewer = ({ url, list }: PropsType) => {
       next: list![findIndex + 1]?.page
     }
   }
-
-  getNameByList(list)
 
   return url ? (
     <SideBar studentList={[list]} moveClickedPage={moveClickedPage} currentPage={String(currentPage)}>
