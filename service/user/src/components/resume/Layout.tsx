@@ -70,7 +70,7 @@ export const ResumeLayout = ({
                     kind="outlineWhite"
                     radius="normal"
                   >
-                    임시 저장
+                    저장
                   </Button>
                   <Button
                     className="w-[61px]"
