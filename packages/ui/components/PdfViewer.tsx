@@ -21,16 +21,16 @@ export const PdfViewer = ({ url, list }: PropsType) => {
   };
 
   const getNameByList = (list: StudentListType) => {
-    return list?.filter((l) => l.page <= currentPage).pop()?.name
+    return list?.filter((l) => l.page ?? 0 <= currentPage).pop()?.name
   }
 
   const getPageByList = (list: StudentListType) => {
-    const findIndex = list?.findIndex((l) => l.name === getNameByList(list))
+    const findIndex = list?.findIndex((l) => l.name === getNameByList(list)) ?? 0
 
     return {
-      prev: list[findIndex - 1]?.page,
-      current: list[findIndex].page,
-      next: list[findIndex + 1]?.page
+      prev: list![findIndex - 1]?.page,
+      current: list![findIndex].page,
+      next: list![findIndex + 1]?.page
     }
   }
 
