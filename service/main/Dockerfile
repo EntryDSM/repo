@@ -4,7 +4,7 @@ WORKDIR /app
 RUN apk add --no-cache libc6-compat
 
 COPY manifests ./
-
+   
 RUN yarn install --immutable
 
 COPY packs ./
