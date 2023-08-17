@@ -59,7 +59,7 @@ export default function Home() {
       <section className="px-[200px] flex justify-between items-center h-[100vh]  mt-[200px] bg-gray50">
         <div className="flex flex-col gap-5">
           <div className="text-[64px] font-semibold">간편한</div>
-          <div className="text-[40px] font-semobold text-gray400">
+          <div className="text-[40px] font-semibold text-gray400">
             정보 입력
           </div>
           <div className="text-body4 mt-5">
@@ -73,7 +73,7 @@ export default function Home() {
         <Image src={feedback} width={600} height={450} alt="fastFeedback" />
         <div className="flex flex-col gap-1">
           <div className="text-[64px] font-semibold">빠른</div>
-          <div className="text-[40px] font-semobold text-gray400">
+          <div className="text-[40px] font-semibold text-gray400">
             피드백 확인
           </div>
           <div className="text-body4 mt-5">
