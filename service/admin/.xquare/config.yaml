@@ -1,0 +1,6 @@
+config: 
+  name: repo-admin
+  service_type: fe
+  port: 3002
+  domain:
+    prod: repo-admin

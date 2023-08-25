@@ -8,17 +8,24 @@ on:
 
 jobs:
   build:
+    permissions:
+      id-token: write
+      contents: read
     name: Build
     runs-on: ubuntu-latest
+    env:
+      SERVICE_NAME: admin
     steps:
       - name: Check Out The Repository
         uses: actions/checkout@v3
 
-      - name: Login to Docker
-        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} ${{ secrets.REGISTRY_URL }}
-
-      - name: Docker Build
-        run: yarn docker build @service/admin -t ${{ secrets.REGISTRY_URL }}/admin
-
-      - name: Docker Push
-        run: docker push ${{ secrets.REGISTRY_URL }}/admin
+      - name: Deploy to xquare
+        uses: team-xquare/xquare-deployment-action@master 
+        with:
+          environment: prod
+          access_key: ${{ secrets.ADMIN_ACCESS_KEY }}
+          github_token: ${{ secrets.GHP_TOKEN }}
+          base_url: service/${{ env.SERVICE_NAME }}
+          config_file_path: service/${{ env.SERVICE_NAME }}/.xquare/config.yaml
+          yarn_docker_build: true
+          yarn_workspace: "@service/${{ env.SERVICE_NAME }}"
