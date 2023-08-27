@@ -3,4 +3,4 @@ config:
   service_type: fe
   port: 3002
   domain:
-    prod: repo-admin
+    prod: repo-admin.xquare.app
