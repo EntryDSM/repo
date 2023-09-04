@@ -12,6 +12,7 @@ instance.interceptors.request.use(
       // @ts-ignore
       config.headers = {
         Authorization: `Bearer ${accessToken}`,
+        'X-Not-Using-Xquare-Auth': 'true'
       };
     }
     return config;
