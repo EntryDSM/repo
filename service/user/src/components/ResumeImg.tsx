@@ -17,7 +17,7 @@ export const ResumeImg = ({
 }: PropsType) => {
   const filterSrc =
     src && src.startsWith("image")
-      ? "https://s3.ap-northeast-2.amazonaws.com/file.dsm-repo.com/" + src
+      ? "https://s3.ap-northeast-2.amazonaws.com/dsm-repo/" + src
       : "";
   console.log(filterSrc, src);
   return (
