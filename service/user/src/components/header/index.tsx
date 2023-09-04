@@ -43,15 +43,6 @@ export const Header = ({ profileImg }: PropsType) => {
             ))}
           </ul>
         </nav>
-        <div>
-          <ResumeImg
-            width={40}
-            height={40}
-            src={profileImg}
-            alt="프로필 이미지"
-            className="w-10 h-10 object-cover rounded-full"
-          />
-        </div>
       </div>
     </header>
   );

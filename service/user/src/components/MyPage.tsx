@@ -66,7 +66,7 @@ export const MyPage = ({ profile, feedbacks }: PropsType) => {
               {heading}
             </div>
             <div className="text-body6 text-gray400 whitespace-pre-wrap">
-              {introduce}
+              {introduce === "" ? "문서를 작성해주세요" : introduce}
             </div>
           </>
         ) : (
