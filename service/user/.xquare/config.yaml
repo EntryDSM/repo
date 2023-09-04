@@ -3,4 +3,4 @@ config:
   service_type: fe
   port: 3001
   domain:
-    prod: repo-user.xquare.app
+    prod: user.dsm-repo.com
