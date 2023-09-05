@@ -81,30 +81,6 @@ export const My = () => {
           element_id={state.element_id}
           content={state.feedback}
         />
-        <ImportLabel label="프로필 이미지">
-          <input
-            id="profile"
-            type="file"
-            name="profile_image_path"
-            onChange={onImgChange}
-            className="hidden"
-          />
-          <label
-            htmlFor="profile"
-            className="relative inline-block cursor-pointer"
-          >
-            <ResumeImg
-              src={img || state.profile_image_path}
-              alt="자기소개 이미지"
-              width={160}
-              height={160}
-              className="w-40 h-40 object-cover rounded-[80px] bg-gray200"
-            />
-            <div className="absolute bottom-0 right-0 bg-gray100 p-2 rounded-full">
-              <Rectify size={24} />
-            </div>
-          </label>
-        </ImportLabel>
         <ImportLabel label="이름" important>
           <div className="text-body4 h-[46px] pl-1">{state.name}</div>
         </ImportLabel>
