@@ -7,6 +7,7 @@ export const instance = axios.create({
 
 instance.interceptors.request.use(
   async function (config) {
+    //@ts-ignore
     config.headers = {
       'X-Not-Using-Xquare-Auth': 'true'
     };
