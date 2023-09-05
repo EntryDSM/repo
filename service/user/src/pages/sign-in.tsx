@@ -1,15 +1,13 @@
 import { Arrow, Plus } from "@packages/ui/assets";
 import { Logo, Input, Button, Dropdown, pageRouteLinks } from "@packages/ui";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { oAuthLogin, postSignUp, postSignUpBody } from "@/apis/auth";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { getMajor } from "@/apis/major";
 import { getFile } from "@/apis/file";
 import Image from "next/image";
-import { AxiosError } from "axios";
 import { getOAuth } from "@/apis/getOAuth";
 
 interface Form {
@@ -78,31 +76,29 @@ const SignUp = () => {
 
   const { mutate } = useMutation({
     mutationFn: async (body: Form) => {
-      if (!img.file) throw Error;
-      const formData = new FormData();
-      console.log(img);
-      formData.append("file", img.file);
-      const { data } = await getFile({ type: "PROFILE", file: formData });;;
+      if (img.file) {
+        const formData = new FormData();
+        formData.append("file", img.file);
+        const { data } = await getFile({ type: "PROFILE", file: formData });
+        return postSignUp({
+          ...body,
+          profile_image_path: data?.image_path,
+          major_id: form.major_id.id,
+          email: body.email || localStorage.getItem("email") || "",
+        })
+      }
       return postSignUp({
         ...body,
-        profile_image_path: data?.image_path,
         major_id: form.major_id.id,
         email: body.email || localStorage.getItem("email") || "",
-      }).catch((e) => {
-        throw e;
-      });
+      })
     },
     onSuccess: (data) => {
-      console.log(data);
       toast("성공적으로 회원가입하였습니다.", {
         autoClose: 1000,
         type: "success",
       });
       push(pageRouteLinks.user)
-    },
-    onError: (error) => {
-      console.log(error);
-      toast("에러 발생", { type: "error" });
     },
   });
 
@@ -114,7 +110,6 @@ const SignUp = () => {
   // @ts-ignore
   useQuery(["oauthlogIn"], () => oAuthLogin(route.query), {
     onSuccess: ({ data }) => {
-      console.log(data);
       const { access_token, refresh_token } = data;
       if (access_token && refresh_token) {
         localStorage.setItem("access_token", access_token);
@@ -125,7 +120,6 @@ const SignUp = () => {
     onError: async ({ response }) => {
       const data = response?.data;
 
-      console.log(response);
       if (!data) return;
 
       switch (data.status) {
