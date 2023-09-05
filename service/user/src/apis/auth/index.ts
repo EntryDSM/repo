@@ -7,7 +7,7 @@ export interface postSignUpBody {
   class_num: number;
   number: number;
   major_id: string;
-  profile_image_path: string;
+  profile_image_path: string | null;
 }
 
 export const postSignUp = (body: postSignUpBody) => {
