@@ -14,7 +14,7 @@ export const TextArea = ({
   name,
   onChange,
   value,
-  limit = 240,
+  limit = 500,
   maxLine,
   placeholder,
   className,
