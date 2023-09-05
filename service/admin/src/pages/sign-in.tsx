@@ -28,8 +28,8 @@ const setSaveEmail = (isSave: boolean, email?: string) => {
 
 const SignIn = () => {
   const [form, setForm] = useState<Form>({
-    account_id: "teacher123",
-    password: "qwerty!1",
+    account_id: "",
+    password: "",
   });
   const [saveEmail, setSave] = useState<boolean>(false);
 
