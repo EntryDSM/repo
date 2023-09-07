@@ -140,6 +140,12 @@ export const useProfileWrite = <
       setState(temp);
       setRender(true);
     },
+    onError: () => {
+      toast("입력하지 않은 필드가 있습니다.", {
+        autoClose: 1000,
+        type: "error",
+      });
+    },
     enabled: !renderOnce,
   });
 
