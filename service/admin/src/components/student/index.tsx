@@ -25,7 +25,7 @@ export const Student = ({
         <Image
           width={46}
           height={46}
-          src={profile_image_url}
+          src={"https://s3.ap-northeast-2.amazonaws.com/dsm-repo/images/user-profile/default-profile.png"}
           alt="학생관리 프로필 이미지"
           className="rounded-full h-[46px]"
         />
