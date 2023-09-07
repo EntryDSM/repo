@@ -7,7 +7,8 @@ import { myDetail } from "@/apis/document/get/myDetail";
 
 const Preview = () => {
   const { data } = useQuery(["writePreview"], () => myDetail(), {
-    staleTime: Infinity,
+    staleTime: 0,
+    refetchOnWindowFocus: false,
   });
   return (
     <SideBar preview>

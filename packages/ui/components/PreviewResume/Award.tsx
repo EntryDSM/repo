@@ -19,7 +19,7 @@ export const Award = ({
             <p>{millsecondToDate(date)}</p>
           </div>
         </div>
-        {description && <pre className="text-body7">{description}</pre>}
+        {description && <pre className="text-body7 whitespace-pre-wrap">{description}</pre>}
       </div>
     </>
   );
