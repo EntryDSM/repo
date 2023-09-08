@@ -61,6 +61,7 @@ export const SkillList = ({
           <div
             className={`h-10 cursor-pointer bg-gray100 hover:bg-gray200 text-body5 rounded-sm flex items-center gap-3 px-5 ${className}`}
             onClick={() => onClickRemove({ index, name })}
+            key={index}
           >
             {skill}
             <Close size={12} />

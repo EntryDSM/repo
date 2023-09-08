@@ -61,7 +61,7 @@ export const ResumeLayout = ({
           <div className="w-[1120px] m-auto flex flex-col gap-10 mb-52">
             <div>
               <p className="text-title1 text-gray50">이력서 관리</p>
-              <p className="text-title4 flex justify-between text-gray50">
+              <div className="text-title4 flex justify-between text-gray50">
                 Resumé Management
                 <div className="flex gap-[15px]">
                   <Button
@@ -81,7 +81,7 @@ export const ResumeLayout = ({
                     {submit ? "제출" : "취소"}
                   </Button>
                 </div>
-              </p>
+              </div>
             </div>
 
             <div className="flex justify-between">

@@ -63,15 +63,16 @@ export const onChange = (
   if (!e.target.files) return;
   const file = new FormData();
   file.append("file", e.target.files[0]);
-  getFile({ type: "DOCUMENT", file }).then(({ data }) => {
-    setState(data);
-  })
-  .catch(() =>
-    toast("1MB 이하의 파일을 선택해주세요.", {
-      type: "error",
-      autoClose: 1000,
+  getFile({ type: "DOCUMENT", file })
+    .then(({ data }) => {
+      setState(data);
     })
-  );;;
+    .catch(() =>
+      toast("1MB 이하의 파일을 선택해주세요.", {
+        type: "error",
+        autoClose: 1000,
+      })
+    );
 };
 
 export const onClickItem = <T>(
@@ -134,6 +135,7 @@ export const useProfileWrite = <
           grade,
           class_num,
           number: Number(number.join("")),
+          url: data.writer.url ?? "",
         };
       }
       //@ts-ignore
@@ -153,7 +155,7 @@ export const useProfileWrite = <
     mutationFn: (body: T): Promise<DetailType> => {
       const newBody = disableId(body);
       return typeFn[type](newBody);
-    }
+    },
   });
 
   const handleChange =

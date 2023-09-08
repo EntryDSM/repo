@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { disableId } from ".";
 import { instance } from "../..";
 
@@ -14,7 +15,14 @@ export interface AwardResType extends AwardReqBody {
 }
 
 export const documnetAward = (body: AwardReqBody[]) => {
-  return instance.patch("/document/award", {
-    award_list: body,
-  });
+  return instance
+    .patch("/document/award", {
+      award_list: body,
+    })
+    .catch((error) => {
+      toast("입력하지 않은 필드가 있습니다.", {
+        autoClose: 1000,
+        type: "error",
+      });
+    });
 };

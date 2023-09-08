@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { disableId } from ".";
 import { instance } from "../..";
 
@@ -17,8 +18,15 @@ export interface ProjectResType extends ProjectReqBody {
 }
 
 export const documnetProject = (body: ProjectReqBody[]) => {
-  return instance.patch("/document/project", {
-    title: "",
-    project_list: body,
-  });
+  return instance
+    .patch("/document/project", {
+      title: "",
+      project_list: body,
+    })
+    .catch((error) => {
+      toast("입력하지 않은 필드가 있습니다.", {
+        autoClose: 1000,
+        type: "error",
+      });
+    });
 };

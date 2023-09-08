@@ -35,7 +35,7 @@ export const Header = ({ profileImg }: PropsType) => {
                       ? "text-gray50"
                       : "text-gray300"
                   }`}
-                  href={"/" + value}
+                  href={value}
                 >
                   {key}
                 </Link>
