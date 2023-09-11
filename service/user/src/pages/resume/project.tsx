@@ -21,6 +21,7 @@ export const Project = () => {
     setState,
     handleChange,
     addItem,
+    moveItem,
     removeItem,
     addSkill,
     removeSkill,
@@ -102,6 +103,8 @@ export const Project = () => {
             onChange={() => {}}
             placeholder="프로젝트 명"
             onRemove={removeItemArray}
+            onMove={moveItem}
+            index={index}
             key={"projectListId" + index}
           >
             <FeedBack
