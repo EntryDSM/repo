@@ -134,7 +134,7 @@ export const Project = () => {
                   alt="프로젝트 로고"
                   width={100}
                   height={100}
-                  className="w-[100px] h-[100px] object-cover rounded bg-gray200"
+                  className="w-[100px] h-[100px] object-cover rounded"
                 />
                 {!imgUrl && (
                   <div className="absolute left-[38px] top-[38px] border-0">

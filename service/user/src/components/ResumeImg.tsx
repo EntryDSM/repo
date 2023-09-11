@@ -29,9 +29,13 @@ export const ResumeImg = ({
           width={width}
           height={height}
           className={className}
+          priority
         />
       ) : (
-        <div style={{ width: width, height: height }}></div>
+        <div
+          style={{ width: width, height: height }}
+          className="bg-gray100"
+        ></div>
       )}
     </>
   );
