@@ -17,10 +17,10 @@ export const Footer = ({ black }: PropsType) => {
           <div className="text-title1">REPO</div>
           <nav className="flex gap-5">
             <Link href={"https://github.com/EntryDSM"}>
-              <Github />
+              <Github size={26} />
             </Link>
             <Link href={"https://www.facebook.com/entrydsm"}>
-              <FaceBook />
+              <FaceBook size={26} />
             </Link>
           </nav>
         </div>

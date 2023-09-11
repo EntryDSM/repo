@@ -15,6 +15,7 @@ export const Certificate = () => {
     mutate,
     handleChange,
     addItem,
+    moveItem,
     removeItem,
     document_id,
   } = useProfileWrite(
@@ -58,7 +59,9 @@ export const Certificate = () => {
             onChange={() => {}}
             placeholder="자격증 이름"
             onRemove={removeItemArray}
+            onMove={moveItem}
             key={element_id}
+            index={index}
           >
             <FeedBack
               document_id={document_id}

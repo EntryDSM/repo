@@ -19,14 +19,23 @@ export const ResumeImg = ({
     src && src.startsWith("image")
       ? "https://s3.ap-northeast-2.amazonaws.com/dsm-repo/" + src
       : "";
-  console.log(filterSrc, src);
   return (
-    <Image
-      src={filterSrc}
-      alt={alt}
-      width={width}
-      height={height}
-      className={className}
-    ></Image>
+    <>
+      {filterSrc ? (
+        <Image
+          src={filterSrc}
+          alt={alt}
+          width={width}
+          height={height}
+          className={className}
+          priority
+        />
+      ) : (
+        <div
+          style={{ width: width, height: height }}
+          className="bg-gray100"
+        ></div>
+      )}
+    </>
   );
 };

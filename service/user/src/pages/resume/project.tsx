@@ -21,6 +21,7 @@ export const Project = () => {
     setState,
     handleChange,
     addItem,
+    moveItem,
     removeItem,
     addSkill,
     removeSkill,
@@ -43,8 +44,6 @@ export const Project = () => {
     "project_list"
   );
   const [imgs, setImgs] = useState<string[]>([]);
-
-  console.log(state)
   
   return (
     <ResumeLayout
@@ -102,6 +101,8 @@ export const Project = () => {
             onChange={() => {}}
             placeholder="프로젝트 명"
             onRemove={removeItemArray}
+            onMove={moveItem}
+            index={index}
             key={"projectListId" + index}
           >
             <FeedBack
@@ -134,7 +135,7 @@ export const Project = () => {
                   alt="프로젝트 로고"
                   width={100}
                   height={100}
-                  className="w-[100px] h-[100px] object-cover rounded bg-gray200"
+                  className="w-[100px] h-[100px] object-cover rounded"
                 />
                 {!imgUrl && (
                   <div className="absolute left-[38px] top-[38px] border-0">

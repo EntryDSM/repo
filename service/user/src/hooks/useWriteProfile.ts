@@ -17,7 +17,7 @@ import {
   WrtieInfoReqBody,
   disableId,
 } from "../apis/document/patch";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, MouseEventHandler, useEffect, useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { GetFileRes, getFile } from "@/apis/file";
@@ -173,9 +173,28 @@ export const useProfileWrite = <
   const addItem = () => {
     if (Array.isArray(state) && Array.isArray(initial)) {
       // @ts-ignore
-      setState([...state, initial[0]]);
+      setState([initial[0], ...state]);
     }
     toast("아이템이 추가되었습니다!", { type: "success", autoClose: 1000 });
+  };
+  const moveItem = (index: number, move: number) => {
+    if (Array.isArray(state)) {
+      if (move && index > 0) {
+        const copy = [...state];
+        const temp = state[index];
+        copy[index] = copy[index - 1];
+        copy[index - 1] = temp;
+        // @ts-ignore
+        setState(copy);
+      } else if (!move && index < state.length - 1) {
+        const copy = [...state];
+        const temp = state[index];
+        copy[index] = copy[index + 1];
+        copy[index + 1] = temp;
+        // @ts-ignore
+        setState(copy);
+      }
+    }
   };
   const removeItem = (index: number) => () => {
     if (Array.isArray(state)) {
@@ -239,6 +258,7 @@ export const useProfileWrite = <
     setState,
     handleChange,
     addItem,
+    moveItem,
     removeItem,
     toPreview,
     removeSkill,

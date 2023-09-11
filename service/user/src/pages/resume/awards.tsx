@@ -17,6 +17,7 @@ export const Awards = () => {
     mutate,
     handleChange,
     addItem,
+    moveItem,
     removeItem,
     document_id,
   } = useProfileWrite(
@@ -69,7 +70,9 @@ export const Awards = () => {
             onChange={() => {}}
             placeholder="상 이름"
             onRemove={removeItemArray}
+            onMove={moveItem}
             key={element_id}
+            index={index}
           >
             <FeedBack
               document_id={document_id}
