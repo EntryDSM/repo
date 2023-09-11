@@ -21,12 +21,18 @@ export const ResumeImg = ({
       : "";
   console.log(filterSrc, src);
   return (
-    <Image
-      src={filterSrc}
-      alt={alt}
-      width={width}
-      height={height}
-      className={className}
-    ></Image>
+    <>
+      {filterSrc ? (
+        <Image
+          src={filterSrc}
+          alt={alt}
+          width={width}
+          height={height}
+          className={className}
+        />
+      ) : (
+        <div style={{ width: width, height: height }}></div>
+      )}
+    </>
   );
 };
