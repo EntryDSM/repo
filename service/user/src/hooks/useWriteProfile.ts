@@ -178,8 +178,6 @@ export const useProfileWrite = <
     toast("아이템이 추가되었습니다!", { type: "success", autoClose: 1000 });
   };
   const moveItem = (index: number, move: number) => {
-    console.log(index);
-    console.log(state);
     if (Array.isArray(state)) {
       if (move && index > 0) {
         const copy = [...state];

@@ -6,10 +6,7 @@ import { Plus } from "@packages/ui/assets";
 import { ChangeEvent, useState } from "react";
 import { ImportLabel } from "../../components/ImportLabel";
 import { ResumeItem, ResumeLayout, ResumeTitle } from "../../components/resume";
-import {
-  onChange,
-  useProfileWrite
-} from "../../hooks/useWriteProfile";
+import { onChange, useProfileWrite } from "../../hooks/useWriteProfile";
 
 export const Project = () => {
   const {
@@ -45,8 +42,6 @@ export const Project = () => {
   );
   const [imgs, setImgs] = useState<string[]>([]);
 
-  console.log(state)
-  
   return (
     <ResumeLayout
       mutate={mutate}
