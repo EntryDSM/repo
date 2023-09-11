@@ -51,7 +51,7 @@ export const DateInput = ({
         >
           <input
             className=" cursor-pointer text-body6"
-            value={CalenderDateValue()}
+            value={CalenderDateValue() || ""}
             placeholder={placeholder}
             disabled
           />
