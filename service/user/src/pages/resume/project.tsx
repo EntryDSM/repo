@@ -65,6 +65,7 @@ export const Project = () => {
           feedback,
           element_id,
         } = item;
+        console.log(represent_image_path);
 
         const onImgChange = (value: string) => {
           const copy = [...imgs];
@@ -94,6 +95,8 @@ export const Project = () => {
 
         const imgUrl = imgs[index] || represent_image_path;
         const inputId = "projectLogo" + index;
+
+        console.log('image url is : ' + imgUrl);
 
         return (
           <ResumeItem

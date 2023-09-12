@@ -10,7 +10,7 @@ export const Award = ({
 }: PreviewType["award_list"][0]) => {
   return (
     <>
-      <div className="bg-gray50 rounded-md pl-5 pt-3 pb-3 pr-5 flex flex-col gap-3">
+      <div className="bg-gray50 rounded-md pl-5 pt-3 pb-3 pr-5 flex flex-col gap-[10px]">
         <div className="flex justify-between">
           <h4 className="text-body5">{name}</h4>
           <div className="flex gap-2 items-center">

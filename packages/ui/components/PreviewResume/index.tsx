@@ -42,7 +42,7 @@ export interface PreviewType {
   project_list: {
     element_id: string;
     name: string;
-    represent_image_url: string;
+    represent_image_path: string;
     skill_list: string[];
     start_date: number | string;
     end_date: number | string;
@@ -103,9 +103,11 @@ export const PreviewResume = ({
 
   const [grade, classNum] = writer.student_number.toString().split("");
 
+  console.log(project_list);
+
   return (
     <main
-      className={`${feedbackWidth} m-auto my-20 flex flex-col gap-8 p-8 justify-between`}
+      className={`${feedbackWidth} m-auto my-20 flex flex-col gap-[40px] p-8 justify-between`}
       ref={targetRef}
     >
       <article>
@@ -114,18 +116,18 @@ export const PreviewResume = ({
           element_id={writer.element_id}
           comment={writer.feedback}
         >
-          <div className="flex justify-between">
+          <div className="flex justify-between items-center">
             <div>
-              <p className="text-title1">{writer.name}</p>
+              <p className="text-title1 mb-[10px]">{writer.name}</p>
               <p className="text-title4">{writer.major.name}</p>
             </div>
             <div className="flex">
-              <div className="flex justify-between flex-col mr-6 text-end">
-                <p className="text-body7">{writer.student_number}</p>
-                <p className="text-body7">
+              <div className="flex flex-col mr-6 text-end gap-[10px] justify-center">
+                <p className="text-body7 leading-[17px]">{writer.student_number}</p>
+                <p className="text-body7 leading-[17px]">
                   {grade !== "1" ? subject[classNum as "1"] : "공통과정"}
                 </p>
-                <p className="text-body7">{writer.email}</p>
+                <p className="text-body7 leading-[17px]">{writer.email}</p>
               </div>
               {writer.url && (
                 <div>
@@ -145,7 +147,7 @@ export const PreviewResume = ({
         >
           <div>
             <h3 className="text-body3">{introduce.heading}</h3>
-            <pre className="text-body8 text-gray400 mt-4">
+            <pre className="text-body7 whitespace-pre-wrap text-gray400 mt-[20px] leading-[17px]">
               {introduce.introduce}
             </pre>
           </div>
@@ -153,8 +155,8 @@ export const PreviewResume = ({
       </article>
 
       {!!skill_list.length && (
-        <article>
-          <h3 className="text-body5 mb-3">기술 스택</h3>
+        <article className="flex flex-col gap-[10px]">
+          <h3 className="text-body5">기술 스택</h3>
           <pre className="flex gap-3">
             {skill_list.map((skill, index) => (
               <Tag key={index} className="bg-gray50" technology={skill} />
@@ -163,7 +165,7 @@ export const PreviewResume = ({
         </article>
       )}
 
-      <article className="flex gap-3 flex-col">
+      <article className="flex gap-[10px] flex-col">
         <h3 className="text-body5">수상 경력</h3>
         {award_list.map((award, index) => (
           <FeedBack
@@ -177,7 +179,7 @@ export const PreviewResume = ({
         ))}
       </article>
 
-      <article className="flex gap-2 flex-col">
+      <article className="flex gap-[10px] flex-col">
         <h3 className="text-body5">자격증</h3>
         {certificate_list.map((data, index) => (
           <FeedBack
@@ -191,8 +193,8 @@ export const PreviewResume = ({
         ))}
       </article>
 
-      <article className="flex flex-col gap-2">
-        <h3 className="text-body1">Project</h3>
+      <article className="flex flex-col gap-[20px]">
+        <h3 className="text-[22px] font-semibold leading-[26px]">Project</h3>
         {project_list.map((data, index) => (
           <FeedBack
             key={index}

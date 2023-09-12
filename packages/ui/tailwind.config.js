@@ -44,7 +44,7 @@ module.exports = {
       title3: [
         "24px",
         {
-          fontWeight: "300",
+          fontWeight: "600",
           lineHeight: "29px",
         },
       ],
