@@ -45,8 +45,8 @@ export const Project = ({
       <div>
         <h4 className="text-body5 mb-2">사용 기술</h4>
         <div className="flex gap-2">
-          {skill_list.map((technology) => (
-            <Tag className="bg-gray100" technology={technology} />
+          {skill_list.map((technology, index) => (
+            <Tag key={index} className="bg-gray100" technology={technology} />
           ))}
         </div>
       </div>

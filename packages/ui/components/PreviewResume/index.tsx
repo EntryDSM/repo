@@ -155,9 +155,9 @@ export const PreviewResume = ({
       {!!skill_list.length && (
         <article>
           <h3 className="text-body5 mb-3">기술 스택</h3>
-          <pre className="flex gap-3"> 
-            {skill_list.map((skill) => (
-              <Tag className="bg-gray50" technology={skill} />
+          <pre className="flex gap-3">
+            {skill_list.map((skill, index) => (
+              <Tag key={index} className="bg-gray50" technology={skill} />
             ))}
           </pre>
         </article>
@@ -165,8 +165,9 @@ export const PreviewResume = ({
 
       <article className="flex gap-3 flex-col">
         <h3 className="text-body5">수상 경력</h3>
-        {award_list.map((award) => (
+        {award_list.map((award, index) => (
           <FeedBack
+            key={index}
             part={award.name}
             element_id={award.element_id}
             comment={award.feedback}
@@ -178,8 +179,9 @@ export const PreviewResume = ({
 
       <article className="flex gap-2 flex-col">
         <h3 className="text-body5">자격증</h3>
-        {certificate_list.map((data) => (
+        {certificate_list.map((data, index) => (
           <FeedBack
+            key={index}
             part={data.name}
             element_id={data.element_id}
             comment={data.feedback}
@@ -191,8 +193,9 @@ export const PreviewResume = ({
 
       <article className="flex flex-col gap-2">
         <h3 className="text-body1">Project</h3>
-        {project_list.map((data) => (
+        {project_list.map((data, index) => (
           <FeedBack
+            key={index}
             part={data.name}
             element_id={data.element_id}
             comment={data.feedback}
