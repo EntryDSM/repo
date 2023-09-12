@@ -58,29 +58,29 @@ export const ResumeLayout = ({
       <div className="mt-[120px]">
         <div className="absolute top-20 w-full h-[360px] bg-gray900" />
         <div className="relative z-2">
-          <div className="w-[1120px] m-auto flex flex-col gap-10 mb-52">
-            <div>
-              <p className="text-title1 text-gray50">이력서 관리</p>
-              <div className="flex justify-between text-gray50">
+          <div className="w-[1120px] m-auto flex flex-col gap-[32px] mb-[200px]">
+            <div className="flex justify-between items-end text-gray50">
+              <div className="flex gap-[10px] flex-col">
+                <p className="text-title1 text-gray50">이력서 관리</p>
                 <p className="text-title4">Resumé Management</p>
-                <div className="flex gap-[15px]">
-                  <Button
-                    onClick={mutate}
-                    className="w-[100px]"
-                    kind="outlineWhite"
-                    radius="normal"
-                  >
-                    저장
-                  </Button>
-                  <Button
-                    className="w-[61px]"
-                    kind="containedWhite"
-                    radius="normal"
-                    onClick={submitChange}
-                  >
-                    {submit ? "제출" : "취소"}
-                  </Button>
-                </div>
+              </div>
+              <div className="flex gap-[15px] h-fit">
+                <Button
+                  onClick={mutate}
+                  className="w-[100px]"
+                  kind="outlineWhite"
+                  radius="normal"
+                >
+                  저장
+                </Button>
+                <Button
+                  className="w-[61px]"
+                  kind="containedWhite"
+                  radius="normal"
+                  onClick={submitChange}
+                >
+                  {submit ? "제출" : "취소"}
+                </Button>
               </div>
             </div>
 
