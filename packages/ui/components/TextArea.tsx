@@ -47,9 +47,9 @@ export const TextArea = ({
         placeholder={placeholder}
         value={value}
       />
-      <div className="text-end text-body7">
+      <p className="text-end text-body7">
         {value.length}/{limit}
-      </div>
+      </p>
     </div>
   );
 };

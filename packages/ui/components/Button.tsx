@@ -1,3 +1,4 @@
+import React from "react";
 import { ReactNode } from "react";
 
 interface PropsType {
@@ -23,44 +24,44 @@ const defaultDisable = "bg-gray200 text-gray50";
 const buttonColor = {
   contained: {
     enable:
-      "bg-gray800 text-gray50 hover:bg-gray500 [&_path]:fill-gray50 active:bg-gray400 [&_path]:hover:fill-gray50",
+      "transition-all bg-gray800 text-gray50 hover:bg-gray500 [&_path]:fill-gray50 active:bg-gray400 [&_path]:hover:fill-gray50",
     disable: defaultDisable,
   },
   containedWhite: {
-    enable: "bg-gray50 text-gray900  hover:bg-gray100 :active:bg-gray200",
+    enable: "transition-all bg-gray50 text-gray900  hover:bg-gray100 :active:bg-gray200",
     disable: "bg-gray600 text-gray500",
   },
   outline: {
     enable:
-      "border-2 text-gray800 hover:text-gray50 hover:border-gray600 hover:bg-gray600 active:text-gray50 [&_path]:hover:fill-gray50 active:bg-gray500 active:border-gray500",
+      "transition-all border-2 text-gray800 hover:text-gray50 hover:border-gray600 hover:bg-gray600 active:text-gray50 [&_path]:hover:fill-gray50 active:bg-gray500 active:border-gray500",
     disable: "border-2 border-gray300 text-gray300",
   },
   outlineWhite: {
     enable:
-      "border-2 text-gray50 hover:text-gray800 hover:border-gray600 hover:bg-gray100 active:text-gray50 active:bg-gray500 active:border-gray500",
+      "transition-all border-2 text-gray50 hover:text-gray800 hover:border-gray50 hover:bg-gray100 active:text-gray50 active:bg-gray500 active:border-gray500",
     disable: "border-2 border-gray300 text-gray300",
   },
   underline: {
-    enable: "underline bg-gray50 text-gray600 hover:text-gray500",
+    enable: "transition-all underline bg-gray50 text-gray600 hover:text-gray500",
     disable: "underline text-gray200",
   },
   text: {
-    enable: "hover:bg-gray100 active:bg-gray200",
+    enable: "transition-all hover:bg-gray100 active:bg-gray200",
     disable: "text-gray200",
   },
   success: {
     enable:
-      "text-gray50 bg-green hover:bg-green200 active:bg-green100 active:text-green",
+      "transition-all text-gray50 bg-green hover:bg-green200 active:bg-green100 active:text-green",
     disable: defaultDisable,
   },
   point: {
     enable:
-      "bg-blue text-gray50 hover:bg-blue200 active:bg-blue100 active:bg-blue [&_path]:fill-gray50",
+      "transition-all bg-blue text-gray50 hover:bg-blue200 active:bg-blue100 active:bg-blue [&_path]:fill-gray50",
     disable: defaultDisable,
   },
   critical: {
     enable:
-      "bg-red text-gray50 hover:bg-red200 active:bg-red100 active:text-red",
+      "transition-all bg-red text-gray50 hover:bg-red200 active:bg-red100 active:text-red",
     disable: defaultDisable,
   },
 };

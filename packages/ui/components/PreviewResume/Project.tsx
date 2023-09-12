@@ -1,13 +1,14 @@
 import React from "react";
-import Image from "next/image";
+import { ResumeImg } from "@/components/ResumeImg";
 import { millsecondToDate } from ".";
 import { LinkSvg } from "../../assets";
 import { Tag } from "./Tag";
 import defaultImg from "../../assets/projectDefaultImg.png";
 import Link from "next/link";
+import Image from "next/image";
 
 interface PropsType {
-  represent_image_url: string;
+  represent_image_path: string;
   name: string;
   skill_list: string[];
   start_date: number | string;
@@ -17,7 +18,7 @@ interface PropsType {
 }
 
 export const Project = ({
-  represent_image_url,
+  represent_image_path,
   name,
   skill_list,
   start_date,
@@ -25,19 +26,31 @@ export const Project = ({
   description,
   url,
 }: PropsType) => {
+  const imageUrl = represent_image_path;
+  console.log(represent_image_path);
   return (
     <div className="flex flex-col gap-10 rounded-md bg-gray50 pl-10 pr-10 pt-7 pb-7 w-full">
       <div className="flex items-center">
-        <Image
-          width={80}
-          height={80}
-          className={"mr-6 bg-gray300 rounded-md"}
-          src={represent_image_url || defaultImg}
-          alt="projectImg"
-        />
-        <div>
-          <p className="text-title2">{name}</p>
-          <p className="text-body7">
+        {imageUrl ? (
+          <ResumeImg
+            width={48}
+            height={48}
+            className="mr-[40px] object-cover w-[48px] h-[48px]"
+            src={imageUrl}
+            alt="projectImg"
+          />
+        ) : (
+          <Image
+            width={48}
+            height={48}
+            className="mr-[40px] object-cover w-[48px] h-[48px]"
+            src={defaultImg}
+            alt="projectImg"
+          />
+        )}
+        <div className="flex flex-col gap-[4px]">
+          <p className="text-title3">{name}</p>
+          <p className="text-[14px] leading-[17px]">
             {millsecondToDate(start_date)} ~ {millsecondToDate(end_date)}
           </p>
         </div>
@@ -45,12 +58,12 @@ export const Project = ({
       <div>
         <h4 className="text-body5 mb-2">사용 기술</h4>
         <div className="flex gap-2">
-          {skill_list.map((technology) => (
-            <Tag className="bg-gray100" technology={technology} />
+          {skill_list.map((technology, index) => (
+            <Tag key={index} className="bg-gray100" technology={technology} />
           ))}
         </div>
       </div>
-      <pre className=" whitespace-pre-wrap">{description}</pre>
+      <pre className="text-body7 whitespace-pre-wrap">{description}</pre>
       {url && (
         <Link
           href={url}
@@ -58,9 +71,9 @@ export const Project = ({
         >
           <LinkSvg />
 
-          <a className="text-ellipsis overflow-hidden whitespace-normal">
+          <p className="text-ellipsis overflow-hidden whitespace-normal">
             {url}
-          </a>
+          </p>
         </Link>
       )}
     </div>

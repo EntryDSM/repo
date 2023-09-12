@@ -40,20 +40,20 @@ export const LoginBranchModal = ({ closeModal }: Props) => {
         <div className="w-[550px] h-[370px] relative rounded-lg bg-gray100 flex flex-col items-center justify-center gap-y-10 px-20">
           <div className="flex flex-col items-center gap-y-2.5">
             <Logo />
-            <div className="text-body6">로그인 유형을 선택해 주세요</div>
+            <p className="text-body6">로그인 유형을 선택해 주세요</p>
           </div>
           <div className="flex flex-col gap-y-[15px] w-full">
             <NavigateButton
               onClick={NavigateToStudent}
               icon={<User size={30} />}
             >
-              학생 로그인하기
+              <p className="text-body5">학생 로그인하기</p>
             </NavigateButton>
             <NavigateButton
               onClick={NavigateToTeacher}
               icon={<Teacher size={30} />}
             >
-              선생님 로그인하기
+              <p className="text-body5">선생님 로그인하기</p>
             </NavigateButton>
           </div>
           <div
@@ -83,7 +83,7 @@ const NavigateButton = ({ icon, children, onClick }: NaviType) => {
       <div className="w-[80px] h-full flex items-center justify-center bg-gray900 rounded-s-md ">
         {icon}
       </div>
-      <div className="text-body5">{children}</div>
+      <div>{children}</div>
     </div>
   );
 };

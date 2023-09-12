@@ -41,9 +41,9 @@ export const LibraryCard = ({
     <Link href={`/library/${id}`}>
       <article className="flex w-[1120px] h-20 items-center bg-gray50 rounded-lg">
         <hr className="h-full block bg-gray300 border-none rounded-tl-lg rounded-bl-lg w-2" />
-        <div className="text-body4 ml-9 w-[655px]">
+        <p className="text-body4 ml-9 w-[655px]">
           {year} {grade}학년 {generation}기
-        </div>
+        </p>
         <Dropdown
           placeholder="공개"
           lists={["공개", "학생만", "비공개"]}

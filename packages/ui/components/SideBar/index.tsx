@@ -43,12 +43,11 @@ export const SideBar = ({
   id,
   grade,
   children,
-  currentPage
+  currentPage,
 }: PropType) => {
-  const [side, setSide] = useState<number>(0);
+  const [side, setSide] = useState<number>(1);
 
   const currentIcon = {
-    0: "[&_path]:[&>*:nth-child(2)]:fill-gray500",
     1: "[&_path]:[&>*:nth-child(3)]:fill-gray500",
     2: "[&_path]:[&>*:nth-child(4)]:fill-gray500",
   }[side];
@@ -64,7 +63,11 @@ export const SideBar = ({
               <WhiteRepoIcon />
             </Link>
           </ul>
-          <Home onClick={() => setSide(0)} />
+          <ul>
+            <Link href="/">
+              <Home />
+            </Link>
+          </ul>
           {!preview && (
             <>
               {studentList && <Stack onClick={() => setSide(1)} />}

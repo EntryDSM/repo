@@ -192,7 +192,7 @@ const SignUp = () => {
           <Arrow direction="left" />
           뒤로가기
         </button>
-        <div className="text-title1 mb-4">회원가입</div>
+        <p className="text-title1 mb-4">회원가입</p>
         <div className="flex gap-8 flex-col">
           <Dropdown
             name="grade"

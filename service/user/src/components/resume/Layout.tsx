@@ -58,29 +58,29 @@ export const ResumeLayout = ({
       <div className="mt-[120px]">
         <div className="absolute top-20 w-full h-[360px] bg-gray900" />
         <div className="relative z-2">
-          <div className="w-[1120px] m-auto flex flex-col gap-10 mb-52">
-            <div>
-              <p className="text-title1 text-gray50">이력서 관리</p>
-              <div className="text-title4 flex justify-between text-gray50">
-                Resumé Management
-                <div className="flex gap-[15px]">
-                  <Button
-                    onClick={mutate}
-                    className="w-[100px]"
-                    kind="outlineWhite"
-                    radius="normal"
-                  >
-                    저장
-                  </Button>
-                  <Button
-                    className="w-[61px]"
-                    kind="containedWhite"
-                    radius="normal"
-                    onClick={submitChange}
-                  >
-                    {submit ? "제출" : "취소"}
-                  </Button>
-                </div>
+          <div className="w-[1120px] m-auto flex flex-col gap-[32px] mb-[200px]">
+            <div className="flex justify-between items-end text-gray50">
+              <div className="flex gap-[10px] flex-col">
+                <p className="text-title1 text-gray50">이력서 관리</p>
+                <p className="text-title4">Resumé Management</p>
+              </div>
+              <div className="flex gap-[15px] h-fit">
+                <Button
+                  onClick={mutate}
+                  className="w-[100px]"
+                  kind="outlineWhite"
+                  radius="normal"
+                >
+                  저장
+                </Button>
+                <Button
+                  className="w-[61px]"
+                  kind="containedWhite"
+                  radius="normal"
+                  onClick={submitChange}
+                >
+                  {submit ? "제출" : "취소"}
+                </Button>
               </div>
             </div>
 
@@ -109,7 +109,7 @@ export const ResumeLayout = ({
                   {Object.entries(link).map(([key, value]) => (
                     <button
                       key={key}
-                      className={`w-full rounded-md box-border pl-[18px] pr-[18px] px-[18px] h-[60px] text-body5 flex items-center justify-between gap-x-[15px] shrink-0 hover:bg-gray100  ${
+                      className={`transition-all w-full rounded-md box-border pl-[18px] pr-[18px] px-[18px] h-[60px] text-body5 flex items-center justify-between gap-x-[15px] shrink-0 hover:bg-gray100  ${
                         route.includes(key) ? "bg-gray100" : ""
                       }`}
                       onClick={() => toOtherProfileWrite(key)}

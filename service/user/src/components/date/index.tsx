@@ -44,7 +44,7 @@ export const DateInput = ({
   return (
     <OutsideClickHandler display="flex" onOutsideClick={closeDropdown}>
       <div className="relative w-full">
-        <div className="text-body2">{label}</div>
+        <p className="text-body2">{label}</p>
         <div
           className=" cursor-pointer relative bg-gray100 rounded-sm  w-full h-[46px] flex items-center pr-1 pl-5 "
           onClick={openDropdown}
