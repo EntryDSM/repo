@@ -39,10 +39,10 @@ export const Sharing = ({
     targetRef && getPdf(targetRef, `대마고 ${name} 이력서`);
   return (
     <>
-      <div className="text-title4">{name}</div>
+      <p className="text-title4">{name}</p>
 
       <div className="flex flex-col gap-[10px] mt-6">
-        <div className="text-body5">문서 공개 설정</div>
+        <p className="text-body5">문서 공개 설정</p>
         {sharingButton.map(({ text, button_Status }) => {
           const includeShare = button_Status.includes(
             shared ? "SHARED" : "SUBMITTED"
@@ -66,7 +66,7 @@ export const Sharing = ({
         })}
       </div>
 
-      <div className="text-body5 mt-6 mb-[10px]">내보내기</div>
+      <p className="text-body5 mt-6 mb-[10px]">내보내기</p>
 
       <Button onClick={onClickPdf} kind="outlineWhite" className="w-full">
         PDF로 내보내기

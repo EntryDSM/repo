@@ -94,7 +94,7 @@ export const Dropdown = <
           </div>
         )}
       </div>
-      {hint && <div className="text-body8 text-gray300">{hint}</div>}
+      {hint && <p className="text-body8 text-gray300">{hint}</p>}
     </ReactOutSideClickHandler>
   );
 };

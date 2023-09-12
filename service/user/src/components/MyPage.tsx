@@ -63,15 +63,15 @@ export const MyPage = ({ profile, feedbacks }: PropsType) => {
 
         {is_exist ? (
           <>
-            <div className="text-body3 mb-[44px] whitespace-pre-wrap">
+            <p className="text-body3 mb-[44px] whitespace-pre-wrap">
               {heading}
-            </div>
-            <div className="text-body6 text-gray400 whitespace-pre-wrap">
+            </p>
+            <p className="text-body6 text-gray400 whitespace-pre-wrap">
               {introduce === "" ? "문서를 작성해주세요" : introduce}
-            </div>
+            </p>
           </>
         ) : (
-          <div className="text-body6 text-gray400">문서를 작성해주세요</div>
+          <p className="text-body6 text-gray400">문서를 작성해주세요</p>
         )}
       </div>
 
@@ -108,14 +108,14 @@ export const MyPage = ({ profile, feedbacks }: PropsType) => {
                 className="bg-gray100 rounded-2xl pl-10 pr-10 pt-12 pb-12 flex flex-col gap-[30px]"
               >
                 <p>{element_name}</p>
-                <div className="text-body6 whitespace-pre-wrap">{comment}</div>
+                <p className="text-body6 whitespace-pre-wrap">{comment}</p>
               </div>
             ))}
           </>
         ) : (
-          <div className="w-full h-40 bg-gray100 rounded-2xl flex justify-center items-center whitespace-pre-wrap text-center text-body5">
+          <p className="w-full h-40 bg-gray100 rounded-2xl flex justify-center items-center whitespace-pre-wrap text-center text-body5">
             {"이력서를 작성하고, 제출하여\n 피드백을 받아보세요"}
-          </div>
+          </p>
         )}
         <div className="flex justify-end gap-x-5 [&>button]:w-fit">
           <Link href="/preview">

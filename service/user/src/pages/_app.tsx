@@ -13,7 +13,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     isView && (
-      <div className=" [&_*]:font-['Pretendard-Regular'] [&_*]:leading-tight">
+      <div className=" [&_*]:font-['Pretendard'] [&_*]:leading-tight">
         <QueryClientProvider client={queryClient}>
           <Component {...pageProps} />
           <ToastContainer autoClose={1000} />

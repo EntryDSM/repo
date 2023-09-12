@@ -96,7 +96,7 @@ const SignIn = () => {
               back
             </button>
           </Link>
-          <div className="text-title1  mb-9">선생님 로그인</div>
+          <p className="text-title1  mb-9">선생님 로그인</p>
         </div>
 
         <div className="flex gap-8 flex-col">

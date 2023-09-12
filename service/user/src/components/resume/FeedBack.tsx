@@ -48,7 +48,7 @@ export const FeedBack = ({
                 피드백
               </div>
             </div>
-            <div className="text-body7 whitespace-pre-wrap">{content}</div>
+            <p className="text-body7 whitespace-pre-wrap">{content}</p>
           </div>
 
           {close && (

@@ -8,18 +8,18 @@ interface PropsType {
 
 export const Logo = ({ size }: PropsType) => {
   return (
-    <div className="flex items-center gap-2 text-title2">
+    <div className="flex items-center gap-[2.78px] text-title2">
       <BlackRepoIcon size={size} />
-      REPO
+      Repo
     </div>
   );
 };
 
 export const WhiteLogo = ({ size }: PropsType) => {
   return (
-    <div className="flex items-center gap-2 text-body4 text-gray50">
-      <WhiteRepoIcon size={size} />
-      REPO
+    <div className="flex items-end h-[18px] gap-[2.78px] text-gray50">
+      <WhiteRepoIcon size={16.67} />
+      <p className="h-[17.23px] text-[17.79px] font-semibold">Repo</p>
     </div>
   );
 };

@@ -20,10 +20,10 @@ export const Sharing = ({ status, sharingFn }: PropsType) => {
 
   return (
     <>
-      <div className="text-title4">1316 장지성</div>
+      <p className="text-title4">1316 장지성</p>
 
       <div className="flex flex-col gap-[10px] mt-6">
-        <div className="text-body5">문서 공개 설정</div>
+        <p className="text-body5">문서 공개 설정</p>
         {sharingButton.map(({ text, button_Status }) => {
           const includeShare = button_Status.includes(
             state ? "SHARED" : "SUBMITTED"
@@ -50,7 +50,7 @@ export const Sharing = ({ status, sharingFn }: PropsType) => {
         })}
       </div>
 
-      <div className="text-body5 mt-6 mb-[10px]">내보내기</div>
+      <p className="text-body5 mt-6 mb-[10px]">내보내기</p>
       <Button kind="outlineWhite" className="w-full">
         PDF로 내보내기
       </Button>

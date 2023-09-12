@@ -21,7 +21,7 @@ export const Header = ({ profileImg }: PropsType) => {
       <div className="w-[1200px] flex justify-between">
         <nav>
           <ul className="flex gap-16 items-center">
-            <li>
+            <li className="h-[40px] pt-[6px]">
               <Link href={"/"}>
                 <WhiteLogo size={18} />
               </Link>

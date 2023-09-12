@@ -61,8 +61,8 @@ export const ResumeLayout = ({
           <div className="w-[1120px] m-auto flex flex-col gap-10 mb-52">
             <div>
               <p className="text-title1 text-gray50">이력서 관리</p>
-              <div className="text-title4 flex justify-between text-gray50">
-                Resumé Management
+              <div className="flex justify-between text-gray50">
+                <p className="text-title4">Resumé Management</p>
                 <div className="flex gap-[15px]">
                   <Button
                     onClick={mutate}

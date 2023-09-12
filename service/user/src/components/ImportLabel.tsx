@@ -9,9 +9,9 @@ interface PropsType {
 export const ImportLabel = ({ label, important, children }: PropsType) => {
   return (
     <div className="flex justify-between">
-      <div className="text-body3">
+      <p className="text-body3">
         {label} {important && <span className="text-red">*</span>}
-      </div>
+      </p>
       <div className="w-[480px]">{children}</div>
     </div>
   );

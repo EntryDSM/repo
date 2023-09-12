@@ -20,7 +20,7 @@ export const Students = ({
 }: PropsType) => {
   return (
     <div className="flex flex-col gap-[10px]">
-      <div className="text-body5">{grade}학년</div>
+      <p className="text-body5">{grade}학년</p>
       {studentList.map((classList, classNum) => (
           <StudentDropdown
               classList={classList}

@@ -82,7 +82,7 @@ export const My = () => {
           content={state.feedback}
         />
         <ImportLabel label="이름" important>
-          <div className="text-body4 h-[46px] pl-1">{state.name}</div>
+          <p className="text-body4 h-[46px] pl-1">{state.name}</p>
         </ImportLabel>
         <ImportLabel label="학번" important>
           <div className="flex justify-between gap-[15px] [&>div]:w-full ">

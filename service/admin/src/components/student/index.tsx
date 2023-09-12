@@ -29,9 +29,9 @@ export const Student = ({
           alt="학생관리 프로필 이미지"
           className="rounded-full h-[46px]"
         />
-        <div className="w-28 text-body3 ml-5">{name}</div>
-        <div className="text-body4 w-96">{student_number}</div>
-        <div className="text-body4 w-52">{statusKr[document_status]}</div>
+        <p className="w-28 text-body3 ml-5">{name}</p>
+        <p className="text-body4 w-96">{student_number}</p>
+        <p className="text-body4 w-52">{statusKr[document_status]}</p>
         <div className={`text-body4 ${hasFeedback}`}>
           피드백 {feedback_count}
         </div>
