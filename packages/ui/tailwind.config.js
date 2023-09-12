@@ -31,72 +31,84 @@ module.exports = {
         "30px",
         {
           fontWeight: "600",
+          lineHeight: "36px",
         },
       ],
       title2: [
         "27px",
         {
           fontWeight: "500",
+          lineHeight: "33px",
         },
       ],
       title3: [
         "24px",
         {
           fontWeight: "300",
+          lineHeight: "29px",
         },
       ],
       title4: [
         "24px",
         {
           fontWeight: "100",
+          lineHeight: "29px",
         },
       ],
       body1: [
         "22px",
         {
           fontWeight: "500",
+          lineHeight: "27px",
         },
       ],
       body2: [
         "22px",
         {
           fontWeight: "400",
+          lineHeight: "27px",
         },
       ],
       body3: [
         "20px",
         {
           fontWeight: "500",
+          lineHeight: "24px",
         },
       ],
       body4: [
         "20px",
         {
           fontWeight: "400",
+          lineHeight: "24px",
         },
       ],
       body5: [
         "17px",
         {
           fontWeight: "500",
+          lineHeight: "21px",
         },
       ],
       body6: [
         "17px",
         {
           fontWeight: "400",
+          lineHeight: "21px",
         },
       ],
       body7: [
         "14px",
         {
           fontWeight: "400",
+          lineHeight: "22px",
         },
       ],
       body8: [
         "14px",
         {
           fontWeight: "600",
+          lineHeight: "17px",
         },
       ],
     },

@@ -11,7 +11,7 @@ export const Footer = ({ black }: PropsType) => {
     ? "bg-gray900 [&_div]:text-gray50 [&_path]:fill-gray50"
     : "bg-gray100";
   return (
-    <footer className={`flex justify-center items-center h-72 ${blackClass}`}>
+    <footer className={`flex justify-center items-center h-[300px] ${blackClass}`}>
       <div className="w-[1330px]">
         <div className="flex jusify-center items-center justify-between">
           <p className="text-title1">REPO</p>
@@ -24,8 +24,8 @@ export const Footer = ({ black }: PropsType) => {
             </Link>
           </nav>
         </div>
-        <p className="text-body6 mt-4 mb-6">©2023 Entry</p>
-        <p className="text-body7 mb-5">
+        <p className="text-body6 mt-[18px] mb-[20px]">©2023 Entry</p>
+        <p className="text-body7 mb-[20px]">
           주소 : 대전광역시 유성구 가정북로 76 (장동 23-9)
           <br />
           교무실 : 042-866-8822 | Fax : 042-867-9900 | 행정실 : 042-866-8885 |

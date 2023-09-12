@@ -6,7 +6,7 @@ const queryOption = new QueryClient({});
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <div className=" [&_*]:font-['Pretendard-Regular'] [&_*]:leading-tight">
+    <div className=" [&_*]:font-['Pretendard']">
       <QueryClientProvider client={queryOption}>
         <Component {...pageProps} />
       </QueryClientProvider>

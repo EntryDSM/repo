@@ -47,12 +47,12 @@ export const MyPage = ({ profile, feedbacks }: PropsType) => {
             />
             <div className="w-[2px] h-10 bg-gray200 rounded" />
           </div>
-          <div>
-            <p className="text-title1 text-gray50">{name}</p>
-            <p className="text-gray300 text-body4 mb-14">
+          <div className="mt-[4px]">
+            <p className="text-title1 text-gray50 h-[36px] mb-[6px]">{name}</p>
+            <p className="text-gray300 text-body4 mb-[56px] h-[24px]">
               {major_name || "전공을 선택해 주세요"}
             </p>
-            <p className="text-body5 mb-6">
+            <p className="text-body5 mb-[23px]">
               {grade}학년 {class_num}반 {number}번
             </p>
             <p className="text-body5">
