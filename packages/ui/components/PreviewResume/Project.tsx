@@ -1,5 +1,5 @@
 import React from "react";
-import { ResumeImg } from "@/components/ResumeImg";
+import { ResumeImg } from "../../../../service/user/src/components/ResumeImg";
 import { millsecondToDate } from ".";
 import { LinkSvg } from "../../assets";
 import { Tag } from "./Tag";
