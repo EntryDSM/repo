@@ -26,7 +26,7 @@ export interface StudentDetailType {
   project_list: {
     element_id: string;
     name: string;
-    represent_image_url: string;
+    represent_image_path: string;
     skill_list: string[];
     start_date: number;
     end_date: number;
