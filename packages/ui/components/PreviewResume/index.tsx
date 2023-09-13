@@ -103,8 +103,6 @@ export const PreviewResume = ({
 
   const [grade, classNum] = writer.student_number.toString().split("");
 
-  console.log(project_list);
-
   return (
     <main
       className={`${feedbackWidth} m-auto my-20 flex flex-col gap-[40px] p-8 justify-between`}
