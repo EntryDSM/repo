@@ -1,5 +1,4 @@
 import React from "react";
-import { ResumeImg } from "../../../../service/user/src/components/ResumeImg";
 import { millsecondToDate } from ".";
 import { LinkSvg } from "../../assets";
 import { Tag } from "./Tag";
@@ -32,11 +31,11 @@ export const Project = ({
     <div className="flex flex-col gap-10 rounded-md bg-gray50 pl-10 pr-10 pt-7 pb-7 w-full">
       <div className="flex items-center">
         {imageUrl ? (
-          <ResumeImg
+          <Image
             width={48}
             height={48}
             className="mr-[40px] object-cover w-[48px] h-[48px]"
-            src={imageUrl}
+            src={"https://s3.ap-northeast-2.amazonaws.com/dsm-repo/" + imageUrl}
             alt="projectImg"
           />
         ) : (
