@@ -11,8 +11,8 @@ export const Footer = ({ black }: PropsType) => {
     ? "bg-gray900 [&_div]:text-gray50 [&_path]:fill-gray50"
     : "bg-gray100";
   return (
-    <footer className={`flex justify-center items-center h-[300px] ${blackClass}`}>
-      <div className="w-[1330px]">
+    <footer className={`w-full px-[40px] flex justify-center items-center h-[300px] ${blackClass}`}>
+      <div className="sm:w-full md:w-full lg:w-[1320px]">
         <div className="flex jusify-center items-center justify-between">
           <p className="text-title1">REPO</p>
           <nav className="flex gap-5">
