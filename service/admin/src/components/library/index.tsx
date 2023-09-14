@@ -40,7 +40,15 @@ export const LibraryCard = ({
   return (
     <Link href={`/library/${id}`}>
       <article className="flex w-[1120px] h-20 items-center bg-gray50 rounded-lg">
-        <hr className="h-full block bg-gray300 border-none rounded-tl-lg rounded-bl-lg w-2" />
+        <hr
+          className={`transition-all ${
+            status === "공개"
+              ? "bg-blue"
+              : status === "학생만"
+              ? "bg-check"
+              : "bg-gray300"
+          } h-full block border-none rounded-tl-lg rounded-bl-lg w-2`}
+        />
         <p className="text-body4 ml-9 w-[655px]">
           {year} {grade}학년 {generation}기
         </p>
