@@ -3,6 +3,7 @@ import { ReactNode, useState } from "react";
 import { Home, Setting, Stack } from "../../assets";
 import { WhiteRepoIcon } from "../../assets/WhiteRepoIcon";
 import { Students } from "./Students";
+import React from "react";
 
 export type StudentType = {
   student_id?: string;
