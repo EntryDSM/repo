@@ -120,7 +120,7 @@ module.exports = {
       ],
     },
     screens: {
-      sm: { min: "320px", max: "639px" },
+      sm: { min: "280px", max: "639px" },
       md: { min: "640px", max: "1399px" },
       lg: { min: "1400px", max: "1920px" },
     },

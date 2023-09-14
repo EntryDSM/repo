@@ -20,19 +20,23 @@ export const Student = ({
 }: StudentType) => {
   const hasFeedback = feedback_count ? "text-blue" : "text-gray300";
   return (
-    <Link href={`/${student_id}`}>
-      <article className="flex w-[1120px] px-10 py-5 items-center bg-gray50 rounded-md">
+    <Link href={`/${student_id}`} className="w-full">
+      <article className="flex w-full px-10 sm:px-4 py-5 sm:py-4 items-center bg-gray50 rounded-md whitespace-nowrap">
         <Image
           width={46}
           height={46}
-          src={"https://s3.ap-northeast-2.amazonaws.com/dsm-repo/images/user-profile/default-profile.png"}
+          src={
+            "https://s3.ap-northeast-2.amazonaws.com/dsm-repo/images/user-profile/default-profile.png"
+          }
           alt="학생관리 프로필 이미지"
-          className="rounded-full h-[46px]"
+          className="rounded-full h-[46px] sm:h-[32px] sm:w-[32px]"
         />
-        <p className="w-28 text-body3 ml-5">{name}</p>
-        <p className="text-body4 w-96">{student_number}</p>
-        <p className="text-body4 w-52">{statusKr[document_status]}</p>
-        <div className={`text-body4 ${hasFeedback}`}>
+        <p className="sm:text-body5 w-28 sm:w-52 text-body3 ml-5 sm:ml-4">{name}</p>
+        <p className="sm:text-body5 text-body4 w-96 sm:w-full">{student_number}</p>
+        <p className="sm:text-body7 text-body4 w-52 sm:w-40">
+          {statusKr[document_status]}
+        </p>
+        <div className={`sm:text-body7 text-body4 ${hasFeedback}`}>
           피드백 {feedback_count}
         </div>
       </article>

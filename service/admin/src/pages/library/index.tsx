@@ -13,9 +13,9 @@ const Library = () => {
   return (
     <>
       <Header />
-      <div className="m-auto max-w-[1120px] px-[40px] sm:px-[20px] my-40">
+      <div className="m-auto max-w-[1200px] px-[40px] sm:px-[20px] my-40">
         <p className="text-title1 mt-[120px] mb-[10px]">도서관</p>
-        <p className="text-title4 mb-[80px]">
+        <p className="text-title4 text-[20px] mb-[80px]">
           레주메북 목록을 담은 도서관입니다.
         </p>
         <div className="mb-10">
