@@ -155,7 +155,7 @@ export const PreviewResume = ({
       {!!skill_list.length && (
         <article className="flex flex-col gap-[10px]">
           <h3 className="text-body5">기술 스택</h3>
-          <pre className="flex gap-3">
+          <pre className="flex gap-3 flex-wrap">
             {skill_list.map((skill, index) => (
               <Tag key={index} className="bg-gray50" technology={skill} />
             ))}
