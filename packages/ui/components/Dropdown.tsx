@@ -32,7 +32,7 @@ export const Dropdown = <
 >({
   kind = "outline",
   label,
-  roleName = '',
+  roleName = "",
   hint,
   name,
   lists,
@@ -75,7 +75,7 @@ export const Dropdown = <
             {lists.map((keyword, idx) => {
               const isListObject = typeof keyword === "object";
               return (
-                <>
+                <div key={idx} className="w-full">
                   <div
                     onClick={() => {
                       onClick({ keyword, name });
@@ -88,7 +88,7 @@ export const Dropdown = <
                   {idx !== lists.length - 1 && (
                     <div className="w-[95%] h-[1px]  bg-gray50 shrink-0" />
                   )}
-                </>
+                </div>
               );
             })}
           </div>

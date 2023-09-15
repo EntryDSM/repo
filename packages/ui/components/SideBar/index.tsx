@@ -3,6 +3,7 @@ import { ReactNode, useState } from "react";
 import { Home, Setting, Stack } from "../../assets";
 import { WhiteRepoIcon } from "../../assets/WhiteRepoIcon";
 import { Students } from "./Students";
+import React from "react";
 
 export type StudentType = {
   student_id?: string;
@@ -45,7 +46,7 @@ export const SideBar = ({
   children,
   currentPage,
 }: PropType) => {
-  const [side, setSide] = useState<number>(1);
+  const [side, setSide] = useState<number>(0);
 
   const currentIcon = {
     1: "[&_path]:[&>*:nth-child(3)]:fill-gray500",
@@ -70,8 +71,12 @@ export const SideBar = ({
           </ul>
           {!preview && (
             <>
-              {studentList && <Stack onClick={() => setSide(1)} />}
-              {Sharing && <Setting onClick={() => setSide(2)} />}
+              {studentList && (
+                <Stack onClick={() => setSide((v) => (v === 1 ? 0 : 1))} />
+              )}
+              {Sharing && (
+                <Setting onClick={() => setSide((v) => (v === 2 ? 0 : 2))} />
+              )}
             </>
           )}
         </nav>

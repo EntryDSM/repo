@@ -12,12 +12,15 @@ import {
   documnetAward,
   AwardReqBody,
   AwardResType,
+  documnetActivity,
+  ActivityReqBody,
+  ActivityResType,
   documnetWriteInfo,
   WriteInfoResType,
   WrtieInfoReqBody,
   disableId,
 } from "../apis/document/patch";
-import { ChangeEvent, MouseEventHandler, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { GetFileRes, getFile } from "@/apis/file";
@@ -28,6 +31,7 @@ interface Detail {
   project_list: ProjectResType;
   award_list: AwardResType;
   certificate_list: CertificateResType;
+  activity_list: ActivityResType;
 }
 type ProfileTypeAll = keyof Detail;
 export type ProfileType = "introduce" | "writer";
@@ -37,13 +41,15 @@ export type EachStateType =
   | CertificateResType
   | IntroduceResType
   | ProjectResType
+  | ActivityResType
   | WrtieInfoReqBody;
 export type StateArrayType =
   | AwardReqBody
   | CertificateReqBody
   | ProjectReqBody
   | WrtieInfoReqBody
-  | IntroduceReqBody;
+  | IntroduceReqBody
+  | ActivityReqBody;
 export type StateType = WrtieInfoReqBody | IntroduceReqBody;
 
 const typeFn: {
@@ -54,6 +60,7 @@ const typeFn: {
   project_list: documnetProject,
   award_list: documnetAward,
   certificate_list: documnetCertificate,
+  activity_list: documnetActivity,
 } as const;
 
 export const onChange = (

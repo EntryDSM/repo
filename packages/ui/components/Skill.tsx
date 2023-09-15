@@ -14,7 +14,7 @@ export const SKillInput = ({ onAddSkill, className, name }: PropsType) => {
   const onChange = (e: ChangeEvent<HTMLInputElement>) =>
     setKeyword(e.target.value);
   const onClickAddSKill = () => {
-    console.log(keyword);
+    // console.log(keyword);
     if (!keyword) return;
     onAddSkill({ keyword, name });
     setKeyword("");
