@@ -2,6 +2,7 @@ import React, { MutableRefObject, ReactNode } from "react";
 import { Award } from "./Award";
 import { Certificate } from "./Certificate";
 import { Project } from "./Project";
+import { Activity } from "./Activity";
 import { Tag } from "./Tag";
 import { LinkSvg } from "../../assets";
 import Image from "next/image";
@@ -55,7 +56,7 @@ export interface PreviewType {
     name: string;
     awarding_institution: string;
     date: number | string;
-    description: string; //null 가능
+    description: string; // null 가능
     feedback?: string | null; // null 가능
   }[];
   certificate_list: {
@@ -63,6 +64,13 @@ export interface PreviewType {
     name: string;
     issuing_institution: string;
     date: number | string;
+    feedback?: string | null; // null 가능
+  }[];
+  activity_list: {
+    element_id: string;
+    name: string;
+    date: number | string;
+    description: string; // null 가능
     feedback?: string | null; // null 가능
   }[];
   targetRef?: MutableRefObject<HTMLDivElement | null>;
@@ -90,6 +98,7 @@ export const PreviewResume = ({
   project_list,
   award_list,
   certificate_list,
+  activity_list,
   targetRef,
   FeedbackBox,
 }: PreviewType) => {
@@ -121,7 +130,9 @@ export const PreviewResume = ({
             </div>
             <div className="flex">
               <div className="flex flex-col mr-6 text-end gap-[10px] justify-center">
-                <p className="text-body7 leading-[17px]">{writer.student_number}</p>
+                <p className="text-body7 leading-[17px]">
+                  {writer.student_number}
+                </p>
                 <p className="text-body7 leading-[17px]">
                   {grade !== "1" ? subject[classNum as "1"] : "공통과정"}
                 </p>
@@ -187,6 +198,20 @@ export const PreviewResume = ({
             comment={data.feedback}
           >
             <Certificate {...data} />
+          </FeedBack>
+        ))}
+      </article>
+
+      <article className="flex gap-[10px] flex-col">
+        <h3 className="text-body5">활동</h3>
+        {activity_list.map((data, index) => (
+          <FeedBack
+            key={index}
+            part={data.name}
+            element_id={data.element_id}
+            comment={data.feedback}
+          >
+            <Activity {...data} />
           </FeedBack>
         ))}
       </article>
