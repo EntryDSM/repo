@@ -5,6 +5,7 @@ export * from "./Certificate";
 export * from "./Introduce";
 export * from "./Project";
 export * from "./WriteInfo";
+export * from "./Activity";
 
 type ValueOf<T> = T[keyof T];
 

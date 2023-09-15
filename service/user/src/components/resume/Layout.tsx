@@ -20,6 +20,7 @@ const link = {
   project: "프로젝트",
   awards: "수상",
   certificate: "자격증",
+  activity: "활동"
 };
 
 const documentStatus = {

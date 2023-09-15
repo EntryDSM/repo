@@ -1,5 +1,6 @@
 import { instance } from "@/apis";
 import {
+  ActivityResType,
   AwardResType,
   CertificateResType,
   IntroduceResType,
@@ -18,6 +19,7 @@ export interface DetailType {
   project_list: ProjectResType[];
   award_list: AwardResType[];
   certificate_list: CertificateResType[];
+  activity_list: ActivityResType[];
 }
 
 export const myDetail = () => {
