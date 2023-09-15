@@ -40,6 +40,10 @@ export interface DateValueType {
   day: number;
 }
 export const stringToDate = (str: string | number): DateValueType => {
+  if(MillsecondToDate(str).includes("/")) {
+    const [month, day, year] = MillsecondToDate(str).split("/").map(Number);
+    return { year, month, day };
+  }
   const [year, month, day] = MillsecondToDate(str).split(". ").map(Number);
   return { year, month, day };
 };

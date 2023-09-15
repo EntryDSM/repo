@@ -1,9 +1,7 @@
 import { ImportLabel } from "@/components/ImportLabel";
 import { Input, TextArea } from "@packages/ui";
 import { useProfileWrite } from "@/hooks/useWriteProfile";
-import { useMutation } from "@tanstack/react-query";
 import { ResumeTitle, ResumeItem, ResumeLayout } from "@/components/resume";
-import { AwardReqBody, documnetAward } from "@/apis/document/patch/Award";
 import { FeedBack } from "@/components/resume/FeedBack";
 import { DateInput } from "@/components/date";
 

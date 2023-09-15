@@ -5,6 +5,7 @@ import {
   useCalender,
 } from "../../hooks/useCalender";
 import { Button } from "../../../../../packages/ui";
+import {data} from "autoprefixer";
 
 interface PropsType {
   initialValue: string | number | undefined;
@@ -36,6 +37,7 @@ export const DayCalender = ({
   };
 
   const { year, month } = stringToDate(date);
+
   return (
     <>
       <div className="h-[64px] flex items-center px-4 justify-between ">

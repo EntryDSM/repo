@@ -24,12 +24,9 @@ export const DateInput = ({
     correct: openDropdown,
     inCorrect: closeDropdown,
   } = useInversion();
-
-  const checkValue = typeof value === "string" ? undefined : value;
-
   const CalenderDateValue = () => {
-    if (checkValue) {
-      const { year, month, day } = stringToDate(checkValue);
+    if (value) {
+      const { year, month, day } = stringToDate(+value);
       const date = [year + "년", month + "월", day + "일"];
 
       return date.join(" ");
@@ -50,16 +47,15 @@ export const DateInput = ({
           onClick={openDropdown}
         >
           <input
-            className=" cursor-pointer text-body6"
+            className=" cursor-pointer text-body6 bg-transparent outline-none caret-transparent"
             value={CalenderDateValue() || ""}
             placeholder={placeholder}
-            disabled
           />
         </div>
         {dropdown && (
           <div className="w-[345px] rounded-[4px] border-[1px] bg-gray50 absolute z-10 top-[60px] right-0">
             <DayCalender
-              initialValue={checkValue}
+              initialValue={value}
               closeDropdown={closeDropdown}
               onSubmitAtInput={submitOnInput}
             />
