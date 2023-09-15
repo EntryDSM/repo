@@ -50,6 +50,13 @@ export interface StudentDetailType {
     date: number;
     feedback: string | null; // null 가능
   }[];
+  activity_list: {
+    element_id: string;
+    name: string;
+    date: number;
+    description: string; // null 가능
+    feedback: string | null; // null 가능
+  }[];
 }
 
 export const studentDetail = (id: string) => {
