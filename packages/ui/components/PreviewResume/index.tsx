@@ -176,7 +176,7 @@ export const PreviewResume = ({
         </article>
       )}
 
-      <article className="flex gap-[10px] flex-col">
+      {award_list.length > 0 && <article className="flex gap-[10px] flex-col">
         <h3 className="text-body5">수상 경력</h3>
         {award_list.map((award, index) => (
           <FeedBack
@@ -188,9 +188,9 @@ export const PreviewResume = ({
             <Award {...award} />
           </FeedBack>
         ))}
-      </article>
+      </article>}
 
-      <article className="flex gap-[10px] flex-col">
+      {certificate_list.length > 0 && <article className="flex gap-[10px] flex-col">
         <h3 className="text-body5">자격증</h3>
         {certificate_list.map((data, index) => (
           <FeedBack
@@ -202,9 +202,9 @@ export const PreviewResume = ({
             <Certificate {...data} />
           </FeedBack>
         ))}
-      </article>
+      </article>}
 
-      <article className="flex gap-[10px] flex-col">
+      {activity_list.length > 0 && <article className="flex gap-[10px] flex-col">
         <h3 className="text-body5">활동</h3>
         {activity_list.map((data, index) => (
           <FeedBack
@@ -216,7 +216,7 @@ export const PreviewResume = ({
             <Activity {...data} />
           </FeedBack>
         ))}
-      </article>
+      </article>}
 
       <article className="flex flex-col gap-[20px]">
         <h3 className="text-[22px] font-semibold leading-[26px]">Project</h3>
