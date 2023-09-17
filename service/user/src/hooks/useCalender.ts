@@ -51,7 +51,7 @@ export const dateToString = ({ year, month, day }: DateValueType) => {
 export const getInitDate = (includeDay?: boolean) => {
   const date = new Date();
 
-  return [date.getFullYear(), date.getMonth(), date.getDate()].join(". ");
+  return [date.getFullYear(), date.getMonth() + 1, date.getDate()].join(". ");
 };
 
 const MillsecondToDate = (str: string | number) => {
