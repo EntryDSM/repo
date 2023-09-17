@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { StudentListType } from ".";
-import { Arrow, Check, Internet, Rectify } from "../../assets";
+import { Arrow, CheckCircle, Internet, Rectify } from "../../assets";
 
 interface PropsType {
   studentList: StudentListType[];
@@ -47,7 +47,7 @@ interface StudentPropsType {
 
 const StudentIcon = {
   CREATED: <Rectify size={16} />,
-  SUBMITTED: <Check size={16} />,
+  SUBMITTED: <CheckCircle size={16} />,
   SHARED: <Internet />,
 };
 

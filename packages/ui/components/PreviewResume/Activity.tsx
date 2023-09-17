@@ -5,6 +5,8 @@ export const Activity = ({
   element_id,
   name,
   date,
+  end_date,
+  is_period,
   description,
 }: PreviewType["activity_list"][0]) => {
   return (
@@ -13,7 +15,10 @@ export const Activity = ({
         <div className="flex justify-between">
           <h4 className="text-body5">{name}</h4>
           <div className="flex gap-2 items-center">
-            <p className="text-gray400 text-body7">{millsecondToDate(date)}</p>
+            <p className="text-gray400 text-body7">
+              {millsecondToDate(date)}
+              {is_period && " ~ " + millsecondToDate(end_date)}
+            </p>
           </div>
         </div>
         {description && (

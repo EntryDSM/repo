@@ -54,6 +54,8 @@ export interface StudentDetailType {
     element_id: string;
     name: string;
     date: number;
+    end_date: number; // null 가능
+    is_period: boolean;
     description: string; // null 가능
     feedback: string | null; // null 가능
   }[];

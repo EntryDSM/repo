@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Arrow, Check, Info } from "../../../../../packages/ui/assets";
+import { Arrow, CheckCircle, Info } from "../../../../../packages/ui/assets";
 import { Button } from "../../../../../packages/ui";
 import { useMutation } from "@tanstack/react-query";
 import { ReflrectIdType, feedbackReflrect } from "@/apis/feedback/reflrect";
@@ -53,7 +53,7 @@ export const FeedBack = ({
 
           {close && (
             <Button kind="point" onClick={reflrectonClick}>
-              <Check size={18} />
+              <CheckCircle size={18} />
               피드백 반영
             </Button>
           )}

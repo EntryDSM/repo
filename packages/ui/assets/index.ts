@@ -9,6 +9,7 @@ export * from "./WhiteRepoIcon";
 export * from "./Search";
 export * from "./Sent";
 export * from "./User";
+export * from "./CheckCircle";
 export * from "./Check";
 export * from "./Info";
 export * from "./Plus";

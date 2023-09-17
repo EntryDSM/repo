@@ -95,7 +95,7 @@ export const Awards = () => {
                 onChange={handleChangeArray}
               />
             </ImportLabel>
-            <ImportLabel label="기간" important>
+            <ImportLabel label="날짜" important>
               <DateInput
                 value={date}
                 name="date"
