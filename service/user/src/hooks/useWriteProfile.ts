@@ -244,6 +244,22 @@ export const useProfileWrite = <
       }
     };
 
+  const initDate = (index: number) => {
+    if (type === "activity_list" && Array.isArray(state)) {
+      const copy = [...state];
+      const changeThing = copy[index];
+      const thing = {
+        ...changeThing,
+        date: "",
+        end_date: "",
+        is_period: !changeThing.is_period,
+      };
+      copy[index] = thing;
+      // @ts-ignore
+      setState(copy);
+    }
+  };
+
   const onDropdownSelect = (value: { keyword: string; name?: string }) => {
     // @ts-ignore
     const temp = onClickItem(state, value);
@@ -266,6 +282,7 @@ export const useProfileWrite = <
     handleChange,
     addItem,
     moveItem,
+    initDate,
     removeItem,
     toPreview,
     removeSkill,

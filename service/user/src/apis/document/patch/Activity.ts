@@ -5,6 +5,8 @@ import { instance } from "../..";
 export interface ActivityReqBody {
   name: string;
   date: number | string;
+  end_date: number | string;
+  is_period: boolean;
   description: string;
 }
 

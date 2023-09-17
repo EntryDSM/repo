@@ -120,6 +120,11 @@ module.exports = {
         },
       ],
     },
+    screens: {
+      sm: { min: "280px", max: "639px" },
+      md: { min: "640px", max: "1219px" },
+      lg: { min: "1220px", max: "1920px" },
+    },
   },
   plugins: [],
 };

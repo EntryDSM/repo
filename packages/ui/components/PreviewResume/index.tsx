@@ -70,6 +70,8 @@ export interface PreviewType {
     element_id: string;
     name: string;
     date: number | string;
+    end_date: number | string; // null 가능
+    is_period: boolean;
     description: string; // null 가능
     feedback?: string | null; // null 가능
   }[];
@@ -79,7 +81,7 @@ export interface PreviewType {
 
 export const millsecondToDate = (str: number | string) => {
   const date = new Date(str || 0);
-  return date.toLocaleDateString();
+  return date.toLocaleDateString().slice(0, -1);
 };
 
 const subject = {

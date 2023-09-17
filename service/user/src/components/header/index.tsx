@@ -17,10 +17,10 @@ interface PropsType {
 export const Header = ({ profileImg }: PropsType) => {
   const { route } = useRouter();
   return (
-    <header className="flex justify-center items-center bg-gray900 h-20">
-      <div className="w-[1200px] flex justify-between">
+    <header className="flex justify-center items-center bg-gray900 h-20 sm:px-[20px] px-[40px]">
+      <div className="w-[1400px] flex justify-between">
         <nav>
-          <ul className="flex gap-16 items-center">
+          <ul className="flex gap-16 sm:gap-[24px] items-center">
             <li className="h-[40px] pt-[6px]">
               <Link href={"/"}>
                 <WhiteLogo size={18} />

@@ -6,10 +6,7 @@ import { Plus } from "@packages/ui/assets";
 import { ChangeEvent, useState } from "react";
 import { ImportLabel } from "../../components/ImportLabel";
 import { ResumeItem, ResumeLayout, ResumeTitle } from "../../components/resume";
-import {
-  onChange,
-  useProfileWrite
-} from "../../hooks/useWriteProfile";
+import { onChange, useProfileWrite } from "../../hooks/useWriteProfile";
 
 export const Project = () => {
   const {
@@ -43,8 +40,7 @@ export const Project = () => {
     ],
     "project_list"
   );
-  const [imgs, setImgs] = useState<string[]>([]);
-  
+
   return (
     <ResumeLayout
       mutate={mutate}
@@ -66,12 +62,6 @@ export const Project = () => {
           element_id,
         } = item;
 
-        const onImgChange = (value: string) => {
-          const copy = [...imgs];
-          copy[index] = value;
-          return copy;
-        };
-
         const handleChangeArray = handleChange(index);
         const removeItemArray = removeItem(index);
         const addSKillArray = addSkill(index);
@@ -88,11 +78,10 @@ export const Project = () => {
               [name]: image_path,
             });
             setState(copy);
-            setImgs(onImgChange(image_path));
           }, e);
         };
 
-        const imgUrl = imgs[index] || represent_image_path;
+        const imgUrl = represent_image_path || "";
         const inputId = "projectLogo" + index;
 
         return (
