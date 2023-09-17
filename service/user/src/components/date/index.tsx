@@ -17,7 +17,7 @@ export const DateInput = ({
   onSubmitAtInput,
   value,
   name,
-  placeholder = "날짜를 입력해 주세요",
+  placeholder = "날짜를 선택해 주세요",
 }: PropsType) => {
   const {
     state: dropdown,
@@ -46,11 +46,11 @@ export const DateInput = ({
       <div className="relative w-full">
         <p className="text-body2">{label}</p>
         <div
-          className=" cursor-pointer relative bg-gray100 rounded-sm  w-full h-[46px] flex items-center pr-1 pl-5 "
+          className="cursor-pointer relative bg-gray100 rounded-sm  w-full h-[46px] flex items-center pr-[8px] pl-[16px] "
           onClick={openDropdown}
         >
           <input
-            className=" cursor-pointer text-body6"
+            className="pointer-events-none w-full cursor-pointer text-body6"
             value={CalenderDateValue() || ""}
             placeholder={placeholder}
             disabled
