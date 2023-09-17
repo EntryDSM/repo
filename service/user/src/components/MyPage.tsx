@@ -33,9 +33,9 @@ export const MyPage = ({ profile, feedbacks }: PropsType) => {
   } = profile;
   const { feedback_list } = feedbacks;
   return (
-    <div className="max-w-[1120px] w-full m-auto my-[200px] px-4">
-      <div className="relative bg-gray50 w-[1120px] rounded-[15px] px-40 pt-[170px] pb-[100px] mb-[120px]">
-        <div className="absolute -top-20 -ml-20 flex gap-x-[30px]">
+    <div className="max-w-[1200px] px-[40px] sm:px-[20px] w-full m-auto my-[200px] sm:mt-[164px]">
+      <div className="transition-all relative bg-gray50 w-full rounded-[15px] px-40 md:px-[80px] sm:px-[48px] pt-[170px] sm:pt-[120px] pb-[80px] sm:pb-[80px] mb-[120px]">
+        <div className="transition-all absolute -top-20 sm:-top-16 -ml-20 md:-ml-12 sm:-ml-8 flex gap-x-[30px]">
           <div className="flex flex-col items-center gap-y-5">
             <Image
               width={160}
@@ -43,19 +43,19 @@ export const MyPage = ({ profile, feedbacks }: PropsType) => {
               src={profile_image_url}
               alt="profile"
               priority
-              className="rounded-full w-40 h-40 object-cover"
+              className="rounded-full w-40 h-40 object-cover sm:w-[100px] sm:h-[100px]"
             />
-            <div className="w-[2px] h-10 bg-gray200 rounded" />
+            <div className="w-[2px] h-8 sm:h-8 bg-gray200 rounded" />
           </div>
           <div className="mt-[4px]">
-            <p className="text-title1 text-gray50 h-[36px] mb-[6px]">{name}</p>
-            <p className="text-gray300 text-body4 mb-[56px] h-[24px]">
+            <p className="text-title1 sm:text-title3 text-gray50 h-[36px] mb-[6px] sm:-mb-2">{name}</p>
+            <p className="text-gray300 text-body4 sm:text-body5 mb-[56px] sm:mb-[32px] h-[24px]">
               {major_name || "전공을 선택해 주세요"}
             </p>
-            <p className="text-body5 mb-[23px]">
+            <p className="text-body5 sm:text-body8 mb-[23px] sm:mb-[12px]">
               {grade}학년 {class_num}반 {number}번
             </p>
-            <p className="text-body5">
+            <p className="text-body5 sm:text-body8">
               {email || "이메일이 등록되지 않았습니다"}
             </p>
           </div>
@@ -63,10 +63,10 @@ export const MyPage = ({ profile, feedbacks }: PropsType) => {
 
         {is_exist ? (
           <>
-            <p className="text-body3 mb-[44px] whitespace-pre-wrap">
+            <p className="text-body3 sm:text-body5 mb-[44px] sm:mb-[28px] whitespace-pre-wrap">
               {heading}
             </p>
-            <p className="text-body6 text-gray400 whitespace-pre-wrap">
+            <p className="text-body6 sm:text-body7 text-gray400 whitespace-pre-wrap">
               {introduce === "" ? "문서를 작성해주세요" : introduce}
             </p>
           </>
