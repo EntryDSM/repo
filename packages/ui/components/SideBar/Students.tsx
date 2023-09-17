@@ -192,6 +192,7 @@ function ClassDropdown({
                   page,
                 }) => (
                   <li
+                    key={student_id}
                     onClick={() =>
                       moveClickedPage
                         ? moveClickedPage(page!)
