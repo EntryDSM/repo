@@ -90,7 +90,7 @@ const StudentDropdown = ({
                 onClick={() => push(`/${student_id}`)}
                 className={`flex text-[14px] cursor-pointer ${
                   id === student_id && "bg-gray100 text-gray700"
-                } py-2 rounded-md px-3 justify-between items-center [&_path]:fill-gray400`}
+                } py-2 rounded-md px-3 justify-between items-center [&_path]:fill-gray400 hover:bg-gray500`}
               >
                 <span className={"flex"}>
                   {student_number} {name}
@@ -192,15 +192,17 @@ function ClassDropdown({
                   page,
                 }) => (
                   <li
+                    key={student_id}
                     onClick={() =>
                       moveClickedPage
                         ? moveClickedPage(page!)
                         : push(`/${student_id}`)
                     }
-                    className={`flex text-[14px] cursor-pointer ${
-                      name === getNameByList(classList) &&
-                      "bg-gray100 text-gray700"
-                    } py-2 rounded-md px-3 justify-between items-center [&_path]:fill-gray400`}
+                    className={`transition-all ${
+                      name === getNameByList(classList)
+                        ? "bg-gray100 text-gray700"
+                        : "hover:bg-gray600"
+                    } flex text-[14px] cursor-pointer py-2 rounded-md px-3 justify-between items-center [&_path]:fill-gray400`}
                   >
                     <span className={"flex"}>
                       {student_number} {name}

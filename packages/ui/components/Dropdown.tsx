@@ -71,7 +71,7 @@ export const Dropdown = <
         </div>
 
         {dropdown && (
-          <div className="absolute z-50 top-14 bg-gray100 rounded-sm shadow-xl w-full max-h-[132px] overflow-y-auto flex flex-col items-center">
+          <div className="absolute z-50 top-14 bg-gray100 rounded-sm shadow-xl w-full max-h-[160px] overflow-y-auto flex flex-col items-center">
             {lists.map((keyword, idx) => {
               const isListObject = typeof keyword === "object";
               return (
@@ -81,7 +81,7 @@ export const Dropdown = <
                       onClick({ keyword, name });
                       setDropDown(false);
                     }}
-                    className="w-full hover:bg-gray200 flex pl-4 py-2.5 items-center rounded cursor-pointer"
+                    className="transition-all w-full hover:bg-gray200 flex pl-4 py-2.5 items-center rounded cursor-pointer"
                   >
                     {isListObject ? keyword[objectKey as string] : keyword}
                   </div>
