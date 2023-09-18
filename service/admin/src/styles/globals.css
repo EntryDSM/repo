@@ -29,8 +29,18 @@ nav::-webkit-scrollbar {
   width: 0;
   height: 0;
 }
+div::-webkit-scrollbar {
+  width: 2px;
+  height: 0;
+}
+div::-webkit-scrollbar-thumb {
+  background-color: #141414;
+}
 
-ul,
-li {
+ul {
   line-height: 0;
+}
+
+li {
+  line-height: 17px;
 }
