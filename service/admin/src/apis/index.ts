@@ -2,7 +2,7 @@ import axios, { AxiosError } from "axios";
 
 export const instance = axios.create({
   baseURL: "https://api.dsm-repo.com",
-  timeout: 3000,
+  timeout: 10000,
 });
 
 instance.interceptors.request.use(
