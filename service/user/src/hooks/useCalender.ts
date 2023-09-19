@@ -97,10 +97,11 @@ export const useCalender = ({ initialValue = getInitDate() }: PropsType) => {
 
   const minusDate = (type: DateKeyType) => () => plusMinus(type, "minus");
 
-  const onSaveClickedDay = (day: number) => {
+  const onSaveClickedDay = (day: number, after?: (date: string) => void) => {
     const temp = stringToDate(date);
     setDate(dateToString({ ...temp, day: day }));
     setCheck(dateToString(temp));
+    after && after(dateToString({ ...temp, day: day }))
   };
 
   const isCurrentDay = (currentDay: number) => {
