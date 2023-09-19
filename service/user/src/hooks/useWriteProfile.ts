@@ -1,6 +1,6 @@
 import { DetailType, StatusType, myDetail } from "@/apis/document/get/myDetail";
 import {
-  documnetProject,
+  documentProject,
   ProjectReqBody,
   ProjectResType,
   documnetIntroduce,
@@ -57,7 +57,7 @@ const typeFn: {
 } = {
   writer: documnetWriteInfo,
   introduce: documnetIntroduce,
-  project_list: documnetProject,
+  project_list: documentProject,
   award_list: documnetAward,
   certificate_list: documnetCertificate,
   activity_list: documnetActivity,

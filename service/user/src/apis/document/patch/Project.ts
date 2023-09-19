@@ -17,13 +17,13 @@ export interface ProjectResType extends ProjectReqBody {
   feedback: string;
 }
 
-export const documnetProject = (body: ProjectReqBody[]) => {
+export const documentProject = (body: ProjectReqBody[]) => {
   return instance
     .patch("/document/project", {
       title: "",
       project_list: body,
     })
-    .catch((error) => {
+    .catch(_ => {
       toast("입력하지 않은 필드가 있습니다.", {
         autoClose: 1000,
         type: "error",
