@@ -248,13 +248,12 @@ export const useProfileWrite = <
     if (type === "activity_list" && Array.isArray(state)) {
       const copy = [...state];
       const changeThing = copy[index];
-      const thing = {
+      copy[index] = {
         ...changeThing,
         date: "",
         end_date: "",
         is_period: !changeThing.is_period,
       };
-      copy[index] = thing;
       // @ts-ignore
       setState(copy);
     }
