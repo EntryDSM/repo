@@ -1,29 +1,29 @@
-import { DetailType, StatusType, myDetail } from "@/apis/document/get/myDetail";
+import {DetailType, myDetail} from "@/apis/document/get/myDetail";
 import {
-  documentProject,
-  ProjectReqBody,
-  ProjectResType,
-  documnetIntroduce,
-  IntroduceReqBody,
-  IntroduceResType,
-  documnetCertificate,
-  CertificateReqBody,
-  CertificateResType,
-  documnetAward,
-  AwardReqBody,
-  AwardResType,
-  documnetActivity,
   ActivityReqBody,
   ActivityResType,
-  documnetWriteInfo,
-  WriteInfoResType,
-  WrtieInfoReqBody,
+  AwardReqBody,
+  AwardResType,
+  CertificateReqBody,
+  CertificateResType,
   disableId,
+  documentActivity,
+  documentAward,
+  documentCertificate,
+  documentIntroduce,
+  documentProject,
+  documentWriteInfo,
+  IntroduceReqBody,
+  IntroduceResType,
+  ProjectReqBody,
+  ProjectResType,
+  WriteInfoResType,
+  WriteInfoReqBody,
 } from "../apis/document/patch";
-import { ChangeEvent, useState } from "react";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { toast } from "react-toastify";
-import { GetFileRes, getFile } from "@/apis/file";
+import {ChangeEvent, useState} from "react";
+import {useMutation, useQuery} from "@tanstack/react-query";
+import {toast} from "react-toastify";
+import {getFile, GetFileRes} from "@/apis/file";
 
 interface Detail {
   introduce: IntroduceResType;
@@ -42,25 +42,25 @@ export type EachStateType =
   | IntroduceResType
   | ProjectResType
   | ActivityResType
-  | WrtieInfoReqBody;
+  | WriteInfoReqBody;
 export type StateArrayType =
   | AwardReqBody
   | CertificateReqBody
   | ProjectReqBody
-  | WrtieInfoReqBody
+  | WriteInfoReqBody
   | IntroduceReqBody
   | ActivityReqBody;
-export type StateType = WrtieInfoReqBody | IntroduceReqBody;
+export type StateType = WriteInfoReqBody | IntroduceReqBody;
 
 const typeFn: {
   [key in keyof Detail]: (body: any) => Promise<any>;
 } = {
-  writer: documnetWriteInfo,
-  introduce: documnetIntroduce,
+  writer: documentWriteInfo,
+  introduce: documentIntroduce,
   project_list: documentProject,
-  award_list: documnetAward,
-  certificate_list: documnetCertificate,
-  activity_list: documnetActivity,
+  award_list: documentAward,
+  certificate_list: documentCertificate,
+  activity_list: documentActivity,
 } as const;
 
 export const onChange = (

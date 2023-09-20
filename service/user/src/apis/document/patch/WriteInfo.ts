@@ -1,6 +1,7 @@
 import { instance } from "../..";
+import {toast} from "react-toastify";
 
-export interface WrtieInfoReqBody {
+export interface WriteInfoReqBody {
   element_id?: string;
   student_id?: string;
   feedback?: string;
@@ -32,7 +33,7 @@ export interface WriteInfoResType {
   };
 }
 
-export const documnetWriteInfo = ({
+export const documentWriteInfo = ({
   skill_list,
   name,
   feedback,
@@ -45,16 +46,29 @@ export const documnetWriteInfo = ({
   major,
   student_number,
   ...body
-}: WrtieInfoReqBody & { skill_list: string[] }) => {
-  instance.patch("/document/skill-set", { skill_list });
-  instance.patch("/document/writer-info", {
-    ...body,
-    major_id: major.id,
-    grade: Number(grade),
-    class_num: Number(class_num),
-    number: Number(number),
+}: WriteInfoReqBody & { skill_list: string[] }) => {
+  const promise = Promise.all([
+    Promise.resolve().then(() => {
+      if(body.email.length === 0) throw new TypeError("Email Required");
+    }),
+    instance.patch("/document/skill-set", { skill_list }),
+    instance.patch("/document/writer-info", {
+      ...body,
+      major_id: major.id,
+      grade: Number(grade),
+      class_num: Number(class_num),
+      number: Number(number),
+    }),
+    instance.patch("/document/profile-image", {
+      profile_image_path: profile_image_path,
+    })
+  ]);
+  toast.promise(promise, {
+    pending: "저장 중...",
+    success: "저장되었습니다.",
+    error: "입력하지 않은 필드가 있습니다."
+  }, {
+    autoClose: 1000
   });
-  return instance.patch("/document/profile-image", {
-    profile_image_path: profile_image_path,
-  });
+  return promise;
 };
