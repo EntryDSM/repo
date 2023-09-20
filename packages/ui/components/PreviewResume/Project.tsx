@@ -12,8 +12,10 @@ interface PropsType {
   skill_list: string[];
   start_date: number | string;
   end_date: number | string;
+  is_period: boolean;
+  type: string;
   description: string;
-  url?: string;
+  urls?: string[];
 }
 
 export const Project = ({
@@ -22,8 +24,10 @@ export const Project = ({
   skill_list,
   start_date,
   end_date,
+  is_period,
+  type,
   description,
-  url,
+  urls,
 }: PropsType) => {
   const imageUrl = represent_image_path;
   return (
@@ -49,7 +53,8 @@ export const Project = ({
         <div className="flex flex-col gap-[4px]">
           <p className="text-title3">{name}</p>
           <p className="text-[14px] leading-[17px]">
-            {millsecondToDate(start_date)} ~ {millsecondToDate(end_date)}
+            {millsecondToDate(start_date)} ~{" "}
+            {is_period ? millsecondToDate(end_date) : "진행중"}
           </p>
         </div>
       </div>
@@ -62,15 +67,15 @@ export const Project = ({
         </div>
       </div>
       <pre className="text-body7 whitespace-pre-wrap">{description}</pre>
-      {url && (
+      {urls && (
         <Link
-          href={url}
+          href={urls[0]}
           className="flex gap-2 bg-gray100 pl-3 pr-3 pt-2 pb-2 rounded-md w-fit max-w-full flex-1"
         >
           <LinkSvg />
 
           <p className="text-ellipsis overflow-hidden whitespace-normal">
-            {url}
+            {urls[0]}
           </p>
         </Link>
       )}

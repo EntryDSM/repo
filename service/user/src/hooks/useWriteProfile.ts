@@ -245,15 +245,28 @@ export const useProfileWrite = <
     };
 
   const initDate = (index: number) => {
-    if (type === "activity_list" && Array.isArray(state)) {
+    if (
+      (type === "activity_list" || type === "project_list") &&
+      Array.isArray(state)
+    ) {
       const copy = [...state];
       const changeThing = copy[index];
-      copy[index] = {
-        ...changeThing,
-        date: "",
-        end_date: "",
-        is_period: !changeThing.is_period,
-      };
+      if (type === "activity_list") {
+        copy[index] = {
+          ...changeThing,
+          date: "",
+          end_date: "",
+          is_period: !changeThing.is_period,
+        };
+      } else {
+        copy[index] = {
+          ...changeThing,
+          start_date: "",
+          end_date: "",
+          is_period: !changeThing.is_period,
+        };
+      }
+
       // @ts-ignore
       setState(copy);
     }

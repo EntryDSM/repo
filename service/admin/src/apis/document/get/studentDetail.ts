@@ -30,8 +30,10 @@ export interface StudentDetailType {
     skill_list: string[];
     start_date: number;
     end_date: number;
+    is_period: boolean;
+    type: string;
     description: string;
-    url: string; //null 가능,
+    urls: string[]; //null 가능,
     feedback: string | null; // null 가능
   }[];
   award_list: {

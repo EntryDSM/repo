@@ -2,7 +2,7 @@ import { ResumeImg } from "@/components/ResumeImg";
 import { DateInput } from "@/components/date";
 import { FeedBack } from "@/components/resume/FeedBack";
 import { Input, SKillInput, SkillList, TextArea } from "@packages/ui";
-import { Plus } from "@packages/ui/assets";
+import { Check, Plus } from "@packages/ui/assets";
 import { ChangeEvent, useState } from "react";
 import { ImportLabel } from "../../components/ImportLabel";
 import { ResumeItem, ResumeLayout, ResumeTitle } from "../../components/resume";
@@ -19,6 +19,7 @@ export const Project = () => {
     handleChange,
     addItem,
     moveItem,
+    initDate,
     removeItem,
     addSkill,
     removeSkill,
@@ -31,9 +32,11 @@ export const Project = () => {
         represent_image_path: "",
         start_date: "",
         end_date: "",
+        is_period: true,
         skill_list: [],
+        type: "TEAM",
         description: "",
-        url: "",
+        urls: [],
         element_id: null,
         feedback: "",
       },
@@ -55,9 +58,11 @@ export const Project = () => {
           represent_image_path,
           start_date,
           end_date,
+          is_period,
           skill_list,
+          type,
           description,
-          url,
+          urls,
           feedback,
           element_id,
         } = item;
@@ -134,20 +139,39 @@ export const Project = () => {
               </label>
             </ImportLabel>
             <ImportLabel label="기간" important>
-              <div className="flex items-center justify-between gap-[14px]">
+              {!is_period ? (
                 <DateInput
                   value={start_date}
                   name="start_date"
-                  placeholder="시작일"
                   onSubmitAtInput={onDateChangeArray}
                 />
-                ~
-                <DateInput
-                  value={end_date}
-                  name="end_date"
-                  placeholder="종료일"
-                  onSubmitAtInput={onDateChangeArray}
-                />
+              ) : (
+                <div className="flex items-center justify-between gap-[14px] w-full">
+                  <DateInput
+                    value={start_date}
+                    name="start_date"
+                    placeholder="시작일"
+                    onSubmitAtInput={onDateChangeArray}
+                  />
+                  ~
+                  <DateInput
+                    value={end_date}
+                    name="end_date"
+                    placeholder="종료일"
+                    onSubmitAtInput={onDateChangeArray}
+                  />
+                </div>
+              )}
+              <div className="flex gap-3 pt-4">
+                <div
+                  className={`transition-all bg-gray50 flex justify-center items-center rounded-sm border-2 border-gray400 w-6 h-6 cursor-pointer hover:bg-gray100 ${
+                    !is_period && "bg-gray900 border-gray900 hover:bg-gray600"
+                  }`}
+                  onClick={() => initDate(index)}
+                >
+                  {!is_period && <Check size={24} color="white" />}
+                </div>
+                진행중
               </div>
             </ImportLabel>
             <ImportLabel label=" 기술 스택" important>
@@ -176,7 +200,7 @@ export const Project = () => {
             </ImportLabel>
             <ImportLabel label="url">
               <Input
-                value={url}
+                value={urls[0]}
                 name="url"
                 placeholder="https://"
                 onChange={handleChangeArray}
