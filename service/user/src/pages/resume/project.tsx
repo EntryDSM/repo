@@ -1,9 +1,9 @@
 import { ResumeImg } from "@/components/ResumeImg";
 import { DateInput } from "@/components/date";
 import { FeedBack } from "@/components/resume/FeedBack";
-import { Input, SKillInput, SkillList, TextArea } from "@packages/ui";
+import { BtnInputList, Input, BtnInput, TextArea } from "@packages/ui";
 import { Check, Plus } from "@packages/ui/assets";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent } from "react";
 import { ImportLabel } from "../../components/ImportLabel";
 import { ResumeItem, ResumeLayout, ResumeTitle } from "../../components/resume";
 import { onChange, useProfileWrite } from "../../hooks/useWriteProfile";
@@ -176,12 +176,13 @@ export const Project = () => {
             </ImportLabel>
             <ImportLabel label=" 기술 스택" important>
               <div className="flex flex-col gap-[30px]">
-                <SKillInput
+                <BtnInput
                   name="skill_list"
                   className="w-full bg-gray100"
+                  placeholder="기술 스택을 입력해 주세요"
                   onAddSkill={addSKillArray}
                 />
-                <SkillList
+                <BtnInputList
                   name="skill_list"
                   list={skill_list}
                   onClickRemove={removeSKillArray}
@@ -199,12 +200,19 @@ export const Project = () => {
               />
             </ImportLabel>
             <ImportLabel label="url">
-              <Input
-                value={urls[0]}
-                name="url"
-                placeholder="https://"
-                onChange={handleChangeArray}
-              />
+              <div className="flex flex-col gap-[30px]">
+                <BtnInput
+                  name="urls"
+                  className="w-full bg-gray100"
+                  placeholder="https://"
+                  onAddSkill={addSKillArray}
+                />
+                <BtnInputList
+                  name="urls"
+                  list={urls}
+                  onClickRemove={removeSKillArray}
+                />
+              </div>
             </ImportLabel>
           </ResumeItem>
         );

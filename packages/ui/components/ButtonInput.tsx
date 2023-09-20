@@ -6,10 +6,16 @@ import { Close } from "../assets";
 interface PropsType {
   name: string;
   className?: string;
+  placeholder: string;
   onAddSkill: (keyword: { keyword: string; name: string }) => void;
 }
 
-export const SKillInput = ({ onAddSkill, className, name }: PropsType) => {
+export const BtnInput = ({
+  onAddSkill,
+  className,
+  name,
+  placeholder,
+}: PropsType) => {
   const [keyword, setKeyword] = useState<string>("");
   const onChange = (e: ChangeEvent<HTMLInputElement>) =>
     setKeyword(e.target.value);
@@ -28,7 +34,7 @@ export const SKillInput = ({ onAddSkill, className, name }: PropsType) => {
         <Input
           value={keyword}
           onChange={onChange}
-          placeholder="기술 스택을 입력해 주세요"
+          placeholder={placeholder}
           className={className}
           onKeyDown={onEnter}
           kind="custom"
@@ -48,7 +54,7 @@ interface ListType {
   className?: string;
 }
 
-export const SkillList = ({
+export const BtnInputList = ({
   list,
   className,
   name,
