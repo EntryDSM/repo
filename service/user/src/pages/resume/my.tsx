@@ -10,7 +10,7 @@ import {
   removeSkillFn,
   useProfileWrite,
 } from "../../hooks/useWriteProfile";
-import { WrtieInfoReqBody } from "../../apis/document/patch/WriteInfo";
+import { WriteInfoReqBody } from "../../apis/document/patch/WriteInfo";
 import { FeedBack } from "@/components/resume/FeedBack";
 import { getMajor } from "@/apis/major";
 import { useQuery } from "@tanstack/react-query";
