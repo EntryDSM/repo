@@ -1,6 +1,6 @@
-import { toast } from "react-toastify";
-import { disableId } from ".";
-import { instance } from "../..";
+import {toast} from "react-toastify";
+import {disableId} from ".";
+import {instance} from "../..";
 
 export interface ProjectReqBody {
   name: string;
@@ -20,14 +20,16 @@ export interface ProjectResType extends ProjectReqBody {
 }
 
 export const documentProject = (body: ProjectReqBody[]) => {
-  return instance
+  const promise = instance
     .patch("/document/project", {
       project_list: body,
-    })
-    .catch((_) => {
-      toast("입력하지 않은 필드가 있습니다.", {
-        autoClose: 1000,
-        type: "error",
-      });
     });
+  toast.promise(promise, {
+    pending: "저장 중...",
+    success: "저장되었습니다.",
+    error: "입력하지 않은 필드가 있습니다."
+  }, {
+    autoClose: 1000
+  });
+  return promise;
 };

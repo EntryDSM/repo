@@ -1,6 +1,6 @@
 import { instance } from "..";
 
-interface DocumnetItem {
+interface DocumentItem {
   document_id: string;
   name: string;
   profile_image_path: string;
@@ -13,5 +13,5 @@ interface DocumnetItem {
 }
 
 export const getDocument = () => {
-  return instance.get<DocumnetItem>("/document/shared");
+  return instance.get<DocumentItem>("/document/shared");
 };
