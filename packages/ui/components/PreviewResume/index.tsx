@@ -79,9 +79,11 @@ export interface PreviewType {
   FeedbackBox?: (props: FeedbackBoxType) => JSX.Element;
 }
 
+const zeroNumber = (value: number) => `${value < 10 ? "0" : ""}${value}`
+
 export const millsecondToDate = (str: number | string) => {
   const date = new Date(str || 0);
-  return date.toLocaleDateString().slice(0, -1);
+  return `${date.getFullYear()}. ${zeroNumber(date.getMonth())}. ${zeroNumber(date.getDay())}`;
 };
 
 const subject = {
