@@ -7,9 +7,11 @@ export interface ProjectReqBody {
   represent_image_path: string;
   start_date: number | string;
   end_date: number | string;
+  is_period: boolean;
+  type: string;
   skill_list: string[];
   description: string;
-  url?: string;
+  urls?: string[];
 }
 
 export interface ProjectResType extends ProjectReqBody {
@@ -20,7 +22,6 @@ export interface ProjectResType extends ProjectReqBody {
 export const documentProject = (body: ProjectReqBody[]) => {
   const promise = instance
     .patch("/document/project", {
-      title: "",
       project_list: body,
     });
   toast.promise(promise, {

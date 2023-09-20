@@ -1,9 +1,9 @@
 import { ResumeImg } from "@/components/ResumeImg";
 import { DateInput } from "@/components/date";
 import { FeedBack } from "@/components/resume/FeedBack";
-import { Input, SKillInput, SkillList, TextArea } from "@packages/ui";
-import { Plus } from "@packages/ui/assets";
-import { ChangeEvent, useState } from "react";
+import { BtnInputList, Input, BtnInput, TextArea } from "@packages/ui";
+import { Check, Plus } from "@packages/ui/assets";
+import { ChangeEvent } from "react";
 import { ImportLabel } from "../../components/ImportLabel";
 import { ResumeItem, ResumeLayout, ResumeTitle } from "../../components/resume";
 import { onChange, useProfileWrite } from "../../hooks/useWriteProfile";
@@ -19,6 +19,8 @@ export const Project = () => {
     handleChange,
     addItem,
     moveItem,
+    initDate,
+    toggleThings,
     removeItem,
     addSkill,
     removeSkill,
@@ -31,9 +33,11 @@ export const Project = () => {
         represent_image_path: "",
         start_date: "",
         end_date: "",
+        is_period: true,
         skill_list: [],
+        type: "TEAM",
         description: "",
-        url: "",
+        urls: [],
         element_id: null,
         feedback: "",
       },
@@ -55,9 +59,11 @@ export const Project = () => {
           represent_image_path,
           start_date,
           end_date,
+          is_period,
           skill_list,
+          type,
           description,
-          url,
+          urls,
           feedback,
           element_id,
         } = item;
@@ -106,6 +112,24 @@ export const Project = () => {
                 placeholder="프로젝트 이름을 입력해 주세요"
                 onChange={handleChangeArray}
               />
+              <div className="flex items-center bg-gray100 rounded-[8px] p-[2px] w-fit mt-[12px] text-body5 cursor-pointer">
+                <div
+                  className={`${
+                    type === "TEAM" && "bg-gray50"
+                  } hover:bg-gray50 flex items-center justify-center w-[64px] h-[32px] rounded-[6px] transition-all`}
+                  onClick={() => toggleThings(index, "TEAM")}
+                >
+                  팀
+                </div>
+                <div
+                  className={`${
+                    type === "PERSONAL" && "bg-gray50"
+                  } hover:bg-gray50 flex items-center justify-center w-[64px] h-[32px] rounded-[6px] transition-all`}
+                  onClick={() => toggleThings(index, "PERSONAL")}
+                >
+                  개인
+                </div>
+              </div>
             </ImportLabel>
             <ImportLabel label="프로젝트 로고">
               <input
@@ -134,30 +158,50 @@ export const Project = () => {
               </label>
             </ImportLabel>
             <ImportLabel label="기간" important>
-              <div className="flex items-center justify-between gap-[14px]">
+              {!is_period ? (
                 <DateInput
                   value={start_date}
                   name="start_date"
-                  placeholder="시작일"
                   onSubmitAtInput={onDateChangeArray}
                 />
-                ~
-                <DateInput
-                  value={end_date}
-                  name="end_date"
-                  placeholder="종료일"
-                  onSubmitAtInput={onDateChangeArray}
-                />
+              ) : (
+                <div className="flex items-center justify-between gap-[14px] w-full">
+                  <DateInput
+                    value={start_date}
+                    name="start_date"
+                    placeholder="시작일"
+                    onSubmitAtInput={onDateChangeArray}
+                  />
+                  ~
+                  <DateInput
+                    value={end_date}
+                    name="end_date"
+                    placeholder="종료일"
+                    onSubmitAtInput={onDateChangeArray}
+                  />
+                </div>
+              )}
+              <div className="flex gap-3 pt-4">
+                <div
+                  className={`transition-all bg-gray50 flex justify-center items-center rounded-sm border-2 border-gray400 w-6 h-6 cursor-pointer hover:bg-gray100 ${
+                    !is_period && "bg-gray900 border-gray900 hover:bg-gray600"
+                  }`}
+                  onClick={() => initDate(index)}
+                >
+                  {!is_period && <Check size={24} color="white" />}
+                </div>
+                진행중
               </div>
             </ImportLabel>
             <ImportLabel label=" 기술 스택" important>
               <div className="flex flex-col gap-[30px]">
-                <SKillInput
+                <BtnInput
                   name="skill_list"
                   className="w-full bg-gray100"
+                  placeholder="기술 스택을 입력해 주세요"
                   onAddSkill={addSKillArray}
                 />
-                <SkillList
+                <BtnInputList
                   name="skill_list"
                   list={skill_list}
                   onClickRemove={removeSKillArray}
@@ -175,12 +219,19 @@ export const Project = () => {
               />
             </ImportLabel>
             <ImportLabel label="url">
-              <Input
-                value={url}
-                name="url"
-                placeholder="https://"
-                onChange={handleChangeArray}
-              />
+              <div className="flex flex-col gap-[30px]">
+                <BtnInput
+                  name="urls"
+                  className="w-full bg-gray100"
+                  placeholder="https://"
+                  onAddSkill={addSKillArray}
+                />
+                <BtnInputList
+                  name="urls"
+                  list={urls}
+                  onClickRemove={removeSKillArray}
+                />
+              </div>
             </ImportLabel>
           </ResumeItem>
         );

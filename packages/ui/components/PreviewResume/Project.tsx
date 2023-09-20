@@ -12,8 +12,10 @@ interface PropsType {
   skill_list: string[];
   start_date: number | string;
   end_date: number | string;
+  is_period: boolean;
+  type: string;
   description: string;
-  url?: string;
+  urls?: string[];
 }
 
 export const Project = ({
@@ -22,13 +24,15 @@ export const Project = ({
   skill_list,
   start_date,
   end_date,
+  is_period,
+  type,
   description,
-  url,
+  urls,
 }: PropsType) => {
   const imageUrl = represent_image_path;
   return (
     <div className="flex flex-col gap-10 rounded-md bg-gray50 pl-10 pr-10 pt-7 pb-7 w-full">
-      <div className="flex items-center">
+      <div className="flex items-center w-full">
         {imageUrl ? (
           <Image
             width={48}
@@ -46,10 +50,20 @@ export const Project = ({
             alt="projectImg"
           />
         )}
-        <div className="flex flex-col gap-[4px]">
-          <p className="text-title3">{name}</p>
-          <p className="text-[14px] leading-[17px]">
-            {millsecondToDate(start_date)} ~ {millsecondToDate(end_date)}
+        <div className="flex items-center w-full justify-between">
+          <div className="flex flex-col gap-[4px]">
+            <p className="text-title3">{name}</p>
+            <p className="text-[14px] leading-[17px]">
+              {millsecondToDate(start_date)} ~{" "}
+              {is_period ? millsecondToDate(end_date) : "진행중"}
+            </p>
+          </div>
+          <p className="text-body8 text-gray300">
+            {type === "TEAM"
+              ? "팀프로젝트"
+              : type === "PERSONAL"
+              ? "개인프로젝트"
+              : ""}
           </p>
         </div>
       </div>
@@ -62,17 +76,21 @@ export const Project = ({
         </div>
       </div>
       <pre className="text-body7 whitespace-pre-wrap">{description}</pre>
-      {url && (
-        <Link
-          href={url}
-          className="flex gap-2 bg-gray100 pl-3 pr-3 pt-2 pb-2 rounded-md w-fit max-w-full flex-1"
-        >
-          <LinkSvg />
-
-          <p className="text-ellipsis overflow-hidden whitespace-normal">
-            {url}
-          </p>
-        </Link>
+      {urls && (
+        <div className="flex flex-col gap-2">
+          {urls.map((value, index) => (
+            <Link
+              key={index}
+              href={value}
+              className="flex gap-2 bg-gray100 pl-3 pr-3 pt-2 pb-2 rounded-md w-fit max-w-full flex-1"
+            >
+              <LinkSvg />
+              <p className="text-ellipsis overflow-hidden whitespace-normal">
+                {value}
+              </p>
+            </Link>
+          ))}
+        </div>
       )}
     </div>
   );

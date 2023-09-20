@@ -45,8 +45,10 @@ export interface PreviewType {
     skill_list: string[];
     start_date: number | string;
     end_date: number | string;
+    is_period: boolean;
+    type: string;
     description: string;
-    url?: string; //null 가능
+    urls?: string[]; //null 가능
     feedback?: string | null; // null 가능
   }[];
   award_list: {
@@ -77,11 +79,11 @@ export interface PreviewType {
   FeedbackBox?: (props: FeedbackBoxType) => JSX.Element;
 }
 
-const zeroNumber = (value: number) => `${value < 10 ? "0" : ""}${value}`
+const zeroNumber = (value: number) => `${value < 10 ? "0" : ""}${value}`;
 
 export const millsecondToDate = (str: number | string) => {
   const date = new Date(str || 0);
-  return `${date.getFullYear()}. ${zeroNumber(date.getMonth() + 1)}. ${zeroNumber(date.getDate())}`;
+  return `${date.getFullYear()}.${zeroNumber(date.getMonth() + 1)}.${zeroNumber(date.getDate())}`;
 };
 
 const subject = {
@@ -176,47 +178,53 @@ export const PreviewResume = ({
         </article>
       )}
 
-      {award_list.length > 0 && <article className="flex gap-[10px] flex-col">
-        <h3 className="text-body5">수상 경력</h3>
-        {award_list.map((award, index) => (
-          <FeedBack
-            key={index}
-            part={award.name}
-            element_id={award.element_id}
-            comment={award.feedback}
-          >
-            <Award {...award} />
-          </FeedBack>
-        ))}
-      </article>}
+      {award_list.length > 0 && (
+        <article className="flex gap-[10px] flex-col">
+          <h3 className="text-body5">수상 경력</h3>
+          {award_list.map((award, index) => (
+            <FeedBack
+              key={index}
+              part={award.name}
+              element_id={award.element_id}
+              comment={award.feedback}
+            >
+              <Award {...award} />
+            </FeedBack>
+          ))}
+        </article>
+      )}
 
-      {certificate_list.length > 0 && <article className="flex gap-[10px] flex-col">
-        <h3 className="text-body5">자격증</h3>
-        {certificate_list.map((data, index) => (
-          <FeedBack
-            key={index}
-            part={data.name}
-            element_id={data.element_id}
-            comment={data.feedback}
-          >
-            <Certificate {...data} />
-          </FeedBack>
-        ))}
-      </article>}
+      {certificate_list.length > 0 && (
+        <article className="flex gap-[10px] flex-col">
+          <h3 className="text-body5">자격증</h3>
+          {certificate_list.map((data, index) => (
+            <FeedBack
+              key={index}
+              part={data.name}
+              element_id={data.element_id}
+              comment={data.feedback}
+            >
+              <Certificate {...data} />
+            </FeedBack>
+          ))}
+        </article>
+      )}
 
-      {activity_list.length > 0 && <article className="flex gap-[10px] flex-col">
-        <h3 className="text-body5">활동</h3>
-        {activity_list.map((data, index) => (
-          <FeedBack
-            key={index}
-            part={data.name}
-            element_id={data.element_id}
-            comment={data.feedback}
-          >
-            <Activity {...data} />
-          </FeedBack>
-        ))}
-      </article>}
+      {activity_list.length > 0 && (
+        <article className="flex gap-[10px] flex-col">
+          <h3 className="text-body5">활동</h3>
+          {activity_list.map((data, index) => (
+            <FeedBack
+              key={index}
+              part={data.name}
+              element_id={data.element_id}
+              comment={data.feedback}
+            >
+              <Activity {...data} />
+            </FeedBack>
+          ))}
+        </article>
+      )}
 
       <article className="flex flex-col gap-[20px]">
         <h3 className="text-[22px] font-semibold leading-[26px]">Project</h3>
