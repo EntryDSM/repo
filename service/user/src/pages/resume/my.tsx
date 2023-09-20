@@ -3,14 +3,6 @@ import { ResumeTitle, ResumeLayout } from "@/components/resume";
 import { Dropdown, Input, BtnInput, BtnInputList } from "@packages/ui";
 import { ChangeEvent, useState } from "react";
 import { onChange, useProfileWrite } from "../../hooks/useWriteProfile";
-import { Rectify } from "@packages/ui/assets";
-import { Dropdown, Input, SKillInput, SkillList } from "@packages/ui";
-import { ChangeEvent, useEffect, useState } from "react";
-import {
-  onChange,
-  useProfileWrite,
-} from "../../hooks/useWriteProfile";
-import { WriteInfoReqBody } from "../../apis/document/patch/WriteInfo";
 import { FeedBack } from "@/components/resume/FeedBack";
 import { getMajor } from "@/apis/major";
 import { useQuery } from "@tanstack/react-query";

@@ -1,4 +1,4 @@
-import {DetailType, myDetail} from "@/apis/document/get/myDetail";
+import { DetailType, myDetail } from "@/apis/document/get/myDetail";
 import {
   ActivityReqBody,
   ActivityResType,
@@ -20,10 +20,10 @@ import {
   WriteInfoResType,
   WriteInfoReqBody,
 } from "../apis/document/patch";
-import {ChangeEvent, useState} from "react";
-import {useMutation, useQuery} from "@tanstack/react-query";
-import {toast} from "react-toastify";
-import {getFile, GetFileRes} from "@/apis/file";
+import { ChangeEvent, useState } from "react";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { toast } from "react-toastify";
+import { getFile, GetFileRes } from "@/apis/file";
 
 interface Detail {
   introduce: IntroduceResType;
@@ -244,6 +244,19 @@ export const useProfileWrite = <
       }
     };
 
+  const toggleThings = (index: number, value: string) => {
+    if (type === "project_list" && Array.isArray(state)) {
+      const copy = [...state];
+      const changeThing = copy[index];
+      copy[index] = {
+        ...changeThing,
+        type: value,
+      };
+      // @ts-ignore
+      setState(copy);
+    }
+  };
+
   const initDate = (index: number) => {
     if (
       (type === "activity_list" || type === "project_list") &&
@@ -295,6 +308,7 @@ export const useProfileWrite = <
     addItem,
     moveItem,
     initDate,
+    toggleThings,
     removeItem,
     toPreview,
     removeSkill,

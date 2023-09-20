@@ -20,6 +20,7 @@ export const Project = () => {
     addItem,
     moveItem,
     initDate,
+    toggleThings,
     removeItem,
     addSkill,
     removeSkill,
@@ -111,6 +112,24 @@ export const Project = () => {
                 placeholder="프로젝트 이름을 입력해 주세요"
                 onChange={handleChangeArray}
               />
+              <div className="flex items-center bg-gray100 rounded-[8px] p-[2px] w-fit mt-[12px] text-body5 cursor-pointer">
+                <div
+                  className={`${
+                    type === "TEAM" && "bg-gray50"
+                  } hover:bg-gray50 flex items-center justify-center w-[64px] h-[32px] rounded-[6px] transition-all`}
+                  onClick={() => toggleThings(index, "TEAM")}
+                >
+                  팀
+                </div>
+                <div
+                  className={`${
+                    type === "PERSONAL" && "bg-gray50"
+                  } hover:bg-gray50 flex items-center justify-center w-[64px] h-[32px] rounded-[6px] transition-all`}
+                  onClick={() => toggleThings(index, "PERSONAL")}
+                >
+                  개인
+                </div>
+              </div>
             </ImportLabel>
             <ImportLabel label="프로젝트 로고">
               <input

@@ -32,7 +32,7 @@ export const Project = ({
   const imageUrl = represent_image_path;
   return (
     <div className="flex flex-col gap-10 rounded-md bg-gray50 pl-10 pr-10 pt-7 pb-7 w-full">
-      <div className="flex items-center">
+      <div className="flex items-center w-full">
         {imageUrl ? (
           <Image
             width={48}
@@ -50,11 +50,20 @@ export const Project = ({
             alt="projectImg"
           />
         )}
-        <div className="flex flex-col gap-[4px]">
-          <p className="text-title3">{name}</p>
-          <p className="text-[14px] leading-[17px]">
-            {millsecondToDate(start_date)} ~{" "}
-            {is_period ? millsecondToDate(end_date) : "진행중"}
+        <div className="flex items-center w-full justify-between">
+          <div className="flex flex-col gap-[4px]">
+            <p className="text-title3">{name}</p>
+            <p className="text-[14px] leading-[17px]">
+              {millsecondToDate(start_date)} ~{" "}
+              {is_period ? millsecondToDate(end_date) : "진행중"}
+            </p>
+          </div>
+          <p className="text-body8 text-gray300">
+            {type === "TEAM"
+              ? "팀프로젝트"
+              : type === "PERSONAL"
+              ? "개인프로젝트"
+              : ""}
           </p>
         </div>
       </div>
