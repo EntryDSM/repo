@@ -4,8 +4,6 @@ import { Certificate } from "./Certificate";
 import { Project } from "./Project";
 import { Activity } from "./Activity";
 import { Tag } from "./Tag";
-import { LinkSvg } from "../../assets";
-import Image from "next/image";
 import QRCode from "qrcode.react";
 
 export interface FeedbackBoxType {
