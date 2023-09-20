@@ -8,8 +8,7 @@ export const instance = axios.create({
 
 instance.interceptors.request.use(
   async function (config) {
-    const accessToken =
-      "eyJ0eXBlIjoiYWNjZXNzIiwiYWxnIjoiSFM1MTIifQ.eyJzdWIiOiIxZjg3MDk0Mi1hYzRlLTQ1YmMtODg0My1iZGQ5NTI2MTE1YjciLCJyb2xlIjoiU1RVREVOVCIsImlhdCI6MTY5NDk0NTA1OSwiZXhwIjoxMTY5NDk0NTA1OX0.-xCyrbeLCKlYswnQHglfed45_eKl6tEvFVcg9NipbjmJgYZIYeMak3Ea0cERt42kyX7q3oe3xFphwsbjBRXTsg";
+    const accessToken = localStorage.getItem("access_token");
     if (accessToken) {
       //@ts-ignore
       config.headers = {
