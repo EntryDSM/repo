@@ -1,11 +1,23 @@
-import {ImportLabel} from "@/components/ImportLabel";
-import {ResumeLayout, ResumeTitle} from "@/components/resume";
-import {Dropdown, Input, SKillInput, SkillList} from "@packages/ui";
-import {ChangeEvent, useState} from "react";
-import {onChange, useProfileWrite,} from "../../hooks/useWriteProfile";
-import {FeedBack} from "@/components/resume/FeedBack";
-import {getMajor} from "@/apis/major";
-import {useQuery} from "@tanstack/react-query";
+import { ImportLabel } from "@/components/ImportLabel";
+import { ResumeTitle, ResumeLayout } from "@/components/resume";
+import { Rectify } from "@packages/ui/assets";
+import { Dropdown, Input, SKillInput, SkillList } from "@packages/ui";
+import { ChangeEvent, useEffect, useState } from "react";
+import {
+  AddSkillFn,
+  onChange,
+  onClickItem,
+  removeSkillFn,
+  useProfileWrite,
+} from "../../hooks/useWriteProfile";
+import { WrtieInfoReqBody } from "../../apis/document/patch/WriteInfo";
+import { FeedBack } from "@/components/resume/FeedBack";
+import { getMajor } from "@/apis/major";
+import { useQuery } from "@tanstack/react-query";
+import { ResumeImg } from "@/components/ResumeImg";
+import {Plus} from "../../../../../packages/ui/assets";
+import Image from "next/image";
+import {documentMy} from "@/apis/document/get/my";
 
 const student = {
   grade: [1, 2, 3],
@@ -49,14 +61,16 @@ export const My = () => {
   const [img, setImg] = useState<string>("");
 
   const { data: major } = useQuery(["skillList"], getMajor);
+  const { data: profile } = useQuery(["mainProfile"], documentMy);
 
   const onImgChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name } = e.target;
     onChange(({ base_url, image_path }) => {
-      setState({ ...state, [name]: image_path });
+      setState({ ...state, "profile_image_path": image_path });
       setImg(base_url + image_path);
     }, e);
   };
+
 
   return (
     <ResumeLayout
@@ -67,6 +81,30 @@ export const My = () => {
     >
       <ResumeTitle value="자기소개" />
       <div className="px-[40px] flex flex-col gap-10">
+        <ImportLabel label={"프로필 사진"}>
+          <input
+              id="profile"
+              onChange={onImgChange}
+              type="file"
+              className="hidden"
+          />
+          <label
+              htmlFor="profile"
+              className="bg-gray200 flex justify-center items-center w-32 h-32 rounded-full cursor-pointer"
+          >
+            {img || profile?.data.profile_image_url ? (
+                <Image
+                    className="rounded-full object-cover w-full h-full"
+                    width={200}
+                    height={200}
+                    src={img || profile?.data.profile_image_url}
+                    alt=""
+                />
+            ) : (
+                <Plus size={20}/>
+            )}
+          </label>
+        </ImportLabel>
         <FeedBack
           document_id={document_id}
           element_id={state.element_id}

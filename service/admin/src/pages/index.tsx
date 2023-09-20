@@ -39,6 +39,8 @@ export default function Home() {
   };
 
   const studentList = data?.data.student_list;
+
+  console.log(studentList)
   return (
     <>
       <Header />
