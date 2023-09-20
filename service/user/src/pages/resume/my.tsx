@@ -1,20 +1,11 @@
-import { ImportLabel } from "@/components/ImportLabel";
-import { ResumeTitle, ResumeLayout } from "@/components/resume";
-import { Rectify } from "@packages/ui/assets";
-import { Dropdown, Input, SKillInput, SkillList } from "@packages/ui";
-import { ChangeEvent, useEffect, useState } from "react";
-import {
-  AddSkillFn,
-  onChange,
-  onClickItem,
-  removeSkillFn,
-  useProfileWrite,
-} from "../../hooks/useWriteProfile";
-import { WrtieInfoReqBody } from "../../apis/document/patch/WriteInfo";
-import { FeedBack } from "@/components/resume/FeedBack";
-import { getMajor } from "@/apis/major";
-import { useQuery } from "@tanstack/react-query";
-import { ResumeImg } from "@/components/ResumeImg";
+import {ImportLabel} from "@/components/ImportLabel";
+import {ResumeLayout, ResumeTitle} from "@/components/resume";
+import {Dropdown, Input, SKillInput, SkillList} from "@packages/ui";
+import {ChangeEvent, useState} from "react";
+import {onChange, useProfileWrite,} from "../../hooks/useWriteProfile";
+import {FeedBack} from "@/components/resume/FeedBack";
+import {getMajor} from "@/apis/major";
+import {useQuery} from "@tanstack/react-query";
 
 const student = {
   grade: [1, 2, 3],

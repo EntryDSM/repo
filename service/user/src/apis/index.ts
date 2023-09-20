@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 export const instance = axios.create({
   baseURL: "https://api.dsm-repo.com",
-  timeout: 3000,
+  timeout: 10000,
 });
 
 instance.interceptors.request.use(

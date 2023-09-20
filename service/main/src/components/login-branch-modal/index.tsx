@@ -1,11 +1,9 @@
 import ReactOutSideClickHandler from "react-outside-click-handler";
-import { User, Teacher, Close } from "@packages/ui/assets";
-import { Logo } from "@packages/ui";
-import { ReactNode, useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { getOAuth } from "@/apis/getOAuth";
-import GoogleLogin from "react-google-login";
+import {Close, Teacher, User} from "@packages/ui/assets";
+import {Logo} from "@packages/ui";
+import {ReactNode} from "react";
+import {useRouter} from "next/router";
+import {getOAuth} from "@/apis/getOAuth";
 
 interface Props {
   closeModal: () => void;
@@ -26,9 +24,10 @@ export const LoginBranchModal = ({ closeModal }: Props) => {
   // });
 
   const NavigateToStudent = () => {
-    getOAuth().then(({ data }) => {
-      route.push(data.login_link.split(" ")[0]);
-    });
+    getOAuth()
+      .then(({data}) => {
+        route.push(data.login_link.split(" ")[0]);
+      });
   };
 
   return (

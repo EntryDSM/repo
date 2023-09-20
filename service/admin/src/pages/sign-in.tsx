@@ -58,13 +58,13 @@ const SignIn = () => {
       return postSignIn(body);
     },
     onSuccess: (res) => {
+      const { access_token, refresh_token } = res.data;
+      localStorage.setItem("access_token", access_token || "");
+      localStorage.setItem("refresh_token", refresh_token || "");
       toast("성공적으로 로그인하였습니다.", {
         autoClose: 1000,
         type: "success",
       });
-      const { access_token, refresh_token } = res.data;
-      localStorage.setItem("access_token", access_token || "");
-      localStorage.setItem("refresh_token", refresh_token || "");
       navigate.push("/");
     },
     onError: () => {

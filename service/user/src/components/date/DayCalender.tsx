@@ -72,7 +72,12 @@ export const DayCalender = ({
                 className={`cursor-pointer rounded-full ${
                   isCurrentDay(idx + 1) && "bg-gray300 text-gray50"
                 } hover:bg-gray200  hover:text-gray50 ${weekClassName}`}
-                onClick={() => onSaveClickedDay(idx + 1)}
+                onClick={() => {
+                  onSaveClickedDay(idx + 1, day => {
+                    onSubmitAtInput(day);
+                    closeDropdown();
+                  });
+                }}
               >
                 {idx + 1}
               </div>
@@ -80,14 +85,14 @@ export const DayCalender = ({
         </div>
       </div>
 
-      <div className="flex h-14 items-center flex-row-reverse px-3">
-        <Button kind="text" radius="circle" onClick={setChangeAtInput}>
-          확인
-        </Button>
-        <Button kind="text" radius="circle" onClick={closeDropdown}>
-          취소
-        </Button>
-      </div>
+      {/*<div className="flex h-14 items-center flex-row-reverse px-3">*/}
+      {/*  <Button kind="text" radius="circle" onClick={setChangeAtInput}>*/}
+      {/*    확인*/}
+      {/*  </Button>*/}
+      {/*  <Button kind="text" radius="circle" onClick={closeDropdown}>*/}
+      {/*    취소*/}
+      {/*  </Button>*/}
+      {/*</div>*/}
     </>
   );
 };

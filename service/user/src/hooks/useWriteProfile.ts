@@ -1,6 +1,6 @@
 import { DetailType, StatusType, myDetail } from "@/apis/document/get/myDetail";
 import {
-  documnetProject,
+  documentProject,
   ProjectReqBody,
   ProjectResType,
   documnetIntroduce,
@@ -57,7 +57,7 @@ const typeFn: {
 } = {
   writer: documnetWriteInfo,
   introduce: documnetIntroduce,
-  project_list: documnetProject,
+  project_list: documentProject,
   award_list: documnetAward,
   certificate_list: documnetCertificate,
   activity_list: documnetActivity,
@@ -248,13 +248,12 @@ export const useProfileWrite = <
     if (type === "activity_list" && Array.isArray(state)) {
       const copy = [...state];
       const changeThing = copy[index];
-      const thing = {
+      copy[index] = {
         ...changeThing,
         date: "",
         end_date: "",
         is_period: !changeThing.is_period,
       };
-      copy[index] = thing;
       // @ts-ignore
       setState(copy);
     }
