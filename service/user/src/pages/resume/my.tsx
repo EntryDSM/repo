@@ -97,7 +97,7 @@ export const My = () => {
                     className="rounded-full object-cover w-full h-full"
                     width={200}
                     height={200}
-                    src={img || profile?.data.profile_image_url}
+                    src={img || profile!.data.profile_image_url}
                     alt=""
                 />
             ) : (
