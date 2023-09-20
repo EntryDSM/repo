@@ -15,7 +15,7 @@ export const Certificate = ({
           <div className="flex gap-2 items-center">
             <p className="text-gray400 text-body7">{issuing_institution}</p>
             <hr className="bg-gray300 h-[12px] border-none w-[1px]" />
-            <p className="text-gray400 text-body7">{millsecondToDate(date)}</p>
+            <p className="text-gray400 text-body7 min-w-[82px]">{millsecondToDate(date)}</p>
           </div>
         </div>
       </div>
