@@ -162,6 +162,7 @@ export const Project = () => {
                 <DateInput
                   value={start_date}
                   name="start_date"
+                  placeholder="시작일"
                   onSubmitAtInput={onDateChangeArray}
                 />
               ) : (
