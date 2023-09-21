@@ -216,7 +216,7 @@ export const Project = () => {
                 onChange={handleChangeArray}
                 name="description"
                 maxLine={20}
-                limit={1500}
+                limit={2000}
               />
             </ImportLabel>
             <ImportLabel label="url">
