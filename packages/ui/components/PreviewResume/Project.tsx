@@ -75,7 +75,7 @@ export const Project = ({
           ))}
         </div>
       </div>
-      <pre className="text-body7 whitespace-pre-wrap truncate overflow-hidden line-clamp-[38]">{description}</pre>
+      <pre className="text-body7 leading-6 text-[15px] font-normal whitespace-pre-wrap truncate overflow-hidden line-clamp-[38]">{description}</pre>
       {urls && (
         <div className="flex flex-wrap gap-2">
           {urls.map((value, index) => (
