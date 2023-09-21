@@ -121,6 +121,8 @@ export const PreviewResume = ({
       className={`${feedbackWidth} m-auto my-20 flex flex-col gap-[40px] p-8 justify-between`}
       ref={targetRef}
     >
+
+      <div className="h-[1164px] flex flex-col ml-6 mr-6 gap-[20px]">
       <article>
         <FeedBack
           part="기본정보"
@@ -225,6 +227,7 @@ export const PreviewResume = ({
           ))}
         </article>
       )}
+      </div>
 
       <article className="flex flex-col gap-[20px]">
         <h3 className="text-[22px] font-semibold leading-[26px]">Project</h3>
@@ -235,7 +238,9 @@ export const PreviewResume = ({
             element_id={data.element_id}
             comment={data.feedback}
           >
+            <div className="h-[1164px]">
             <Project {...data} />
+            </div>
           </FeedBack>
         ))}
       </article>

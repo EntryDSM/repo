@@ -31,7 +31,7 @@ export const Project = ({
 }: PropsType) => {
   const imageUrl = represent_image_path;
   return (
-    <div className="flex flex-col gap-10 rounded-md bg-gray50 pl-10 pr-10 pt-7 pb-7 w-full">
+    <div className="flex flex-col gap-5 rounded-md bg-gray50 pl-10 pr-10 pt-7 pb-7 w-full h-full">
       <div className="flex items-center w-full">
         {imageUrl ? (
           <Image
@@ -75,10 +75,11 @@ export const Project = ({
           ))}
         </div>
       </div>
-      <pre className="text-body7 whitespace-pre-wrap">{description}</pre>
+      <pre className="text-body7 whitespace-pre-wrap truncate overflow-hidden line-clamp-[38]">{description}</pre>
       {urls && (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-wrap gap-2">
           {urls.map((value, index) => (
+            <div className="h-fit">
             <Link
               key={index}
               href={value}
@@ -89,6 +90,7 @@ export const Project = ({
                 {value}
               </p>
             </Link>
+            </div>
           ))}
         </div>
       )}
