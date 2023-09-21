@@ -621,6 +621,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["next", "virtual:41fe72e4f1f69320fab2b9b0a8de9a11b807f96dc0bdf2bac3f8aed1e8d970b37a8bc0f83fb0a695fb539d2a942d537caa95efbfb96ee4ef46b0f998b5e06f0f#npm:13.3.0"],\
             ["next-transpile-modules", "npm:10.0.0"],\
             ["postcss", "npm:8.4.21"],\
+            ["qrcode.react", "virtual:576cc4d2cc244f3af3c540317c2f84ae4d9a046d2b1519763846c613a93498d7e30080f38895c54cb2ed8b1a477d494fed6d10759b4dbb9b81d50d6a277d3c78#npm:3.1.0"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:429f1b8d68e7340a3b64de46c05ed489952f55c1bce814efcf9c475d84e07008d414fbf55bb9eb9f42d957c755a8a9167409ddf30772a81fee66d8a53507ad81#npm:18.2.0"],\
             ["react-outside-click-handler", "virtual:576cc4d2cc244f3af3c540317c2f84ae4d9a046d2b1519763846c613a93498d7e30080f38895c54cb2ed8b1a477d494fed6d10759b4dbb9b81d50d6a277d3c78#npm:1.3.0"],\

@@ -1,5 +1,6 @@
 import React from "react";
-import { PreviewType, millsecondToDate } from ".";
+import { PreviewType } from ".";
+import { millisecondToDate } from "../../utils/timeUtils";
 
 export const Activity = ({
   element_id,
@@ -16,8 +17,8 @@ export const Activity = ({
           <h4 className="text-body5">{name}</h4>
           <div className="flex gap-2 items-center">
             <p className="text-gray400 text-body7">
-              {millsecondToDate(date)}
-              {is_period && " ~ " + millsecondToDate(end_date)}
+              {millisecondToDate(date)}
+              {is_period && " ~ " + millisecondToDate(end_date)}
             </p>
           </div>
         </div>

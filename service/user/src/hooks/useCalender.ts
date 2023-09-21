@@ -40,11 +40,11 @@ export interface DateValueType {
   day: number;
 }
 export const stringToDate = (str: string | number): DateValueType => {
-  if(MillsecondToDate(str).includes("/")) {
-    const [month, day, year] = MillsecondToDate(str).split("/").map(Number);
+  if (MillisecondToDate(str).includes("/")) {
+    const [month, day, year] = MillisecondToDate(str).split("/").map(Number);
     return { year, month, day };
   }
-  const [year, month, day] = MillsecondToDate(str).split(". ").map(Number);
+  const [year, month, day] = MillisecondToDate(str).split(". ").map(Number);
   return { year, month, day };
 };
 
@@ -58,7 +58,7 @@ export const getInitDate = (includeDay?: boolean) => {
   return [date.getFullYear(), date.getMonth() + 1, date.getDate()].join(". ");
 };
 
-const MillsecondToDate = (str: string | number) => {
+const MillisecondToDate = (str: string | number) => {
   const date = new Date(str);
   return typeof str === "number" ? date.toLocaleDateString() : str;
 };
@@ -82,9 +82,9 @@ interface PropsType {
 }
 
 export const useCalender = ({ initialValue = getInitDate() }: PropsType) => {
-  const [date, setDate] = useState<string>(MillsecondToDate(initialValue));
+  const [date, setDate] = useState<string>(MillisecondToDate(initialValue));
   const [checkDate, setCheck] = useState<string>(
-    MillsecondToDate(initialValue)
+    MillisecondToDate(initialValue)
   );
   const objectDate = stringToDate(date);
 
@@ -101,7 +101,7 @@ export const useCalender = ({ initialValue = getInitDate() }: PropsType) => {
     const temp = stringToDate(date);
     setDate(dateToString({ ...temp, day: day }));
     setCheck(dateToString(temp));
-    after && after(dateToString({ ...temp, day: day }))
+    after && after(dateToString({ ...temp, day: day }));
   };
 
   const isCurrentDay = (currentDay: number) => {
