@@ -53,7 +53,7 @@ export const PdfViewer = ({ url, list }: PropsType) => {
       <div className="fixed flex right-32 bottom-14 gap-2">
         <div className="flex bg-gray900 rounded-3xl h-8 w-32 justify-center gap-2 text-gray50">
           <button onClick={() => setCurrentPage(prev => (prev - 2) > 0 ? prev - 2 : 0)}>&larr;</button>
-          <p className="flex items-center">{currentPage + 1} / {page}</p>
+          <p className="flex items-center">{currentPage + 1} ~ {currentPage + 2}/ {page}</p>
           <button onClick={() => setCurrentPage(prev => (prev + 2) < page ? prev + 2 : page - 1)}>&rarr;</button>
         </div>
         <div className="flex bg-gray900 rounded-3xl h-8 w-32 justify-center gap-2 text-gray50">
