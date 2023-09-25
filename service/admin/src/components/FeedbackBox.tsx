@@ -1,9 +1,8 @@
-import React, { ChangeEvent, ReactNode, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import OutsideClickHandler from "react-outside-click-handler";
 import { Delete } from "@packages/ui/assets";
-import { TextArea } from "@packages/ui/components/TextArea";
 import { Button } from "@packages/ui/components/Button";
-import { FeedbackBoxType } from "../../../../packages/ui";
+import { FeedbackBoxType } from "@packages/ui/components/PreviewResume/PreviewType";
 import {
   feedbackAdd,
   feedbackChange,
@@ -62,14 +61,14 @@ export const FeedbackBox = ({
   };
 
   return (
-    <section className="flex gap-8 relative left-[-48px]">
+    <section className="flex gap-8 relative w-full">
       <div
         onClick={openFeedBack}
-        className={`mt-[10px] rounded-[4px] w-4 h-4 shrink-0 ${
+        className={`absolute left-[-48px] mt-[10px] rounded-[4px] w-4 h-4 shrink-0 ${
           isFeedbackChange ? "bg-blue" : "bg-gray200"
         }`}
       />
-      <div className="w-[736px]">
+      <div className="w-full">
         {children}
         {dropdown && (
           <OutsideClickHandler onOutsideClick={closeFeedBack}>
@@ -80,7 +79,6 @@ export const FeedbackBox = ({
               </div>
               <textarea
                 className="bg-gray100 w-full h-[200px] p-3 text-body7 resize-none rounded-[4px] focus:outline-0 focus:border-2 focus:border-gray300"
-                name=""
                 placeholder="내용을 입력해 주세요"
                 onChange={onChange}
                 value={state}

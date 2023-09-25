@@ -1,9 +1,8 @@
 import React from "react";
-import { PreviewType } from ".";
+import { PreviewType } from "./PreviewType";
 import { millisecondToDate } from "../../utils/timeUtils";
 
 export const Certificate = ({
-  element_id,
   name,
   issuing_institution,
   date,
