@@ -52,7 +52,10 @@ export const ResumeLayout = ({
     push("/resume/" + link);
   };
 
-  const toPathPreview = () => push("/" + toPreview());
+  const toPathPreview = () => {
+    mutate()
+    push("/" + toPreview())
+  };
   return (
     <>
       <Header profileImg={profileImg} />
