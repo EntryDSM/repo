@@ -1,5 +1,5 @@
 import React from "react";
-import { PreviewType, millsecondToDate } from ".";
+import {millsecondToDate, PreviewType} from ".";
 
 export const Award = ({
   element_id,

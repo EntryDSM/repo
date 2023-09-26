@@ -4,6 +4,7 @@ import { Button, Footer } from "@packages/ui";
 import { Header } from "../header";
 import { useRouter } from "next/router";
 import { documentSubmit } from "@/apis/document/post/submit";
+import {Save} from "../../../../../packages/ui/assets/Save";
 
 interface PropsType {
   children: ReactNode;
@@ -58,6 +59,7 @@ export const ResumeLayout = ({
       <div className="mt-[120px]">
         <div className="absolute top-20 w-full h-[360px] bg-gray900" />
         <div className="relative z-2">
+          <div onClick={mutate} className="fixed w-16 h-16 bg-gray50 bottom-20 right-32 rounded-full flex justify-center items-center shadow-xl transition hover:shadow-none hover:cursor-pointer hover:bg-gray200 md:hidden"><Save size={30}/></div>
           <div className="w-[1120px] m-auto flex flex-col gap-[32px] mb-[200px]">
             <div className="flex justify-between items-end text-gray50">
               <div className="flex gap-[10px] flex-col">

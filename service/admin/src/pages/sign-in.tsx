@@ -90,12 +90,10 @@ const SignIn = () => {
       </div>
       <div className="w-[770px] pl-40 pr-40 flex flex-col justify-center">
         <div>
-          <Link href={"/"}>
-            <button className="flex text-body5 text-gray400 [&_path]:fill-gray400">
-              <Arrow direction="left" />
-              back
-            </button>
-          </Link>
+          <button className="flex text-body5 text-gray400 [&_path]:fill-gray400" onClick={() => navigate.back()}>
+            <Arrow direction="left" />
+            back
+          </button>
           <p className="text-title1  mb-9">선생님 로그인</p>
         </div>
 
