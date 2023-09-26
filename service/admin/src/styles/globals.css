@@ -30,11 +30,12 @@ nav::-webkit-scrollbar {
   height: 0;
 }
 div::-webkit-scrollbar {
-  width: 2px;
+  width: 4px;
   height: 0;
 }
 div::-webkit-scrollbar-thumb {
   background-color: #141414;
+  border-radius: 10px;
 }
 
 ul {
