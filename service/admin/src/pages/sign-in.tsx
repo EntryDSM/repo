@@ -90,7 +90,10 @@ const SignIn = () => {
       </div>
       <div className="w-[770px] pl-40 pr-40 flex flex-col justify-center">
         <div>
-          <button className="flex text-body5 text-gray400 [&_path]:fill-gray400" onClick={() => navigate.back()}>
+          <button
+            onClick={() => navigate.back()}
+            className="flex text-body5 text-gray400 [&_path]:fill-gray400"
+          >
             <Arrow direction="left" />
             back
           </button>

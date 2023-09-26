@@ -46,7 +46,7 @@ li {
 }
 
 @font-face {
-  font-family: "Pretendard";
+  font-family: "Pretendard" !important;
   font-weight: 900;
   font-display: optional;
   src: url("/fonts/woff2/Pretendard-Black.woff2") format("woff2"),
@@ -54,7 +54,7 @@ li {
 }
 
 @font-face {
-  font-family: "Pretendard";
+  font-family: "Pretendard" !important;
   font-weight: 800;
   font-display: optional;
   src: url("/fonts/woff2/Pretendard-ExtraBold.woff2") format("woff2"),
@@ -62,7 +62,7 @@ li {
 }
 
 @font-face {
-  font-family: "Pretendard";
+  font-family: "Pretendard" !important;
   font-weight: 700;
   font-display: optional;
   src: url("/fonts/woff2/Pretendard-Bold.woff2") format("woff2"),
@@ -70,7 +70,7 @@ li {
 }
 
 @font-face {
-  font-family: "Pretendard";
+  font-family: "Pretendard" !important;
   font-weight: 600;
   font-display: optional;
   src: url("/fonts/woff2/Pretendard-SemiBold.woff2") format("woff2"),
@@ -78,7 +78,7 @@ li {
 }
 
 @font-face {
-  font-family: "Pretendard";
+  font-family: "Pretendard" !important;
   font-weight: 500;
   font-display: optional;
   src: url("/fonts/woff2/Pretendard-Medium.woff2") format("woff2"),
@@ -86,7 +86,7 @@ li {
 }
 
 @font-face {
-  font-family: "Pretendard";
+  font-family: "Pretendard" !important;
   font-weight: 400;
   font-display: optional;
   src: url("/fonts/woff2/Pretendard-Regular.woff2") format("woff2"),
@@ -94,7 +94,7 @@ li {
 }
 
 @font-face {
-  font-family: "Pretendard";
+  font-family: "Pretendard" !important;
   font-weight: 300;
   font-display: optional;
   src: url("/fonts/woff2/Pretendard-Light.woff2") format("woff2"),
@@ -102,7 +102,7 @@ li {
 }
 
 @font-face {
-  font-family: "Pretendard";
+  font-family: "Pretendard" !important;
   font-weight: 200;
   font-display: optional;
   src: url("/fonts/woff2/Pretendard-ExtraLight.woff2") format("woff2"),
@@ -110,7 +110,7 @@ li {
 }
 
 @font-face {
-  font-family: "Pretendard";
+  font-family: "Pretendard" !important;
   font-weight: 100;
   font-display: optional;
   src: url("/fonts/woff2/Pretendard-Thin.woff2") format("woff2"),

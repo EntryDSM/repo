@@ -98,14 +98,14 @@ module.exports = {
         },
       ],
       body7: [
-        "14px",
+        "16px",
         {
           fontWeight: "400",
           lineHeight: "22px",
         },
       ],
       body8: [
-        "14px",
+        "16px",
         {
           fontWeight: "600",
           lineHeight: "17px",

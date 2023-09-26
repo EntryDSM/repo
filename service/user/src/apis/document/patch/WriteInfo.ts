@@ -51,13 +51,13 @@ export const documentWriteInfo = ({
     Promise.resolve().then(() => {
       if(body.email.length === 0) throw new TypeError("Email Required");
     }),
-    instance.patch("/document/skill-set", { skill_list }),
     instance.patch("/document/writer-info", {
       ...body,
       major_id: major.id,
       grade: Number(grade),
       class_num: Number(class_num),
       number: Number(number),
+      skill_list: skill_list
     }),
     instance.patch("/document/profile-image", {
       profile_image_path: profile_image_path,
