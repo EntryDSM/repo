@@ -100,7 +100,7 @@ export const SideBar = ({
         )}
       </div>
       {!preview && !!side && <div className="w-[320px]" />}
-      <div className="m-auto">{children}</div>
+      <div className="w-full ml-20 flex justify-center">{children}</div>
     </header>
   );
 };

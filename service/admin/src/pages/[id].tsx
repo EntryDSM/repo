@@ -1,19 +1,19 @@
 import { studentDetail } from "@/apis/document/get/studentDetail";
-import { documentShare, documentUnShare } from "@/apis/document/post/shard";
 import { getStudent } from "@/apis/student";
 import { FeedbackBox } from "@/components/FeedbackBox";
 import { Sharing } from "@/components/Sharing";
-import { Button, PreviewResume, SideBar, TextArea } from "@packages/ui";
-import Image from "next/image";
+import { PreviewResume, SideBar } from "@packages/ui";
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useQueries, useQuery } from "@tanstack/react-query";
+import { PdfPreviewer } from "@/components/PdfPreviewer";
 
 const Detail = () => {
   const { query } = useRouter();
   const { id } = query;
   const pdfRef = useRef<HTMLDivElement | null>(null);
   const [shared, setShared] = useState<boolean>(false);
+  const [pdfView, setPdfView] = useState<boolean>(false);
 
   const { data } = useQuery(
     ["teacherPreview", id],
@@ -51,8 +51,8 @@ const Detail = () => {
             <Sharing
               name={student_number + name}
               document_id={document_id}
-              targetRef={pdfRef}
               shared={shared}
+              pdfView={setPdfView}
               changeSharing={() => setShared(!shared)}
             />
           );
@@ -68,11 +68,17 @@ const Detail = () => {
         Sharing={Shared}
       >
         {data && (
-          <PreviewResume
-            {...data.data}
-            FeedbackBox={FeedBackBoxUnShared}
-            targetRef={pdfRef}
-          />
+          <>
+            <PreviewResume {...data.data} FeedbackBox={FeedBackBoxUnShared} />
+            {pdfView && (
+              <PdfPreviewer
+                {...data.data}
+                FeedbackBox={FeedBackBoxUnShared}
+                targetRef={pdfRef}
+                pdfView={setPdfView}
+              />
+            )}
+          </>
         )}
       </SideBar>
     </div>

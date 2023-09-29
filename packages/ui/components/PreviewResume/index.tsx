@@ -1,90 +1,12 @@
-import React, { MutableRefObject, ReactNode } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Award } from "./Award";
 import { Certificate } from "./Certificate";
 import { Project } from "./Project";
 import { Activity } from "./Activity";
 import { Tag } from "./Tag";
 import QRCode from "qrcode.react";
-
-export interface FeedbackBoxType {
-  part: string;
-  document_id: string;
-  element_id: string;
-  comment?: string | null;
-  children?: ReactNode;
-}
-
-export interface PreviewType {
-  document_id: string;
-  writer: {
-    element_id: string;
-    student_id: string;
-    feedback?: string | null;
-    name: string;
-    profile_image_url: string;
-    student_number: number; // 원하면 학년 반 번호로 각각 나눠서 줄 수도 있음
-    email: string;
-    url?: string | null;
-    major: {
-      id: string;
-      name: string;
-    };
-  };
-  document_status: string;
-  introduce: {
-    element_id: string;
-    feedback?: string | null;
-    heading: string;
-    introduce: string;
-  };
-  skill_list: string[];
-  project_list: {
-    element_id: string;
-    name: string;
-    represent_image_path: string;
-    skill_list: string[];
-    start_date: number | string;
-    end_date: number | string;
-    is_period: boolean;
-    type: string;
-    description: string;
-    urls?: string[]; //null 가능
-    feedback?: string | null; // null 가능
-  }[];
-  award_list: {
-    element_id: string;
-    name: string;
-    awarding_institution: string;
-    date: number | string;
-    description: string; // null 가능
-    feedback?: string | null; // null 가능
-  }[];
-  certificate_list: {
-    element_id: string;
-    name: string;
-    issuing_institution: string;
-    date: number | string;
-    feedback?: string | null; // null 가능
-  }[];
-  activity_list: {
-    element_id: string;
-    name: string;
-    date: number | string;
-    end_date: number | string; // null 가능
-    is_period: boolean;
-    description: string; // null 가능
-    feedback?: string | null; // null 가능
-  }[];
-  targetRef?: MutableRefObject<HTMLDivElement | null>;
-  FeedbackBox?: (props: FeedbackBoxType) => JSX.Element;
-}
-
-const zeroNumber = (value: number) => `${value < 10 ? "0" : ""}${value}`;
-
-export const millsecondToDate = (str: number | string) => {
-  const date = new Date(str || 0);
-  return `${date.getFullYear()}.${zeroNumber(date.getMonth() + 1)}.${zeroNumber(date.getDate())}`;
-};
+import { Arrow } from "../../assets";
+import { PreviewType, FeedbackBoxType } from "./PreviewType";
 
 const subject = {
   1: "소프트웨어개발과",
@@ -96,14 +18,12 @@ const subject = {
 export const PreviewResume = ({
   document_id,
   writer,
-  document_status,
   introduce,
   skill_list,
   project_list,
   award_list,
   certificate_list,
   activity_list,
-  targetRef,
   FeedbackBox,
 }: PreviewType) => {
   const FeedBack = (props: Omit<FeedbackBoxType, "document_id">): JSX.Element =>
@@ -112,108 +32,57 @@ export const PreviewResume = ({
     ) : (
       <>{props.children}</>
     );
-  const feedbackWidth = FeedbackBox ? "w-[848px] ml-[48px]" : "w-[800px] ";
+  const feedbackWidth = FeedbackBox ? "w-[848px] ml-[48px]" : "w-[800px]";
 
   const [grade, classNum] = writer.student_number.toString().split("");
 
-  return (
-    <main
-      className={`${feedbackWidth} m-auto my-20 flex flex-col gap-[40px] p-8 justify-between`}
-      ref={targetRef}
-    >
+  const [currentPage, setCurrentPage] = useState<number>(0);
+  const [page, setPage] = useState<number>(1);
+  const [oneH, setOneH] = useState<number>(0);
 
-      <div className="h-[1164px] flex flex-col ml-6 mr-6 gap-[20px]">
-      <article>
-        <FeedBack
-          part="기본정보"
-          element_id={writer.element_id}
-          comment={writer.feedback}
-        >
-          <div className="flex justify-between items-center">
-            <div>
-              <p className="text-title1 mb-[10px]">{writer.name}</p>
-              <p className="text-title4">{writer.major.name}</p>
-            </div>
-            <div className="flex">
-              <div className="flex flex-col mr-6 text-end gap-[10px] justify-center">
-                <p className="text-body7 leading-[17px]">
-                  {writer.student_number}
-                </p>
-                <p className="text-body7 leading-[17px]">
-                  {grade !== "1" ? subject[classNum as "1"] : "공통과정"}
-                </p>
-                <p className="text-body7 leading-[17px]">{writer.email}</p>
-              </div>
-              {writer.url && (
-                <div>
-                  <QRCode size={80} value={writer.url} />
-                </div>
-              )}
-            </div>
-          </div>
-        </FeedBack>
-      </article>
+  const activity = useRef<HTMLElement>(null);
+  const one = useRef<HTMLDivElement>(null);
 
-      <article>
-        <FeedBack
-          part="자기소개"
-          element_id={introduce.element_id}
-          comment={introduce.feedback}
-        >
-          <div>
-            <h3 className="text-body3">{introduce.heading}</h3>
-            <pre className="text-body7 whitespace-pre-wrap text-gray400 mt-[20px] leading-[17px]">
-              {introduce.introduce}
-            </pre>
-          </div>
-        </FeedBack>
-      </article>
+  const heightCheck = () => {
+    if (oneH && oneH > 1164) {
+      setPage(2);
+      console.log("page set 2");
+    }
+  };
 
-      {!!skill_list.length && (
-        <article className="flex flex-col gap-[10px]">
-          <h3 className="text-body5">기술 스택</h3>
-          <pre className="flex gap-3 flex-wrap">
-            {skill_list.map((skill, index) => (
-              <Tag key={index} className="bg-gray50" technology={skill} />
-            ))}
-          </pre>
-        </article>
-      )}
+  useLayoutEffect(() => {
+    heightCheck();
+    if (oneH && oneH <= 1164) {
+      heightCheck();
+    }
+    return () => {
+      one.current && setOneH(one.current?.scrollHeight);
+      setCurrentPage(0);
+      setPage(1);
+      console.log("page set 1");
+    };
+  }, [document_id]);
 
-      {award_list.length > 0 && (
-        <article className="flex gap-[10px] flex-col">
-          <h3 className="text-body5">수상 경력</h3>
-          {award_list.map((award, index) => (
-            <FeedBack
-              key={index}
-              part={award.name}
-              element_id={award.element_id}
-              comment={award.feedback}
-            >
-              <Award {...award} />
-            </FeedBack>
-          ))}
-        </article>
-      )}
+  const back = () => {
+    setCurrentPage((p) => (p > 1 ? p - 2 : p));
+  };
 
-      {certificate_list.length > 0 && (
-        <article className="flex gap-[10px] flex-col">
-          <h3 className="text-body5">자격증</h3>
-          {certificate_list.map((data, index) => (
-            <FeedBack
-              key={index}
-              part={data.name}
-              element_id={data.element_id}
-              comment={data.feedback}
-            >
-              <Certificate {...data} />
-            </FeedBack>
-          ))}
-        </article>
-      )}
+  const front = () => {
+    setCurrentPage((p) => (p < project_list.length + page - 2 ? p + 2 : p));
+  };
 
+  window.onkeydown = (e) => {
+    if (e.key === "ArrowRight") {
+      front();
+    } else if (e.key === "ArrowLeft") {
+      back();
+    }
+  };
+
+  const ActivityList = (
+    <>
       {activity_list.length > 0 && (
-        <article className="flex gap-[10px] flex-col">
+        <article className="flex gap-[10px] flex-col" ref={activity}>
           <h3 className="text-body5">활동</h3>
           {activity_list.map((data, index) => (
             <FeedBack
@@ -227,23 +96,199 @@ export const PreviewResume = ({
           ))}
         </article>
       )}
-      </div>
+    </>
+  );
 
-      <article className="flex flex-col gap-[20px]">
-        <h3 className="text-[22px] font-semibold leading-[26px]">Project</h3>
-        {project_list.map((data, index) => (
-          <FeedBack
-            key={index}
-            part={data.name}
-            element_id={data.element_id}
-            comment={data.feedback}
-          >
-            <div className="h-[1164px]">
-            <Project {...data} />
+  return (
+    <main className={`${feedbackWidth} flex w-fit h-fit overflow-hidden`}>
+      {!currentPage && (
+        <div className="h-[100vh] w-[829px] flex justify-center items-center">
+          <div className="h-[1164px] w-[829px] flex scale-[0.75]">
+            <div className="h-fit w-full flex flex-col gap-[20px]" ref={one}>
+              <article className="w-full">
+                <FeedBack
+                  part="기본정보"
+                  element_id={writer.element_id}
+                  comment={writer.feedback}
+                >
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <p className="text-title1 mb-[10px]">{writer.name}</p>
+                      <p className="text-title4">{writer.major.name}</p>
+                    </div>
+                    <div className="flex">
+                      <div className="flex flex-col mr-6 text-end gap-[10px] justify-center">
+                        <p className="text-body7 leading-[17px]">
+                          {writer.student_number}
+                        </p>
+                        <p className="text-body7 leading-[17px]">
+                          {grade !== "1"
+                            ? subject[classNum as "1"]
+                            : "공통과정"}
+                        </p>
+                        <p className="text-body7 leading-[17px]">
+                          {writer.email}
+                        </p>
+                      </div>
+                      {writer.url && (
+                        <div>
+                          <QRCode size={80} value={writer.url} />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </FeedBack>
+              </article>
+
+              <article>
+                <FeedBack
+                  part="자기소개"
+                  element_id={introduce.element_id}
+                  comment={introduce.feedback}
+                >
+                  <div>
+                    <h3 className="text-body3">{introduce.heading}</h3>
+                    <pre className="text-body7 whitespace-pre-wrap text-gray400 mt-[20px] leading-[17px]">
+                      {introduce.introduce}
+                    </pre>
+                  </div>
+                </FeedBack>
+              </article>
+
+              {!!skill_list.length && (
+                <article className="flex flex-col gap-[10px]">
+                  <h3 className="text-body5">기술 스택</h3>
+                  <pre className="flex gap-3 flex-wrap">
+                    {skill_list.map((skill, index) => (
+                      <Tag
+                        key={index}
+                        className="bg-gray50"
+                        technology={skill}
+                      />
+                    ))}
+                  </pre>
+                </article>
+              )}
+
+              {award_list.length > 0 && (
+                <article className="flex gap-[10px] flex-col">
+                  <h3 className="text-body5">수상 경력</h3>
+                  {award_list.map((award, index) => (
+                    <FeedBack
+                      key={index}
+                      part={award.name}
+                      element_id={award.element_id}
+                      comment={award.feedback}
+                    >
+                      <Award {...award} />
+                    </FeedBack>
+                  ))}
+                </article>
+              )}
+              {certificate_list.length > 0 && (
+                <article className="flex gap-[10px] flex-col">
+                  <h3 className="text-body5">자격증</h3>
+                  {certificate_list.map((data, index) => (
+                    <FeedBack
+                      key={index}
+                      part={data.name}
+                      element_id={data.element_id}
+                      comment={data.feedback}
+                    >
+                      <Certificate {...data} />
+                    </FeedBack>
+                  ))}
+                </article>
+              )}
+              {page === 1 && ActivityList}
             </div>
-          </FeedBack>
+          </div>
+        </div>
+      )}
+
+      {!currentPage && page > 1 && (
+        <div className="h-[100vh] w-[829px] flex justify-center items-center">
+          <div className="h-[1164px] w-[829px] flex scale-[0.75]">
+            <div className="h-fit w-full flex flex-col gap-[20px]" id="two">
+              {page === 2 && ActivityList}
+            </div>
+          </div>
+        </div>
+      )}
+
+      <article className="flex">
+        {project_list.map((data, index) => (
+          <div
+            key={index}
+            className={`${
+              (!index &&
+                ((page === 1 && currentPage === 0) ||
+                  (page === 2 && currentPage === 2))) ||
+              (index &&
+                currentPage >= 2 &&
+                ((page === 1 &&
+                  (currentPage - page === index || currentPage === index)) ||
+                  (page === 2 &&
+                    (currentPage - 1 === index ||
+                      currentPage - page === index))))
+                ? "block"
+                : "hidden"
+            } w-[829px] h-[100vh] flex flex-col justify-center items-center`}
+          >
+            <div className="h-[1164px] w-[829px] flex justify-center items-center">
+              <div className="h-[1164px] w-[829px] flex flex-col scale-[0.75]">
+                <FeedBack
+                  key={index}
+                  part={data.name}
+                  element_id={data.element_id}
+                  comment={data.feedback}
+                >
+                  <div className="flex flex-col gap-[20px] w-full h-[1164px]">
+                    {index === 0 && (
+                      <h3 className="text-[22px] font-semibold leading-[26px] w-full">
+                        Project
+                      </h3>
+                    )}
+                    <div className="w-full h-full">
+                      <Project {...data} />
+                    </div>
+                  </div>
+                </FeedBack>
+              </div>
+            </div>
+          </div>
         ))}
+        {(page + project_list.length) % 2 !== 0 &&
+          currentPage - page + 1 === project_list.length && (
+            <div className="h-[100vh] w-[829px]"></div>
+          )}
       </article>
+
+      <div className="fixed flex right-32 bottom-14 gap-2">
+        <div className="flex bg-gray900 rounded-3xl py-[4px] px-[12px] justify-center gap-[6px] text-gray50 items-center">
+          <button onClick={back}>
+            <Arrow
+              direction="left"
+              className={`[&_path]:${
+                !currentPage ? "fill-gray400" : "fill-gray50"
+              }`}
+            />
+          </button>
+          <p>
+            {currentPage + 1} / {project_list.length + page}
+          </p>
+          <button onClick={front}>
+            <Arrow
+              className={`[&_path]:${
+                currentPage === project_list.length + page - 2 ||
+                currentPage === project_list.length + page - 1
+                  ? "fill-gray400"
+                  : "fill-gray50"
+              }`}
+            />
+          </button>
+        </div>
+      </div>
     </main>
   );
 };

@@ -72,7 +72,7 @@ export const FeedbackBox = ({
         {children}
         {dropdown && (
           <OutsideClickHandler onOutsideClick={closeFeedBack}>
-            <div className="fixed bg-gray50 z-10 rounded-[10px] shadow-[0 80px 0 0] top-[calc(50%-200px)] left-[calc(50%-200px)] w-[400px] px-5 py-10 flex flex-col gap-5 shadow-[0_0_80px_0_rgba(0,0,0,0.04)] ">
+            <div className="fixed bg-gray50 z-10 rounded-[10px] shadow-[0 80px 0 0] top-[calc(50%-200px)] left-[calc(50%-200px)] w-[400px] px-5 py-10 flex flex-col gap-5 shadow-[0_0_80px_0_rgba(0,0,0,0.04)] scale-[1.333]">
               <div className="flex justify-between text-body3 text-blue [&_path]:fill-blue">
                 {part}
                 <Delete size={24} onClick={deleteFeedback} />
