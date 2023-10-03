@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import { Award } from "@packages/ui/components/PreviewResume/Award";
 import { Certificate } from "@packages/ui/components/PreviewResume/Certificate";
 import { Project } from "@packages/ui/components/PreviewResume/Project";
@@ -33,13 +33,24 @@ export const PdfPreviewer = ({
 
   const activity = useRef<HTMLElement>(null);
   const one = useRef<HTMLDivElement>(null);
-  const oneH = one.current?.scrollHeight;
 
-  useEffect(() => {
-    if (oneH && oneH > 1164) {
+  const heightCheck = () => {
+    if (one.current && one.current?.scrollHeight > 1164) {
       setPage(2);
+      console.log("page set 2");
+    } else {
+      setPage(1);
     }
-  }, [oneH]);
+  };
+
+  useLayoutEffect(() => {
+    setTimeout(() => {
+      heightCheck();
+    }, 1);
+    return () => {
+      setPage(1);
+    };
+  }, []);
 
   const closePreview = () => {
     pdfView && pdfView(false);

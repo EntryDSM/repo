@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import { Award } from "./Award";
 import { Certificate } from "./Certificate";
 import { Project } from "./Project";
@@ -38,28 +38,26 @@ export const PreviewResume = ({
 
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [page, setPage] = useState<number>(1);
-  const [oneH, setOneH] = useState<number>(0);
 
   const activity = useRef<HTMLElement>(null);
   const one = useRef<HTMLDivElement>(null);
 
   const heightCheck = () => {
-    if (oneH && oneH > 1164) {
+    if (one.current && one.current?.scrollHeight > 1164) {
       setPage(2);
       console.log("page set 2");
+    } else {
+      setPage(1);
     }
   };
 
   useLayoutEffect(() => {
-    heightCheck();
-    if (oneH && oneH <= 1164) {
+    setTimeout(() => {
       heightCheck();
-    }
+    }, 1);
     return () => {
-      one.current && setOneH(one.current?.scrollHeight);
       setCurrentPage(0);
       setPage(1);
-      console.log("page set 1");
     };
   }, [document_id]);
 
