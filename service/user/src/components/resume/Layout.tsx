@@ -1,9 +1,9 @@
-import Link from "next/link";
 import { ReactNode, useEffect, useState } from "react";
 import { Button, Footer } from "@packages/ui";
 import { Header } from "../header";
 import { useRouter } from "next/router";
 import { documentSubmit } from "@/apis/document/post/submit";
+import { Save } from "../../../../../packages/ui/assets/Save";
 
 interface PropsType {
   children: ReactNode;
@@ -19,7 +19,7 @@ const link = {
   project: "프로젝트",
   awards: "수상",
   certificate: "자격증",
-  activity: "활동"
+  activity: "활동",
 };
 
 const documentStatus = {
@@ -51,13 +51,22 @@ export const ResumeLayout = ({
     push("/resume/" + link);
   };
 
-  const toPathPreview = () => push("/" + toPreview());
+  const toPathPreview = () => {
+    mutate();
+    push("/" + toPreview());
+  };
   return (
     <>
       <Header profileImg={profileImg} />
       <div className="mt-[120px]">
         <div className="absolute top-20 w-full h-[360px] bg-gray900" />
         <div className="relative z-2">
+          <div
+            onClick={mutate}
+            className="fixed w-16 h-16 bg-gray50 bottom-20 right-32 rounded-full flex justify-center items-center shadow-xl transition hover:shadow-none hover:cursor-pointer hover:bg-gray200 md:hidden"
+          >
+            <Save size={30} />
+          </div>
           <div className="w-[1120px] m-auto flex flex-col gap-[32px] mb-[200px]">
             <div className="flex justify-between items-end text-gray50">
               <div className="flex gap-[10px] flex-col">
@@ -89,7 +98,7 @@ export const ResumeLayout = ({
                 {children}
               </div>
 
-              <div className="w-72 flex gap-4 flex-col">
+              <div className="w-72 flex gap-4 flex-col sticky self-start top-8">
                 <div
                   className={`bg-gray50 text-title1 ${
                     submit ? "text-gray300" : "text-gray800"
