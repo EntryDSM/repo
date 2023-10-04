@@ -242,11 +242,11 @@ export const PreviewResume = ({
                   comment={data.feedback}
                 >
                   <div className="flex flex-col gap-[20px] w-full h-[1164px]">
-                    {index === 0 && (
+                    {/* {index === 0 && (
                       <h3 className="text-[22px] font-semibold leading-[26px] w-full">
                         Project
                       </h3>
-                    )}
+                    )} */}
                     <div className="w-full h-full">
                       <Project {...data} />
                     </div>
