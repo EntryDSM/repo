@@ -1,5 +1,5 @@
 import React from "react";
-import { millsecondToDate } from ".";
+import { millisecondToDate } from "../../utils/timeUtils";
 import { LinkSvg } from "../../assets";
 import { Tag } from "./Tag";
 import defaultImg from "../../assets/projectDefaultImg.png";
@@ -54,8 +54,8 @@ export const Project = ({
           <div className="flex flex-col gap-[4px]">
             <p className="text-title3">{name}</p>
             <p className="text-[14px] leading-[17px]">
-              {millsecondToDate(start_date)} ~{" "}
-              {is_period ? millsecondToDate(end_date) : "진행중"}
+              {millisecondToDate(start_date)} ~{" "}
+              {is_period ? millisecondToDate(end_date) : "진행중"}
             </p>
           </div>
           <p className="text-body8 text-gray300">
@@ -79,17 +79,17 @@ export const Project = ({
       {urls && (
         <div className="flex flex-wrap gap-2">
           {urls.map((value, index) => (
-            <div className="h-fit">
-            <Link
-              key={index}
-              href={value}
-              className="flex gap-2 bg-gray100 pl-3 pr-3 pt-2 pb-2 rounded-md w-fit max-w-full flex-1"
-            >
-              <LinkSvg />
-              <p className="text-ellipsis overflow-hidden whitespace-normal">
-                {value}
-              </p>
-            </Link>
+            <div key={index} className="h-fit">
+              <Link
+                key={index}
+                href={value}
+                className="flex gap-2 bg-gray100 pl-3 pr-3 pt-2 pb-2 rounded-md w-fit max-w-full flex-1"
+              >
+                <LinkSvg />
+                <p className="text-ellipsis overflow-hidden whitespace-normal">
+                  {value}
+                </p>
+              </Link>
             </div>
           ))}
         </div>

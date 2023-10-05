@@ -13,7 +13,7 @@ export const Selected = ({ size = 24, onClick }: PropsType) => (
     viewBox="0 0 24 24"
     fill="none"
   >
-    <circle cx="12" cy="12" r="11" stroke="white" stroke-width="2" />
+    <circle cx="12" cy="12" r="11" stroke="white" strokeWidth="2" />
     <circle cx="12" cy="12" r="8" fill="white" />
   </svg>
 );

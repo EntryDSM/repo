@@ -13,6 +13,6 @@ export const UnSelected = ({ size = 24, onClick }: PropsType) => (
     fill="none"
     onClick={onClick}
   >
-    <circle cx="12" cy="12" r="11" stroke="#818181" stroke-width="2" />
+    <circle cx="12" cy="12" r="11" stroke="#818181" strokeWidth="2" />
   </svg>
 );
