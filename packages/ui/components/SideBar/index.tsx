@@ -4,6 +4,7 @@ import { Home, Setting, Stack } from "../../assets";
 import { WhiteRepoIcon } from "../../assets/WhiteRepoIcon";
 import { Students } from "./Students";
 import React from "react";
+import {useRouter} from "next/router";
 
 export type StudentType = {
   student_id?: string;
@@ -46,6 +47,7 @@ export const SideBar = ({
   children,
   currentPage,
 }: PropType) => {
+  const router = useRouter()
   const [side, setSide] = useState<number>(0);
 
   const currentIcon = {
@@ -65,9 +67,9 @@ export const SideBar = ({
             </Link>
           </ul>
           <ul>
-            <Link href="/">
+            <button onClick={() => router.back()}>
               <Home />
-            </Link>
+            </button>
           </ul>
           {!preview && (
             <>

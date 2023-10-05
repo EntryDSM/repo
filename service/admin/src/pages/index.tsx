@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ChangeEvent, useState } from "react";
 import { getStudent } from "@/apis/student";
 import { getMajor } from "@/apis/major";
+import {useRouter} from "next/router";
 
 const studentNum = [
   { placeholder: "학년", lists: ["전체", "1", "2", "3"], name: "grade" },
@@ -14,12 +15,13 @@ const studentNum = [
 ];
 
 export default function Home() {
+  const router = useRouter()
   const { data: major } = useQuery(["asfaf"], getMajor);
 
   const [option, setOption] = useState({
     name: "",
-    grade: "",
-    classNum: "",
+    grade: router.query['grade'] ?? '',
+    classNum: router.query['classNum'] ?? '',
     major: {
       id: "",
       name: "",
@@ -28,7 +30,6 @@ export default function Home() {
   const { data } = useQuery(["dwqdq", option], () =>
     getStudent({ ...option, major: option.major.id })
   );
-
   const onOptionChange = (state: typeof option) => {
     setOption(state);
   };
@@ -40,7 +41,6 @@ export default function Home() {
 
   const studentList = data?.data.student_list;
 
-  console.log(studentList)
   return (
     <>
       <Header />
@@ -65,15 +65,21 @@ export default function Home() {
                 lists={lists}
                 name={name}
                 value={option[name as "grade"]}
-                onClick={({ keyword, name }) =>
-                  name && setOption({ ...option, [name]: dropdownAll(keyword) })
-                }
+                onClick={({keyword, name}) => {
+                  if(!(keyword === '전체'))
+                    router.replace({
+                      query: {...router.query, [name]: keyword === '전체' ? '' : keyword}
+                    })
+                  // router.replace("", {})
+                  name && setOption({...option, [name]: dropdownAll(keyword)})
+
+                }}
               />
             ))}
           </div>
           {major?.data && (
             <Dropdown
-              className="w-40 sm:w-[240px]"
+              className="w-52 sm:w-[240px]"
               placeholder="기술 스택"
               lists={[{ name: "전체", id: "" }, ...major.data.major_list]}
               name="major"
