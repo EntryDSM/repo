@@ -5,10 +5,12 @@ import { ChangeEvent, useState } from "react";
 import { onChange, useProfileWrite } from "../../hooks/useWriteProfile";
 import { FeedBack } from "@/components/resume/FeedBack";
 import { getMajor } from "@/apis/major";
-import { useQuery } from "@tanstack/react-query";
+import {useMutation, useQuery} from "@tanstack/react-query";
 import { Plus } from "../../../../../packages/ui/assets";
 import Image from "next/image";
 import { documentMy } from "@/apis/document/get/my";
+import axios from "axios";
+import {profileImage, ProfileImgBody} from "@/apis/document/patch/ProfileImage";
 
 const student = {
   grade: [1, 2, 3],
@@ -58,6 +60,9 @@ export const My = () => {
     onChange(({ base_url, image_path }) => {
       setState({ ...state, profile_image_path: image_path });
       setImg(base_url + image_path);
+      profileImage({
+        profile_image_path: image_path
+      })
     }, e);
   };
 

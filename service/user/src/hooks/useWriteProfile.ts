@@ -19,7 +19,7 @@ import {
   ProjectResType,
   WriteInfoResType,
   WriteInfoReqBody,
-} from "../apis/document/patch";
+} from "@/apis/document/patch";
 import { ChangeEvent, useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
