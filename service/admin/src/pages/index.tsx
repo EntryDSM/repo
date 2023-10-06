@@ -27,7 +27,9 @@ export default function Home() {
       name: "",
     },
   });
+
   const { data } = useQuery(["dwqdq", option], () =>
+      // @ts-ignore
     getStudent({ ...option, major: option.major.id })
   );
   const onOptionChange = (state: typeof option) => {
@@ -66,7 +68,7 @@ export default function Home() {
                 name={name}
                 value={option[name as "grade"]}
                 onClick={({keyword, name}) => {
-                  if(!(keyword === '전체'))
+                  if(!(keyword === '전체')) {
                     router.replace({
                       query: {...router.query, [name]: keyword === '전체' ? '' : keyword}
                     })
