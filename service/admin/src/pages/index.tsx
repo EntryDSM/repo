@@ -66,16 +66,16 @@ export default function Home() {
                 placeholder={placeholder}
                 lists={lists}
                 name={name}
-                value={option[name as "grade"]}
+                value={option[name as "grade"] as string}
                 onClick={({keyword, name}) => {
                   if(!(keyword === '전체')) {
                     router.replace({
-                      query: {...router.query, [name]: keyword === '전체' ? '' : keyword}
+                      query: {...router.query, [name ?? '']: keyword === '전체' ? '' : keyword}
                     })
                   // router.replace("", {})
                   name && setOption({...option, [name]: dropdownAll(keyword)})
 
-                }}
+                }}}
               />
             ))}
           </div>
