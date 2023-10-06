@@ -11,6 +11,7 @@ import Image from "next/image";
 import { documentMy } from "@/apis/document/get/my";
 import axios from "axios";
 import {profileImage, ProfileImgBody} from "@/apis/document/patch/ProfileImage";
+import {toast} from "react-toastify";
 
 const student = {
   grade: [1, 2, 3],
@@ -62,7 +63,7 @@ export const My = () => {
       setImg(base_url + image_path);
       profileImage({
         profile_image_path: image_path
-      })
+      }).catch((err) => toast( "이미지 업로드 중 문제가 생겼습니다."))
     }, e);
   };
 
