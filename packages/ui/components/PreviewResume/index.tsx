@@ -98,10 +98,10 @@ export const PreviewResume = ({
   );
 
   return (
-    <main className={`${feedbackWidth} flex w-fit h-fit overflow-hidden`}>
+    <main className={`${feedbackWidth} flex w-fit h-fit`}>
       {!currentPage && (
-        <div className="h-[100vh] w-[829px] flex justify-center items-center">
-          <div className="h-[1164px] w-[829px] flex scale-[0.75]">
+        <div className="h-[100vh] w-[50vw] flex justify-center items-center scale-[0.9]">
+          <div className="h-[1164px] w-[50vw] flex scale-[0.75]">
             <div className="h-fit w-full flex flex-col gap-[20px]" ref={one}>
               <article className="w-full">
                 <FeedBack
@@ -231,17 +231,17 @@ export const PreviewResume = ({
                       currentPage - page === index))))
                 ? "block"
                 : "hidden"
-            } w-[829px] h-[100vh] flex flex-col justify-center items-center`}
+            } w-[50vw] h-[100vh] flex flex-col justify-center`}
           >
-            <div className="h-[1164px] w-[829px] flex justify-center items-center">
-              <div className="h-[1164px] w-[829px] flex flex-col scale-[0.75]">
+            <div className="w-[50vw] flex justify-end">
+              <div className="h-[1164px] flex flex-col -translate-x-[5rem] scale-[0.65] bg-green">
                 <FeedBack
                   key={index}
                   part={data.name}
                   element_id={data.element_id}
                   comment={data.feedback}
                 >
-                  <div className="flex flex-col gap-[20px] w-full h-[1164px]">
+                  <div className="flex flex-col gap-[20px] w-[50vw] h-[1164px] justify-end">
                     {/* {index === 0 && (
                       <h3 className="text-[22px] font-semibold leading-[26px] w-full">
                         Project
