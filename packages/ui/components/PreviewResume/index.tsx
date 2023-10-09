@@ -101,7 +101,7 @@ export const PreviewResume = ({
     <main className={`${feedbackWidth} flex w-fit h-fit`}>
       {!currentPage && (
         <div className="h-[100vh] w-[50vw] flex justify-center items-center scale-[0.9]">
-          <div className="h-[1164px] w-[50vw] flex scale-[0.75]">
+          <div className="h-[70rem] w-[50vw] flex scale-[0.75]">
             <div className="h-fit w-full flex flex-col gap-[20px]" ref={one}>
               <article className="w-full">
                 <FeedBack
@@ -205,8 +205,8 @@ export const PreviewResume = ({
       )}
 
       {!currentPage && page > 1 && (
-        <div className="h-[100vh] w-[829px] flex justify-center items-center">
-          <div className="h-[1164px] w-[829px] flex scale-[0.75]">
+        <div className="h-[100vh] w-[50vw] flex justify-center items-center">
+          <div className="h-[70rem] w-[50vw] flex scale-[0.7]">
             <div className="h-fit w-full flex flex-col gap-[20px]" id="two">
               {page === 2 && ActivityList}
             </div>
