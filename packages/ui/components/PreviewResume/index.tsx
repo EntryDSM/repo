@@ -45,7 +45,6 @@ export const PreviewResume = ({
   const heightCheck = () => {
     if (one.current && one.current?.scrollHeight > 1164) {
       setPage(2);
-      console.log("page set 2");
     } else {
       setPage(1);
     }
@@ -98,11 +97,12 @@ export const PreviewResume = ({
   );
 
   return (
-    <main className={`${feedbackWidth} flex w-fit h-fit overflow-hidden`}>
-      {!currentPage && (
-        <div className="h-[100vh] flex justify-center items-center scale-[0.8]">
-          <div className="h-[1250px] flex scale-[0.75]">
-            <div className="h-fit w-[600px] flex flex-col gap-[20px]" ref={one}>
+    <main className={`${feedbackWidth} flex ml-[-30px] w-[1500px] h-fit overflow-hidden`}>
+      {!currentPage && ( 
+        <div className="w-[650px]">
+        <div className="h-[100vh] w-[800px] flex justify-center items-center">
+          <div className="h-[1123px] w-[794px] flex scale-[0.68]">
+            <div className="h-fit flex flex-col gap-[20px]" ref={one}>
               <article className="w-full">
                 <FeedBack
                   part="기본정보"
@@ -202,15 +202,18 @@ export const PreviewResume = ({
             </div>
           </div>
         </div>
+        </div>
       )}
 
       {!currentPage && page > 1 && (
-        <div className="h-[100vh] w-[600px] flex justify-center items-center">
-          <div className="h-[1100px] flex scale-[0.7]">
+        <div className=" w-[650px]">
+        <div className="h-[100vh] w-[800px] flex justify-center items-center ">
+          <div className="h-[1123px] w-[794px] scale-[0.68] flex">
             <div className="h-fit w-full flex flex-col gap-[20px]" id="two">
               {page === 2 && ActivityList}
             </div>
           </div>
+        </div>
         </div>
       )}
 
@@ -231,17 +234,18 @@ export const PreviewResume = ({
                       currentPage - page === index))))
                 ? "block"
                 : "hidden"
-            } h-[100vh] flex flex-col justify-center`}
+            } h-[100vh] flex`}
           >
-            <div className="w-[700px] flex justify-end">
-              <div className="h-[1150px] flex flex-col scale-[0.7]">
+            <div className="w-[650px]">
+            <div className="h-[100vh] w-[800px] flex justify-center items-center ">
+            <div className="h-[1123px] w-[794px] flex justify-center scale-[0.68]">
                 <FeedBack
                   key={index}
                   part={data.name}
                   element_id={data.element_id}
                   comment={data.feedback}
                 >
-                  <div className="flex flex-col gap-[20px] w-[50vw] h-[1164px] justify-end">
+                  <div className="flex flex-col justify-center">
                     {/* {index === 0 && (
                       <h3 className="text-[22px] font-semibold leading-[26px] w-full">
                         Project
@@ -252,14 +256,15 @@ export const PreviewResume = ({
                     </div>
                   </div>
                 </FeedBack>
-              </div>
+            </div>
+            </div>
             </div>
           </div>
         ))}
         {(page + project_list.length) % 2 !== 0 &&
           currentPage - page + 1 === project_list.length && (
-            <div className="h-[100vh] w-[829px]"></div>
-          )}
+            <div className="h-[1123px] w-[794px] flex justify-center"></div>
+        )}
       </article>
 
       <div className="fixed flex right-32 bottom-14 gap-2">

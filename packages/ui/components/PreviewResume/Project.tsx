@@ -31,7 +31,7 @@ export const Project = ({
 }: PropsType) => {
   const imageUrl = represent_image_path;
   return (
-    <div className="flex flex-col gap-5 rounded-md bg-gray50 pl-10 pr-10 pt-7 pb-7 w-full h-full">
+    <div className="flex flex-col gap-5 rounded-md bg-gray50 m-0 pl-10 pr-10 pt-7 pb-7 w-full h-full">
       <div className="flex items-center w-full">
         {imageUrl ? (
           <Image
