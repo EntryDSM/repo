@@ -4,12 +4,17 @@ import { useQuery } from "@tanstack/react-query";
 import { detail } from "@/apis/document/get/detail";
 import { useRouter } from "next/router";
 import { myDetail } from "@/apis/document/get/myDetail";
+import {useEffect} from "react";
 
 const Preview = () => {
-  const { data } = useQuery(["writePreview"], () => myDetail(), {
+  const { data, refetch } = useQuery(["writePreview"], () => myDetail(), {
     staleTime: 0,
-    refetchOnWindowFocus: false,
+    refetchOnWindowFocus: false
   });
+
+  useEffect(() => {
+    refetch()
+  }, []);
   return (
     <SideBar preview>
       {data && <PreviewResume {...(data.data as any)} />}
