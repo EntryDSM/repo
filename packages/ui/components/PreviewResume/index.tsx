@@ -98,11 +98,11 @@ export const PreviewResume = ({
   );
 
   return (
-    <main className={`${feedbackWidth} flex w-fit h-fit`}>
+    <main className={`${feedbackWidth} flex w-fit h-fit overflow-hidden`}>
       {!currentPage && (
-        <div className="h-[100vh] w-[50vw] flex justify-center items-center scale-[0.9]">
-          <div className="h-[70rem] w-[50vw] flex scale-[0.75]">
-            <div className="h-fit w-full flex flex-col gap-[20px]" ref={one}>
+        <div className="h-[100vh] flex justify-center items-center scale-[0.8]">
+          <div className="h-[1250px] flex scale-[0.75]">
+            <div className="h-fit w-[600px] flex flex-col gap-[20px]" ref={one}>
               <article className="w-full">
                 <FeedBack
                   part="기본정보"
@@ -205,8 +205,8 @@ export const PreviewResume = ({
       )}
 
       {!currentPage && page > 1 && (
-        <div className="h-[100vh] w-[50vw] flex justify-center items-center">
-          <div className="h-[70rem] w-[50vw] flex scale-[0.7]">
+        <div className="h-[100vh] w-[600px] flex justify-center items-center">
+          <div className="h-[1100px] flex scale-[0.7]">
             <div className="h-fit w-full flex flex-col gap-[20px]" id="two">
               {page === 2 && ActivityList}
             </div>
@@ -231,10 +231,10 @@ export const PreviewResume = ({
                       currentPage - page === index))))
                 ? "block"
                 : "hidden"
-            } w-[50vw] h-[100vh] flex flex-col justify-center`}
+            } h-[100vh] flex flex-col justify-center`}
           >
-            <div className="w-[50vw] flex justify-end">
-              <div className="h-[1164px] flex flex-col -translate-x-[5rem] scale-[0.65] bg-green">
+            <div className="w-[700px] flex justify-end">
+              <div className="h-[1150px] flex flex-col scale-[0.7]">
                 <FeedBack
                   key={index}
                   part={data.name}
