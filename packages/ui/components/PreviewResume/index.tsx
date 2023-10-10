@@ -69,13 +69,13 @@ export const PreviewResume = ({
     setCurrentPage((p) => (p < project_list.length + page - 2 ? p + 2 : p));
   };
 
-  window.onkeydown = (e) => {
-    if (e.key === "ArrowRight") {
-      front();
-    } else if (e.key === "ArrowLeft") {
-      back();
-    }
-  };
+  // window.onkeydown = (e) => {
+  //   if (e.key === "ArrowRight") {
+  //     front();
+  //   } else if (e.key === "ArrowLeft") {
+  //     back();
+  //   }
+  // };
 
   const ActivityList = (
     <>
