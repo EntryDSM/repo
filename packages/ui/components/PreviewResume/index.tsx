@@ -113,8 +113,8 @@ export const PreviewResume = ({
   }
 
   return (
-    <main className={`${feedbackWidth} flex ml-[-600px] w-[1500px] h-fit`}>
-      {!currentPage && ( 
+    <main className={`${feedbackWidth} flex w-full   h-fit overflow-hidden`}>
+      {!currentPage && (
         <Page content={(
             <div className="h-fit flex flex-col gap-[20px]" ref={one}>
               <article className="w-full">
