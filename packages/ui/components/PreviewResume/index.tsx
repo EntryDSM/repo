@@ -96,12 +96,26 @@ export const PreviewResume = ({
     </>
   );
 
-  return (
-    <main className={`${feedbackWidth} flex ml-[-30px] w-[1500px] h-fit overflow-hidden`}>
-      {!currentPage && ( 
-        <div className="w-[650px]">
+  interface PageProps {
+    content: React.ReactNode;
+  }
+
+  const Page: React.FC<PageProps> = ({content}) => {
+    return (
+      <div className="w-[650px]">
         <div className="h-[100vh] w-[800px] flex justify-center items-center">
-          <div className="h-[1123px] w-[794px] flex scale-[0.68]">
+          <div className="h-[1123px] w-[794px] p-3 flex scale-[0.68]">
+            {content}
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <main className={`${feedbackWidth} flex ml-[-600px] w-[1500px] h-fit`}>
+      {!currentPage && ( 
+        <Page content={(
             <div className="h-fit flex flex-col gap-[20px]" ref={one}>
               <article className="w-full">
                 <FeedBack
@@ -200,21 +214,15 @@ export const PreviewResume = ({
               )}
               {page === 1 && ActivityList}
             </div>
-          </div>
-        </div>
-        </div>
+        )} />
       )}
 
       {!currentPage && page > 1 && (
-        <div className=" w-[650px]">
-        <div className="h-[100vh] w-[800px] flex justify-center items-center ">
-          <div className="h-[1123px] w-[794px] scale-[0.68] flex">
+        <Page content={(
             <div className="h-fit w-full flex flex-col gap-[20px]" id="two">
               {page === 2 && ActivityList}
             </div>
-          </div>
-        </div>
-        </div>
+        )} />
       )}
 
       <article className="flex">
@@ -236,9 +244,7 @@ export const PreviewResume = ({
                 : "hidden"
             } h-[100vh] flex`}
           >
-            <div className="w-[650px]">
-            <div className="h-[100vh] w-[800px] flex justify-center items-center ">
-            <div className="h-[1123px] w-[794px] flex justify-center scale-[0.68]">
+            <Page content={(
                 <FeedBack
                   key={index}
                   part={data.name}
@@ -256,9 +262,7 @@ export const PreviewResume = ({
                     </div>
                   </div>
                 </FeedBack>
-            </div>
-            </div>
-            </div>
+            )} />
           </div>
         ))}
         {(page + project_list.length) % 2 !== 0 &&
