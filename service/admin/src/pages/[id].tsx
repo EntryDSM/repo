@@ -73,7 +73,6 @@ const Detail = () => {
             {pdfView && (
               <PdfPreviewer
                 {...data.data}
-                FeedbackBox={FeedBackBoxUnShared}
                 targetRef={pdfRef}
                 pdfView={setPdfView}
               />
