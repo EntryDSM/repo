@@ -31,15 +31,14 @@ export const PdfViewer = ({ url, list }: PropsType) => {
     min: number;
     max: number;
   }
-  const EditablePage = ({page}: EditablePagePropsType) => {
+  const EditablePage = ({page, min, max}: EditablePagePropsType) => {
     const [isEditing, setIsEditing] = useState(false);
     const [inputPage, setInputPage] = useState(0);
   
     const handleBlurOrEnterKey = (e: SyntheticEvent) => {
-      console.log(inputPage)
       if (e.type === 'blur' || (e.type === 'keypress' && (e as React.KeyboardEvent).key === 'Enter')) {
         setIsEditing(false)
-        const page = Number(inputPage) - 1
+        const page = Math.min(Math.max(inputPage, min), max) - 1;
         setCurrentPage( page - (page % 2))
       }
     };
@@ -52,6 +51,8 @@ export const PdfViewer = ({ url, list }: PropsType) => {
             className="w-[50px]"
             style={{ backgroundColor: 'white', color: 'black' }}
             value={inputPage}
+            min={min}
+            max={max}
             onChange={(e: ChangeEvent<HTMLInputElement>) => setInputPage(Number(e.target.value))}
             onKeyPress={handleBlurOrEnterKey}
             onBlur={handleBlurOrEnterKey}
@@ -119,7 +120,7 @@ export const PdfViewer = ({ url, list }: PropsType) => {
               />
             </button>
             <div className="flex flex-row gap-[3px]">
-              <EditablePage page={page} min={1} max={page} /> <div> / {page}</div>
+              <EditablePage page={page + 1} min={1} max={page} /> <div> / {page + 1}</div>
             </div>
             <button onClick={() => setCurrentPage(prev => (prev + 2) < page ? prev + 2 : page - 1)}>
               <Arrow
