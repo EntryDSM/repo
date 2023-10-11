@@ -14,6 +14,14 @@ export const PdfViewer = ({ url, list }: PropsType) => {
   const [page, setPage] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(0);
 
+  window.onkeydown = (e) => {
+    if (e.key === "ArrowRight") {
+      setCurrentPage((currentPage + 2) < page ? currentPage + 2 : page - 1)
+    } else if (e.key === "ArrowLeft") {
+      setCurrentPage((currentPage - 2) > 0 ? currentPage - 2 : 0)
+    }
+  };
+
   interface EditablePagePropsType {
     page: number;
     min: number;
@@ -82,7 +90,7 @@ export const PdfViewer = ({ url, list }: PropsType) => {
     <SideBar studentList={[list]} moveClickedPage={moveClickedPage} currentPage={String(currentPage)}>
       <Document className={"document scale-[0.9] mt-[-25px]"} file={url} onLoadSuccess={onPDFOpen}>
         <Page
-            className="mt-0"
+            className="ml-[-150px]"
             pageIndex={currentPage}
             key={Date()}
             renderAnnotationLayer={false}
