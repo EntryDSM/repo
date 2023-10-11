@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState, SyntheticEvent } from 'react';
+import React, { ChangeEvent, useState, useEffect, SyntheticEvent } from 'react';
 import { Document, Page, pdfjs } from "react-pdf";
 import {SideBar, StudentListType, StudentType} from "./SideBar";
 import "./pdfDocument.css";
@@ -14,13 +14,17 @@ export const PdfViewer = ({ url, list }: PropsType) => {
   const [page, setPage] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(0);
 
-  window.onkeydown = (e) => {
-    if (e.key === "ArrowRight") {
-      setCurrentPage((currentPage + 2) < page ? currentPage + 2 : page - 1)
-    } else if (e.key === "ArrowLeft") {
-      setCurrentPage((currentPage - 2) > 0 ? currentPage - 2 : 0)
-    }
-  };
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") {
+        setCurrentPage((currentPage + 2) < page ? currentPage + 2 : page - 1)
+      } else if (e.key === "ArrowLeft") {
+        setCurrentPage((currentPage - 2) > 0 ? currentPage - 2 : 0)
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+     return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [currentPage]);
 
   interface EditablePagePropsType {
     page: number;
