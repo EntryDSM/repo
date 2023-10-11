@@ -68,13 +68,13 @@ export const PreviewResume = ({
     setCurrentPage((p) => (p < project_list.length + page - 2 ? p + 2 : p));
   };
 
-  // window.onkeydown = (e) => {
-  //   if (e.key === "ArrowRight") {
-  //     front();
-  //   } else if (e.key === "ArrowLeft") {
-  //     back();
-  //   }
-  // };
+  window.onkeydown = (e) => {
+    if (e.key === "ArrowRight") {
+      front();
+    } else if (e.key === "ArrowLeft") {
+      back();
+    }
+  };
 
   const ActivityList = (
     <>
@@ -100,7 +100,7 @@ export const PreviewResume = ({
     content: React.ReactNode;
   }
 
-  const Page: React.FC<PageProps> = ({content}) => {
+  const Page: React.FC<PageProps> = ({ content }) => {
     return (
       <div className="w-[650px]">
         <div className="h-[100vh] w-[800px] flex justify-center items-center">
@@ -109,13 +109,16 @@ export const PreviewResume = ({
           </div>
         </div>
       </div>
-    )
-  }
+    );
+  };
 
   return (
-    <main className={`${feedbackWidth} flex w-full ml-[10px] h-fit overflow-hidden`}>
+    <main
+      className={`${feedbackWidth} flex w-full ml-[10px] h-fit overflow-hidden`}
+    >
       {!currentPage && (
-        <Page content={(
+        <Page
+          content={
             <div className="h-fit flex flex-col gap-[20px]" ref={one}>
               <article className="w-full">
                 <FeedBack
@@ -214,15 +217,18 @@ export const PreviewResume = ({
               )}
               {page === 1 && ActivityList}
             </div>
-        )} />
+          }
+        />
       )}
 
       {!currentPage && page > 1 && (
-        <Page content={(
+        <Page
+          content={
             <div className="h-fit w-full flex flex-col gap-[20px]" id="two">
               {page === 2 && ActivityList}
             </div>
-        )} />
+          }
+        />
       )}
 
       <article className="flex">
@@ -244,7 +250,8 @@ export const PreviewResume = ({
                 : "hidden"
             } h-[100vh] flex`}
           >
-            <Page content={(
+            <Page
+              content={
                 <FeedBack
                   key={index}
                   part={data.name}
@@ -252,23 +259,19 @@ export const PreviewResume = ({
                   comment={data.feedback}
                 >
                   <div className="flex flex-col justify-center">
-                    {/* {index === 0 && (
-                      <h3 className="text-[22px] font-semibold leading-[26px] w-full">
-                        Project
-                      </h3>
-                    )} */}
                     <div className="w-full h-full">
                       <Project {...data} />
                     </div>
                   </div>
                 </FeedBack>
-            )} />
+              }
+            />
           </div>
         ))}
         {(page + project_list.length) % 2 !== 0 &&
           currentPage - page + 1 === project_list.length && (
             <div className="h-[1123px] w-[794px] flex justify-center"></div>
-        )}
+          )}
       </article>
 
       <div className="fixed flex right-32 bottom-14 gap-2">
@@ -282,7 +285,11 @@ export const PreviewResume = ({
             />
           </button>
           <p>
-            {currentPage + 1}{((currentPage + 1) != (project_list.length + page)) ? (" - " + (currentPage + 2)) : ""} / {project_list.length + page}
+            {currentPage + 1}
+            {currentPage + 1 != project_list.length + page
+              ? " - " + (currentPage + 2)
+              : ""}{" "}
+            / {project_list.length + page}
           </p>
           <button onClick={front}>
             <Arrow

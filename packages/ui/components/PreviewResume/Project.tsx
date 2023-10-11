@@ -75,7 +75,9 @@ export const Project = ({
           ))}
         </div>
       </div>
-      <pre className="text-body7 leading-6 text-[15px] font-normal whitespace-pre-wrap truncate line-clamp-[38]">{description}</pre>
+      <pre className="text-body7 leading-6 text-[15px] font-normal whitespace-pre-wrap truncate line-clamp-[38]">
+        {description}
+      </pre>
       {urls && (
         <div className="flex flex-wrap gap-2">
           {urls.map((value, index) => (
@@ -83,10 +85,10 @@ export const Project = ({
               <Link
                 key={index}
                 href={value}
-                className="flex gap-2 bg-gray100 pl-3 pr-3 pt-2 pb-2 rounded-md w-fit max-w-full flex-1"
+                className="flex items-center gap-2 bg-gray100 pl-3 pr-3 pt-2 pb-2 rounded-md w-fit max-w-full flex-1"
               >
                 <LinkSvg />
-                <p className="text-ellipsis overflow-hidden whitespace-normal text-[12px]">
+                <p className="text-ellipsis overflow-hidden break-all text-[12px]">
                   {value}
                 </p>
               </Link>
