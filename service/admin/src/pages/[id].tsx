@@ -4,14 +4,13 @@ import { FeedbackBox } from "@/components/FeedbackBox";
 import { Sharing } from "@/components/Sharing";
 import { PreviewResume, SideBar } from "@packages/ui";
 import { useRouter } from "next/router";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useQueries, useQuery } from "@tanstack/react-query";
 import { PdfPreviewer } from "@/components/PdfPreviewer";
 
 const Detail = () => {
   const { query } = useRouter();
   const { id } = query;
-  const pdfRef = useRef<HTMLDivElement | null>(null);
   const [shared, setShared] = useState<boolean>(false);
   const [pdfView, setPdfView] = useState<boolean>(false);
 
@@ -70,13 +69,7 @@ const Detail = () => {
         {data && (
           <>
             <PreviewResume {...data.data} FeedbackBox={FeedBackBoxUnShared} />
-            {pdfView && (
-              <PdfPreviewer
-                {...data.data}
-                targetRef={pdfRef}
-                pdfView={setPdfView}
-              />
-            )}
+            {pdfView && <PdfPreviewer {...data.data} pdfView={setPdfView} />}
           </>
         )}
       </SideBar>
