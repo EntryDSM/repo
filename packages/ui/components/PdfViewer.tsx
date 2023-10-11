@@ -2,6 +2,7 @@
 import { Document, Page, pdfjs } from "react-pdf";
 import {SideBar, StudentListType, StudentType} from "./SideBar";
 import "./pdfDocument.css";
+import { Arrow } from "../assets";
 
 interface PropsType {
   list: StudentListType;
@@ -12,6 +13,49 @@ export const PdfViewer = ({ url, list }: PropsType) => {
   pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
   const [page, setPage] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(0);
+
+  interface EditablePagePropsType {
+    page: number;
+    min: number;
+    max: number;
+  }
+  const EditablePage = ({page}: EditablePagePropsType) => {
+    const [isEditing, setIsEditing] = useState(false);
+    const [inputPage, setInputPage] = useState(0);
+  
+    const handleBlurOrEnterKey = (e) => {
+      setIsEditing(false)
+      if (e.type === 'blur' || (e.key === 'Enter')) {
+        const page = Number(inputPage) - 1
+        setCurrentPage( page - (page % 2))
+        console.log("current: " + currentPage)
+        console.log("input: " + inputPage)
+      }
+    };
+
+    return (
+      <div>
+        {isEditing ? (
+          <input
+            type="number"
+            className="w-[50px]"
+            style={{ backgroundColor: 'white', color: 'black' }}
+            value={inputPage}
+            onChange={(e) => setInputPage(e.target.value)}
+            onBlur={handleBlurOrEnterKey}
+            autoFocus
+          />
+        ) : (
+          <div 
+              onClick={() => setIsEditing(true)} 
+              className="bg-black text-white">
+              {currentPage + 1}{((currentPage + 1) != (page)) ? (" - " + (currentPage + 2)) : ""}
+          </div>
+        )}
+      </div>
+    );
+  };
+
   const onPDFOpen = ({ numPages }: { numPages: number }) => {
     setPage(numPages - 1);
   };
@@ -21,7 +65,7 @@ export const PdfViewer = ({ url, list }: PropsType) => {
   };
 
   const getNameByList = (list: StudentListType) => {
-    return list?.filter((l) => (l.page as number) <= currentPage).pop()?.name
+    return list?.filter((l) => (l.page as number) <= (currentPage + 1)).pop()?.name
   }
 
   const getPageByList = (list: StudentListType) => {
@@ -36,8 +80,9 @@ export const PdfViewer = ({ url, list }: PropsType) => {
 
   return url ? (
     <SideBar studentList={[list]} moveClickedPage={moveClickedPage} currentPage={String(currentPage)}>
-      <Document className={"document"} file={url} onLoadSuccess={onPDFOpen}>
+      <Document className={"document scale-[0.9] mt-[-25px]"} file={url} onLoadSuccess={onPDFOpen}>
         <Page
+            className="mt-0"
             pageIndex={currentPage}
             key={Date()}
             renderAnnotationLayer={false}
@@ -50,20 +95,64 @@ export const PdfViewer = ({ url, list }: PropsType) => {
             renderTextLayer={false}
         ></Page>
       </Document>
-      <div className="fixed flex right-32 bottom-14 gap-2">
-        <div className="flex bg-gray900 rounded-3xl h-8 w-fit justify-center gap-2 text-gray50">
-          <button onClick={() => setCurrentPage(prev => (prev - 2) > 0 ? prev - 2 : 0)}>&larr;</button>
-          <p className="flex items-center">{currentPage + 1}-{currentPage + 2}/ {page}</p>
-          <button onClick={() => setCurrentPage(prev => (prev + 2) < page ? prev + 2 : page - 1)}>&rarr;</button>
+      <div className="fixed flex flex-row pr-[20px] right-32 bottom-14 gap-[20px] h-[32px]">
+        <div className="flex bottom-14 gap-2">
+          <div className="flex flex-row bg-gray900 rounded-3xl py-[4px] px-[12px] justify-center gap-[6px] text-gray50 items-center">
+            <button onClick={() => setCurrentPage(prev => (prev - 2) > 0 ? prev - 2 : 0)}>
+              <Arrow
+                direction="left"
+                className={`[&_path]:${
+                  !currentPage ? "fill-gray400" : "fill-gray50"
+                }`}
+              />
+            </button>
+            <div className="flex flex-row gap-[3px]">
+              <EditablePage page={page} min={1} max={page} /> <div> / {page}</div>
+            </div>
+            <button onClick={() => setCurrentPage(prev => (prev + 2) < page ? prev + 2 : page - 1)}>
+              <Arrow
+                className={`[&_path]:${
+                  currentPage === page - 2 ||
+                  currentPage === page - 1
+                    ? "fill-gray400"
+                    : "fill-gray50"
+                }`}
+              />
+            </button>
+          </div>
         </div>
-        <div className="flex bg-gray900 rounded-3xl h-8 w-32 justify-center gap-2 text-gray50">
-          <button onClick={() => setCurrentPage(getPageByList(list)?.prev ?? 0)}>&larr;</button>
-          <p className="flex items-center">{getNameByList(list)}</p>
-          <button onClick={() => setCurrentPage(getPageByList(list)?.next ?? page - 1)}>&rarr;</button>
+        <div className="flex bottom-14 gap-2">
+          <div className="flex bg-gray900 rounded-3xl py-[4px] px-[12px] justify-center gap-[6px] text-gray50 items-center w-[150px]">
+            <button onClick={() => { // 페이지를 홀수로 맞추기 위한 연산
+              const page = (getPageByList(list)?.prev ?? 0)
+              setCurrentPage( page - (page % 2))} 
+            }>
+              <Arrow
+                direction="left"
+                className={`[&_path]:${
+                  !currentPage ? "fill-gray400" : "fill-gray50"
+                }`}
+              />
+            </button>
+            <p className="flex items-center">{getNameByList(list)}</p>
+            <button onClick={() => {
+              const page = (getPageByList(list)?.next ?? 0)
+              setCurrentPage( page - (page % 2))} 
+            }>
+              <Arrow
+                className={`[&_path]:${
+                  currentPage === page - 2 ||
+                  currentPage === page - 1
+                    ? "fill-gray400"
+                    : "fill-gray50"
+                }`}
+              />
+            </button>
+          </div>
         </div>
       </div>
     </SideBar>
   ) : (
-    <SideBar>접근 권한이 있는 지, 문서가 있는 지 확인해 보세요.</SideBar>
+    <SideBar><p className="mt-[50px]">존재하지 않거나 접근 권한이 없는 문서입니다.</p></SideBar>
   );
 };

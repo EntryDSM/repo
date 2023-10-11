@@ -113,7 +113,7 @@ export const PreviewResume = ({
   }
 
   return (
-    <main className={`${feedbackWidth} flex w-full   h-fit overflow-hidden`}>
+    <main className={`${feedbackWidth} flex w-full ml-[10px] h-fit overflow-hidden`}>
       {!currentPage && (
         <Page content={(
             <div className="h-fit flex flex-col gap-[20px]" ref={one}>
@@ -282,7 +282,7 @@ export const PreviewResume = ({
             />
           </button>
           <p>
-            {currentPage + 1} / {project_list.length + page}
+            {currentPage + 1}{((currentPage + 1) != (project_list.length + page)) ? (" - " + (currentPage + 2)) : ""} / {project_list.length + page}
           </p>
           <button onClick={front}>
             <Arrow
