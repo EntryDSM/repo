@@ -1,4 +1,4 @@
- import React, { useState } from "react";
+import React, { ChangeEvent, useState, SyntheticEvent } from 'react';
 import { Document, Page, pdfjs } from "react-pdf";
 import {SideBar, StudentListType, StudentType} from "./SideBar";
 import "./pdfDocument.css";
@@ -23,13 +23,12 @@ export const PdfViewer = ({ url, list }: PropsType) => {
     const [isEditing, setIsEditing] = useState(false);
     const [inputPage, setInputPage] = useState(0);
   
-    const handleBlurOrEnterKey = (e) => {
-      setIsEditing(false)
-      if (e.type === 'blur' || (e.key === 'Enter')) {
+    const handleBlurOrEnterKey = (e: SyntheticEvent) => {
+      console.log(inputPage)
+      if (e.type === 'blur' || (e.type === 'keypress' && (e as React.KeyboardEvent).key === 'Enter')) {
+        setIsEditing(false)
         const page = Number(inputPage) - 1
         setCurrentPage( page - (page % 2))
-        console.log("current: " + currentPage)
-        console.log("input: " + inputPage)
       }
     };
 
@@ -41,13 +40,14 @@ export const PdfViewer = ({ url, list }: PropsType) => {
             className="w-[50px]"
             style={{ backgroundColor: 'white', color: 'black' }}
             value={inputPage}
-            onChange={(e) => setInputPage(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setInputPage(Number(e.target.value))}
+            onKeyPress={handleBlurOrEnterKey}
             onBlur={handleBlurOrEnterKey}
             autoFocus
           />
         ) : (
           <div 
-              onClick={() => setIsEditing(true)} 
+              onClick={() => {setInputPage(currentPage + 1); setIsEditing(true)}} 
               className="bg-black text-white">
               {currentPage + 1}{((currentPage + 1) != (page)) ? (" - " + (currentPage + 2)) : ""}
           </div>
