@@ -100,7 +100,7 @@ export const PdfViewer = ({ url, list }: PropsType) => {
             pageIndex={currentPage + 1}
             key={Date() + 1}
             renderAnnotationLayer={false}
-            renderTextLayer={false}
+            renderTextLayer={false} 
         ></Page>
       </Document>
       <div className="fixed flex flex-row pr-[20px] right-32 bottom-14 gap-[20px] h-[32px]">
