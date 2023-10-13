@@ -1,7 +1,6 @@
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { MutableRefObject } from "react";
-import { toast } from "react-toastify";
 
 export const convert2PdfAll = async (
   { current }: MutableRefObject<HTMLElement | null>,
@@ -9,6 +8,7 @@ export const convert2PdfAll = async (
 ) => {
   if (!current) return;
   const promise = async () => {
+    console.time("make data");
     const canvas = await html2canvas(current, {
       scale: 3,
       backgroundColor: "#f6f6f6",
@@ -23,6 +23,8 @@ export const convert2PdfAll = async (
     const doc = new jsPDF("p", "mm", "a4", true);
     let position = 0;
 
+    console.timeEnd("make data");
+
     doc.addImage(
       imgData,
       "PNG",
@@ -35,7 +37,9 @@ export const convert2PdfAll = async (
     );
     heightLeft -= pageHeight;
 
+    let asdf = 0;
     while (heightLeft >= 0) {
+      asdf += 1;
       position = heightLeft - imgHeight;
       doc.addPage();
       doc.addImage(
@@ -49,18 +53,15 @@ export const convert2PdfAll = async (
         "FAST"
       );
       heightLeft -= pageHeight;
+      console.log("add page " + asdf);
     }
     doc.save(fileName + ".pdf");
   };
-  toast.promise(
-    promise,
-    {
-      pending: "PDF로 변환하는 중입니다...",
-      success: "PDF로 변환이 완료되었습니다.",
-      error: "",
-    },
-    {
-      autoClose: 1000,
-    }
-  );
+  promise()
+    .then(() => {
+      console.log("success");
+    })
+    .catch((e) => {
+      console.log(e);
+    });
 };
