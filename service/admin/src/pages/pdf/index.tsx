@@ -5,7 +5,7 @@ import {
 import { getStudent } from "@/apis/student";
 import { Header } from "@/components/header";
 import { useQueries } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@packages/ui";
 import { Check } from "@packages/ui/assets";
 import RenderAllDetail from "./RenderAllDetail";
@@ -14,6 +14,9 @@ const pdf = () => {
   const [grade, setGrade] = useState<number>(2);
   const [detailArr, setDetailArr] = useState<StudentDetailType[]>([]);
   const [progress, setProgress] = useState<number>(0);
+  const [isRender, setIsRender] = useState<boolean>(true);
+
+  const targetRef = useRef<HTMLDivElement>(null);
 
   const studentListObject = (classNum: string) => ({
     queryKey: ["class" + classNum],
@@ -57,6 +60,8 @@ const pdf = () => {
     }
   };
 
+  useEffect(() => {}, [isRender]);
+
   return (
     <div>
       <Header />
@@ -83,7 +88,7 @@ const pdf = () => {
             {grade}학년 PDF 저장하기
           </Button>
         </div>
-        <div className="w-full p-10 bg-gray50 rounded-[16px] my-10">
+        <div className="w-full p-10 bg-gray50 rounded-[16px] my-10 flex flex-col gap-4">
           <div className="w-full flex items-center">
             <div className="w-60 text-body5 flex gap-2 items-center">
               학생 정보 불러오기 {isDone() && <Check color="#04DF00" />}
@@ -98,8 +103,26 @@ const pdf = () => {
               {Math.floor((progress / result.length) * 100)}%
             </p>
           </div>
+          <div className="w-full flex items-center">
+            <div className="w-60 text-body5 flex gap-2 items-center">
+              학생 정보 렌더링 {!isRender && <Check color="#04DF00" />}
+            </div>
+            <div className="w-full h-4 bg-gray200 rounded-[10px]">
+              <div
+                className={`transition-all h-full rounded-[10px] ${isDone()} bg-gray900`}
+                style={{ width: `${isRender ? 0 : 100}%` }}
+              />
+            </div>
+            <p className="w-16 text-right">{isRender ? 0 : 100}%</p>
+          </div>
         </div>
-        <RenderAllDetail detailArr={detailArr} />
+        {isDone() && (
+          <RenderAllDetail
+            detailArr={detailArr}
+            targetRef={targetRef}
+            setIsRender={setIsRender}
+          />
+        )}
       </div>
     </div>
   );

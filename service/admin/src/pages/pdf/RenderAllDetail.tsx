@@ -1,14 +1,21 @@
 import { StudentDetailType } from "@/apis/document/get/studentDetail";
-import { RefObject } from "react";
+import { Dispatch, RefObject, SetStateAction, useEffect } from "react";
 import DetailPage from "./DetailPage";
 
 const RenderAllDetail = ({
   detailArr,
   targetRef,
+  setIsRender,
 }: {
   detailArr: StudentDetailType[];
   targetRef: RefObject<HTMLDivElement>;
+  setIsRender: Dispatch<SetStateAction<boolean>>;
 }) => {
+  useEffect(() => {
+    setTimeout(() => {
+      setIsRender(false);
+    }, 1000);
+  }, []);
   return (
     <div
       className={`w-[829px] flex flex-col items-center w-full justify-center bg-gray100`}
