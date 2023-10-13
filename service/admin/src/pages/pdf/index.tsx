@@ -9,6 +9,7 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "@packages/ui";
 import { Check } from "@packages/ui/assets";
 import RenderAllDetail from "./RenderAllDetail";
+import { convert2PdfAll } from "./convert2PDFAll";
 
 const pdf = () => {
   const [grade, setGrade] = useState<number>(2);
@@ -60,7 +61,9 @@ const pdf = () => {
     }
   };
 
-  useEffect(() => {}, [isRender]);
+  useEffect(() => {
+    convert2PdfAll(targetRef, `${grade}학년 전체 이력서`);
+  }, [isRender]);
 
   return (
     <div>
