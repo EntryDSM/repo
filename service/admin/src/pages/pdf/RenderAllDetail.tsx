@@ -18,7 +18,7 @@ const RenderAllDetail = ({
   }, []);
   return (
     <div
-      className={`w-[829px] flex flex-col items-center w-full justify-center bg-gray100`}
+      className={`w-[829px] flex flex-col bg-gray100`}
       ref={targetRef}
     >
       {detailArr.map((detail, index) => (
