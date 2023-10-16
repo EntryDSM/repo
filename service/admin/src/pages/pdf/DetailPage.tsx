@@ -2,10 +2,18 @@ import { Tag } from "@packages/ui/components/PreviewResume/Tag";
 import { Award } from "@packages/ui/components/PreviewResume/Award";
 import { Certificate } from "@packages/ui/components/PreviewResume/Certificate";
 import { Project } from "@packages/ui/components/PreviewResume/Project";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import { Activity } from "@packages/ui/components/PreviewResume/Activity";
 import QRCode from "qrcode.react";
 import { PreviewType } from "@packages/ui/components/PreviewResume/PreviewType";
+import { studentIndex } from ".";
 
 const subject = {
   1: "소프트웨어개발과",
@@ -14,15 +22,22 @@ const subject = {
   4: "정보보안과",
 };
 
-const DetailPage = ({
-  writer,
-  introduce,
-  skill_list,
-  project_list,
-  award_list,
-  certificate_list,
-  activity_list,
-}: PreviewType) => {
+interface indexType {
+  data: PreviewType;
+  setIndex: Dispatch<SetStateAction<{ [k: string]: studentIndex }>>;
+}
+
+const DetailPage = ({ data, setIndex }: indexType) => {
+  const {
+    writer,
+    introduce,
+    skill_list,
+    project_list,
+    award_list,
+    certificate_list,
+    activity_list,
+  } = data;
+
   const [grade, classNum] = writer.student_number.toString().split("");
   const [page, setPage] = useState<number>(1);
   const [trigger, setTrigger] = useState<boolean>(false);
@@ -49,6 +64,19 @@ const DetailPage = ({
       setTrigger(true);
     }, 1000);
   }, []);
+  useEffect(() => {
+    setIndex((i) => {
+      return {
+        ...i,
+        [writer.student_number]: {
+          name: writer.name,
+          major: writer.major,
+          studentNumber: writer.student_number,
+          page: page,
+        },
+      };
+    });
+  }, [page]);
 
   const ActivityList = (
     <>

@@ -11,11 +11,19 @@ import { Check } from "@packages/ui/assets";
 import RenderAllDetail from "./RenderAllDetail";
 import { convert2PdfAll } from "./convert2PDFAll";
 
+export interface studentIndex {
+  name: string;
+  major: string;
+  studentNumber: string;
+  page: number;
+}
+
 const pdf = () => {
   const [grade, setGrade] = useState<number>(2);
   const [detailArr, setDetailArr] = useState<StudentDetailType[]>([]);
   const [progress, setProgress] = useState<number>(0);
   const [isRender, setIsRender] = useState<boolean>(true);
+  const [index, setIndex] = useState<{ [k: string]: studentIndex }>({});
 
   const targetRef = useRef<HTMLDivElement>(null);
 
@@ -36,7 +44,8 @@ const pdf = () => {
     .map((list) =>
       list.data?.data.student_list.map((student) => student.student_id)
     )
-    .flat();
+    .flat()
+    .slice(0, 10);
 
   const allFinished = result.every((value) => value);
 
@@ -62,6 +71,7 @@ const pdf = () => {
   };
 
   useEffect(() => {
+    console.log(index);
     convert2PdfAll(targetRef, `${grade}학년 전체 이력서`);
   }, [isRender]);
 
@@ -124,6 +134,7 @@ const pdf = () => {
             detailArr={detailArr}
             targetRef={targetRef}
             setIsRender={setIsRender}
+            setIndex={setIndex}
           />
         )}
       </div>
