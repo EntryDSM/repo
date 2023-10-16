@@ -43,7 +43,7 @@ export const PreviewResume = ({
   const one = useRef<HTMLDivElement>(null);
 
   const heightCheck = () => {
-    if (one.current && one.current?.scrollHeight > 1164) {
+    if (one.current && one.current?.scrollHeight > 1123) {
       setPage(2);
     } else {
       setPage(1);
