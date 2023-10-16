@@ -44,8 +44,7 @@ const pdf = () => {
     .map((list) =>
       list.data?.data.student_list.map((student) => student.student_id)
     )
-    .flat()
-    .slice(0, 10);
+    .flat();
 
   const allFinished = result.every((value) => value);
 

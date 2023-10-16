@@ -21,7 +21,7 @@ const RenderAllDetail = ({
   useEffect(() => {
     setTimeout(() => {
       setIsRender(false);
-    }, 1000);
+    }, 2000);
   }, []);
   return (
     <div className={`w-[829px] flex flex-col bg-gray100`} ref={targetRef}>
