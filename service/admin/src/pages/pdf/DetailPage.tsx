@@ -72,7 +72,7 @@ const DetailPage = ({ data, setIndex }: indexType) => {
           name: writer.name,
           major: writer.major,
           studentNumber: writer.student_number,
-          page: page,
+          page: page + project_list.length,
         },
       };
     });
