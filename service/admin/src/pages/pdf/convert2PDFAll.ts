@@ -1,10 +1,14 @@
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { MutableRefObject } from "react";
+import { studentIndex } from ".";
+import { saveDocument } from "@/components/library/saveDocument";
 
 export const convert2PdfAll = async (
   { current }: MutableRefObject<HTMLElement | null>,
-  fileName: string
+  fileName: string,
+  index: { data: studentIndex[] },
+  grade: number
 ) => {
   if (!current) return;
   const promise = async () => {
@@ -22,7 +26,7 @@ export const convert2PdfAll = async (
               ? current.scrollHeight - (loopNum - 1) * maxPage * 1164
               : 1164 * maxPage,
           y: offset,
-          scale: 1,
+          scale: 1.5,
           backgroundColor: "#f6f6f6",
         })
       );
@@ -67,10 +71,21 @@ export const convert2PdfAll = async (
       }
     });
     doc.save(fileName + ".pdf");
+    return doc.output("blob");
   };
   promise()
-    .then(() => {
+    .then((blob) => {
       console.log("success");
+      const file = new FormData();
+      file.append("pdf", blob);
+      file.append("index", JSON.stringify(index));
+      saveDocument({ grade, file })
+        .then(() => {
+          console.log("document post successed");
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     })
     .catch((e) => {
       console.log(e);

@@ -70,8 +70,8 @@ const pdf = () => {
   };
 
   useEffect(() => {
-    console.log(index);
-    convert2PdfAll(targetRef, `${grade}학년 전체 이력서`);
+    const key: { ["data"]: studentIndex[] } = { data: Object.values(index) };
+    convert2PdfAll(targetRef, `${grade}학년 전체 이력서`, key, grade);
   }, [isRender]);
 
   return (
