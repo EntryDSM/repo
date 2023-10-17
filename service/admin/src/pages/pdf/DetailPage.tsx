@@ -70,7 +70,7 @@ const DetailPage = ({ data, setIndex }: indexType) => {
         ...i,
         [writer.student_number]: {
           name: writer.name,
-          major: writer.major,
+          major: writer.major.name,
           studentNumber: writer.student_number,
           page: page + project_list.length,
         },
