@@ -2,15 +2,11 @@ import {
   StudentDetailType,
   studentDetail,
 } from "@/apis/document/get/studentDetail";
-import { getLibrary } from "@/apis/library";
-import { libraryIndexList } from "@/apis/library/list";
-import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
-import { PdfViewer } from "../../../../../packages/ui";
 import { getStudent } from "@/apis/student";
 import { useQueries } from "@tanstack/react-query";
 import RenderAllDetail from "./RenderAllDetail";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 export interface studentIndex {
   name: string;
@@ -21,15 +17,12 @@ export interface studentIndex {
 
 const Grade = () => {
   const [detailArr, setDetailArr] = useState<StudentDetailType[]>([]);
-  const [index, setIndex] = useState<{ [k: string]: studentIndex }>({});
 
   const { query } = useRouter();
   const grade = query["grade"];
 
-  console.log("grade: " + grade)
+  console.log("grade: " + grade);
 
-  const targetRef = useRef<HTMLDivElement>(null);
-  
   const studentListObject = (classNum: string) => ({
     queryKey: ["class" + classNum],
     queryFn: () => getStudent({ grade: grade as unknown as string, classNum }),
@@ -43,7 +36,8 @@ const Grade = () => {
       studentListObject("3"),
       studentListObject("4"),
     ],
-  }).map((list: any) =>
+  })
+    .map((list: any) =>
       list.data?.data.student_list.map((student: any) => student.student_id)
     )
     .flat();
@@ -52,7 +46,7 @@ const Grade = () => {
   const detailAll = async () => {
     if (allFinished) {
       let detailArr = [];
-      for (let i = 0; i < result.length; i++) {;
+      for (let i = 0; i < result.length; i++) {
         // @ts-ignore
         const a = await studentDetail(result[i]);
         detailArr.push(a.data);
@@ -65,13 +59,7 @@ const Grade = () => {
   useEffect(() => {
     detailAll();
   }, [allFinished]);
- 
-  return (
-    <RenderAllDetail
-      detailArr={detailArr}
-      targetRef={targetRef}
-      setIndex={setIndex}
-    />
-  );
+
+  return <RenderAllDetail detailArr={detailArr} />;
 };
 export default Grade;

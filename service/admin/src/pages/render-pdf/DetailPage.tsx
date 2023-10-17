@@ -2,18 +2,10 @@ import { Tag } from "@packages/ui/components/PreviewResume/Tag";
 import { Award } from "@packages/ui/components/PreviewResume/Award";
 import { Certificate } from "@packages/ui/components/PreviewResume/Certificate";
 import { Project } from "@packages/ui/components/PreviewResume/Project";
-import {
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Activity } from "@packages/ui/components/PreviewResume/Activity";
 import QRCode from "qrcode.react";
 import { PreviewType } from "@packages/ui/components/PreviewResume/PreviewType";
-import { studentIndex } from ".";
 
 const subject = {
   1: "소프트웨어개발과",
@@ -22,22 +14,15 @@ const subject = {
   4: "정보보안과",
 };
 
-interface indexType {
-  data: PreviewType;
-  setIndex: Dispatch<SetStateAction<{ [k: string]: studentIndex }>>;
-}
-
-const DetailPage = ({ data, setIndex }: indexType) => {
-  const {
-    writer,
-    introduce,
-    skill_list,
-    project_list,
-    award_list,
-    certificate_list,
-    activity_list,
-  } = data;
-
+const DetailPage = ({
+  writer,
+  introduce,
+  skill_list,
+  project_list,
+  award_list,
+  certificate_list,
+  activity_list,
+}: PreviewType) => {
   const [grade, classNum] = writer.student_number.toString().split("");
   const [page, setPage] = useState<number>(1);
   const [trigger, setTrigger] = useState<boolean>(false);
@@ -64,19 +49,6 @@ const DetailPage = ({ data, setIndex }: indexType) => {
       setTrigger(true);
     }, 1000);
   }, []);
-  useEffect(() => {
-    setIndex((i) => {
-      return {
-        ...i,
-        [writer.student_number]: {
-          name: writer.name,
-          major: writer.major,
-          studentNumber: writer.student_number,
-          page: page + project_list.length,
-        },
-      };
-    });
-  }, [page]);
 
   const ActivityList = (
     <>
@@ -92,7 +64,6 @@ const DetailPage = ({ data, setIndex }: indexType) => {
   );
   return (
     <>
-    <page>
       <div className="w-[831px] h-[1171px] bg-gray50 flex justify-center items-center">
         <div
           className="h-full w-full flex flex-col gap-[20px] scale-[0.92]"
@@ -163,10 +134,8 @@ const DetailPage = ({ data, setIndex }: indexType) => {
           {page === 1 && ActivityList}
         </div>
       </div>
-      </page>
 
       {page > 1 && (
-        <page>
         <div className="w-[831px] h-[1171px] flex justify-center items-center">
           <div className="h-full w-full flex scale-[0.92]">
             <div className="h-fit w-full flex flex-col gap-[20px]" id="two">
@@ -174,7 +143,6 @@ const DetailPage = ({ data, setIndex }: indexType) => {
             </div>
           </div>
         </div>
-        </page>
       )}
       <article className="flex flex-col">
         {project_list.map((data, index) => (
@@ -183,16 +151,9 @@ const DetailPage = ({ data, setIndex }: indexType) => {
             key={index}
           >
             <div className="w-[831px] h-[1171px] flex flex-col gap-[20px] scale-[0.92]">
-              {/* {index === 0 && (
-                <h3 className="text-[22px] font-semibold leading-[26px] w-full">
-                  Project
-                </h3>
-              )} */}
-              <page>
               <div className={`h-full w-full`}>
                 <Project {...data} />
               </div>
-              </page>
             </div>
           </div>
         ))}
