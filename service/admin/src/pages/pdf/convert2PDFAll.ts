@@ -7,72 +7,15 @@ export const convert2PdfAll = async (
   fileName: string
 ) => {
   if (!current) return;
-  const promise = async () => {
-    console.time("make data");
-    const maxPage = 18;
-    const loopNum = Math.ceil(current.scrollHeight / (1164 * maxPage));
-    const canvas = [];
 
-    let offset = 0;
-    for (let i = 0; i < loopNum; i++) {
-      canvas.push(
-        await html2canvas(current, {
-          height:
-            i === loopNum - 1
-              ? current.scrollHeight - (loopNum - 1) * maxPage * 1164
-              : 1164 * maxPage,
-          y: offset,
-          scale: 1,
-          backgroundColor: "#f6f6f6",
-        })
-      );
-      offset += 1164 * maxPage;
-      console.log(offset);
-    }
+  console.log("sdfs")
+  const response = await fetch(`/api/pdf?grade=2`);
+  const blob = await response.blob();
 
-    console.log(canvas);
+  // Create a URL for the blob
+  const pdfUrl = URL.createObjectURL(blob);
+  console.log(pdfUrl)
 
-    const imgData = canvas.map((value) => value.toDataURL("image/png"));
-
-    const imgWidth = 210;
-    const pageHeight = 295;
-
-    const doc = new jsPDF("p", "mm", "a4", true);
-
-    console.timeEnd("make data");
-
-    canvas.map((canvas, index) => {
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      let heightLeft = imgHeight;
-      let position = 0;
-      let asdf = 0;
-
-      while (heightLeft >= 0) {
-        asdf += 1;
-        doc.addImage(
-          imgData[index],
-          "PNG",
-          0,
-          position,
-          imgWidth,
-          imgHeight,
-          undefined,
-          "FAST"
-        );
-        heightLeft -= pageHeight;
-        position = heightLeft - imgHeight;
-        console.log("add page " + asdf);
-        if (heightLeft < 0 && index + 1 === imgData.length) return;
-        doc.addPage();
-      }
-    });
-    doc.save(fileName + ".pdf");
-  };
-  promise()
-    .then(() => {
-      console.log("success");
-    })
-    .catch((e) => {
-      console.log(e);
-    });
+  // Open the PDF in a new tab for preview
+  window.open(pdfUrl, '_blank');
 };

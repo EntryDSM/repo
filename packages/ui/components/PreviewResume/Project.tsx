@@ -82,7 +82,7 @@ export const Project = ({
               <Link
                 key={index}
                 href={value}
-                className="flex items-center gap-2 bg-gray100 pl-3 pr-3 pt-2 pb-2 rounded-md w-fit max-w-full flex-1"
+                className="flex items-center gap-2 bg-gray100 pl-2 pr-2 pt-0 pb-0 rounded-md w-fit max-w-full flex-1"
               >
                 <LinkSvg />
                 <p className="text-ellipsis overflow-hidden break-all text-[12px]">
