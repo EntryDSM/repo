@@ -6,5 +6,5 @@ interface DocumentFileReq {
 }
 
 export const saveDocument = ({ grade, file }: DocumentFileReq) => {
-  return instance.post(`/library?grade=${grade}`, file);
+  return instance.post(`/library/?grade=${grade}`, file);
 };
