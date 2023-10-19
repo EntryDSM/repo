@@ -33,7 +33,7 @@ export const PdfViewer = ({ url, list }: PropsType) => {
     min: number;
     max: number;
   }
-  const EditablePage = ({ page }: EditablePagePropsType) => {
+  const EditablePage = ({page, min, max}: EditablePagePropsType) => {
     const [isEditing, setIsEditing] = useState(false);
     const [inputPage, setInputPage] = useState(0);
 
@@ -56,9 +56,9 @@ export const PdfViewer = ({ url, list }: PropsType) => {
             className="w-[50px]"
             style={{ backgroundColor: "white", color: "black" }}
             value={inputPage}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setInputPage(Number(e.target.value))
-            }
+            min={min}
+            max={max}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setInputPage(Number(e.target.value))}
             onKeyPress={handleBlurOrEnterKey}
             onBlur={handleBlurOrEnterKey}
             autoFocus

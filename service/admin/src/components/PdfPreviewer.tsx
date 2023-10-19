@@ -71,7 +71,7 @@ export const PdfPreviewer = ({
   return (
     <div className="z-100 top-0 right-0 absolute w-[calc(100%-320px)] h-full bg-[rgba(0,0,0,0.5)] flex items-center justify-center">
       <OutsideClickHandler onOutsideClick={closePreview}>
-        <div className="bg-gray50 h-[900px] w-[829px] rounded-[16px] flex flex-col overflow-hidden">
+        <div className="bg-gray50 h-[92vh] w-[829px] rounded-[16px] flex flex-col overflow-hidden">
           <div className="w-full px-[24px] pt-[24px] pb-[16px]">
             <p className="text-body5">PDF로 내보내기</p>
           </div>
