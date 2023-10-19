@@ -27,7 +27,7 @@ export default async function handler(
     });
 
     const timeout = 60 * 1000;
-    const url: string = "http://localhost:3000/render-pdf/" + req.query.grade;
+    const url: string = "https://teacher.dsm-repo.com/render-pdf/" + req.query.grade;
     const navigationPromise = await page.goto(url, {
       waitUntil: ["networkidle0", "load", "domcontentloaded"],
       timeout: timeout, // Set the navigation timeout
