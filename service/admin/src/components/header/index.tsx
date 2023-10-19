@@ -36,10 +36,26 @@ export const Header = () => {
                 전공관리
               </Link>
             </li>
+            <li>
+              <Link
+                className={`${
+                  route.includes("pdf") ? "text-gray50" : "text-gray300"
+                } text-body5`}
+                href={"/pdf"}
+              >
+                PDF
+              </Link>
+            </li>
           </ul>
         </nav>
         <div>
-          <Image width={40} height={40} src={dummy} alt="프로필 이미지" className="sm:w-[32px] sm:h-[32px]" />
+          <Image
+            width={40}
+            height={40}
+            src={dummy}
+            alt="프로필 이미지"
+            className="sm:w-[32px] sm:h-[32px]"
+          />
         </div>
       </div>
     </header>

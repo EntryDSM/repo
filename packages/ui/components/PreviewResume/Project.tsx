@@ -33,23 +33,27 @@ export const Project = ({
   return (
     <div className="flex flex-col gap-5 rounded-md bg-gray50 m-0 pl-10 pr-10 pt-7 pb-7 w-full h-full">
       <div className="flex items-center w-full">
-        {imageUrl ? (
-          <Image
-            width={48}
-            height={48}
-            className="mr-[40px] object-cover w-[48px] h-[48px]"
-            src={"https://s3.ap-northeast-2.amazonaws.com/dsm-repo/" + imageUrl}
-            alt="projectImg"
-          />
-        ) : (
-          <Image
-            width={48}
-            height={48}
-            className="mr-[40px] object-cover w-[48px] h-[48px]"
-            src={defaultImg}
-            alt="projectImg"
-          />
-        )}
+        <div className="mr-[40px] overflow-hidden flex justify-center items-center w-[48px] h-[48px]">
+          {imageUrl ? (
+            <Image
+              width={48}
+              height={48}
+              src={
+                "https://s3.ap-northeast-2.amazonaws.com/dsm-repo/" + imageUrl
+              }
+              alt="projectImg"
+              priority
+            />
+          ) : (
+            <Image
+              width={48}
+              height={48}
+              src={defaultImg}
+              alt="projectImg"
+              priority
+            />
+          )}
+        </div>
         <div className="flex items-center w-full justify-between">
           <div className="flex flex-col gap-[4px]">
             <p className="text-title3">{name}</p>
@@ -85,7 +89,7 @@ export const Project = ({
               <Link
                 key={index}
                 href={value}
-                className="flex items-center gap-2 bg-gray100 pl-3 pr-3 pt-2 pb-2 rounded-md w-fit max-w-full flex-1"
+                className="flex items-center gap-2 bg-gray100 pl-2 pr-2 pt-0 pb-0 rounded-md w-fit max-w-full flex-1"
               >
                 <LinkSvg />
                 <p className="text-ellipsis overflow-hidden break-all text-[12px]">

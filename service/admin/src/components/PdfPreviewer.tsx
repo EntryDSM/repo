@@ -25,19 +25,18 @@ export const PdfPreviewer = ({
   award_list,
   certificate_list,
   activity_list,
-  targetRef,
   pdfView,
 }: PreviewType) => {
   const [grade, classNum] = writer.student_number.toString().split("");
   const [page, setPage] = useState<number>(1);
 
+  const targetRef = useRef<HTMLDivElement>(null);
   const activity = useRef<HTMLElement>(null);
   const one = useRef<HTMLDivElement>(null);
 
   const heightCheck = () => {
     if (one.current && one.current?.scrollHeight > 1164) {
       setPage(2);
-      console.log("page set 2");
     } else {
       setPage(1);
     }
