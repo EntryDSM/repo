@@ -114,18 +114,18 @@ export const PdfViewer = ({ url, list }: PropsType) => {
         onLoadSuccess={onPDFOpen}
       >
         <Page
-          className="ml-[-150px] bg-gray100"
-          pageIndex={currentPage}
-          key={Date()}
-          renderAnnotationLayer={false}
-          renderTextLayer={false}
+            pageIndex={currentPage}
+            key={Date()}
+            renderAnnotationLayer={false}
+            renderTextLayer={false}
+            canvasBackground={"#F6F6F6"}
         ></Page>
         <Page
-          className="bg-gray100"
-          pageIndex={currentPage + 1}
-          key={Date() + 1}
-          renderAnnotationLayer={false}
-          renderTextLayer={false}
+            pageIndex={currentPage + 1}
+            key={Date() + 1}
+            renderAnnotationLayer={false}
+            renderTextLayer={false}
+            canvasBackground={"#F6F6F6"}
         ></Page>
       </Document>
       <div className="fixed flex flex-row pr-[20px] right-32 bottom-14 gap-[20px] h-[32px]">
