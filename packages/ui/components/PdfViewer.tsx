@@ -13,7 +13,7 @@ export const PdfViewer = ({ url, list }: PropsType) => {
   pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
   const [page, setPage] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(0);
-  const [innerHeight, setInnerHeight] = useState<number>(window.innerHeight);
+  const [innerHeight, setInnerHeight] = useState<number>(window.innerHeight + 50);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -24,7 +24,7 @@ export const PdfViewer = ({ url, list }: PropsType) => {
       }
     };
     window.addEventListener("keydown", handleKeyDown);
-    window.addEventListener("resize", () => setInnerHeight(window.innerHeight))
+    window.addEventListener("resize", () => setInnerHeight(window.innerHeight + 50))
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [currentPage]);
 
