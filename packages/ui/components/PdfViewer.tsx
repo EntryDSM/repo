@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState, useEffect, SyntheticEvent, useMemo} from "react";
+import React, { ChangeEvent, useState, useEffect, SyntheticEvent } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import { SideBar, StudentListType } from "./SideBar";
 import "./pdfDocument.css";
@@ -13,7 +13,11 @@ export const PdfViewer = ({ url, list }: PropsType) => {
   pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
   const [page, setPage] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(0);
-  const [innerHeight, setInnerHeight] = useState<number>(window.innerHeight + 50);
+  const [innerHeight, setInnerHeight] = useState<number>(1080);
+
+  useEffect(() => {
+    setInnerHeight(window.innerHeight + 50);
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -24,7 +28,9 @@ export const PdfViewer = ({ url, list }: PropsType) => {
       }
     };
     window.addEventListener("keydown", handleKeyDown);
-    window.addEventListener("resize", () => setInnerHeight(window.innerHeight + 50))
+    window.addEventListener("resize", () =>
+      setInnerHeight(window.innerHeight + 50)
+    );
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [currentPage]);
 
@@ -33,7 +39,7 @@ export const PdfViewer = ({ url, list }: PropsType) => {
     min: number;
     max: number;
   }
-  const EditablePage = ({page, min, max}: EditablePagePropsType) => {
+  const EditablePage = ({ page, min, max }: EditablePagePropsType) => {
     const [isEditing, setIsEditing] = useState(false);
     const [inputPage, setInputPage] = useState(0);
 
@@ -58,7 +64,9 @@ export const PdfViewer = ({ url, list }: PropsType) => {
             value={inputPage}
             min={min}
             max={max}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => setInputPage(Number(e.target.value))}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setInputPage(Number(e.target.value))
+            }
             onKeyPress={handleBlurOrEnterKey}
             onBlur={handleBlurOrEnterKey}
             autoFocus
@@ -88,7 +96,8 @@ export const PdfViewer = ({ url, list }: PropsType) => {
   };
 
   const getNameByList = (list: StudentListType) => {
-    return list?.filter((l) => (l.page as number) <= currentPage + 1).pop()?.name;
+    return list?.filter((l) => (l.page as number) <= currentPage + 1).pop()
+      ?.name;
   };
 
   const getPageByList = (list: StudentListType) => {
@@ -114,20 +123,20 @@ export const PdfViewer = ({ url, list }: PropsType) => {
         onLoadSuccess={onPDFOpen}
       >
         <Page
-            pageIndex={currentPage}
-            key={Date()}
-            renderAnnotationLayer={false}
-            renderTextLayer={false}
-            canvasBackground={"#F6F6F6"}
-            height={innerHeight}
+          pageIndex={currentPage}
+          key={Date()}
+          renderAnnotationLayer={false}
+          renderTextLayer={false}
+          canvasBackground={"#F6F6F6"}
+          height={innerHeight}
         ></Page>
         <Page
-            pageIndex={currentPage + 1}
-            key={Date() + 1}
-            renderAnnotationLayer={false}
-            renderTextLayer={false}
-            canvasBackground={"#F6F6F6"}
-            height={innerHeight}
+          pageIndex={currentPage + 1}
+          key={Date() + 1}
+          renderAnnotationLayer={false}
+          renderTextLayer={false}
+          canvasBackground={"#F6F6F6"}
+          height={innerHeight}
         ></Page>
       </Document>
       <div className="fixed flex flex-row pr-[20px] right-32 bottom-14 gap-[20px] h-[32px]">
@@ -151,9 +160,7 @@ export const PdfViewer = ({ url, list }: PropsType) => {
             </div>
             <button
               onClick={() =>
-                setCurrentPage((prev) =>
-                  prev + 2 < page ? prev + 2 : page
-                )
+                setCurrentPage((prev) => (prev + 2 < page ? prev + 2 : page))
               }
             >
               <Arrow

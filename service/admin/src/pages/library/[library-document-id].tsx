@@ -2,7 +2,7 @@ import { getLibrary } from "@/apis/library";
 import { libraryIndexList } from "@/apis/library/list";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
-import { PdfViewer } from "../../../../../packages/ui";
+import { PdfViewer } from "@packages/ui/";
 
 const Library = () => {
   const { query } = useRouter();
