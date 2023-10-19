@@ -42,9 +42,16 @@ export const Project = ({
                 "https://s3.ap-northeast-2.amazonaws.com/dsm-repo/" + imageUrl
               }
               alt="projectImg"
+              priority
             />
           ) : (
-            <Image width={48} height={48} src={defaultImg} alt="projectImg" />
+            <Image
+              width={48}
+              height={48}
+              src={defaultImg}
+              alt="projectImg"
+              priority
+            />
           )}
         </div>
         <div className="flex items-center w-full justify-between">

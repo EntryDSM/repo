@@ -31,7 +31,7 @@ const DetailPage = ({
   const one = useRef<HTMLDivElement>(null);
 
   const heightCheck = () => {
-    if (one.current && one.current?.scrollHeight > 1264) {
+    if (one.current && one.current?.scrollHeight > 1171) {
       setPage(2);
       console.log("page set 2: " + one.current?.scrollHeight);
     } else {
@@ -64,7 +64,7 @@ const DetailPage = ({
   );
   return (
     <>
-      <div className="w-[831px] h-[1171px] bg-gray50 flex justify-center items-center">
+      <div className="w-[831px] h-[1171px] bg-gray100 flex justify-center items-center">
         <div
           className="h-full w-full flex flex-col gap-[20px] scale-[0.92]"
           ref={one}
@@ -136,7 +136,7 @@ const DetailPage = ({
       </div>
 
       {page > 1 && (
-        <div className="w-[831px] h-[1171px] flex justify-center items-center">
+        <div className="w-[831px] h-[1171px] flex justify-center items-center bg-gray100">
           <div className="h-full w-full flex scale-[0.92]">
             <div className="h-fit w-full flex flex-col gap-[20px]" id="two">
               {page === 2 && ActivityList}
@@ -144,10 +144,10 @@ const DetailPage = ({
           </div>
         </div>
       )}
-      <article className="flex flex-col">
+      <article className="flex flex-col bg-gray100">
         {project_list.map((data, index) => (
           <div
-            className="w-[831px] h-[1171px] bg-gray50 flex flex-col justify-center items-center"
+            className="w-[831px] h-[1171px] bg-gray100 flex flex-col justify-center items-center"
             key={index}
           >
             <div className="w-[831px] h-[1171px] flex flex-col gap-[20px] scale-[0.92]">
