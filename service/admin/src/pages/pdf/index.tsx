@@ -56,9 +56,9 @@ const pdf = () => {
         setProgress((v) => v + 1);
         // @ts-ignore
         const a = await studentDetail(result[i]);
+        // @ts-ignore
         detailArr.push(a.data);
       }
-      console.log(detailArr);
       setDetailArr(detailArr);
     }
   };

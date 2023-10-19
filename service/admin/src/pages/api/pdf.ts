@@ -11,7 +11,7 @@ export default async function handler(
     console.log(req.query.grade);
 
     const browser = await puppeteer.launch({
-      headless: false,
+      headless: 'new',
       args: [
         "--window-size=1164,829",
         "--disable-dev-shm-usage",
@@ -25,7 +25,6 @@ export default async function handler(
       width: 829,
       height: 1164,
     });
-    console.log("829");
 
     const timeout = 60 * 1000;
     const url: string = "http://localhost:3000/render-pdf/" + req.query.grade;

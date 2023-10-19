@@ -37,7 +37,6 @@ export const PdfPreviewer = ({
   const heightCheck = () => {
     if (one.current && one.current?.scrollHeight > 1164) {
       setPage(2);
-      console.log("page set 2");
     } else {
       setPage(1);
     }

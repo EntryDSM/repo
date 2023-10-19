@@ -1,6 +1,6 @@
 import { StudentDetailType } from "@/apis/document/get/studentDetail";
 import { Dispatch, RefObject, SetStateAction, useEffect } from "react";
-import DetailPage from "./DetailPage";
+import DetailPageWrapper from "./DetailPageWrapper";
 import { studentIndex } from ".";
 
 const RenderAllDetail = ({
@@ -21,12 +21,12 @@ const RenderAllDetail = ({
   useEffect(() => {
     setTimeout(() => {
       setIsRender(false);
-    }, 2000);
+    }, 4000);
   }, []);
   return (
     <div className={`w-[829px] flex flex-col bg-gray100`} ref={targetRef}>
       {detailArr.map((detail, index) => (
-        <DetailPage data={detail} setIndex={setIndex} key={index} />
+        <DetailPageWrapper data={detail} setIndex={setIndex} key={index} />
       ))}
     </div>
   );

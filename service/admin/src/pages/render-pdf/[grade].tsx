@@ -21,8 +21,6 @@ const Grade = () => {
   const { query } = useRouter();
   const grade = query["grade"];
 
-  console.log("grade: " + grade);
-
   const studentListObject = (classNum: string) => ({
     queryKey: ["class" + classNum],
     queryFn: () => getStudent({ grade: grade as unknown as string, classNum }),
@@ -49,9 +47,9 @@ const Grade = () => {
       for (let i = 0; i < result.length; i++) {
         // @ts-ignore
         const a = await studentDetail(result[i]);
+        // @ts-ignore
         detailArr.push(a.data);
       }
-      console.log(detailArr);
       setDetailArr(detailArr);
     }
   };
@@ -60,6 +58,7 @@ const Grade = () => {
     detailAll();
   }, [allFinished]);
 
-  return <RenderAllDetail detailArr={detailArr} />;
+  const [index, setIndex] = useState<{ [k: string]: studentIndex }>({});
+  return <RenderAllDetail detailArr={detailArr} setIndex={setIndex} />;
 };
 export default Grade;

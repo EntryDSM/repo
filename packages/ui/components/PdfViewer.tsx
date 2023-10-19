@@ -38,7 +38,6 @@ export const PdfViewer = ({ url, list }: PropsType) => {
     const [inputPage, setInputPage] = useState(0);
 
     const handleBlurOrEnterKey = (e: SyntheticEvent) => {
-      console.log(inputPage);
       if (
         e.type === "blur" ||
         (e.type === "keypress" && (e as React.KeyboardEvent).key === "Enter")
@@ -89,8 +88,7 @@ export const PdfViewer = ({ url, list }: PropsType) => {
   };
 
   const getNameByList = (list: StudentListType) => {
-    return list?.filter((l) => (l.page as number) <= currentPage + 1).pop()
-      ?.name;
+    return list?.filter((l) => (l.page as number) <= currentPage + 1).pop()?.name;
   };
 
   const getPageByList = (list: StudentListType) => {
@@ -154,7 +152,7 @@ export const PdfViewer = ({ url, list }: PropsType) => {
             <button
               onClick={() =>
                 setCurrentPage((prev) =>
-                  prev + 2 < page ? prev + 2 : page - 1
+                  prev + 2 < page ? prev + 2 : page
                 )
               }
             >
