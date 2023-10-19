@@ -1,14 +1,14 @@
 import { StudentDetailType } from "@/apis/document/get/studentDetail";
-import { Dispatch, RefObject, SetStateAction, useEffect } from "react";
+import { Dispatch, SetStateAction } from "react";
 import DetailPage from "./DetailPage";
-import { studentIndex } from "../pdf";
+import { studentIndex } from "../../pages/pdf";
 
 interface renderDetailType {
   detailArr: StudentDetailType[];
   setIndex: Dispatch<SetStateAction<{ [k: string]: studentIndex }>>;
 }
 
-const RenderAllDetail = ({ detailArr, setIndex }: renderDetailType) => {
+const RenderAllDetailPdf = ({ detailArr, setIndex }: renderDetailType) => {
   return (
     <div className={`w-[832px] flex flex-col bg-gray100`}>
       {detailArr.map((detail, index) => (
@@ -18,4 +18,4 @@ const RenderAllDetail = ({ detailArr, setIndex }: renderDetailType) => {
   );
 };
 
-export default RenderAllDetail;
+export default RenderAllDetailPdf;

@@ -5,7 +5,7 @@ import {
 import { useRouter } from "next/router";
 import { getStudent } from "@/apis/student";
 import { useQueries } from "@tanstack/react-query";
-import RenderAllDetail from "./RenderAllDetail";
+import RenderAllDetailPdf from "../../components/pdf/RenderAllDetailPdf";
 import { useEffect, useState } from "react";
 
 export interface studentIndex {
@@ -59,6 +59,6 @@ const Grade = () => {
   }, [allFinished]);
 
   const [index, setIndex] = useState<{ [k: string]: studentIndex }>({});
-  return <RenderAllDetail detailArr={detailArr} setIndex={setIndex} />;
+  return <RenderAllDetailPdf detailArr={detailArr} setIndex={setIndex} />;
 };
 export default Grade;

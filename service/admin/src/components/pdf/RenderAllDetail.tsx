@@ -1,7 +1,7 @@
 import { StudentDetailType } from "@/apis/document/get/studentDetail";
 import { Dispatch, RefObject, SetStateAction, useEffect } from "react";
 import DetailPageWrapper from "./DetailPageWrapper";
-import { studentIndex } from ".";
+import { studentIndex } from "../../pages/pdf";
 
 const RenderAllDetail = ({
   detailArr,

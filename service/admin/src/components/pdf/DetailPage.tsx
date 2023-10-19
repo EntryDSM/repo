@@ -13,7 +13,7 @@ import {
 import { Activity } from "@packages/ui/components/PreviewResume/Activity";
 import QRCode from "qrcode.react";
 import { PreviewType } from "@packages/ui/components/PreviewResume/PreviewType";
-import { studentIndex } from "../pdf";
+import { studentIndex } from "../../pages/pdf";
 
 const subject = {
   1: "소프트웨어개발과",

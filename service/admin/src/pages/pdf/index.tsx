@@ -8,8 +8,8 @@ import { useQueries } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@packages/ui";
 import { Check } from "@packages/ui/assets";
-import RenderAllDetail from "./RenderAllDetail";
-import { convert2PdfAll } from "./convert2PDFAll";
+import RenderAllDetail from "../../components/pdf/RenderAllDetail";
+import { convert2PdfAll } from "../../hooks/convert2PDFAll";
 
 export interface studentIndex {
   name: string;
@@ -18,7 +18,7 @@ export interface studentIndex {
   page: number;
 }
 
-const pdf = () => {
+const Pdf = () => {
   const [grade, setGrade] = useState<number>(2);
   const [detailArr, setDetailArr] = useState<StudentDetailType[]>([]);
   const [progress, setProgress] = useState<number>(0);
@@ -141,4 +141,4 @@ const pdf = () => {
   );
 };
 
-export default pdf;
+export default Pdf;

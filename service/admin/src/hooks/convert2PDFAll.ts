@@ -1,5 +1,5 @@
 import { MutableRefObject } from "react";
-import { studentIndex } from ".";
+import { studentIndex } from "../pages/pdf";
 import { saveDocument } from "@/components/library/saveDocument";
 
 export const convert2PdfAll = async (
