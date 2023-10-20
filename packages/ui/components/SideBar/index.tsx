@@ -83,7 +83,7 @@ export const SideBar = ({
           )}
         </nav>
         {!preview && !!side && (
-          <div className="bg-gray700 w-[300px] text-gray50 pl-6 pr-6 pt-10 overflow-y-scroll">
+          <div className="bg-gray700 w-[330px] text-gray50 pl-6 pr-6 pt-10 overflow-y-scroll">
             {
               {
                 1: studentList && (
