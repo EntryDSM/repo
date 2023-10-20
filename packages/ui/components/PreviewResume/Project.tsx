@@ -41,6 +41,7 @@ export const Project = ({
               src={
                 "https://s3.ap-northeast-2.amazonaws.com/dsm-repo/" + imageUrl
               }
+              className="rounded-md"
               alt="projectImg"
               priority
             />
@@ -50,6 +51,7 @@ export const Project = ({
               height={48}
               src={defaultImg}
               alt="projectImg"
+              className="rounded-md"
               priority
             />
           )}
