@@ -42,7 +42,7 @@ export const Students = ({
         }}
       />
       
-      {dropdown == "학년" && studentList.map((classList, classNum) => (
+      {dropdown == "학과" && studentList.map((classList, classNum) => (
         <StudentDropdown
           classList={classList}
           grade={grade}

@@ -77,7 +77,7 @@ export const PdfPreviewer = ({
           </div>
           <div className="bg-gray50 h-full overflow-scroll">
             <main
-              className={`w-[829px] flex flex-col items-center w-fit bg-gray100`}
+              className={`w-[829px] flex flex-col items-center w-fit bg-gray50`}
               ref={targetRef}
             >
               <div className="w-[829px] h-[1164px] flex justify-center items-center">

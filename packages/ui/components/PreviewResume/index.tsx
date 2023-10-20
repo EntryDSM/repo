@@ -102,7 +102,7 @@ export const PreviewResume = ({
 
   const Page: React.FC<PageProps> = ({ content }) => {
     return (
-      <div className="w-[650px]">
+      <div className="w-[650px] bg-[#ffffff]">
         <div className="h-[100vh] w-[800px] flex justify-center items-center">
           <div className="h-[1123px] w-[794px] p-3 flex scale-[0.68]">
             {content}

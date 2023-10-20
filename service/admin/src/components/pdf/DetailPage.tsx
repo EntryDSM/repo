@@ -82,8 +82,9 @@ export const DetailPage = ({ data, setIndex, key }: indexType) => {
   const ActivityList = (
     <>
       {activity_list.length > 0 && (
-        <article className="flex gap-[10px] flex-col" ref={activity}>
+        <article className="flex gap-[15px] flex-col" ref={activity}>
           <h3 className="text-body5">활동</h3>
+          <div className="h-[2px] bg-gray100"/>
           {activity_list.map((data, index) => (
             <Activity {...data} key={index} />
           ))}
@@ -95,14 +96,14 @@ export const DetailPage = ({ data, setIndex, key }: indexType) => {
     <>
       <div className="w-[831px] h-[1171px] bg-gray100 flex justify-center items-center">
         <div
-          className="h-full w-full flex flex-col gap-[20px] scale-[0.92]"
+          className="h-full w-full py-[20px] px-[30px] rounded-lg bg-gray50 flex flex-col gap-[20px] scale-[0.92]"
           ref={one}
         >
           <article>
             <div className="flex justify-between items-center">
               <div>
                 <p className="text-title1 mb-[10px]">{writer.name}</p>
-                <p className="text-title4">{writer.major.name}</p>
+                <p className="text-title4 font-light">{writer.major.name}</p>
               </div>
               <div className="flex">
                 <div className="flex flex-col mr-6 text-end gap-[10px] justify-center">
@@ -126,7 +127,7 @@ export const DetailPage = ({ data, setIndex, key }: indexType) => {
           <article>
             <div>
               <h3 className="text-body3">{introduce.heading}</h3>
-              <pre className="text-body7 whitespace-pre-wrap text-gray400 mt-[20px] leading-[17px]">
+              <pre className="text-body7 font-medium whitespace-pre-wrap text-gray400 mt-[20px] leading-[17px]">
                 {introduce.introduce}
               </pre>
             </div>
@@ -137,7 +138,7 @@ export const DetailPage = ({ data, setIndex, key }: indexType) => {
               <h3 className="text-body5">기술 스택</h3>
               <pre className="flex gap-3 flex-wrap">
                 {skill_list.map((skill, index) => (
-                  <Tag key={index} className="bg-gray50" technology={skill} />
+                  <Tag key={index} className="bg-gray100" technology={skill} />
                 ))}
               </pre>
             </article>
@@ -146,6 +147,7 @@ export const DetailPage = ({ data, setIndex, key }: indexType) => {
           {award_list.length > 0 && (
             <article className="flex gap-[10px] flex-col">
               <h3 className="text-body5">수상 경력</h3>
+              <div className="h-[2px] bg-gray100"/>
               {award_list.map((award, index) => (
                 <Award {...award} key={index} />
               ))}
@@ -155,6 +157,7 @@ export const DetailPage = ({ data, setIndex, key }: indexType) => {
           {certificate_list.length > 0 && (
             <article className="flex gap-[10px] flex-col">
               <h3 className="text-body5">자격증</h3>
+              <div className="h-[2px] bg-gray100"/>
               {certificate_list.map((data, index) => (
                 <Certificate {...data} key={index} />
               ))}
@@ -166,7 +169,7 @@ export const DetailPage = ({ data, setIndex, key }: indexType) => {
 
       {page > 1 && (
         <div className="w-[831px] h-[1171px] flex justify-center items-center bg-gray100">
-          <div className="h-full w-full flex scale-[0.92]">
+          <div className="h-full w-full py-[20px] px-[30px] rounded-lg bg-gray50 flex flex-col gap-[20px] scale-[0.92]">
             <div className="h-fit w-full flex flex-col gap-[20px]" id="two">
               {page === 2 && ActivityList}
             </div>
@@ -180,7 +183,7 @@ export const DetailPage = ({ data, setIndex, key }: indexType) => {
             key={index}
           >
             <div className="w-[831px] h-[1171px] flex flex-col gap-[20px] scale-[0.92]">
-              <div className={`h-full w-full`}>
+              <div className={`h-full w-full font-medium`}>
                 <Project {...data} />
               </div>
             </div>

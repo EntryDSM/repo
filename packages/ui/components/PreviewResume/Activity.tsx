@@ -12,7 +12,7 @@ export const Activity = ({
 }: PreviewType["activity_list"][0]) => {
   return (
     <>
-      <div className="bg-gray50 rounded-md pl-5 pt-3 pb-3 pr-5 flex flex-col gap-[10px]">
+      <div className="border-solid border-l-[4px] border-gray500 bg-gray50 px-4 py-1 flex flex-col gap-[1px]">
         <div className="flex justify-between">
           <h4 className="text-body5">{name}</h4>
           <div className="flex gap-2 items-center">
@@ -23,7 +23,7 @@ export const Activity = ({
           </div>
         </div>
         {description && (
-          <pre className="text-body7 whitespace-pre-wrap">{description}</pre>
+          <pre className="text-body7 font-medium whitespace-pre-wrap">{description}</pre>
         )}
       </div>
     </>
