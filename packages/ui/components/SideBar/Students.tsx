@@ -3,6 +3,13 @@ import React, { useState } from "react";
 import { StudentListType } from ".";
 import { Arrow, CheckCircle, Internet, Rectify } from "../../assets";
 
+const subject = {
+  1: "소프트웨어개발과",
+  2: "소프트웨어개발과",
+  3: "임베디드소프트웨어과",
+  4: "정보보안과",
+};
+
 interface PropsType {
   studentList: StudentListType[];
   moveClickedPage?: (page: number) => void;
@@ -76,14 +83,15 @@ const StudentDropdown = ({
               : "bg-gray600"
           } justify-between items-center px-3 [&_path]:fill-gray50`}
         >
-          <div>{classNum + 1}반</div>
+          <div>{classNum + 1}반 {grade !== "1" ? subject[String(classNum + 1) as "1"] : "공통과정"}
+          </div>
           <Arrow direction={arrowDirection} size={16} />
         </div>
       )}
       {!moveClickedPage &&
         open &&
         classList?.map(
-          ({ name, student_number, student_id, document_status, page }) => {
+          ({ name, student_number, student_id, major, document_status, page }) => {
             return (
               <li
                 key={student_id}
@@ -93,7 +101,7 @@ const StudentDropdown = ({
                 } py-2 rounded-md px-3 justify-between items-center [&_path]:fill-gray400 hover:bg-gray500`}
               >
                 <span className={"flex"}>
-                  {student_number} {name}
+                  {student_number} {name} <span className="ml-[5px] text-gray400">{major.name.split(' ')[0]}</span>
                 </span>
                 {document_status && StudentIcon[document_status]}
               </li>
@@ -106,6 +114,7 @@ const StudentDropdown = ({
             classNumber={1}
             classList={classList}
             moveClickedPage={moveClickedPage}
+            grade={grade}
             id={id}
             currentPage={currentPage}
           />
@@ -113,6 +122,7 @@ const StudentDropdown = ({
             classNumber={2}
             classList={classList}
             moveClickedPage={moveClickedPage}
+            grade={grade}
             id={id}
             currentPage={currentPage}
           />
@@ -120,6 +130,7 @@ const StudentDropdown = ({
             classNumber={3}
             classList={classList}
             moveClickedPage={moveClickedPage}
+            grade={grade}
             id={id}
             currentPage={currentPage}
           />
@@ -127,6 +138,7 @@ const StudentDropdown = ({
             classNumber={4}
             classList={classList}
             moveClickedPage={moveClickedPage}
+            grade={grade}
             id={id}
             currentPage={currentPage}
           />
@@ -141,12 +153,14 @@ function ClassDropdown({
   moveClickedPage,
   id,
   classNumber,
+  grade,
   currentPage,
 }: {
   classList: StudentListType;
   moveClickedPage?: (page: number) => void;
   id?: string;
   classNumber: number;
+  grade: string;
   currentPage?: string;
 }) {
   const { push } = useRouter();
@@ -169,7 +183,7 @@ function ClassDropdown({
             className="flex h-12 rounded-md bg-gray600 justify-between items-center px-4 peer-checked:[&_svg]:rotate-90 peer-checked:[&_svg_path]:fill-gray900 peer-checked:bg-gray50 peer-checked:text-gray900"
             htmlFor={"classCheckbox" + classNumber}
           >
-            <h1>{classNumber}반</h1>
+            <h1>{classNumber}반 {grade !== "1" ? subject[String(classNumber) as "1"] : "공통과정"}</h1>
             <Arrow
               size={24}
               direction="bottom"
@@ -188,6 +202,7 @@ function ClassDropdown({
                   student_id,
                   student_number,
                   document_status,
+                  major,
                   name,
                   page,
                 }) => (
@@ -205,8 +220,8 @@ function ClassDropdown({
                     } flex text-[14px] cursor-pointer py-2 rounded-md px-3 justify-between items-center [&_path]:fill-gray400`}
                   >
                     <span className={"flex"}>
-                      {student_number} {name}
-                    </span>
+                      {student_number} {name} <span className="ml-[5px] text-gray400">{major.name}</span>
+                    </span> 
                     {document_status && StudentIcon[document_status]}
                   </li>
                 )
