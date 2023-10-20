@@ -102,7 +102,7 @@ export const PreviewResume = ({
 
   const Page: React.FC<PageProps> = ({ content }) => {
     return (
-      <div className="w-[650px] bg-[#ffffff]">
+      <div className="w-[650px]">
         <div className="h-[100vh] w-[800px] flex justify-center items-center">
           <div className="h-[1123px] w-[794px] p-3 flex scale-[0.68]">
             {content}
@@ -119,103 +119,105 @@ export const PreviewResume = ({
       {!currentPage && (
         <Page
           content={
-            <div className="h-fit flex flex-col gap-[20px]" ref={one}>
-              <article className="w-full">
-                <FeedBack
-                  part="기본정보"
-                  element_id={writer.element_id}
-                  comment={writer.feedback}
-                >
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <p className="text-title1 mb-[10px]">{writer.name}</p>
-                      <p className="text-title4">{writer.major.name}</p>
-                    </div>
-                    <div className="flex">
-                      <div className="flex flex-col mr-6 text-end gap-[10px] justify-center">
-                        <p className="text-body7 leading-[17px]">
-                          {writer.student_number}
-                        </p>
-                        <p className="text-body7 leading-[17px]">
-                          {grade !== "1"
-                            ? subject[classNum as "1"]
-                            : "공통과정"}
-                        </p>
-                        <p className="text-body7 leading-[17px]">
-                          {writer.email}
-                        </p>
+            <div className="h-full w-full py-[20px] px-[30px] rounded-lg bg-gray50">
+              <div className="h-fit flex flex-col gap-[20px]" ref={one}>
+                <article className="w-full">
+                  <FeedBack
+                    part="기본정보"
+                    element_id={writer.element_id}
+                    comment={writer.feedback}
+                  >
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <p className="text-title1 mb-[10px]">{writer.name}</p>
+                        <p className="text-title4">{writer.major.name}</p>
                       </div>
-                      {writer.url && (
-                        <div>
-                          <QRCode size={80} value={writer.url} />
+                      <div className="flex">
+                        <div className="flex flex-col mr-6 text-end gap-[10px] justify-center">
+                          <p className="text-body7 leading-[17px]">
+                            {writer.student_number}
+                          </p>
+                          <p className="text-body7 leading-[17px]">
+                            {grade !== "1"
+                              ? subject[classNum as "1"]
+                              : "공통과정"}
+                          </p>
+                          <p className="text-body7 leading-[17px]">
+                            {writer.email}
+                          </p>
                         </div>
-                      )}
+                        {writer.url && (
+                          <div>
+                            <QRCode size={80} value={writer.url} />
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                </FeedBack>
-              </article>
+                  </FeedBack>
+                </article>
 
-              <article>
-                <FeedBack
-                  part="자기소개"
-                  element_id={introduce.element_id}
-                  comment={introduce.feedback}
-                >
-                  <div>
-                    <h3 className="text-body3">{introduce.heading}</h3>
-                    <pre className="text-body7 whitespace-pre-wrap text-gray400 mt-[20px] leading-[17px]">
-                      {introduce.introduce}
+                <article>
+                  <FeedBack
+                    part="자기소개"
+                    element_id={introduce.element_id}
+                    comment={introduce.feedback}
+                  >
+                    <div>
+                      <h3 className="text-body3">{introduce.heading}</h3>
+                      <pre className="text-body7 whitespace-pre-wrap text-gray400 mt-[20px] leading-[17px]">
+                        {introduce.introduce}
+                      </pre>
+                    </div>
+                  </FeedBack>
+                </article>
+
+                {!!skill_list.length && (
+                  <article className="flex flex-col gap-[10px]">
+                    <h3 className="text-body5">기술 스택</h3>
+                    <pre className="flex gap-3 flex-wrap">
+                      {skill_list.map((skill, index) => (
+                        <Tag
+                          key={index}
+                          className="bg-gray50"
+                          technology={skill}
+                        />
+                      ))}
                     </pre>
-                  </div>
-                </FeedBack>
-              </article>
+                  </article>
+                )}
 
-              {!!skill_list.length && (
-                <article className="flex flex-col gap-[10px]">
-                  <h3 className="text-body5">기술 스택</h3>
-                  <pre className="flex gap-3 flex-wrap">
-                    {skill_list.map((skill, index) => (
-                      <Tag
+                {award_list.length > 0 && (
+                  <article className="flex gap-[10px] flex-col">
+                    <h3 className="text-body5">수상 경력</h3>
+                    {award_list.map((award, index) => (
+                      <FeedBack
                         key={index}
-                        className="bg-gray50"
-                        technology={skill}
-                      />
+                        part={award.name}
+                        element_id={award.element_id}
+                        comment={award.feedback}
+                      >
+                        <Award {...award} />
+                      </FeedBack>
                     ))}
-                  </pre>
-                </article>
-              )}
-
-              {award_list.length > 0 && (
-                <article className="flex gap-[10px] flex-col">
-                  <h3 className="text-body5">수상 경력</h3>
-                  {award_list.map((award, index) => (
-                    <FeedBack
-                      key={index}
-                      part={award.name}
-                      element_id={award.element_id}
-                      comment={award.feedback}
-                    >
-                      <Award {...award} />
-                    </FeedBack>
-                  ))}
-                </article>
-              )}
-              {certificate_list.length > 0 && (
-                <article className="flex gap-[10px] flex-col">
-                  <h3 className="text-body5">자격증</h3>
-                  {certificate_list.map((data, index) => (
-                    <FeedBack
-                      key={index}
-                      part={data.name}
-                      element_id={data.element_id}
-                      comment={data.feedback}
-                    >
-                      <Certificate {...data} />
-                    </FeedBack>
-                  ))}
-                </article>
-              )}
-              {page === 1 && ActivityList}
+                  </article>
+                )}
+                {certificate_list.length > 0 && (
+                  <article className="flex gap-[10px] flex-col">
+                    <h3 className="text-body5">자격증</h3>
+                    {certificate_list.map((data, index) => (
+                      <FeedBack
+                        key={index}
+                        part={data.name}
+                        element_id={data.element_id}
+                        comment={data.feedback}
+                      >
+                        <Certificate {...data} />
+                      </FeedBack>
+                    ))}
+                  </article>
+                )}
+                {page === 1 && ActivityList}
+              </div>
             </div>
           }
         />
