@@ -3,6 +3,7 @@ import { instance } from "..";
 interface LibraryIndexType {
   index: {
     name: string;
+    major: string;
     student_number: number;
     page: number;
   }[];

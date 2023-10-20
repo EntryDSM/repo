@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { PdfViewer, SideBar } from "../../../../../packages/ui";
+import { PdfViewer } from "@packages/ui";
 import { useQuery } from "@tanstack/react-query";
 import { libraryIndexList } from "@/apis/library/list";
 import { getUrl } from "@/apis/library/getUrl";
