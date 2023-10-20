@@ -8,6 +8,7 @@ interface DetailLibraryType {
   index: {
     name: string;
     student_number: number;
+    major: string;
     page: number;
   }[];
 }

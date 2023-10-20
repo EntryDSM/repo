@@ -21,7 +21,22 @@ const Library = () => {
     ({ document_url }) => document_url === libraryId
   )?.document_url;
 
-  return <PdfViewer list={list} url={url} />;
+  return (
+    <PdfViewer
+      list={list?.map((value) => {
+        return {
+          name: value.name,
+          student_number: value.student_number,
+          major: {
+            id: value.major,
+            name: value.major,
+          },
+          page: value.page,
+        };
+      })}
+      url={url}
+    />
+  );
 };
 
 export default Library;

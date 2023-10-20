@@ -27,15 +27,15 @@ export const Students = ({
   currentPage,
 }: PropsType) => {
 
-  const [dropdown, setDropDown] = useState("전공");
+  const [dropdown, setDropDown] = useState("학과");
 
   return (
     <div className="flex flex-col gap-[10px]">
       <Dropdown
-        placeholder="학년"
-        lists={["학년", "전공"]}
+        placeholder="학과"
+        lists={["학과", "전공"]}
         kind="contained"
-        className="w-[150px] text-gray900 sm:w-full"
+        className="w-[150px] text-gray900"
         value={dropdown}
         onClick={({ keyword }) => {
           setDropDown(keyword);
@@ -100,20 +100,6 @@ const StudentDropdown = ({
 
   return (
     <>
-      {!moveClickedPage && (
-        <div
-          onClick={closeList}
-          className={`flex text-body6 h-11 rounded-md ${
-            isClass
-              ? "bg-gray100 [&_path]:fill-gray900 text-gray900"
-              : "bg-gray600"
-          } justify-between items-center px-3 [&_path]:fill-gray50`}
-        >
-          <div>{classNum + 1}반 {grade !== "1" ? subject[String(classNum + 1) as "1"] : "공통과정"} ({classList?.length})
-          </div>
-          <Arrow direction={arrowDirection} size={16} />
-        </div>
-      )}
       {!moveClickedPage &&
         open &&
         classList?.map(
@@ -197,7 +183,7 @@ function ClassDropdown({
   };
 
   return (
-    <nav className="overflow-scroll">
+    <nav className="">
       <ul className="flex flex-col gap-2">
         <div>
           <input
@@ -361,7 +347,7 @@ function MajorDropdown({
           >
             <h1>{major} ({classList
               ?.filter(
-                (c) => c.major?.name.toString() === major
+                (c) => c.major?.name === major
               ).length})</h1>
             <Arrow
               size={24}
@@ -397,7 +383,7 @@ function MajorDropdown({
                     } flex text-[14px] cursor-pointer py-2 rounded-md px-3 justify-between items-center [&_path]:fill-gray400`}
                   >
                     <span className={"flex"}>
-                      {student_number} {name} <span className="ml-[5px] text-gray400">{major?.name}</span>
+                      {student_number} {name} <span className="ml-[5px] text-gray400">{major?.name.split(' ')[0]}</span>
                     </span> 
                     {document_status && StudentIcon[document_status]}
                   </li>
