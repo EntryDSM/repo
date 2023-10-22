@@ -27,6 +27,7 @@ export type StudentListType = StudentType[] | undefined;
 export type ShareFnType = (action: "SHARING" | "UNSHARING") => void;
 
 interface PropType {
+  isPublic?: boolean;
   preview?: boolean;
   moveClickedPage?: (page: number) => void;
   studentList?: (StudentType[] | undefined)[];
@@ -38,6 +39,7 @@ interface PropType {
 }
 
 export const SideBar = ({
+  isPublic,
   preview,
   moveClickedPage,
   studentList,
@@ -58,30 +60,52 @@ export const SideBar = ({
   return (
     <header className="flex h-[100vh]">
       <div className="fixed bottom-0 top-0 flex z-20">
-        <nav
-          className={`bg-gray800 w-20 flex gap-10 flex-col items-center pt-10 ${currentIcon}`}
-        >
-          <ul>
-            <Link href="/">
-              <WhiteRepoIcon />
-            </Link>
-          </ul>
-          <ul>
-            <button onClick={() => router.back()}>
-              <Home />
-            </button>
-          </ul>
-          {!preview && (
-            <>
-              {studentList && (
-                <Stack onClick={() => setSide((v) => (v === 1 ? 0 : 1))} />
+        {isPublic ?
+          (
+            <nav
+              className={`bg-gray800 w-20 flex gap-10 flex-col items-center pt-10 ${currentIcon}`}
+            >
+              <ul>
+                <WhiteRepoIcon />
+              </ul>
+              {!preview && (
+                <>
+                  {studentList && (
+                    <Stack onClick={() => setSide((v) => (v === 1 ? 0 : 1))} />
+                  )}
+                  {Sharing && (
+                    <Setting onClick={() => setSide((v) => (v === 2 ? 0 : 2))} />
+                  )}
+                </>
               )}
-              {Sharing && (
-                <Setting onClick={() => setSide((v) => (v === 2 ? 0 : 2))} />
+            </nav>
+          ):(
+            <nav
+              className={`bg-gray800 w-20 flex gap-10 flex-col items-center pt-10 ${currentIcon}`}
+            >
+              <ul>
+                <Link href="/">
+                  <WhiteRepoIcon />
+                </Link>
+              </ul>
+              <ul>
+                <button onClick={() => router.back()}>
+                  <Home />
+                </button>
+              </ul>
+              {!preview && (
+                <>
+                  {studentList && (
+                    <Stack onClick={() => setSide((v) => (v === 1 ? 0 : 1))} />
+                  )}
+                  {Sharing && (
+                    <Setting onClick={() => setSide((v) => (v === 2 ? 0 : 2))} />
+                  )}
+                </>
               )}
-            </>
-          )}
-        </nav>
+            </nav>
+          )
+        }
         {!preview && !!side && (
           <div className="bg-gray700 w-[330px] text-gray50 pl-6 pr-6 pt-10 overflow-y-scroll">
             {

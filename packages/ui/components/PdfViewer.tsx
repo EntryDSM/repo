@@ -5,12 +5,14 @@ import "./pdfDocument.css";
 import { Arrow } from "../assets";
 
 interface PropsType {
+  isPublic?: boolean;
   list: StudentListType;
   url?: string;
 }
 
-export const PdfViewer = ({ url, list }: PropsType) => {
+export const PdfViewer = ({ isPublic, url, list }: PropsType) => {
   pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+ 
   const [page, setPage] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [innerHeight, setInnerHeight] = useState<number>(1080);
@@ -113,6 +115,7 @@ export const PdfViewer = ({ url, list }: PropsType) => {
 
   return url ? (
     <SideBar
+      isPublic={isPublic}
       studentList={[list]}
       moveClickedPage={moveClickedPage}
       currentPage={String(currentPage)}

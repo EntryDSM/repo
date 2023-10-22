@@ -81,7 +81,7 @@ export const Project = ({
           ))}
         </div>
       </div>
-      <pre className="text-body7 font-medium leading-6 text-[15px] font-normal whitespace-pre-wrap truncate line-clamp-[38]">
+      <pre className="text-body7 font-medium leading-6 text-[15px] whitespace-pre-wrap truncate line-clamp-[38]">
         {description}
       </pre>
       {urls && (

@@ -19,6 +19,7 @@ const Library = () => {
   const data = detail?.data;
 
   return <PdfViewer
+    isPublic={true}
     list={data?.index?.map((value) => {
       return {
         name: value.name,
