@@ -1,9 +1,12 @@
 import { DocumentMyRes } from "@/apis/document/get/my";
 import { MyFeedbackResType } from "@/apis/feedback/my";
 import { Button } from "@packages/ui";
+import { Close } from "@packages/ui/assets";
+import { useInversion } from "@packages/hooks";
 import Image from "next/image";
 import Link from "next/link";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
+import ReactOutSideClickHandler from "react-outside-click-handler";
 
 const statusList = ["작성", "제출됨", "공유됨"];
 const statusIdx = {
@@ -12,12 +15,23 @@ const statusIdx = {
   SHARED: 2,
 };
 
+export interface TmpDocument {
+  writer?: string | null;
+  introduce?: string | null;
+  skill_set?: string | null;
+  project_list?: string | null;
+  award_list?: string | null;
+  certificate_list?: string | null;
+  activity_list?: string | null;
+}
+
 interface PropsType {
   profile: DocumentMyRes;
   feedbacks: MyFeedbackResType;
+  tmpDocument: TmpDocument
 }
 
-export const MyPage = ({ profile, feedbacks }: PropsType) => {
+export const MyPage = ({ profile, feedbacks, tmpDocument }: PropsType) => {
   const {
     profile_image_url,
     name,
@@ -32,8 +46,40 @@ export const MyPage = ({ profile, feedbacks }: PropsType) => {
     introduce,
   } = profile;
   const { feedback_list } = feedbacks;
+  const {
+    writer,
+    skill_set,
+    project_list,
+    award_list,
+    certificate_list,
+    activity_list
+  } = tmpDocument;
+
+  const {
+    state: modal,
+    correct: openModal,
+    inCorrect: closeModal,
+  } = useInversion();
+
+  const {
+    state: toggle,
+    correct: open,
+    inCorrect: close,
+  } = useInversion();
+
   return (
+    <>
     <div className="max-w-[1200px] px-[40px] sm:px-[20px] w-full m-auto my-[200px] sm:mt-[164px]">
+        <div className="w-full transition-all ">
+          <Button
+            onClick={() => {openModal(); close()}}
+            className="w-[100px] absolute right-[13%] top-[220px] sm:top-[190px] mr-0 float-right"
+            kind="outlineWhite"
+            radius="normal"
+          >
+            문서 복구
+          </Button>
+        </div>
       <div className="transition-all relative bg-gray50 w-full rounded-[15px] px-40 md:px-[80px] sm:px-[48px] pt-[170px] sm:pt-[120px] pb-[80px] sm:pb-[80px] mb-[120px]">
         <div className="transition-all absolute -top-20 sm:-top-16 -ml-20 md:-ml-12 sm:-ml-8 flex gap-x-[30px]">
           <div className="flex flex-col items-center gap-y-5">
@@ -60,7 +106,6 @@ export const MyPage = ({ profile, feedbacks }: PropsType) => {
             </p>
           </div>
         </div>
-
         {is_exist ? (
           <>
             <p className="text-body3 sm:text-body5 mb-[44px] sm:mb-[28px] whitespace-pre-wrap">
@@ -73,6 +118,8 @@ export const MyPage = ({ profile, feedbacks }: PropsType) => {
         ) : (
           <p className="text-body6 text-gray400">문서를 작성해주세요</p>
         )}
+
+
       </div>
 
       <p className="text-title1 mb-2.5">레주메</p>
@@ -131,6 +178,51 @@ export const MyPage = ({ profile, feedbacks }: PropsType) => {
         </div>
       </div>
     </div>
+    { modal && <div
+      className="fixed top-0 right-0 left-0 h-[100vh] flex items-center justify-center z-20"
+      style={{ background: "rgba(0, 0, 0, 0.7)" }}
+    >
+      <ReactOutSideClickHandler onOutsideClick={closeModal}>
+        <div className="w-[750px] h-[670px] relative rounded-lg bg-gray100 flex flex-col items-center justify-center gap-y-10 px-20 py-10">
+          <div>
+            {toggle ? <>
+              <p className="w-[600px]">
+                안녕하세요? REPO 담당자입니다.<br/>
+                어제 밤 18시경에 DB 볼륨이 손실되는 사고가 발생했습니다.<br/><br/>
+                손실 직전 이력서 백업본이 남아있지만,<br/>
+                데이터 형식이 맞지 않아 완전한 형태로 복구하기 위해선 긴 작업이 필요합니다.<br/><br/>
+                작성 일정이 제한되어있는 상황이기에 데이터 완전 복구 대신<br/>
+                텍스트로 되어있는 데이터를 임시로 공개하려고 합니다.<br/><br/>
+                죄송합니다.<br/>
+                다음에는 이러한 일이 발생하지 않도록 DB 백업 절차를 강화하겠습니다.<br/><br/>
+                여러분들은 mongoDB 백업 꼭 JSON으로 하세요.<br/>
+                너른 양해 부탁드립니다. 감사합니다.<br/><br/>
+              </p>
+              <p onClick={close}>닫기</p>
+            </> : <>
+              <p className="w-[600px]" onClick={open}>공지 열기</p>
+            </>
+            }
+          </div>
+          <div className="bg-[#eeeeee] overflow-y-scroll h-full w-full rounded-md whitespace-pre-wrap">
+            {writer}
+            {tmpDocument.introduce}
+            {skill_set}
+            {project_list}
+            {award_list}
+            {certificate_list}
+            {activity_list}
+          </div>
+          <div
+            onClick={closeModal}
+            className="absolute top-[30px] right-[30px] cursor-pointer"
+          >
+            <Close size={24} />
+          </div>
+        </div>
+      </ReactOutSideClickHandler>
+    </div>}
+    </>
   );
 };
 
