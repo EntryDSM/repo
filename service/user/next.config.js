@@ -2,11 +2,9 @@
 const withTM = require("next-transpile-modules")(["@packages/ui"]);
 
 const nextConfig = withTM({
-  reactStrictMode: true,
+  reactStrictMode: false,
   images: {
-    domains: [
-      "s3.ap-northeast-2.amazonaws.com",
-    ],
+    domains: ["s3.ap-northeast-2.amazonaws.com"],
   },
 });
 

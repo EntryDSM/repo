@@ -9,6 +9,7 @@ import { PreviewType } from "@packages/ui/components/PreviewResume/PreviewType";
 import OutsideClickHandler from "react-outside-click-handler";
 import { Button } from "../../../../packages/ui";
 import { convert2Pdf } from "@/utils/convert2Pdf";
+import { overflow } from "html2canvas/dist/types/css/property-descriptors/overflow";
 
 const subject = {
   1: "소프트웨어개발과",
@@ -29,16 +30,38 @@ export const PdfPreviewer = ({
 }: PreviewType) => {
   const [grade, classNum] = writer.student_number.toString().split("");
   const [page, setPage] = useState<number>(1);
+  const [activity, setActivity] = useState<any[]>(activity_list);
 
   const targetRef = useRef<HTMLDivElement>(null);
-  const activity = useRef<HTMLElement>(null);
-  const one = useRef<HTMLDivElement>(null);
+  const top = useRef<HTMLDivElement>(null);
+  const bot = useRef<HTMLDivElement>(null);
+  const activities = useRef<any>([]);
+  const overFlows = useRef<any>([]);
 
   const heightCheck = () => {
-    if (one.current && one.current?.scrollHeight > 1164) {
+    const { height: topHeight } =
+      top.current?.getBoundingClientRect() as DOMRect;
+    const { height: bottomHeight } =
+      bot.current?.getBoundingClientRect() as DOMRect;
+
+    let isOverflow = 1047 - topHeight - bottomHeight - 20 < 0;
+    let overFlowHeight = 1164 - topHeight;
+    let tmp = 10;
+
+    console.log(overFlowHeight);
+
+    if (isOverflow) {
       setPage(2);
-    } else {
-      setPage(1);
+      activities.current?.map((i: any) => {
+        tmp += i[0].getBoundingClientRect().height + 20;
+        if (overFlowHeight - tmp < 0) {
+          console.log(i, "얘는 뒤짐");
+          setActivity((prev) =>
+            prev.filter((j) => j.element_id !== i[1].element_id)
+          );
+          overFlows.current.push(i[1]);
+        }
+      });
     }
   };
 
@@ -58,10 +81,15 @@ export const PdfPreviewer = ({
   const ActivityList = (
     <>
       {activity_list.length > 0 && (
-        <article className="flex gap-[10px] flex-col" ref={activity}>
+        <article className="w-full flex gap-[10px] flex-col" ref={bot}>
           <h3 className="text-body5">활동</h3>
-          {activity_list.map((data, index) => (
-            <Activity {...data} key={index} />
+          {activity.map((data, index) => (
+            <div
+              ref={(item) => (activities.current[index] = [item, data])}
+              key={index}
+            >
+              <Activity {...data} key={index} />
+            </div>
           ))}
         </article>
       )}
@@ -77,13 +105,13 @@ export const PdfPreviewer = ({
           </div>
           <div className="bg-gray50 h-full overflow-scroll">
             <main
-              className={`w-[829px] flex flex-col items-center w-fit bg-gray50`}
+              className={`w-[829px] flex flex-col items-center bg-gray50`}
               ref={targetRef}
             >
-              <div className="w-[829px] h-[1164px] flex justify-center items-center">
+              <div className="w-[829px] h-[1164px] flex flex-col justify-center items-center">
                 <div
                   className="h-full w-full flex flex-col gap-[20px] scale-[0.9]"
-                  ref={one}
+                  ref={top}
                 >
                   <article>
                     <div className="flex justify-between items-center">
@@ -155,18 +183,23 @@ export const PdfPreviewer = ({
                       ))}
                     </article>
                   )}
-                  {page === 1 && ActivityList}
+                </div>
+                <div className="mt-[-420px] w-[829px] scale-[0.9]">
+                  {ActivityList}
                 </div>
               </div>
 
               {page > 1 && (
                 <div className="h-[1164px] w-[829px] flex justify-center items-center">
-                  <div className="h-[1164px] w-[829px] flex scale-[0.9]">
+                  <div className="h-[1164px] w-[829px] flex scale-[0.9] mt-[-60px] ">
                     <div
-                      className="h-fit w-full flex flex-col gap-[20px]"
+                      className="h-fit w-full flex flex-col gap-[10px]"
                       id="two"
                     >
-                      {page === 2 && ActivityList}
+                      {page === 2 &&
+                        overFlows.current.map((i: any, j: number) => (
+                          <Activity {...i} key={j} />
+                        ))}
                     </div>
                   </div>
                 </div>
