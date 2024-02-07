@@ -37,6 +37,9 @@ export const Project = () => {
         skill_list: [],
         type: "TEAM",
         description: "",
+        motive: "",
+        role: "",
+        reflection: "",
         urls: [],
         element_id: null,
         feedback: "",
@@ -66,6 +69,9 @@ export const Project = () => {
           urls,
           feedback,
           element_id,
+          motive,
+          role,
+          reflection
         } = item;
 
         const handleChangeArray = handleChange(index);
@@ -89,6 +95,8 @@ export const Project = () => {
 
         const imgUrl = represent_image_path || "";
         const inputId = "projectLogo" + index;
+
+        const totalCharacterCount = [description, motive, role, reflection].map((value) => value.length).reduce((a, b) => a+ b);
 
         return (
           <ResumeItem
@@ -216,7 +224,37 @@ export const Project = () => {
                 onChange={handleChangeArray}
                 name="description"
                 maxLine={20}
-                limit={2000}
+                limit={1000}
+              />
+            </ImportLabel>
+            <ImportLabel label="동기" important>
+              <TextArea
+                value={motive}
+                placeholder="프로젝트를 하게된 동기를 입력해 주세요"
+                onChange={handleChangeArray}
+                name="motive"
+                maxLine={20}
+                limit={1000 - description.length}
+              />
+            </ImportLabel>
+            <ImportLabel label="역할" important>
+              <TextArea
+                value={role}
+                placeholder="프로젝트에서의 역할을 입력해 주세요"
+                onChange={handleChangeArray}
+                name="role"
+                maxLine={20}
+                limit={1000 - description.length - motive.length}
+              />
+            </ImportLabel>
+            <ImportLabel label="회고" important>
+              <TextArea
+                value={reflection}
+                placeholder="프로젝트를 한후의 회고를 입력해 주세요"
+                onChange={handleChangeArray}
+                name="reflection"
+                maxLine={20}
+                limit={1000 - description.length - motive.length - role.length}
               />
             </ImportLabel>
             <ImportLabel label="url">
