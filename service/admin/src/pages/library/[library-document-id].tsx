@@ -22,9 +22,11 @@ const Library = () => {
 
   const list = student?.data.index;
 
-  const url = document?.data.library_document_list.find(
+  const libraryDocument = document?.data.library_document_list.find(
     ({ id }) => id === libraryId
-  )?.document_url;
+  );
+  const url = libraryDocument?.document_url
+  const grade = libraryDocument?.grade
 
   return (
     <PdfViewer
@@ -40,6 +42,7 @@ const Library = () => {
         };
       })}
       url={url}
+      grade={grade}
     />
   );
 };

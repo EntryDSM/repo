@@ -8,9 +8,10 @@ interface PropsType {
   isPublic?: boolean;
   list: StudentListType;
   url?: string;
+  grade?: number;
 }
 
-export const PdfViewer = ({ isPublic, url, list }: PropsType) => {
+export const PdfViewer = ({ isPublic, url, list, grade }: PropsType) => {
   pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
  
   const [page, setPage] = useState<number>(0);
@@ -116,6 +117,7 @@ export const PdfViewer = ({ isPublic, url, list }: PropsType) => {
   return url ? (
     <SideBar
       isPublic={isPublic}
+      grade={grade?.toString()}
       studentList={[list]}
       moveClickedPage={moveClickedPage}
       currentPage={String(currentPage)}
