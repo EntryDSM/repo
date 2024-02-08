@@ -17,6 +17,7 @@ export const disableId = <
   body: T
 ) => {
   if (Array.isArray(body)) return body.map(({ feedback, ...arg }) => arg);
+  //@ts-ignore
   const { element_id, feedback, ...arg } = body;
   return arg;
 };
