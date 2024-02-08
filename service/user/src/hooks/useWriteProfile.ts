@@ -131,6 +131,7 @@ export const useProfileWrite = <
   const { data } = useQuery(["madeDetail"], () => myDetail(), {
     onSuccess: ({ data }) => {
       let temp = Object.assign(data[type]);
+
       if (type === "writer") {
         // @ts-ignore
         const [grade, class_num, ...number] = data.writer.student_number
@@ -144,9 +145,14 @@ export const useProfileWrite = <
           number: Number(number.join("")),
           url: data.writer.url ?? "",
         };
+
       }
+
       //@ts-ignore
-      setState(temp);
+      setState(temp.map((item) => ({...item, 
+        motive: data.motive ?? "",
+        role: data.role ?? "",
+        reflection: data.reflection ?? ""})));
       setRender(true);
     },
     onError: () => {
@@ -298,6 +304,7 @@ export const useProfileWrite = <
 
   const status = data?.data.document_status || "CREATED";
   const profileImg = data?.data.writer.profile_image_path;
+  
   return {
     state,
     status,
