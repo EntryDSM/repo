@@ -44,18 +44,15 @@ export const PdfPreviewer = ({
     const { height: bottomHeight } =
       bot.current?.getBoundingClientRect() as DOMRect;
 
-    let isOverflow = 1047 - topHeight - bottomHeight - 20 < 0;
-    let overFlowHeight = 1164 - topHeight;
+    let isOverflow = 1100 - topHeight - bottomHeight < 0;
+    let overFlowHeight = 1100 - topHeight;
     let tmp = 10;
-
-    console.log(overFlowHeight);
 
     if (isOverflow) {
       setPage(2);
       activities.current?.map((i: any) => {
         tmp += i[0].getBoundingClientRect().height + 20;
         if (overFlowHeight - tmp < 0) {
-          console.log(i, "얘는 뒤짐");
           setActivity((prev) =>
             prev.filter((j) => j.element_id !== i[1].element_id)
           );
@@ -108,9 +105,9 @@ export const PdfPreviewer = ({
               className={`w-[829px] flex flex-col items-center bg-gray50`}
               ref={targetRef}
             >
-              <div className="w-[829px] h-[1164px] flex flex-col justify-center items-center">
+              <div className="w-[829px] h-[1164px] flex flex-col items-center">
                 <div
-                  className="h-full w-full flex flex-col gap-[20px] scale-[0.9]"
+                  className="w-full flex flex-col gap-[20px] scale-[0.9]"
                   ref={top}
                 >
                   <article>
@@ -184,7 +181,7 @@ export const PdfPreviewer = ({
                     </article>
                   )}
                 </div>
-                <div className="mt-[-420px] w-[829px] scale-[0.9]">
+                <div className="mt-[-35px] w-[829px] scale-[0.9]">
                   {ActivityList}
                 </div>
               </div>
