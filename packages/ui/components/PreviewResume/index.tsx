@@ -38,15 +38,37 @@ export const PreviewResume = ({
 
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [page, setPage] = useState<number>(1);
+  const [activity, setActivity] = useState<any[]>(activity_list);
 
-  const activity = useRef<HTMLElement>(null);
   const one = useRef<HTMLDivElement>(null);
+  const top = useRef<HTMLDivElement>(null);
+  const bot = useRef<HTMLDivElement>(null);
+  const activities = useRef<any>([]);
+  const overFlows = useRef<any>([]);
 
   const heightCheck = () => {
-    if (one.current && one.current?.scrollHeight > 1123) {
+    const { height: oneHeight } =
+      one.current?.getBoundingClientRect() as DOMRect;
+    const { height: topHeight } =
+      top.current?.getBoundingClientRect() as DOMRect;
+    const { height: bottomHeight } =
+      bot.current?.getBoundingClientRect() as DOMRect;
+
+    let isOverflow = oneHeight - topHeight - bottomHeight - 20 < 0;
+    let overFlowHeight = oneHeight - topHeight;
+    let tmp = 10;
+
+    if (isOverflow) {
       setPage(2);
-    } else {
-      setPage(1);
+      activities.current?.map((i: any) => {
+        tmp += i[0].getBoundingClientRect().height + 20;
+        if (overFlowHeight - tmp < 0) {
+          setActivity((prev) =>
+            prev.filter((j) => j.element_id !== i[1].element_id)
+          );
+          overFlows.current.push(i[1]);
+        }
+      });
     }
   };
 
@@ -79,17 +101,21 @@ export const PreviewResume = ({
   const ActivityList = (
     <>
       {activity_list.length > 0 && (
-        <article className="flex gap-[10px] flex-col" ref={activity}>
+        <article className="flex gap-[10px] flex-col" ref={bot}>
           <h3 className="text-body5">활동</h3>
-          {activity_list.map((data, index) => (
-            <FeedBack
+          {activity.map((data, index) => (
+            <div
               key={index}
-              part={data.name}
-              element_id={data.element_id}
-              comment={data.feedback}
+              ref={(item) => (activities.current[index] = [item, data])}
             >
-              <Activity {...data} />
-            </FeedBack>
+              <FeedBack
+                part={data.name}
+                element_id={data.element_id}
+                comment={data.feedback}
+              >
+                <Activity {...data} />
+              </FeedBack>
+            </div>
           ))}
         </article>
       )}
@@ -119,8 +145,11 @@ export const PreviewResume = ({
       {!currentPage && (
         <Page
           content={
-            <div className="h-full w-full py-[20px] px-[30px] rounded-lg bg-gray50">
-              <div className="h-fit flex flex-col gap-[20px]" ref={one}>
+            <div
+              className="h-full w-full py-[20px] px-[30px] rounded-lg bg-gray50"
+              ref={one}
+            >
+              <div className="h-fit flex flex-col gap-[20px]" ref={top}>
                 <article className="w-full">
                   <FeedBack
                     part="기본정보"
@@ -216,8 +245,8 @@ export const PreviewResume = ({
                     ))}
                   </article>
                 )}
-                {page === 1 && ActivityList}
               </div>
+              <div className="mt-[20px]">{ActivityList}</div>
             </div>
           }
         />
@@ -226,8 +255,22 @@ export const PreviewResume = ({
       {!currentPage && page > 1 && (
         <Page
           content={
-            <div className="h-fit w-full flex flex-col gap-[20px]" id="two">
-              {page === 2 && ActivityList}
+            <div
+              className="h-full w-full flex flex-col gap-[10px] py-[20px] px-[30px] rounded-lg bg-gray50"
+              id="two"
+            >
+              {page === 2 &&
+                overFlows.current.map((i: any, j: number) => (
+                  <FeedBack
+                    key={j}
+                    part={i.name}
+                    element_id={i.element_id}
+                    comment={i.feedback}
+                  >
+                    {/*prettier-ignore */}
+                    <Activity {...i} />
+                  </FeedBack>
+                ))}
             </div>
           }
         />
