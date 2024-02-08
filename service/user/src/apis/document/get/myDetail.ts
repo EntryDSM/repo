@@ -20,6 +20,9 @@ export interface DetailType {
   award_list: AwardResType[];
   certificate_list: CertificateResType[];
   activity_list: ActivityResType[];
+  motive: string;
+  role: string;
+  reflection: string;
 }
 
 export const myDetail = () => {
