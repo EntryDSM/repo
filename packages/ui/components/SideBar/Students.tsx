@@ -26,14 +26,13 @@ export const Students = ({
   grade,
   currentPage,
 }: PropsType) => {
-
   const [dropdown, setDropDown] = useState("학과");
 
   return (
     <div className="flex flex-col gap-[10px]">
       <Dropdown
         placeholder="학과"
-        lists={["학과", "전공"]}
+        lists={["반", "전공"]}
         kind="contained"
         className="w-[150px] text-gray900"
         value={dropdown}
@@ -41,30 +40,32 @@ export const Students = ({
           setDropDown(keyword);
         }}
       />
-      
-      {dropdown == "학과" && studentList.map((classList, classNum) => (
-        <StudentDropdown
-          classList={classList}
-          grade={grade}
-          moveClickedPage={moveClickedPage}
-          classNum={classNum}
-          id={id}
-          currentPage={currentPage}
-          key={classNum}
-        />
-      ))}
 
-      {dropdown == "전공" && studentList.map((classList, classNum) => (
-        <StudentMajorDropdown
-          classList={classList}
-          grade={grade}
-          moveClickedPage={moveClickedPage}
-          classNum={classNum}
-          id={id}
-          currentPage={currentPage}
-          key={classNum}
-        />
-      ))}
+      {dropdown == "학과" &&
+        studentList.map((classList, classNum) => (
+          <StudentDropdown
+            classList={classList}
+            grade={grade}
+            moveClickedPage={moveClickedPage}
+            classNum={classNum}
+            id={id}
+            currentPage={currentPage}
+            key={classNum}
+          />
+        ))}
+
+      {dropdown == "전공" &&
+        studentList.map((classList, classNum) => (
+          <StudentMajorDropdown
+            classList={classList}
+            grade={grade}
+            moveClickedPage={moveClickedPage}
+            classNum={classNum}
+            id={id}
+            currentPage={currentPage}
+            key={classNum}
+          />
+        ))}
     </div>
   );
 };
@@ -103,7 +104,14 @@ const StudentDropdown = ({
       {!moveClickedPage &&
         open &&
         classList?.map(
-          ({ name, student_number, student_id, major, document_status, page }) => {
+          ({
+            name,
+            student_number,
+            student_id,
+            major,
+            document_status,
+            page,
+          }) => {
             return (
               <li
                 key={student_id}
@@ -113,7 +121,10 @@ const StudentDropdown = ({
                 } py-2 rounded-md px-3 justify-between items-center [&_path]:fill-gray400 hover:bg-gray500`}
               >
                 <span className={"flex"}>
-                  {student_number} {name} <span className="ml-[5px] text-gray400">{major?.name.split(' ')[0]}</span>
+                  {student_number} {name}{" "}
+                  <span className="ml-[5px] text-gray400">
+                    {major?.name.split(" ")[0]}
+                  </span>
                 </span>
                 {document_status && StudentIcon[document_status]}
               </li>
@@ -195,12 +206,17 @@ function ClassDropdown({
             className="flex h-12 rounded-md bg-gray600 justify-between items-center px-4 peer-checked:[&_svg]:rotate-90 peer-checked:[&_svg_path]:fill-gray900 peer-checked:bg-gray50 peer-checked:text-gray900"
             htmlFor={"classCheckbox" + classNumber}
           >
-            <h1>{classNumber}반 {grade !== "1" ? subject[String(classNumber) as "1"] : "공통과정"} 
-              ({classList?.filter(
-                (c) =>
-                  c.student_number.toString().slice(1, 2) ===
-                  String(classNumber)
-              ).length})
+            <h1>
+              {classNumber}반{" "}
+              {grade !== "1" ? subject[String(classNumber) as "1"] : ""}(
+              {
+                classList?.filter(
+                  (c) =>
+                    c.student_number.toString().slice(1, 2) ===
+                    String(classNumber)
+                ).length
+              }
+              )
             </h1>
             <Arrow
               size={24}
@@ -238,8 +254,11 @@ function ClassDropdown({
                     } flex text-[14px] cursor-pointer py-2 rounded-md px-3 justify-between items-center [&_path]:fill-gray400`}
                   >
                     <span className={"flex"}>
-                      {student_number} {name} <span className="ml-[5px] text-gray400">{major?.name} </span>
-                    </span> 
+                      {student_number} {name}{" "}
+                      <span className="ml-[5px] text-gray400">
+                        {major?.name}{" "}
+                      </span>
+                    </span>
                     {document_status && StudentIcon[document_status]}
                   </li>
                 )
@@ -250,7 +269,6 @@ function ClassDropdown({
     </nav>
   );
 }
-
 
 const StudentMajorDropdown = ({
   classList,
@@ -271,7 +289,14 @@ const StudentMajorDropdown = ({
       {!moveClickedPage &&
         open &&
         classList?.map(
-          ({ name, student_number, student_id, major, document_status, page }) => {
+          ({
+            name,
+            student_number,
+            student_id,
+            major,
+            document_status,
+            page,
+          }) => {
             return (
               <li
                 key={student_id}
@@ -281,7 +306,9 @@ const StudentMajorDropdown = ({
                 } py-2 rounded-md px-3 justify-between items-center [&_path]:fill-gray400 hover:bg-gray500`}
               >
                 <span className={"flex"}>
-                  {student_number} {name} <span className="ml-[5px] text-gray400">{major?.name.split(' ')[0]}
+                  {student_number} {name}{" "}
+                  <span className="ml-[5px] text-gray400">
+                    {major?.name.split(" ")[0]}
                   </span>
                 </span>
                 {document_status && StudentIcon[document_status]}
@@ -291,8 +318,8 @@ const StudentMajorDropdown = ({
         )}
       {moveClickedPage && (
         <>
-          {Array.from(new Set(classList?.map((v, i) => v.major?.name)))
-            ?.map((value, index) => (
+          {Array.from(new Set(classList?.map((v, i) => v.major?.name)))?.map(
+            (value, index) => (
               <MajorDropdown
                 major={value}
                 classList={classList}
@@ -308,7 +335,6 @@ const StudentMajorDropdown = ({
     </>
   );
 };
-
 
 function MajorDropdown({
   classList,
@@ -345,10 +371,10 @@ function MajorDropdown({
             className="flex h-12 rounded-md bg-gray600 justify-between items-center px-4 peer-checked:[&_svg]:rotate-90 peer-checked:[&_svg_path]:fill-gray900 peer-checked:bg-gray50 peer-checked:text-gray900"
             htmlFor={"majorCheckbox" + major}
           >
-            <h1>{major} ({classList
-              ?.filter(
-                (c) => c.major?.name === major
-              ).length})</h1>
+            <h1>
+              {major} (
+              {classList?.filter((c) => c.major?.name === major).length})
+            </h1>
             <Arrow
               size={24}
               direction="bottom"
@@ -357,9 +383,7 @@ function MajorDropdown({
           </label>
           <div className="peer-checked:flex hidden flex-col gap-1 mt-2">
             {classList
-              ?.filter(
-                (c) => c.major?.name.toString() === major
-              )
+              ?.filter((c) => c.major?.name.toString() === major)
               .map(
                 ({
                   student_id,
@@ -383,8 +407,11 @@ function MajorDropdown({
                     } flex text-[14px] cursor-pointer py-2 rounded-md px-3 justify-between items-center [&_path]:fill-gray400`}
                   >
                     <span className={"flex"}>
-                      {student_number} {name} <span className="ml-[5px] text-gray400">{major?.name.split(' ')[0]}</span>
-                    </span> 
+                      {student_number} {name}{" "}
+                      <span className="ml-[5px] text-gray400">
+                        {major?.name.split(" ")[0]}
+                      </span>
+                    </span>
                     {document_status && StudentIcon[document_status]}
                   </li>
                 )
@@ -395,4 +422,3 @@ function MajorDropdown({
     </nav>
   );
 }
-
