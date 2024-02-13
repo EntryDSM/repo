@@ -32,7 +32,7 @@ export const Students = ({
     <div className="flex flex-col gap-[10px]">
       <Dropdown
         placeholder="학과"
-        lists={["학과", "전공"]}
+        lists={["반", "전공"]}
         kind="contained"
         className="w-[150px] text-gray900"
         value={dropdown}
