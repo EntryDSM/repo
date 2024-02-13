@@ -18,20 +18,24 @@ const Library = () => {
 
   const data = detail?.data;
 
-  return <PdfViewer
-    isPublic={true}
-    list={data?.index?.map((value) => {
-      return {
-        name: value.name,
-        student_number: value.student_number,
-        major: {
-          id: value.major,
-          name: value.major,
-        },
-        page: value.page,
-      };
-    })}
-    url={data?.document_url} />;
+  return (
+    <PdfViewer
+      isPublic={true}
+      grade={1}
+      list={data?.index?.map((value) => {
+        return {
+          name: value.name,
+          student_number: value.student_number,
+          major: {
+            id: value.major,
+            name: value.major,
+          },
+          page: value.page,
+        };
+      })}
+      url={data?.document_url}
+    />
+  );
 };
 
 export default Library;
