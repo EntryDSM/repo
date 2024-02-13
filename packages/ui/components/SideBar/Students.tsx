@@ -26,12 +26,12 @@ export const Students = ({
   grade,
   currentPage,
 }: PropsType) => {
-  const [dropdown, setDropDown] = useState("학과");
+  const [dropdown, setDropDown] = useState("반");
 
   return (
     <div className="flex flex-col gap-[10px]">
       <Dropdown
-        placeholder="학과"
+        placeholder="반"
         lists={["반", "전공"]}
         kind="contained"
         className="w-[150px] text-gray900"
@@ -41,7 +41,7 @@ export const Students = ({
         }}
       />
 
-      {dropdown == "학과" &&
+      {dropdown == "반" &&
         studentList.map((classList, classNum) => (
           <StudentDropdown
             classList={classList}
