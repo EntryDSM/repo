@@ -70,16 +70,6 @@ export const MyPage = ({ profile, feedbacks, tmpDocument }: PropsType) => {
   return (
     <>
     <div className="max-w-[1200px] px-[40px] sm:px-[20px] w-full m-auto my-[200px] sm:mt-[164px]">
-        <div className="w-full transition-all ">
-          <Button
-            onClick={() => {openModal(); close()}}
-            className="w-[100px] absolute right-[13%] top-[220px] sm:top-[190px] mr-0 float-right"
-            kind="outlineWhite"
-            radius="normal"
-          >
-            문서 복구
-          </Button>
-        </div>
       <div className="transition-all relative bg-gray50 w-full rounded-[15px] px-40 md:px-[80px] sm:px-[48px] pt-[170px] sm:pt-[120px] pb-[80px] sm:pb-[80px] mb-[120px]">
         <div className="transition-all absolute -top-20 sm:-top-16 -ml-20 md:-ml-12 sm:-ml-8 flex gap-x-[30px]">
           <div className="flex flex-col items-center gap-y-5">
